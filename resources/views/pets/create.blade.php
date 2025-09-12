@@ -195,6 +195,7 @@
                             this.shelterId = '{{ old('shelter_id', '') }}';
                             console.log('Pet has no shelter - using defaults');
                         @endif
+                        // 非同期でリストを取得
                         this.$nextTick(() => {
                             this.fetchList().then(() => {
                                 // リスト取得後にshelterIdを再設定
@@ -264,25 +265,16 @@
                     }, 100);
                 },
                 handleKindChange() {
-                    console.log('handleKindChange called - kind:', this.kind); // デバッグ用
                     // 初期化中でない場合のみshelterIdをクリア
                     if (!this.isInitializing) {
                         this.shelterId = '';
                     }
                     if (this.kind === 'site') {
                         this.area = 'national';
-                        console.log('Set area to national for site'); // デバッグ用
-                
-                        this.$nextTick(() => {
-                            console.log('About to fetch list for site'); // デバッグ用
-                            this.fetchList();
-                        });
                     } else if (!this.area) {
                         this.area = '';
-                        this.fetchList();
-                    } else {
-                        this.fetchList();
                     }
+                    this.fetchList();
                 },
                 handleAreaChange() {
                     // 初期化中でない場合のみshelterIdをクリア
@@ -297,14 +289,14 @@
                     if(this.kind==='unknown'){ this.list=[]; return; }
                     if(!this.area){ this.list=[]; return; } // area が空の場合はリストを空にする
                     
-                    console.log('fetchList called - kind:', this.kind, 'area:', this.area); // デバッグ用
                     this.loading = true;
                     try {
                         const url = `/api/shelters?kind=${this.kind}&area=${this.area}`;
                         console.log('Fetching:', url); // デバッグ用
                         const res = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
                         const all = await res.json();
-                        console.log('API response:', all); 
+                        console.log('API response:', all); // デバッグ用
+                        // 念のためクライアント側でも kind/area で厳密に絞り込み
                         this.list = all.filter(s => s.kind===this.kind && s.area===this.area);
                         console.log('Filtered list:', this.list); // デバッグ用
                         
