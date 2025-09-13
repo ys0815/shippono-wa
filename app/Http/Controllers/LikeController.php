@@ -21,12 +21,37 @@ class LikeController extends Controller
             return redirect()->route('login');
         }
 
-        $likes = $user->likes()
-            ->with(['pet.user'])
-            ->latest()
-            ->paginate(20);
+        $species = $request->get('species', 'all');
+        $period = $request->get('period', 'all');
 
-        return view('likes.index', compact('likes'));
+        $query = $user->likes()->with(['pet.user']);
+
+        // 動物種でフィルタ
+        if ($species !== 'all') {
+            $query->whereHas('pet', function ($q) use ($species) {
+                $q->where('species', $species);
+            });
+        }
+
+        // 期間でフィルタ
+        if ($period !== 'all') {
+            $now = now();
+            switch ($period) {
+                case 'week':
+                    $query->where('created_at', '>=', $now->subWeek());
+                    break;
+                case 'month':
+                    $query->where('created_at', '>=', $now->subMonth());
+                    break;
+                case 'year':
+                    $query->where('created_at', '>=', $now->subYear());
+                    break;
+            }
+        }
+
+        $likes = $query->latest()->paginate(20);
+
+        return view('likes.index', compact('likes', 'species', 'period'));
     }
 
     /**

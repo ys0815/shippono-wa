@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pet;
 use App\Models\PetFamilyLink;
+use App\Models\Like;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,26 @@ class PetController extends Controller
             ->with('shelter:id,name,area,kind')
             ->firstOrFail();
         return view('pets.create', compact('pet'));
+    }
+
+    public function show(Pet $pet): View
+    {
+        $pet->load(['user', 'shelter', 'posts' => function ($query) {
+            $query->where('status', 'published')->latest()->limit(5);
+        }]);
+
+        // 現在のユーザーがこのペットにいいねしているかチェック
+        $isLiked = false;
+        if (Auth::check()) {
+            $isLiked = Like::where('user_id', Auth::id())
+                ->where('pet_id', $pet->id)
+                ->exists();
+        }
+
+        // いいね数
+        $likeCount = $pet->likes()->count();
+
+        return view('pets.show', compact('pet', 'isLiked', 'likeCount'));
     }
 
     public function store(Request $request): RedirectResponse

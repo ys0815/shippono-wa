@@ -20,68 +20,104 @@
         </div>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-4 px-4 max-w-2xl mx-auto bg-gray-50 min-h-screen">
+        <!-- フィルター -->
+        <div class="mb-6">
+            <form method="GET" class="flex flex-col sm:flex-row gap-4">
+                <div class="flex items-center">
+                    <label class="text-sm font-medium text-gray-700 mr-2">動物種:</label>
+                    <select name="species" class="border border-gray-300 rounded-md px-3 py-1 text-sm" onchange="this.form.submit()">
+                        <option value="all" {{ $species === 'all' ? 'selected' : '' }}>すべて</option>
+                        <option value="dog" {{ $species === 'dog' ? 'selected' : '' }}>犬</option>
+                        <option value="cat" {{ $species === 'cat' ? 'selected' : '' }}>猫</option>
+                        <option value="rabbit" {{ $species === 'rabbit' ? 'selected' : '' }}>うさぎ</option>
+                        <option value="other" {{ $species === 'other' ? 'selected' : '' }}>その他</option>
+                    </select>
+                </div>
+                <div class="flex items-center">
+                    <label class="text-sm font-medium text-gray-700 mr-2">期間:</label>
+                    <select name="period" class="border border-gray-300 rounded-md px-3 py-1 text-sm" onchange="this.form.submit()">
+                        <option value="all" {{ $period === 'all' ? 'selected' : '' }}>すべて</option>
+                        <option value="week" {{ $period === 'week' ? 'selected' : '' }}>1週間</option>
+                        <option value="month" {{ $period === 'month' ? 'selected' : '' }}>1ヶ月</option>
+                        <option value="year" {{ $period === 'year' ? 'selected' : '' }}>1年</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <!-- いいねした動物プロフィール -->
+        <div class="mb-4">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">いいねした動物プロフィール</h2>
+            
             @if($likes->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="space-y-4">
                     @foreach($likes as $like)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                            <!-- ペット画像 -->
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <!-- プロフィール画像 -->
+                            <div class="relative h-32 bg-gray-100">
                                 @if($like->pet->header_image_url)
                                     <img src="{{ $like->pet->header_image_url }}" 
                                          alt="{{ $like->pet->name }}" 
-                                         class="w-full h-48 object-cover">
+                                         class="w-full h-full object-cover">
                                 @else
-                                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                                        <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
-                                            @if($like->pet->profile_image_url)
-                                                <img src="{{ $like->pet->profile_image_url }}" 
-                                                     alt="{{ $like->pet->name }}" 
-                                                     class="w-full h-full object-cover rounded-full">
-                                            @else
-                                                <span class="text-gray-500 text-2xl">
-                                                    {{ mb_substr($like->pet->name, 0, 2) }}
-                                                </span>
-                                            @endif
-                                        </div>
+                                    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                                        <span class="text-gray-400 text-sm">プロフィール画像</span>
                                     </div>
                                 @endif
+                                
+                                <!-- ペットアイコン -->
+                                <div class="absolute -bottom-6 left-4">
+                                    <div class="w-12 h-12 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center">
+                                        @if($like->pet->profile_image_url)
+                                            <img src="{{ $like->pet->profile_image_url }}" 
+                                                 alt="{{ $like->pet->name }}" 
+                                                 class="w-full h-full object-cover rounded-full">
+                                        @else
+                                            <span class="text-gray-500 text-sm font-medium">
+                                                {{ mb_substr($like->pet->name, 0, 2) }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             
                             <!-- ペット情報 -->
-                            <div class="p-4">
-                                <div class="flex items-center justify-between mb-2">
-                                    <h3 class="text-lg font-semibold text-gray-900">{{ $like->pet->name }}</h3>
-                                    <span class="text-sm text-gray-500">
-                                        {{ $like->created_at->format('Y/m/d') }}
-                                    </span>
+                            <div class="pt-8 px-4 pb-4">
+                                <div class="mb-2">
+                                    <h3 class="text-lg font-semibold text-gray-900">
+                                        {{ $like->pet->name }}
+                                        @if($like->pet->breed)
+                                            <span class="text-sm font-normal text-gray-600">({{ $like->pet->breed }})</span>
+                                        @endif
+                                    </h3>
                                 </div>
                                 
                                 <div class="text-sm text-gray-600 mb-3">
-                                    <p>{{ __(['dog' => '犬', 'cat' => '猫', 'rabbit' => 'うさぎ', 'other' => 'その他'][$like->pet->species] ?? $like->pet->species) }}</p>
-                                    @if($like->pet->breed)
-                                        <p>{{ $like->pet->breed }}</p>
-                                    @endif
-                                    @if($like->pet->age_years || $like->pet->age_months)
-                                        <p>
-                                            @if($like->pet->age_years && $like->pet->age_months)
-                                                {{ $like->pet->age_years }}歳{{ $like->pet->age_months }}ヶ月
-                                            @elseif($like->pet->age_years)
-                                                {{ $like->pet->age_years }}歳
-                                            @else
-                                                {{ $like->pet->age_months }}ヶ月
-                                            @endif
-                                        </p>
-                                    @endif
+                                    <p>
+                                        {{ __(['dog' => 'オス', 'cat' => 'メス', 'rabbit' => 'オス', 'other' => 'オス'][$like->pet->species] ?? 'オス') }}・
+                                        @if($like->pet->age_years && $like->pet->age_months)
+                                            {{ $like->pet->age_years }}歳{{ $like->pet->age_months }}ヶ月
+                                        @elseif($like->pet->age_years)
+                                            {{ $like->pet->age_years }}歳
+                                        @else
+                                            {{ $like->pet->age_months }}ヶ月
+                                        @endif
+                                        ・飼い主: {{ $like->pet->user->display_name ?? $like->pet->user->name }}さん
+                                    </p>
+                                    <p class="text-gray-500">いいね日: {{ $like->created_at->format('Y/m/d') }}</p>
                                 </div>
                                 
-                                <!-- いいね取り消しボタン -->
-                                <div class="flex justify-end">
+                                <!-- アクションボタン -->
+                                <div class="flex space-x-2">
+                                    <a href="{{ route('pets.show', $like->pet->id) }}" 
+                                       class="flex-1 bg-blue-600 text-white text-center py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-700 transition duration-200">
+                                        プロフィールを見る
+                                    </a>
                                     <button type="button" 
                                             @click="$dispatch('open-modal', { id: 'unlike-modal', formId: 'unlike-form-{{ $like->pet->id }}' })"
-                                            class="text-red-600 text-sm hover:text-red-800 px-3 py-1 border border-red-300 rounded hover:bg-red-50 transition duration-200">
-                                        いいねを取り消す
+                                            class="flex-1 bg-gray-200 text-gray-700 py-2 px-4 rounded-md text-sm font-medium hover:bg-gray-300 transition duration-200">
+                                        いいね取消
                                     </button>
                                     <form id="unlike-form-{{ $like->pet->id }}" 
                                           action="{{ route('likes.destroy', $like->pet->id) }}" 
@@ -104,7 +140,7 @@
                 <div class="text-center py-12">
                     <div class="text-gray-400 text-6xl mb-4">❤️</div>
                     <h3 class="text-lg font-medium text-gray-900 mb-2">いいねがありません</h3>
-                    <p class="text-gray-500">動物プロフィールにいいねをしてみましょう！</p>
+                    <p class="text-gray-500">他のペットプロフィールにいいねをしてみましょう！</p>
                 </div>
             @endif
         </div>

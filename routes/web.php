@@ -48,6 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/mypage/pets/links', [PetController::class, 'saveLinks'])->name('mypage.pets.links.store');
     Route::delete('/mypage/pets/links', [PetController::class, 'destroyLinks'])->name('mypage.pets.links.destroy');
 
+    // ペットプロフィール詳細（公開ページ）
+    Route::get('/pets/{pet}', [PetController::class, 'show'])->name('pets.show');
+
     // ペット登録ガイド（ワイヤーフレーム準拠の詳細ページ）
     Route::view('/mypage/pets/detail', 'pets.detail_guide')->name('mypage.pets.detail_guide');
 

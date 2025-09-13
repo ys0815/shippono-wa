@@ -65,9 +65,9 @@
                                 <div class="text-sm text-gray-600 mt-1">いいね: {{ $pet->likes->count() }} | 投稿: {{ $pet->posts->count() }}</div>
                                 
                                 <div class="mt-4 flex gap-2">
+                                    <a href="{{ route('pets.show', $pet->id) }}" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">プロフィールを見る</a>
                                     <a href="{{ route('mypage.pets.edit', ['pet_id' => $pet->id]) }}" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">プロフィール編集</a>
                                     <a href="#" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">投稿を見る</a>
-                                    <a href="#" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">シェアURL</a>
                                 </div>
                             </div>
                         </div>
