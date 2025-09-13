@@ -6,3 +6,83 @@
 [x-cloak] {
     display: none !important;
 }
+
+/* ========== Brand Theme ========== */
+:root {
+    /* icon.png 由来の温かいオレンジ基調（Tailwind amber 系ベース） */
+    --brand-50: #fffbeb;
+    --brand-100: #fef3c7;
+    --brand-200: #fde68a;
+    --brand-300: #fcd34d;
+    --brand-400: #fbbf24;
+    --brand-500: #f59e0b;
+    --brand-600: #d97706;
+    --brand-700: #b45309;
+    --brand-800: #92400e;
+    --brand-900: #78350f;
+}
+
+@layer components {
+    /* Buttons */
+    .btn {
+        @apply inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+    .btn-brand {
+        color: #fff;
+        background-color: var(--brand-600);
+        border-color: transparent;
+    }
+    .btn-brand:hover {
+        background-color: var(--brand-700);
+    }
+    .btn-brand:focus {
+        box-shadow: 0 0 0 2px var(--brand-100);
+    }
+
+    .btn-outline {
+        @apply bg-white border;
+        border-color: var(--brand-300);
+        color: var(--brand-700);
+    }
+    .btn-outline:hover {
+        background-color: var(--brand-50);
+    }
+
+    .btn-danger {
+        @apply text-white;
+        background-color: #dc2626; /* red-600 */
+    }
+    .btn-danger:hover {
+        background-color: #b91c1c;
+    }
+
+    /* Links */
+    .link-brand {
+        color: var(--brand-700);
+    }
+    .link-brand:hover {
+        color: var(--brand-800);
+    }
+
+    /* Badges */
+    .badge-brand {
+        @apply text-xs px-2 py-1 rounded-full;
+        background-color: var(--brand-50);
+        color: var(--brand-800);
+    }
+
+    /* Cards */
+    .card {
+        @apply bg-white rounded-lg shadow-sm border border-gray-200;
+    }
+
+    /* Navigation */
+    .nav-active {
+        @apply inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5;
+        border-color: var(--brand-500);
+        color: #1f2937; /* gray-800 */
+    }
+    .nav-inactive {
+        @apply inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300;
+    }
+}
