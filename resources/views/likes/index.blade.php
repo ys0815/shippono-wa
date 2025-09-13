@@ -111,7 +111,7 @@
                                 <!-- アクションボタン -->
                                 <div class="flex space-x-2">
                                     <a href="{{ route('pets.show', $like->pet->id) }}" 
-                                       class="flex-1 bg-blue-600 text-white text-center py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-700 transition duration-200">
+                                       class="flex-1 bg-amber-600 text-white text-center py-2 px-4 rounded-md text-sm font-medium hover:bg-amber-700 transition duration-200">
                                         プロフィールを見る
                                     </a>
                                     <button type="button" 

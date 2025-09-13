@@ -1,14 +1,14 @@
 <nav x-data="{ sidebarOpen: false }" 
      x-init="sidebarOpen = false; $nextTick(() => { sidebarOpen = false; })" 
      @keydown.escape.window="sidebarOpen=false" 
-     class="bg-white border-b border-gray-100">
+     class="style="background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); border-bottom: 1px solid #fde68a"">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Hamburger Menu Button -->
                 <div class="flex items-center mr-4">
-                    <button @click="sidebarOpen = ! sidebarOpen" aria-label="Open menu" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                    <button @click="sidebarOpen = ! sidebarOpen" aria-label="Open menu" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:color: #b45309 hover:background-color: #fef3c7 focus:outline-none focus:background-color: #fef3c7 focus:color: #b45309 transition duration-150 ease-in-out">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -34,7 +34,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-color: #fde68a text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:background-color: #fef3c7 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -81,7 +81,7 @@
            style="display: none;">
         
         <!-- Header -->
-        <div class="p-4 border-b bg-gray-50">
+        <div class="p-4 border-b background-color: #fef3c7 border-color: #fde68a">
             <div class="text-lg font-bold text-gray-800">{{ Auth::user()->display_name ?? Auth::user()->name }}</div>
             <div class="text-sm text-gray-600">{{ Auth::user()->email }}</div>
         </div>
@@ -89,17 +89,17 @@
         <!-- Menu blocks -->
         <nav class="p-4 space-y-6">
             <div>
-                <div class="text-xs font-semibold text-gray-500 mb-2">メイン</div>
+                <div class="text-xs font-semibold color: #b45309 mb-2">メイン</div>
                 <ul class="space-y-1">
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage') }}" class="flex items-center p-2 rounded hover:bg-gray-100">🏠<span class="ml-3">マイページ</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.posts') }}" class="flex items-center p-2 rounded hover:bg-gray-100">📝<span class="ml-3">投稿管理</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.pets') }}" class="flex items-center p-2 rounded hover:bg-gray-100">🐾<span class="ml-3">動物プロフィール管理</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.likes') }}" class="flex items-center p-2 rounded hover:bg-gray-100">❤️<span class="ml-3">いいね一覧</span></a></li>
+                    <li><a @click="sidebarOpen=false" href="{{ route('mypage') }}" class="flex items-center p-2 rounded hover:background-color: #fef3c7">🏠<span class="ml-3">マイページ</span></a></li>
+                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.posts') }}" class="flex items-center p-2 rounded hover:background-color: #fef3c7">📝<span class="ml-3">投稿管理</span></a></li>
+                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.pets') }}" class="flex items-center p-2 rounded hover:background-color: #fef3c7">🐾<span class="ml-3">動物プロフィール管理</span></a></li>
+                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.likes') }}" class="flex items-center p-2 rounded hover:background-color: #fef3c7">❤️<span class="ml-3">いいね一覧</span></a></li>
                 </ul>
             </div>
 
             <div>
-                <div class="text-xs font-semibold text-gray-500 mb-2">作成</div>
+                <div class="text-xs font-semibold color: #b45309 mb-2">作成</div>
                 <ul class="space-y-1">
                     <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded hover:bg-gray-100">✏️<span class="ml-3">新規投稿</span></a></li>
                     <li><a @click="sidebarOpen=false" href="{{ route('mypage.pets.create') }}" class="flex items-center p-2 rounded hover:bg-gray-100">➕<span class="ml-3">動物を登録</span></a></li>
@@ -107,7 +107,7 @@
             </div>
 
             <div>
-                <div class="text-xs font-semibold text-gray-500 mb-2">設定</div>
+                <div class="text-xs font-semibold color: #b45309 mb-2">設定</div>
                 <ul class="space-y-1">
                     <li><a @click="sidebarOpen=false" href="{{ route('profile.edit') }}" class="flex items-center p-2 rounded hover:bg-gray-100">👤<span class="ml-3">プロフィール編集</span></a></li>
                     <li><a @click="sidebarOpen=false" href="{{ route('mypage.profile.email') }}" class="flex items-center p-2 rounded hover:bg-gray-100">✉️<span class="ml-3">メールアドレス変更</span></a></li>
@@ -116,7 +116,7 @@
             </div>
 
             <div>
-                <div class="text-xs font-semibold text-gray-500 mb-2">その他</div>
+                <div class="text-xs font-semibold color: #b45309 mb-2">その他</div>
                 <ul class="space-y-1">
                     <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded hover:bg-gray-100">❓<span class="ml-3">ヘルプ・サポート</span></a></li>
                     <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded hover:bg-gray-100">📞<span class="ml-3">お問い合わせ</span></a></li>

@@ -88,7 +88,7 @@
             @endforelse
 
             <!-- 詳細を見るボタン（ペットプロフィール管理＝一覧ページへ遷移） -->
-            <a href="{{ route('mypage.pets') }}" class="block w-full text-center bg-gray-800 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition duration-200">
+            <a href="{{ route('mypage.pets') }}" class="block w-full text-center bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition duration-200">
                 詳細を見る→
             </a>
         </div>
@@ -117,10 +117,10 @@
 
             <!-- アクションボタン -->
             <div class="space-y-3">
-                <a href="{{ route('mypage.posts.gallery.create') }}" class="block w-full text-center bg-gray-800 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition duration-200">
+                <a href="{{ route('mypage.posts.gallery.create') }}" class="block w-full text-center bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition duration-200">
                     今日の幸せを投稿
                 </a>
-                <a href="{{ route('mypage.posts.interview.create') }}" class="block w-full text-center bg-gray-800 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition duration-200">
+                <a href="{{ route('mypage.posts.interview.create') }}" class="block w-full text-center bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition duration-200">
                     里親インタビューを投稿
                 </a>
                 <a href="{{ route('mypage.posts') }}" class="block w-full text-center bg-gray-200 text-gray-800 py-3 rounded-lg font-medium hover:bg-gray-300 transition duration-200">

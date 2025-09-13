@@ -137,7 +137,7 @@
                 @else
                     <div class="pt-4 border-t border-gray-200">
                         <p class="text-sm text-gray-500 text-center">
-                            <a href="{{ route('login') }}" class="text-blue-600 hover:text-blue-800">ログイン</a>していいねしてみましょう！
+                            <a href="{{ route('login') }}" class="text-amber-600 hover:text-amber-800">ログイン</a>していいねしてみましょう！
                         </p>
                     </div>
                 @endauth

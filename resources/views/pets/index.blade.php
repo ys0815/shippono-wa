@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="mt-6">
-                    <a href="{{ route('mypage.pets.create') }}" class="block w-full text-center bg-gray-800 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition duration-200">＋新しいペットを登録</a>
+                    <a href="{{ route('mypage.pets.create') }}" class="block w-full text-center bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition duration-200">＋新しいペットを登録</a>
                 </div>
             </div>
         </div>
