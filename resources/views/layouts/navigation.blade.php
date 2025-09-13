@@ -1,7 +1,7 @@
 <nav x-data="{ sidebarOpen: false }" 
      x-init="sidebarOpen = false; $nextTick(() => { sidebarOpen = false; })" 
      @keydown.escape.window="sidebarOpen=false" 
-     class="nav-fixed bg-white/90 backdrop-blur border-b border-amber-100">
+     class="fixed top-0 left-0 right-0 z-[100] bg-white/90 backdrop-blur border-b border-amber-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -64,7 +64,7 @@
     <div x-cloak 
          x-show="sidebarOpen" 
          x-transition.opacity
-         class="sidebar-overlay bg-black/50" 
+         class="fixed inset-0 z-[200] bg-black/50" 
          @click="sidebarOpen = false"
          style="display: none;"></div>
 
@@ -77,7 +77,7 @@
            x-transition:leave="transition ease-in-out duration-300 transform"
            x-transition:leave-start="translate-x-0"
            x-transition:leave-end="-translate-x-full"
-           class="sidebar-menu w-72 h-full bg-white shadow-lg overflow-y-auto"
+           class="fixed top-0 left-0 z-[210] w-72 h-full bg-white shadow-lg overflow-y-auto"
            style="display: none;">
         
         <!-- Header -->
