@@ -77,8 +77,12 @@
                             @endif
                             <p class="text-xs text-gray-600">いいね：{{ $pet->likes()->count() }}｜投稿：{{ $pet->posts()->count() }}</p>
                             <div class="flex space-x-2 mt-2">
-                                <a href="{{ route('mypage.pets.edit', ['pet_id' => $pet->id]) }}" class="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded">編集</a>
-                                <a href="#" class="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded">投稿</a>
+                                <a href="{{ route('mypage.pets.edit', ['pet_id' => $pet->id]) }}" 
+                                   class="px-3 py-1 text-white text-xs rounded transition duration-200" 
+                                   style="background-color: #f59e0b; hover:background-color: #d97706;">編集</a>
+                                <a href="#" 
+                                   class="px-3 py-1 text-white text-xs rounded transition duration-200" 
+                                   style="background-color: #3b82f6; hover:background-color: #2563eb;">投稿</a>
                             </div>
                         </div>
                     </div>
@@ -99,7 +103,8 @@
             @forelse ($recentPosts as $post)
                 <div class="bg-white rounded-lg p-3 mb-3 border">
                     <div class="flex justify-between items-start mb-1">
-                        <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">{{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}</span>
+                        <span class="text-xs text-white px-2 py-1 rounded" 
+                              style="background-color: #f59e0b;">{{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}</span>
                         <span class="text-xs text-gray-500">{{ $post->created_at->format('Y/m/d') }}</span>
                     </div>
                     <h3 class="font-medium text-gray-800 text-sm">{{ $post->title }}</h3>

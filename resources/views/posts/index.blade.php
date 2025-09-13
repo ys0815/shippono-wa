@@ -65,14 +65,16 @@
             <div class="mb-6">
                 <div class="flex space-x-4">
                     <a href="{{ route('mypage.posts.gallery.create') }}" 
-                       class="inline-flex items-center px-4 py-2 bg-gray-800 text-white text-sm rounded-lg hover:bg-gray-700 transition duration-200">
+                       class="inline-flex items-center px-4 py-2 text-white text-sm rounded-lg transition duration-200" 
+                       style="background-color: #d97706; hover:background-color: #b45309;">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
                         今日の幸せを投稿
                     </a>
                     <a href="{{ route('mypage.posts.interview.create') }}" 
-                       class="inline-flex items-center px-4 py-2 bg-gray-800 text-white text-sm rounded-lg hover:bg-gray-700 transition duration-200">
+                       class="inline-flex items-center px-4 py-2 text-white text-sm rounded-lg transition duration-200" 
+                       style="background-color: #d97706; hover:background-color: #b45309;">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
@@ -142,7 +144,8 @@
                             <!-- 投稿タイプタグと日付 -->
                             <div class="flex justify-between items-start mb-3">
                                 <div class="flex items-center">
-                                    <span class="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-700">
+                                    <span class="text-xs text-white px-2 py-1 rounded" 
+                                          style="background-color: #f59e0b;">
                                         {{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}
                                     </span>
                                 </div>
@@ -191,12 +194,14 @@
                             <!-- アクションボタン -->
                             <div class="flex space-x-2">
                                 <a href="{{ route('mypage.posts.edit', $post) }}" 
-                                   class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-200">
+                                   class="px-3 py-1 text-sm rounded text-white transition duration-200" 
+                                   style="background-color: #f59e0b; hover:background-color: #d97706;">
                                     編集
                                 </a>
                                 <button type="button" 
                                         @click="$dispatch('open-modal', { id: 'delete-post-modal', formId: 'delete-form-{{ $post->id }}' })"
-                                        class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-200">
+                                        class="px-3 py-1 text-sm rounded text-white transition duration-200" 
+                                        style="background-color: #dc2626; hover:background-color: #b91c1c;">
                                     削除
                                 </button>
                                 <form id="delete-form-{{ $post->id }}" 
@@ -210,7 +215,8 @@
                                 @if($post->status === 'published')
                                     <button type="button" 
                                             @click="$dispatch('open-modal', { id: 'hide-post-modal', formId: 'hide-form-{{ $post->id }}' })"
-                                            class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-200">
+                                            class="px-3 py-1 text-sm rounded text-white transition duration-200" 
+                                            style="background-color: #f59e0b; hover:background-color: #d97706;">
                                         非公開
                                     </button>
                                     <form id="hide-form-{{ $post->id }}" 
@@ -227,7 +233,8 @@
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" 
-                                                class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-200">
+                                                class="px-3 py-1 text-sm rounded text-white transition duration-200" 
+                                                style="background-color: #10b981; hover:background-color: #059669;">
                                             公開
                                         </button>
                                     </form>

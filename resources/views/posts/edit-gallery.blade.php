@@ -173,11 +173,13 @@
                 <!-- ボタン -->
                 <div class="flex space-x-4">
                     <button type="submit" 
-                            class="flex-1 bg-gray-800 text-white py-3 px-4 rounded-lg hover:bg-gray-700 transition duration-200 font-medium">
+                            class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium" 
+                            style="background-color: #d97706; hover:background-color: #b45309;">
                         更新する
                     </button>
                     <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" 
-                       class="flex-1 bg-gray-200 text-gray-800 py-3 px-4 rounded-lg hover:bg-gray-300 transition duration-200 font-medium text-center">
+                       class="flex-1 text-gray-800 py-3 px-4 rounded-lg transition duration-200 font-medium text-center" 
+                       style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
                         キャンセル
                     </a>
                 </div>

@@ -230,11 +230,13 @@
                 <!-- 送信ボタン -->
                 <div class="flex space-x-4">
                     <button type="submit" 
-                            class="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-200">
+                            class="px-6 py-3 text-white rounded-lg transition duration-200" 
+                            style="background-color: #d97706; hover:background-color: #b45309;">
                         更新する
                     </button>
                     <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" 
-                       class="px-6 py-3 bg-white text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200">
+                       class="px-6 py-3 text-gray-800 rounded-lg transition duration-200" 
+                       style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
                         キャンセル
                     </a>
                 </div>

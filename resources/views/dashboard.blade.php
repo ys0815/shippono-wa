@@ -75,7 +75,8 @@
             @forelse ($recentPosts as $post)
                 <div class="bg-white rounded-lg p-3 mb-3 border">
                     <div class="flex justify-between items-start mb-1">
-                        <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">{{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}</span>
+                        <span class="text-xs text-white px-2 py-1 rounded" 
+                              style="background-color: #f59e0b;">{{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}</span>
                         <span class="text-xs text-gray-500">{{ $post->created_at->format('Y/m/d') }}</span>
                     </div>
                     <h3 class="font-medium text-gray-800 text-sm">{{ $post->title }}</h3>
@@ -92,7 +93,8 @@
             @endforelse
 
             <!-- すべての投稿を見るボタン -->
-            <a href="{{ route('mypage.posts') }}" class="block w-full text-center bg-gray-800 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition duration-200">
+            <a href="{{ route('mypage.posts') }}" class="block w-full text-center text-white py-3 rounded-lg font-medium transition duration-200" 
+               style="background-color: #d97706; hover:background-color: #b45309;">
                 すべての投稿を見る→
             </a>
         </div>

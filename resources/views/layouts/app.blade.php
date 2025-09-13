@@ -19,13 +19,13 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen background-color: #f9fafb">
+    <body class="font-sans antialiased bg-gray-50">
+        <div class="min-h-screen">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); border-bottom: 1px solid #fde68a shadow-sm">
+                <header class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
