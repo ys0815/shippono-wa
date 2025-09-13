@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Alpine.js x-cloak のちらつき防止 */
+[x-cloak] {
+    display: none !important;
+}

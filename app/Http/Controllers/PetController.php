@@ -76,14 +76,14 @@ class PetController extends Controller
             $path = $request->file('profile_image')->store('pets/profile', 'public');
             $pet->profile_image_url = '/storage/' . $path;
         } else {
-            $pet->profile_image_url = '/images/default-pet-icon.png';
+            $pet->profile_image_url = '/images/icon.png';
         }
 
         if ($request->hasFile('header_image')) {
             $path = $request->file('header_image')->store('pets/header', 'public');
             $pet->header_image_url = '/storage/' . $path;
         } else {
-            $pet->header_image_url = '/images/default-pet-header.png';
+            $pet->header_image_url = '/images/icon.png';
         }
 
         $pet->save();
@@ -152,12 +152,15 @@ class PetController extends Controller
             ->latest()
             ->get();
 
-        // 既存の家族リンクを取得
-        $existingLinks = PetFamilyLink::where('user_id', Auth::id())
+        // 既存の家族リンクを取得してグループ化
+        $links = PetFamilyLink::where('user_id', Auth::id())
             ->with(['pet1', 'pet2'])
             ->get();
 
-        return view('pets.links', compact('pets', 'existingLinks'));
+        // ペットIDをグループ化して家族グループを作成
+        $familyGroups = $this->groupFamilyLinks($links);
+
+        return view('pets.links', compact('pets', 'familyGroups'));
     }
 
     public function saveLinks(Request $request): RedirectResponse
@@ -201,6 +204,89 @@ class PetController extends Controller
                 ->with('status', 'family-links-created');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => '家族リンクの作成に失敗しました。']);
+        }
+    }
+
+    public function destroyLinks(Request $request): RedirectResponse
+    {
+        try {
+            // 全ての家族リンクを削除
+            PetFamilyLink::where('user_id', Auth::id())->delete();
+
+            return redirect()->route('mypage.pets.links')
+                ->with('status', 'family-links-deleted');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => '家族リンクの解除に失敗しました。']);
+        }
+    }
+
+    /**
+     * 家族リンクをグループ化する
+     */
+    private function groupFamilyLinks($links)
+    {
+        if ($links->isEmpty()) {
+            return collect();
+        }
+
+        // ペットIDの関係をグラフとして構築
+        $graph = [];
+        foreach ($links as $link) {
+            $pet1Id = $link->pet1_id;
+            $pet2Id = $link->pet2_id;
+
+            if (!isset($graph[$pet1Id])) {
+                $graph[$pet1Id] = [];
+            }
+            if (!isset($graph[$pet2Id])) {
+                $graph[$pet2Id] = [];
+            }
+
+            $graph[$pet1Id][] = $pet2Id;
+            $graph[$pet2Id][] = $pet1Id;
+        }
+
+        // 連結成分を見つけてグループ化
+        $visited = [];
+        $groups = [];
+
+        foreach (array_keys($graph) as $petId) {
+            if (!isset($visited[$petId])) {
+                $group = [];
+                $this->dfs($graph, $petId, $visited, $group);
+                if (!empty($group)) {
+                    $groups[] = $group;
+                }
+            }
+        }
+
+        // 各グループのペット情報を取得
+        $familyGroups = [];
+        foreach ($groups as $group) {
+            $pets = Pet::whereIn('id', $group)->get();
+            $familyGroups[] = [
+                'pets' => $pets,
+                'created_at' => $links->first()->created_at
+            ];
+        }
+
+        return collect($familyGroups);
+    }
+
+    /**
+     * 深さ優先探索でグループを構築
+     */
+    private function dfs($graph, $petId, &$visited, &$group)
+    {
+        $visited[$petId] = true;
+        $group[] = $petId;
+
+        if (isset($graph[$petId])) {
+            foreach ($graph[$petId] as $neighborId) {
+                if (!isset($visited[$neighborId])) {
+                    $this->dfs($graph, $neighborId, $visited, $group);
+                }
+            }
         }
     }
 }

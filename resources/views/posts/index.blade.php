@@ -3,6 +3,25 @@
 @endphp
 
 <x-app-layout>
+    <!-- 削除確認ダイアログ -->
+    <x-confirmation-modal 
+        id="delete-post-modal"
+        title="投稿を削除しますか?"
+        message="この操作は取り消せません。本当に削除してもよろしいですか?"
+        confirm-text="削除"
+        cancel-text="キャンセル"
+        confirm-class="bg-red-600 hover:bg-red-700 text-white"
+        icon="🗑️" />
+
+    <!-- 非公開確認ダイアログ -->
+    <x-confirmation-modal 
+        id="hide-post-modal"
+        title="投稿を非公開にしますか?"
+        message="この投稿は他のユーザーから見えなくなります。"
+        confirm-text="非公開にする"
+        cancel-text="キャンセル"
+        confirm-class="bg-orange-600 hover:bg-orange-700 text-white"
+        icon="👁️" />
     <div class="min-h-screen bg-gray-50">
         <!-- ヘッダー -->
         <div class="bg-white shadow-sm border-b">
@@ -175,27 +194,44 @@
                                    class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-200">
                                     編集
                                 </a>
-                                <form action="{{ route('mypage.posts.destroy', $post) }}" 
+                                <button type="button" 
+                                        @click="$dispatch('open-modal', { id: 'delete-post-modal', formId: 'delete-form-{{ $post->id }}' })"
+                                        class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-200">
+                                    削除
+                                </button>
+                                <form id="delete-form-{{ $post->id }}" 
+                                      action="{{ route('mypage.posts.destroy', $post) }}" 
                                       method="POST" 
-                                      class="inline"
-                                      onsubmit="return confirm('この投稿を削除しますか？')">
+                                      class="hidden">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" 
-                                            class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-200">
-                                        削除
-                                    </button>
                                 </form>
-                                <form action="{{ route('mypage.posts.toggle-visibility', $post) }}" 
-                                      method="POST" 
-                                      class="inline">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" 
+                                
+                                @if($post->status === 'published')
+                                    <button type="button" 
+                                            @click="$dispatch('open-modal', { id: 'hide-post-modal', formId: 'hide-form-{{ $post->id }}' })"
                                             class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-200">
-                                        {{ $post->status === 'published' ? '非公開' : '公開' }}
+                                        非公開
                                     </button>
-                                </form>
+                                    <form id="hide-form-{{ $post->id }}" 
+                                          action="{{ route('mypage.posts.toggle-visibility', $post) }}" 
+                                          method="POST" 
+                                          class="hidden">
+                                        @csrf
+                                        @method('PATCH')
+                                    </form>
+                                @else
+                                    <form action="{{ route('mypage.posts.toggle-visibility', $post) }}" 
+                                          method="POST" 
+                                          class="inline">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" 
+                                                class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-200">
+                                            公開
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     @endforeach

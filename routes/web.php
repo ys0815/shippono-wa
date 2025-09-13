@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/mypage/pets/{pet_id}', [PetController::class, 'update'])->name('mypage.pets.update');
     Route::get('/mypage/pets/links', [PetController::class, 'links'])->name('mypage.pets.links');
     Route::post('/mypage/pets/links', [PetController::class, 'saveLinks'])->name('mypage.pets.links.store');
+    Route::delete('/mypage/pets/links', [PetController::class, 'destroyLinks'])->name('mypage.pets.links.destroy');
 
     // ペット登録ガイド（ワイヤーフレーム準拠の詳細ページ）
     Route::view('/mypage/pets/detail', 'pets.detail_guide')->name('mypage.pets.detail_guide');
@@ -57,6 +58,8 @@ Route::middleware('auth')->group(function () {
 
     // いいね一覧
     Route::get('/mypage/likes', [LikeController::class, 'index'])->name('mypage.likes');
+    Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
+    Route::delete('/likes/{petId}', [LikeController::class, 'destroy'])->name('likes.destroy');
 
     // プロフィール編集（マイページ配下）
     Route::get('/mypage/profile/edit', [ProfileController::class, 'edit'])->name('mypage.profile.edit');
