@@ -10,7 +10,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8">
+    <div class="pt-20 pb-8">
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white p-6 shadow sm:rounded-lg">
                 <h3 class="font-medium text-gray-900 mb-4">登録済みペット</h3>

@@ -9,7 +9,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-4 px-4 max-w-2xl mx-auto bg-gray-50 min-h-screen">
+    <div class="pt-10 pb-4 px-4 max-w-2xl mx-auto bg-gray-50 min-h-screen">
         <!-- ユーザー情報ヘッダー -->
         <div class="text-center mb-4">
             <h1 class="text-lg font-bold text-gray-800">{{ Auth::user()->display_name ?? Auth::user()->name }}さんのマイページ</h1>

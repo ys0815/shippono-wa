@@ -20,12 +20,12 @@
         
     </head>
     <body class="font-sans antialiased bg-gray-50">
-        <div class="min-h-screen">
+        <div class="min-h-screen pt-16">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm">
+                <header class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-30">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -33,7 +33,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="relative z-10">
                 {{ $slot }}
             </main>
         </div>

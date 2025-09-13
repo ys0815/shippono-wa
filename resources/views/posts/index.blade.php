@@ -23,8 +23,8 @@
         confirm-class="bg-orange-600 hover:bg-orange-700 text-white"
         icon="👁️" />
     <div class="min-h-screen bg-gray-50">
-        <!-- ヘッダー -->
-        <div class="bg-white shadow-sm border-b">
+        <!-- ヘッダー（固定） -->
+        <div class="bg-white/90 backdrop-blur border-b border-amber-100 sticky top-16 z-30">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center">
@@ -39,8 +39,8 @@
             </div>
         </div>
 
-        <!-- タブナビゲーション -->
-        <div class="bg-white border-b">
+        <!-- タブナビゲーション（固定） -->
+        <div class="bg-white/90 backdrop-blur border-b border-amber-100 sticky top-[calc(4rem+4rem)] z-30">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <nav class="flex space-x-8">
                     <a href="{{ route('mypage.posts', ['type' => 'all']) }}" 
@@ -98,9 +98,9 @@
                                        name="keyword" 
                                        value="{{ $keyword }}"
                                        placeholder="キーワード" 
-                                       class="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                       class="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                                 <div id="searchLoading" class="absolute right-2 top-1.5 hidden">
-                                    <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                                    <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-amber-600"></div>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                                 <label for="period" class="block text-xs font-medium text-gray-700 mb-1">期間:</label>
                                 <select id="period" 
                                         name="period" 
-                                        class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                        class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                                     <option value="all" {{ $period === 'all' ? 'selected' : '' }}>すべて</option>
                                     <option value="month" {{ $period === 'month' ? 'selected' : '' }}>今月</option>
                                     <option value="half_year" {{ $period === 'half_year' ? 'selected' : '' }}>半年</option>
@@ -125,7 +125,7 @@
                                 <label for="status" class="block text-xs font-medium text-gray-700 mb-1">状態:</label>
                                 <select id="status" 
                                         name="status" 
-                                        class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                        class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                                     <option value="all" {{ $status === 'all' ? 'selected' : '' }}>すべて</option>
                                     <option value="published" {{ $status === 'published' ? 'selected' : '' }}>公開</option>
                                     <option value="draft" {{ $status === 'draft' ? 'selected' : '' }}>下書き</option>
@@ -265,7 +265,7 @@
                     </p>
                     <div class="mt-4">
                         <a href="{{ route('mypage.posts.gallery.create') }}" 
-                           class="inline-flex items-center px-4 py-2 bg-gray-800 text-white text-sm rounded-lg hover:bg-gray-700 transition duration-200">
+                           class="inline-flex items-center px-4 py-2 bg-amber-600 text-white text-sm rounded-lg hover:bg-amber-700 transition duration-200">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
@@ -287,7 +287,6 @@
             
             let searchTimeout;
             
-            // ローディング表示の制御
             function showLoading() {
                 searchLoading.classList.remove('hidden');
             }
@@ -296,12 +295,10 @@
                 searchLoading.classList.add('hidden');
             }
             
-            // フォーム送信時のローディング表示
             searchForm.addEventListener('submit', function() {
                 showLoading();
             });
             
-            // キーワード検索の自動実行（入力後500ms待機）
             keywordInput.addEventListener('input', function() {
                 clearTimeout(searchTimeout);
                 searchTimeout = setTimeout(function() {
@@ -310,7 +307,6 @@
                 }, 500);
             });
             
-            // キーワード検索のEnterキー実行
             keywordInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -320,13 +316,11 @@
                 }
             });
             
-            // 期間選択の自動実行
             periodSelect.addEventListener('change', function() {
                 showLoading();
                 searchForm.submit();
             });
             
-            // 状態選択の自動実行
             statusSelect.addEventListener('change', function() {
                 showLoading();
                 searchForm.submit();
