@@ -111,7 +111,8 @@
         <div>
             <div class="text-xs font-semibold text-amber-700 mb-2">作成</div>
             <ul class="space-y-1">
-                <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">新規投稿</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('mypage.posts.gallery.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">今日の幸せを投稿</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('mypage.posts.interview.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">里親インタビューを投稿</a></li>
                 <li><a @click="sidebarOpen=false" href="{{ route('mypage.pets.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットを登録</a></li>
             </ul>
         </div>
