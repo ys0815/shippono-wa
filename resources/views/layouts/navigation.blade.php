@@ -1,14 +1,16 @@
-<nav x-data="{ sidebarOpen: false }" 
-     x-init="sidebarOpen = false; $nextTick(() => { sidebarOpen = false; })" 
-     @keydown.escape.window="sidebarOpen=false" 
-     class="fixed top-0 left-0 right-0 z-[100] bg-white/90 backdrop-blur border-b border-amber-100">
+<!-- Header + Sidebar (shared Alpine scope) -->
+<div x-data="{ sidebarOpen: false }" @keydown.escape.window="sidebarOpen=false">
+
+<!-- Top Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-[1000] bg-white/90 backdrop-blur border-b border-amber-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Hamburger Menu Button -->
                 <div class="flex items-center mr-4">
-                    <button @click="sidebarOpen = ! sidebarOpen" aria-label="Open menu" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-50 focus:outline-none focus:bg-amber-50 focus:text-amber-700 transition duration-150 ease-in-out">
+                    <button @click="sidebarOpen = ! sidebarOpen" aria-label="Open menu" 
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-50 focus:outline-none focus:bg-amber-50 focus:text-amber-700 transition duration-150 ease-in-out">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -59,75 +61,84 @@
             </div>
         </div>
     </div>
+</nav>
 
-    <!-- Sidebar Overlay -->
-    <div x-cloak 
-         x-show="sidebarOpen" 
-         x-transition.opacity
-         class="fixed inset-0 z-[200] bg-black/50" 
-         @click="sidebarOpen = false"
-         style="display: none;"></div>
+<!-- Sidebar Overlay -->
+<div x-cloak 
+     x-show="sidebarOpen" 
+     x-transition.opacity
+     class="fixed inset-0 z-[1100] bg-black/50" 
+     @click="sidebarOpen = false"></div>
 
-    <!-- Sidebar Menu -->
-    <aside x-cloak 
-           x-show="sidebarOpen"
-           x-transition:enter="transition ease-in-out duration-300 transform"
-           x-transition:enter-start="-translate-x-full"
-           x-transition:enter-end="translate-x-0"
-           x-transition:leave="transition ease-in-out duration-300 transform"
-           x-transition:leave-start="translate-x-0"
-           x-transition:leave-end="-translate-x-full"
-           class="fixed top-0 left-0 z-[210] w-72 h-full bg-white shadow-lg overflow-y-auto"
-           style="display: none;">
-        
-        <!-- Header -->
-        <div class="p-4 border-b bg-amber-50 border-amber-200">
+<!-- Sidebar Menu -->
+<aside x-cloak 
+       x-show="sidebarOpen"
+       x-transition:enter="transition ease-in-out duration-300 transform"
+       x-transition:enter-start="-translate-x-full"
+       x-transition:enter-end="translate-x-0"
+       x-transition:leave="transition ease-in-out duration-300 transform"
+       x-transition:leave-start="translate-x-0"
+       x-transition:leave-end="-translate-x-full"
+       class="fixed top-0 left-0 z-[1200] w-72 md:w-80 max-w-[85vw] h-full bg-white shadow-lg overflow-y-auto">
+    
+    <!-- Header -->
+    <div class="p-4 border-b bg-amber-50 border-amber-200 flex items-center justify-between">
+        <div>
             <div class="text-lg font-bold text-gray-800">{{ Auth::user()->display_name ?? Auth::user()->name }}</div>
             <div class="text-sm text-gray-600">{{ Auth::user()->email }}</div>
         </div>
+        <button @click="sidebarOpen=false" aria-label="メニューを閉じる" 
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-100 focus:outline-none transition">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
 
-        <!-- Menu blocks -->
-        <nav class="p-4 space-y-6">
-            <div>
-                <div class="text-xs font-semibold text-amber-700 mb-2">メイン</div>
-                <ul class="space-y-1">
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage') }}" class="flex items-center p-2 rounded hover:bg-amber-50">🏠<span class="ml-3">マイページ</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.posts') }}" class="flex items-center p-2 rounded hover:bg-amber-50">📝<span class="ml-3">投稿管理</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.pets') }}" class="flex items-center p-2 rounded hover:bg-amber-50">🐾<span class="ml-3">動物プロフィール管理</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.likes') }}" class="flex items-center p-2 rounded hover:bg-amber-50">❤️<span class="ml-3">いいね一覧</span></a></li>
-                </ul>
-            </div>
+    <!-- Menu blocks -->
+    <nav class="p-4 space-y-6" aria-label="サイドバー">
+        <div>
+            <div class="text-xs font-semibold text-amber-700 mb-2">メイン</div>
+            <ul class="space-y-1">
+                <li><a @click="sidebarOpen=false" href="{{ route('mypage') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">マイページ</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('mypage.posts') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">投稿管理</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('mypage.pets') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットプロフィール管理</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('mypage.likes') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">いいね一覧</a></li>
+            </ul>
+        </div>
 
-            <div>
-                <div class="text-xs font-semibold text-amber-700 mb-2">作成</div>
-                <ul class="space-y-1">
-                    <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded hover:bg-gray-100">✏️<span class="ml-3">新規投稿</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.pets.create') }}" class="flex items-center p-2 rounded hover:bg-gray-100">➕<span class="ml-3">動物を登録</span></a></li>
-                </ul>
-            </div>
+        <div>
+            <div class="text-xs font-semibold text-amber-700 mb-2">作成</div>
+            <ul class="space-y-1">
+                <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">新規投稿</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('mypage.pets.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットを登録</a></li>
+            </ul>
+        </div>
 
-            <div>
-                <div class="text-xs font-semibold text-amber-700 mb-2">設定</div>
-                <ul class="space-y-1">
-                    <li><a @click="sidebarOpen=false" href="{{ route('profile.edit') }}" class="flex items-center p-2 rounded hover:bg-gray-100">👤<span class="ml-3">プロフィール編集</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.profile.email') }}" class="flex items-center p-2 rounded hover:bg-gray-100">✉️<span class="ml-3">メールアドレス変更</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="{{ route('mypage.profile.password') }}" class="flex items-center p-2 rounded hover:bg-gray-100">🔒<span class="ml-3">パスワード変更</span></a></li>
-                </ul>
-            </div>
+        <div>
+            <div class="text-xs font-semibold text-amber-700 mb-2">設定</div>
+            <ul class="space-y-1">
+                <li><a @click="sidebarOpen=false" href="{{ route('profile.edit') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">プロフィール編集</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('mypage.profile.email') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">メールアドレス変更</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('mypage.profile.password') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">パスワード変更</a></li>
+            </ul>
+        </div>
 
-            <div>
-                <div class="text-xs font-semibold text-amber-700 mb-2">その他</div>
-                <ul class="space-y-1">
-                    <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded hover:bg-gray-100">❓<span class="ml-3">ヘルプ・サポート</span></a></li>
-                    <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded hover:bg-gray-100">📞<span class="ml-3">お問い合わせ</span></a></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}" class="inline">
-                            @csrf
-                            <button type="submit" class="flex items-center p-2 rounded hover:bg-gray-100">🚪<span class="ml-3">ログアウト</span></button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </aside>
-</nav>
+        <div>
+            <div class="text-xs font-semibold text-amber-700 mb-2">その他</div>
+            <ul class="space-y-1">
+                <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ヘルプ・サポート</a></li>
+                <li><a @click="sidebarOpen=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">お問い合わせ</a></li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ログアウト</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside>
+
+</div>

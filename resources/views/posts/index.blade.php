@@ -24,9 +24,9 @@
         icon="👁️" />
     <div class="min-h-screen bg-gray-50">
         <!-- ヘッダー（固定） -->
-        <div class="bg-white/90 backdrop-blur border-b border-amber-100 sticky top-16 z-30">
+        <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center py-4">
+                <div class="flex justify-between items-center h-16">
                     <div class="flex items-center">
                         <a href="{{ route('mypage') }}" class="mr-4">
                             <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,7 +40,7 @@
         </div>
 
         <!-- タブナビゲーション（固定） -->
-        <div class="bg-white/90 backdrop-blur border-b border-amber-100 sticky top-[calc(4rem+4rem)] z-30">
+        <div class="bg-white/90 backdrop-blur border-b border-amber-100 sticky top-[8rem] z-[900]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <nav class="flex space-x-8">
                     <a href="{{ route('mypage.posts', ['type' => 'all']) }}" 

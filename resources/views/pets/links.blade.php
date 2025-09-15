@@ -167,7 +167,8 @@
                             @endforeach
                         </div>
                         
-                        <button type="submit" class="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition duration-200">
+                        <button type="submit" class="w-full text-white py-3 rounded-lg font-medium transition duration-200" 
+                                style="background-color: #d97706; hover:background-color: #b45309;">
                             家族リンクを作成
                         </button>
                     </form>
@@ -175,7 +176,8 @@
                     <div class="text-center py-8 text-gray-500">
                         <p>家族リンクを作成するには、2匹以上のペットを登録してください</p>
                         <div class="mt-4">
-                            <a href="{{ route('mypage.pets.create') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 text-white text-sm rounded-lg hover:bg-gray-700 transition duration-200">
+                            <a href="{{ route('mypage.pets.create') }}" class="inline-flex items-center px-4 py-2 text-white text-sm rounded-lg transition duration-200" 
+                               style="background-color: #d97706; hover:background-color: #b45309;">
                                 新しいペットを登録する
                             </a>
                         </div>
