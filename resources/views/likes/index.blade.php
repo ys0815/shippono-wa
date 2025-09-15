@@ -21,27 +21,33 @@
     </x-slot>
 
     <div class="py-4 px-4 max-w-2xl mx-auto bg-gray-50 min-h-screen">
-        <!-- フィルター -->
-        <div class="mb-6">
-            <form method="GET" class="flex flex-col sm:flex-row gap-4">
-                <div class="flex items-center">
-                    <label class="text-sm font-medium text-gray-700 mr-2">動物種:</label>
-                    <select name="species" class="border border-gray-300 rounded-md px-3 py-1 text-sm" onchange="this.form.submit()">
-                        <option value="all" {{ $species === 'all' ? 'selected' : '' }}>すべて</option>
-                        <option value="dog" {{ $species === 'dog' ? 'selected' : '' }}>犬</option>
-                        <option value="cat" {{ $species === 'cat' ? 'selected' : '' }}>猫</option>
-                        <option value="rabbit" {{ $species === 'rabbit' ? 'selected' : '' }}>うさぎ</option>
-                        <option value="other" {{ $species === 'other' ? 'selected' : '' }}>その他</option>
-                    </select>
-                </div>
-                <div class="flex items-center">
-                    <label class="text-sm font-medium text-gray-700 mr-2">期間:</label>
-                    <select name="period" class="border border-gray-300 rounded-md px-3 py-1 text-sm" onchange="this.form.submit()">
-                        <option value="all" {{ $period === 'all' ? 'selected' : '' }}>すべて</option>
-                        <option value="week" {{ $period === 'week' ? 'selected' : '' }}>1週間</option>
-                        <option value="month" {{ $period === 'month' ? 'selected' : '' }}>1ヶ月</option>
-                        <option value="year" {{ $period === 'year' ? 'selected' : '' }}>1年</option>
-                    </select>
+        <!-- フィルター（投稿管理画面と統一） -->
+        <div class="bg-white rounded-lg shadow-sm border p-4 mb-6">
+            <form method="GET" id="likesFilterForm" class="space-y-3">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex-1">
+                        <label class="block text-xs font-medium text-gray-700 mb-1">ペットの種類:</label>
+                        <select name="species" 
+                                class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                onchange="this.form.submit()">
+                            <option value="all" {{ $species === 'all' ? 'selected' : '' }}>すべて</option>
+                            <option value="dog" {{ $species === 'dog' ? 'selected' : '' }}>犬</option>
+                            <option value="cat" {{ $species === 'cat' ? 'selected' : '' }}>猫</option>
+                            <option value="rabbit" {{ $species === 'rabbit' ? 'selected' : '' }}>うさぎ</option>
+                            <option value="other" {{ $species === 'other' ? 'selected' : '' }}>その他</option>
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-xs font-medium text-gray-700 mb-1">期間:</label>
+                        <select name="period" 
+                                class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                onchange="this.form.submit()">
+                            <option value="all" {{ $period === 'all' ? 'selected' : '' }}>すべて</option>
+                            <option value="week" {{ $period === 'week' ? 'selected' : '' }}>1週間</option>
+                            <option value="month" {{ $period === 'month' ? 'selected' : '' }}>1ヶ月</option>
+                            <option value="year" {{ $period === 'year' ? 'selected' : '' }}>1年</option>
+                        </select>
+                    </div>
                 </div>
             </form>
         </div>

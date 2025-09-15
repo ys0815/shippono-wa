@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="min-h-screen bg-gray-50">
         <!-- ヘッダー -->
-        <div class="bg-white shadow-sm border-b">
+        <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-30">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center">
