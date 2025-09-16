@@ -181,7 +181,7 @@
                                     編集
                                 </a>
                                 <button type="button" 
-                                        onclick="console.log('削除ボタンクリック'); window.dispatchEvent(new CustomEvent('open-confirm', {
+                                        onclick="window.dispatchEvent(new CustomEvent('open-confirm', {
                                             detail: { 
                                                 id: 'confirmation-modal',
                                                 title: '投稿を削除しますか？',
@@ -207,7 +207,7 @@
                                 
                                 @if($post->status === 'published')
                                     <button type="button" 
-                                            onclick="console.log('非公開ボタンクリック'); window.dispatchEvent(new CustomEvent('open-confirm', {
+                                            onclick="window.dispatchEvent(new CustomEvent('open-confirm', {
                                                 detail: { 
                                                     id: 'confirmation-modal',
                                                     title: '投稿を非公開にしますか？',

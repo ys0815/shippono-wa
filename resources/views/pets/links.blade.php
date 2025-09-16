@@ -98,7 +98,7 @@
                                 <div class="text-center sm:text-right">
                                     <div class="text-sm text-gray-600 mb-2">設定日: {{ $group['created_at']->format('Y/m/d') }}</div>
                                     <button type="button" 
-                                            onclick="console.log('家族リンク解除ボタンクリック'); window.dispatchEvent(new CustomEvent('open-confirm', {
+                                            onclick="window.dispatchEvent(new CustomEvent('open-confirm', {
                                                 detail: { 
                                                     id: 'confirmation-modal',
                                                     title: '家族リンクを解除しますか？',

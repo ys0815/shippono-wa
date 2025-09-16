@@ -18,7 +18,6 @@
     confirmClass: '{{ $confirmClass }}',
     icon: '{{ $icon }}',
     openModal(event) {
-        console.log('Modal event received:', event.detail);
         if (event.detail && event.detail.id === '{{ $id }}') {
             this.formId = event.detail.formId;
             this.title = event.detail.title || '{{ $title }}';
@@ -28,22 +27,13 @@
             this.confirmClass = event.detail.confirmClass || '{{ $confirmClass }}';
             this.icon = event.detail.icon || '{{ $icon }}';
             this.open = true;
-            console.log('Modal opened with data:', {
-                formId: this.formId,
-                title: this.title,
-                message: this.message
-            });
         }
     },
     confirmAction() {
-        console.log('Confirm action triggered, formId:', this.formId);
         if (this.formId) {
             const form = document.getElementById(this.formId);
             if (form) {
-                console.log('Submitting form:', form);
                 form.submit();
-            } else {
-                console.error('Form not found with ID:', this.formId);
             }
         }
         this.open = false;
@@ -71,7 +61,7 @@ style="display: none;">
 
     <!-- モーダルダイアログ -->
     <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full max-w-md mx-auto"
              x-transition:enter="ease-out duration-300"
              x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
              x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"

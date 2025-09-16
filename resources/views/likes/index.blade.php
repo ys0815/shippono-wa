@@ -102,7 +102,7 @@
                                 <div class="mt-auto flex gap-2">
                                     <a href="{{ route('pets.show', $like->pet->id) }}" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">プロフィールを見る</a>
                                     <button type="button" 
-                                            onclick="console.log('いいね取消ボタンクリック'); window.dispatchEvent(new CustomEvent('open-confirm', {
+                                            onclick="window.dispatchEvent(new CustomEvent('open-confirm', {
                                                 detail: { 
                                                     id: 'confirmation-modal',
                                                     title: 'いいねを取り消しますか？',
