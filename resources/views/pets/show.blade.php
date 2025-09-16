@@ -364,9 +364,9 @@
                                 @else
                                     <button disabled class="px-5 py-3 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">保護団体サイトへ</button>
                                 @endif
-                                @php $hasInterview = $pet->posts()->where('type','interview')->exists(); @endphp
-                                @if($hasInterview)
-                                    <a href="{{ route('pets.show', $pet->id) }}#interview" class="px-5 py-3 text-base rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition font-medium">しっぽのわを読む</a>
+                                @php $interviewPost = $pet->posts()->where('type','interview')->where('status','published')->latest()->first(); @endphp
+                                @if($interviewPost)
+                                    <a href="{{ route('interviews.show', $interviewPost) }}" class="px-5 py-3 text-base rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition font-medium">しっぽのわを読む</a>
                                 @else
                                     <button disabled class="px-5 py-3 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">しっぽのわを読む</button>
                                 @endif

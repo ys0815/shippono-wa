@@ -8,6 +8,7 @@ use App\Http\Controllers\MyPageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShelterController;
+use App\Http\Controllers\InterviewController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -95,3 +96,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
 Route::get('/api/pets/{pet}/posts', [PetController::class, 'getPosts'])->name('api.pets.posts');
 
 require __DIR__ . '/auth.php';
+
+// 里親インタビュー（公開）
+Route::get('/interviews', [InterviewController::class, 'index'])->name('interviews.index');
+Route::get('/interviews/{post}', [InterviewController::class, 'show'])->name('interviews.show');

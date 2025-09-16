@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>里親インタビュー | #しっぽのわ</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="font-sans text-gray-900 antialiased bg-gray-50" style="font-family: 'Noto Sans JP', sans-serif;">
+<div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
+    <!-- 共通ヘッダー（home と同一UI想定） -->
+    @include('partials.header')
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- ヒーロー/見出し -->
+        <section class="mb-8">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">里親インタビュー</h1>
+            <p class="text-gray-600">出会いから今までの物語を、やさしい言葉で。</p>
+        </section>
+
+        <!-- 検索 -->
+        <section class="mb-8">
+            <form method="GET" class="flex flex-col sm:flex-row gap-3">
+                <input type="text" name="q" value="{{ request('q') }}" placeholder="キーワードで探す" class="flex-1 px-4 py-3 border border-gray-300 rounded-md focus:ring-amber-500 focus:border-amber-500" />
+                <button class="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-md hover:from-amber-600 hover:to-orange-600">検索</button>
+            </form>
+        </section>
+
+        <!-- リスト（フラット表示） -->
+        <section class="space-y-8">
+            @forelse($interviews as $post)
+                <article class="bg-white border border-gray-200 rounded-lg p-5 sm:p-6">
+                    <div class="flex items-start gap-4">
+                        <!-- アイコン（正円） -->
+                        <a href="{{ route('interviews.show', $post) }}" class="shrink-0">
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-4 border-white shadow bg-amber-100">
+                                @if($post->pet && $post->pet->profile_image_url)
+                                    <img src="{{ $post->pet->profile_image_url }}" alt="{{ $post->pet->name }}" class="w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
+                                        <span class="text-amber-600 text-lg font-bold">{{ mb_substr($post->pet->name ?? 'Pet', 0, 2) }}</span>
+                                    </div>
+                                @endif
+                            </div>
+                        </a>
+
+                        <div class="flex-1">
+                            <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-1">
+                                <a href="{{ route('interviews.show', $post) }}" class="hover:text-amber-600">{{ $post->title ?? ($post->pet->name.'の里親インタビュー') }}</a>
+                            </h2>
+                            <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-3 line-clamp-3">{{ \Illuminate\Support\Str::limit(strip_tags($post->content), 120) }}</p>
+                            <div class="flex items-center gap-3 text-sm text-gray-500">
+                                <span class="font-medium text-gray-700">{{ $post->pet->name ?? '名無し' }}</span>
+                                @if($post->pet)
+                                    <span class="{{ $post->pet->gender === 'male' ? 'text-blue-400' : ($post->pet->gender === 'female' ? 'text-pink-400' : 'text-gray-400') }}">
+                                        {{ ['male'=>'♂','female'=>'♀','unknown'=>'?'][$post->pet->gender] ?? '?' }}
+                                    </span>
+                                @endif
+                                <span>飼い主さん：{{ $post->pet->user->display_name ?? $post->pet->user->name }}</span>
+                                <span class="ml-auto">{{ $post->created_at->format('Y.m.d') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            @empty
+                <p class="text-gray-500">まだインタビューがありません。</p>
+            @endforelse
+        </section>
+
+        <div class="mt-10">
+            {{ $interviews->links() }}
+        </div>
+    </main>
+</div>
+</body>
+</html>
+
+

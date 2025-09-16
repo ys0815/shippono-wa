@@ -279,11 +279,11 @@
                                 @endif
                                 
                                 @php
-                                    $hasInterview = $pet->posts()->where('type', 'interview')->exists();
+                                    $interviewPost = $pet->posts()->where('type','interview')->where('status','published')->latest()->first();
                                 @endphp
-                                
-                                @if($hasInterview)
-                                    <a href="{{ route('pets.show', $pet->id) }}#interview" 
+
+                                @if($interviewPost)
+                                    <a href="{{ route('interviews.show', $interviewPost) }}" 
                                        class="px-4 py-2 text-sm rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm">
                                         しっぽのわを読む
                                     </a>
