@@ -3,25 +3,7 @@
 @endphp
 
 <x-app-layout>
-    <!-- 削除確認ダイアログ -->
-    <x-confirmation-modal 
-        id="delete-post-modal"
-        title="投稿を削除しますか?"
-        message="この操作は取り消せません。本当に削除してもよろしいですか?"
-        confirm-text="削除"
-        cancel-text="キャンセル"
-        confirm-class="bg-red-600 hover:bg-red-700 text-white"
-        icon="🗑️" />
 
-    <!-- 非公開確認ダイアログ -->
-    <x-confirmation-modal 
-        id="hide-post-modal"
-        title="投稿を非公開にしますか?"
-        message="この投稿は他のユーザーから見えなくなります。"
-        confirm-text="非公開にする"
-        cancel-text="キャンセル"
-        confirm-class="bg-orange-600 hover:bg-orange-700 text-white"
-        icon="👁️" />
     <div class="min-h-screen bg-gray-50">
         <!-- ヘッダー（固定） -->
         <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
@@ -199,7 +181,18 @@
                                     編集
                                 </a>
                                 <button type="button" 
-                                        @click="$dispatch('open-modal', { id: 'delete-post-modal', formId: 'delete-form-{{ $post->id }}' })"
+                                        onclick="console.log('削除ボタンクリック'); window.dispatchEvent(new CustomEvent('open-confirm', {
+                                            detail: { 
+                                                id: 'confirmation-modal',
+                                                title: '投稿を削除しますか？',
+                                                message: 'この投稿を削除してもよろしいですか？この操作は元に戻せません。',
+                                                confirmText: '削除',
+                                                cancelText: 'キャンセル',
+                                                confirmClass: 'bg-red-600 hover:bg-red-700 text-white',
+                                                icon: '🗑️',
+                                                formId: 'delete-form-{{ $post->id }}'
+                                            }
+                                        }))"
                                         class="px-3 py-1 text-sm rounded text-white transition duration-200" 
                                         style="background-color: #dc2626; hover:background-color: #b91c1c;">
                                     削除
@@ -214,7 +207,18 @@
                                 
                                 @if($post->status === 'published')
                                     <button type="button" 
-                                            @click="$dispatch('open-modal', { id: 'hide-post-modal', formId: 'hide-form-{{ $post->id }}' })"
+                                            onclick="console.log('非公開ボタンクリック'); window.dispatchEvent(new CustomEvent('open-confirm', {
+                                                detail: { 
+                                                    id: 'confirmation-modal',
+                                                    title: '投稿を非公開にしますか？',
+                                                    message: 'この投稿を非公開にしますか？',
+                                                    confirmText: '非公開にする',
+                                                    cancelText: 'キャンセル',
+                                                    confirmClass: 'bg-orange-600 hover:bg-orange-700 text-white',
+                                                    icon: '👁️',
+                                                    formId: 'hide-form-{{ $post->id }}'
+                                                }
+                                            }))"
                                             class="px-3 py-1 text-sm rounded text-white transition duration-200" 
                                             style="background-color: #f59e0b; hover:background-color: #d97706;">
                                         非公開

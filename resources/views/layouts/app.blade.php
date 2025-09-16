@@ -37,5 +37,34 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- 共通確認モーダル -->
+        <x-confirmation-modal 
+            id="confirmation-modal"
+            title="確認"
+            message="この操作を実行しますか？"
+            confirm-text="実行"
+            cancel-text="キャンセル"
+            confirm-class="bg-red-600 hover:bg-red-700 text-white"
+            icon="⚠️" />
+
+        <!-- デバッグ用テストボタン（本番では削除） -->
+        <div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
+            <button onclick="window.dispatchEvent(new CustomEvent('open-confirm', {
+                detail: { 
+                    id: 'confirmation-modal',
+                    title: 'テストモーダル', 
+                    message: 'モーダル表示テストです', 
+                    formId: null, 
+                    confirmText: 'テスト実行',
+                    cancelText: 'キャンセル',
+                    confirmClass: 'bg-blue-600 hover:bg-blue-700 text-white',
+                    icon: '🧪'
+                }
+            }))" 
+            class="bg-blue-600 text-white px-4 py-2 rounded text-sm">
+                モーダルテスト
+            </button>
+        </div>
     </body>
 </html>

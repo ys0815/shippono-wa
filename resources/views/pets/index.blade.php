@@ -10,14 +10,14 @@
         </div>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="pt-16 pb-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white p-6 shadow sm:rounded-lg">
-                <h3 class="font-medium text-gray-900 mb-4">登録済みペット</h3>
+                <h3 class="text-base font-semibold text-gray-800 mb-3">登録済みペット</h3>
 
-                <div class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse ($pets as $pet)
-                        <div class="border rounded-lg overflow-hidden">
+                        <div class="border rounded-lg overflow-hidden h-full flex flex-col">
                             <!-- プロフィール画像（背景画像） -->
                             <div class="relative h-32 bg-gray-200 flex items-center justify-center">
                                 @if($pet->header_image_url)
@@ -64,7 +64,7 @@
                                 
                                 <div class="text-sm text-gray-600 mt-1">いいね: {{ $pet->likes->count() }} | 投稿: {{ $pet->posts->count() }}</div>
                                 
-                                <div class="mt-4 flex gap-2">
+                                <div class="mt-auto flex gap-2">
                                     <a href="{{ route('pets.show', $pet->id) }}" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">プロフィールを見る</a>
                                     <a href="{{ route('mypage.pets.edit', ['pet_id' => $pet->id]) }}" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">プロフィール編集</a>
                                     <a href="#" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">投稿を見る</a>
@@ -78,7 +78,7 @@
 
                 <!-- 家族リンク設定セクション -->
                 <div class="mt-8">
-                    <h3 class="font-medium text-gray-900 mb-3">家族リンク設定</h3>
+                    <h3 class="text-base font-semibold text-gray-800 mb-3">家族リンク設定</h3>
 
                     <div class="text-sm text-gray-700 mb-4">
                         複数の動物を一緒に飼っている場合、家族として関連付けることができます。

@@ -1,13 +1,4 @@
 <x-app-layout>
-    <!-- 家族リンク解除確認ダイアログ -->
-    <x-confirmation-modal 
-        id="unlink-family-modal"
-        title="家族リンクを解除しますか?"
-        message="この操作は取り消せません。本当に解除してもよろしいですか?"
-        confirm-text="解除する"
-        cancel-text="キャンセル"
-        confirm-class="bg-orange-600 hover:bg-orange-700 text-white"
-        icon="🔗" />
 
     <x-slot name="header">
         <div class="flex items-center">
@@ -54,7 +45,7 @@
             @endif
             <!-- 現在の家族リンク -->
             <div class="bg-white p-6 shadow sm:rounded-lg">
-                <h3 class="font-medium text-gray-900 mb-4">現在の家族リンク</h3>
+                <h3 class="text-base font-semibold text-gray-800 mb-3">現在の家族リンク</h3>
                 
                 @if($familyGroups->isNotEmpty())
                     @foreach($familyGroups as $group)
@@ -107,7 +98,18 @@
                                 <div class="text-center sm:text-right">
                                     <div class="text-sm text-gray-600 mb-2">設定日: {{ $group['created_at']->format('Y/m/d') }}</div>
                                     <button type="button" 
-                                            @click="$dispatch('open-modal', { id: 'unlink-family-modal', formId: 'unlink-form' })"
+                                            onclick="console.log('家族リンク解除ボタンクリック'); window.dispatchEvent(new CustomEvent('open-confirm', {
+                                                detail: { 
+                                                    id: 'confirmation-modal',
+                                                    title: '家族リンクを解除しますか？',
+                                                    message: 'この動物プロフィールの家族リンクを解除しますか？',
+                                                    confirmText: '解除する',
+                                                    cancelText: 'キャンセル',
+                                                    confirmClass: 'bg-red-600 hover:bg-red-700 text-white',
+                                                    icon: '🔗',
+                                                    formId: 'unlink-form'
+                                                }
+                                            }))"
                                             class="text-red-600 text-sm hover:text-red-800 px-3 py-1 border border-red-300 rounded hover:bg-red-50 transition duration-200">
                                         解除
                                     </button>
@@ -132,7 +134,7 @@
 
             <!-- 新しい家族リンクを作成 -->
             <div class="bg-white p-6 shadow sm:rounded-lg">
-                <h3 class="font-medium text-gray-900 mb-4">新しい家族リンクを作成</h3>
+                <h3 class="text-base font-semibold text-gray-800 mb-3">新しい家族リンクを作成</h3>
                 <p class="text-sm text-gray-600 mb-4">一緒に暮らしている動物を選択してください (複数選択可能)</p>
                 
                 @if($pets->count() >= 2)
@@ -187,7 +189,7 @@
 
             <!-- 家族リンクについて -->
             <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <h4 class="font-medium text-gray-900 mb-3">家族リンクについて</h4>
+                <h4 class="text-base font-semibold text-gray-800 mb-3">家族リンクについて</h4>
                 <ul class="text-sm text-gray-700 space-y-1">
                     <li>• 一緒に暮らしている動物同士をリンクできます</li>
                     <li>• 複数の動物を同時に選択して、グループとしてリンク可能</li>

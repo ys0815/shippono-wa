@@ -7,8 +7,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Hamburger Menu Button -->
-                <div class="flex items-center mr-4">
+                <!-- Hamburger Menu Button (mobile only) -->
+                <div class="flex items-center mr-4 sm:hidden">
                     <button @click="sidebarOpen = ! sidebarOpen" aria-label="Open menu" 
                         class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-50 focus:outline-none focus:bg-amber-50 focus:text-amber-700 transition duration-150 ease-in-out">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -28,6 +28,15 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('mypage')" :active="request()->routeIs('mypage')">
                         {{ __('マイページ') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('mypage.posts')" :active="request()->routeIs('mypage.posts*')">
+                        {{ __('投稿管理') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('mypage.pets')" :active="request()->routeIs('mypage.pets*')">
+                        {{ __('ペット管理') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('mypage.likes')" :active="request()->routeIs('mypage.likes*')">
+                        {{ __('いいね一覧') }}
                     </x-nav-link>
                 </div>
             </div>
