@@ -91,4 +91,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
     Route::get('/shelters', [ShelterController::class, 'index']);
 });
 
+// ペット投稿API（無限スクロール用）
+Route::get('/api/pets/{pet}/posts', [PetController::class, 'getPosts'])->name('api.pets.posts');
+
 require __DIR__ . '/auth.php';

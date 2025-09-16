@@ -42,8 +42,8 @@ class PetController extends Controller
     public function show(Pet $pet): View
     {
         $pet->load(['user', 'shelter', 'posts' => function ($query) {
-            $query->where('status', 'published')->latest()->limit(5);
-        }]);
+            $query->where('status', 'published')->latest()->limit(5)->with('media');
+        }, 'familyLinksAsPet1.pet2', 'familyLinksAsPet2.pet1']);
 
         // 現在のユーザーがこのペットにいいねしているかチェック
         $isLiked = false;
@@ -56,7 +56,56 @@ class PetController extends Controller
         // いいね数
         $likeCount = $pet->likes()->count();
 
-        return view('pets.show', compact('pet', 'isLiked', 'likeCount'));
+        // 家族ペットを取得
+        $familyPets = collect();
+        foreach ($pet->familyLinksAsPet1 as $link) {
+            $familyPets->push($link->pet2);
+        }
+        foreach ($pet->familyLinksAsPet2 as $link) {
+            $familyPets->push($link->pet1);
+        }
+
+        return view('pets.show', compact('pet', 'isLiked', 'likeCount', 'familyPets'));
+    }
+
+    public function getPosts(Request $request, Pet $pet)
+    {
+        $page = $request->get('page', 1);
+        $perPage = 5;
+
+        $posts = $pet->posts()
+            ->where('status', 'published')
+            ->where('type', 'gallery')
+            ->with('media')
+            ->latest()
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+
+        return response()->json([
+            'posts' => $posts->map(function ($post) {
+                return [
+                    'id' => $post->id,
+                    'title' => $post->title,
+                    'content' => $post->content,
+                    'created_at' => $post->created_at->format('Y年n月j日'),
+                    'media' => $post->media->map(function ($media) {
+                        // URLを正しいパスに変換
+                        $url = $media->url;
+                        if (strpos($url, 'http') !== 0) {
+                            $url = '/storage/' . $url;
+                        }
+
+                        return [
+                            'url' => $url,
+                            'type' => $media->type,
+                        ];
+                    }),
+                    'user_id' => $post->user_id,
+                ];
+            }),
+            'hasMore' => $posts->count() === $perPage,
+        ]);
     }
 
     public function share(string $token): View
