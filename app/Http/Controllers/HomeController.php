@@ -23,9 +23,9 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        $shelters = Shelter::select('id', 'name', 'area', 'kind')
+        $shelters = Shelter::select('id', 'name', 'area', 'kind', 'prefecture_id', 'website_url')
+            ->with('prefecture:id,name')
             ->latest()
-            ->take(5)
             ->get();
 
         return view('home.index', [
