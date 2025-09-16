@@ -20,8 +20,22 @@
         <!-- メイン画像 -->
         <section class="mb-8">
             <div class="relative h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 rounded-lg overflow-hidden">
-                @if($post->pet && $post->pet->header_image_url)
-                    <img src="{{ $post->pet->header_image_url }}" alt="メイン画像" class="w-full h-full object-cover">
+                @php
+                    $mainImage = null;
+                    // インタビュー投稿時のメディアから画像を取得
+                    if ($post->media && $post->media->count() > 0) {
+                        $imageMedia = $post->media->where('type', 'image')->first();
+                        if ($imageMedia) {
+                            $mainImage = $imageMedia->url;
+                            if (strpos($mainImage, 'http') !== 0) {
+                                $mainImage = '/storage/' . $mainImage;
+                            }
+                        }
+                    }
+                @endphp
+                
+                @if($mainImage)
+                    <img src="{{ $mainImage }}" alt="メイン画像" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                 @else
                     <div class="w-full h-full flex items-center justify-center">
@@ -35,19 +49,28 @@
                                     </div>
                                 @endif
                             </div>
-                            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">{{ $post->title ?? ($post->pet->name.'の里親インタビュー') }}</h1>
-                            <div class="flex items-center justify-center gap-3 text-gray-600">
-                                <span class="font-medium text-gray-700">{{ $post->pet->name ?? '名無し' }}</span>
-                                @if($post->pet)
-                                    <span class="{{ $post->pet->gender === 'male' ? 'text-blue-400' : ($post->pet->gender === 'female' ? 'text-pink-400' : 'text-gray-400') }}">
-                                        {{ ['male'=>'♂','female'=>'♀','unknown'=>'?'][$post->pet->gender] ?? '?' }}
-                                    </span>
-                                    <span>飼い主さん：{{ $post->pet->user->display_name ?? $post->pet->user->name }}</span>
-                                @endif
-                            </div>
                         </div>
                     </div>
                 @endif
+            </div>
+        </section>
+
+        <!-- インタビュー情報ヘッダー -->
+        <section class="bg-white border border-gray-200 rounded-lg p-6 sm:p-8 mb-8">
+            <div class="text-center mb-6">
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">{{ $post->title ?? ($post->pet->name.'の里親インタビュー') }}</h1>
+                <div class="flex items-center justify-center gap-3 text-gray-600 mb-4">
+                    <span class="font-medium text-gray-700">{{ $post->pet->name ?? '名無し' }}</span>
+                    @if($post->pet)
+                        <span class="{{ $post->pet->gender === 'male' ? 'text-blue-400' : ($post->pet->gender === 'female' ? 'text-pink-400' : 'text-gray-400') }}">
+                            {{ ['male'=>'♂','female'=>'♀','unknown'=>'?'][$post->pet->gender] ?? '?' }}
+                        </span>
+                        <span>飼い主さん：{{ $post->pet->user->display_name ?? $post->pet->user->name }}</span>
+                    @endif
+                </div>
+                <div class="text-sm text-gray-500">
+                    投稿日時：{{ $post->created_at->format('Y年n月j日 H:i') }}
+                </div>
             </div>
         </section>
 
