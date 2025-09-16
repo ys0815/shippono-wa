@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pet;
 use App\Models\PetFamilyLink;
 use App\Models\Like;
+use App\Models\PetShareLink;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +57,107 @@ class PetController extends Controller
         $likeCount = $pet->likes()->count();
 
         return view('pets.show', compact('pet', 'isLiked', 'likeCount'));
+    }
+
+    public function share(string $token): View
+    {
+        $shareLink = PetShareLink::where('share_token', $token)
+            ->where('is_active', true)
+            ->with(['pet.user', 'pet.shelter', 'pet.posts' => function ($query) {
+                $query->where('status', 'published')->latest()->limit(5);
+            }])
+            ->firstOrFail();
+
+        // 有効期限チェック
+        if ($shareLink->isExpired()) {
+            abort(404, 'シェアリンクの有効期限が切れています。');
+        }
+
+        $pet = $shareLink->pet;
+
+        // ビューカウントを増加
+        $shareLink->incrementViewCount();
+
+        // 現在のユーザーがこのペットにいいねしているかチェック
+        $isLiked = false;
+        if (Auth::check()) {
+            $isLiked = Like::where('user_id', Auth::id())
+                ->where('pet_id', $pet->id)
+                ->exists();
+        }
+
+        // いいね数
+        $likeCount = $pet->likes()->count();
+
+        return view('pets.share', compact('pet', 'isLiked', 'likeCount', 'shareLink'));
+    }
+
+    public function generateShareLink(Request $request, Pet $pet): RedirectResponse
+    {
+        // ペットの所有者かチェック
+        if ($pet->user_id !== Auth::id()) {
+            abort(403, 'このペットのシェアリンクを生成する権限がありません。');
+        }
+
+        // 既存のアクティブなシェアリンクをチェック
+        $existingLink = $pet->shareLinks()
+            ->where('is_active', true)
+            ->where(function ($query) {
+                $query->whereNull('expires_at')
+                    ->orWhere('expires_at', '>', now());
+            })
+            ->first();
+
+        if ($existingLink) {
+            return redirect()->route('pets.show', $pet)
+                ->with('share_url', $existingLink->getShareUrl())
+                ->with('status', 'share-link-exists');
+        }
+
+        // 新しいシェアリンクを作成
+        $shareLink = PetShareLink::create([
+            'pet_id' => $pet->id,
+            'share_token' => PetShareLink::generateToken(),
+            'title' => $pet->name . 'のプロフィール',
+            'description' => $pet->profile_description ?: $pet->name . 'のプロフィールページです。',
+            'is_active' => true,
+            'expires_at' => now()->addDays(30), // 30日間有効
+        ]);
+
+        return redirect()->route('pets.show', $pet)
+            ->with('share_url', $shareLink->getShareUrl())
+            ->with('status', 'share-link-generated');
+    }
+
+    public function generateQrCode(Request $request, Pet $pet)
+    {
+        // ペットの所有者かチェック
+        if ($pet->user_id !== Auth::id()) {
+            abort(403, 'このペットのQRコードを生成する権限がありません。');
+        }
+
+        // 既存のアクティブなシェアリンクを取得
+        $shareLink = $pet->shareLinks()
+            ->where('is_active', true)
+            ->where(function ($query) {
+                $query->whereNull('expires_at')
+                    ->orWhere('expires_at', '>', now());
+            })
+            ->first();
+
+        if (!$shareLink) {
+            return redirect()->route('pets.show', $pet)
+                ->with('error', 'シェア用URLが存在しません。まずシェア用URLを生成してください。');
+        }
+
+        // QRコードを生成
+        $qrCode = QrCode::size(200)
+            ->format('svg')
+            ->generate($shareLink->getShareUrl());
+
+        return response($qrCode)
+            ->header('Content-Type', 'image/svg+xml')
+            ->header('Content-Disposition', 'inline; filename="' . $pet->name . '_qr_code.svg"');
     }
 
     public function store(Request $request): RedirectResponse

@@ -48,6 +48,11 @@ class Pet extends Model
         return $this->belongsTo(Shelter::class);
     }
 
+    public function shareLinks(): HasMany
+    {
+        return $this->hasMany(PetShareLink::class);
+    }
+
     /**
      * このペットがペット1として参加している家族リンク
      */

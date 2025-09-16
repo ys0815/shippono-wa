@@ -214,7 +214,7 @@
                         <div class="text-center group">
                             <!-- ペット画像（正円・大きく表示） -->
                             <div class="relative mb-4">
-                                <div class="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
+                                <a href="{{ route('pets.show', $pet->id) }}" class="block w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
                                     @if($pet->profile_image_url)
                                         <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
                                     @else
@@ -222,7 +222,7 @@
                                             <span class="text-amber-600 text-2xl font-bold">{{ mb_substr($pet->name, 0, 2) }}</span>
                                         </div>
                                     @endif
-                                </div>
+                                </a>
                                 <!-- 装飾的な背景 -->
                                 <div class="absolute -inset-4 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                             </div>
@@ -302,40 +302,40 @@
             <section class="relative bg-gray-50 border-t border-b border-gray-200 py-12">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
-                        <span class="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent font-sans">
+                        <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             サービスコンセプト
                         </span>
-                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
+                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
                     <p class="text-sm text-gray-600">私たちが大切にしている想い</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
                     <div class="text-center group">
                         <div class="relative mb-6">
-                            <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-pink-100 to-pink-200 text-pink-600 text-3xl group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 text-3xl group-hover:scale-110 transition-transform duration-300">
                                 ❤
                             </div>
-                            <div class="absolute -inset-2 bg-gradient-to-br from-pink-200 to-pink-300 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <h4 class="text-xl font-bold text-gray-800 mb-3">幸せの可視化</h4>
                         <p class="text-gray-600 leading-relaxed">保護動物と家族のストーリーを写真と文章で。</p>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-6">
-                            <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-amber-200 text-amber-600 text-3xl group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 text-3xl group-hover:scale-110 transition-transform duration-300">
                                 🤝
                             </div>
-                            <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-amber-300 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <h4 class="text-xl font-bold text-gray-800 mb-3">共感の輪</h4>
                         <p class="text-gray-600 leading-relaxed">思いに触れて、優しい支援の循環を。</p>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-6">
-                            <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 text-3xl group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 text-3xl group-hover:scale-110 transition-transform duration-300">
                                 🔗
                             </div>
-                            <div class="absolute -inset-2 bg-gradient-to-br from-blue-200 to-blue-300 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <h4 class="text-xl font-bold text-gray-800 mb-3">命をつなぐ</h4>
                         <p class="text-gray-600 leading-relaxed">施設や里親とつながる導線をわかりやすく。</p>
@@ -347,60 +347,60 @@
             <section class="relative bg-white border-t border-b border-gray-200 py-12">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
-                        <span class="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent font-sans">
+                        <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             統計情報
                         </span>
-                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-green-500 to-blue-500 rounded-full"></div>
+                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
                     <p class="text-sm text-gray-600">みんなの活動を数字で見てみよう</p>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
                     <div class="text-center group">
                         <div class="relative mb-4">
-                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-green-100 to-green-200 text-green-600 group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 group-hover:scale-110 transition-transform duration-300">
                                 📝
                             </div>
-                            <div class="absolute -inset-1 bg-gradient-to-br from-green-200 to-green-300 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['posts_gallery']) }}</div>
                         <div class="text-sm text-gray-600">投稿数</div>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-4">
-                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 group-hover:scale-110 transition-transform duration-300">
                                 💬
                             </div>
-                            <div class="absolute -inset-1 bg-gradient-to-br from-blue-200 to-blue-300 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['posts_interview']) }}</div>
                         <div class="text-sm text-gray-600">インタビュー数</div>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-4">
-                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-amber-200 text-amber-600 group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 group-hover:scale-110 transition-transform duration-300">
                                 🐾
                             </div>
-                            <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-amber-300 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['pets']) }}</div>
                         <div class="text-sm text-gray-600">登録動物数</div>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-4">
-                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-purple-100 to-purple-200 text-purple-600 group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 group-hover:scale-110 transition-transform duration-300">
                                 🏢
                             </div>
-                            <div class="absolute -inset-1 bg-gradient-to-br from-purple-200 to-purple-300 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['shelters']) }}</div>
                         <div class="text-sm text-gray-600">掲載団体数</div>
                     </div>
                     <div class="text-center group col-span-2 sm:col-span-1">
                         <div class="relative mb-4">
-                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-pink-100 to-pink-200 text-pink-600 group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 group-hover:scale-110 transition-transform duration-300">
                                 ❤️
                             </div>
-                            <div class="absolute -inset-1 bg-gradient-to-br from-pink-200 to-pink-300 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['likes']) }}</div>
                         <div class="text-sm text-gray-600">いいね数</div>
@@ -412,10 +412,10 @@
             <section class="relative bg-gray-50 border-t border-b border-gray-200 py-12" x-data="shelterFilter()">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
-                        <span class="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent font-sans">
+                        <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             保護団体リンク集
                         </span>
-                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"></div>
+                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
                     <p class="text-sm text-gray-600">協力いただいている保護団体の皆様</p>
                 </div>
@@ -427,7 +427,7 @@
                         <select id="region-filter" 
                                 x-model="selectedRegion" 
                                 @change="filterShelters()"
-                                class="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 w-full sm:w-auto sm:min-w-[200px]">
+                                class="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors duration-200 w-full sm:w-auto sm:min-w-[200px]">
                             <option value="all">全国</option>
                             <option value="hokkaido-tohoku">北海道・東北</option>
                             <option value="kanto">関東</option>
@@ -442,61 +442,63 @@
                     <div class="mt-4 text-center">
                         <p class="text-sm text-gray-600" x-show="selectedRegion !== 'all'">
                             <span x-text="getRegionName(selectedRegion)"></span>の保護団体を表示中
+                            <span x-text="'（' + filteredShelters.length + '件中' + Math.min(currentPage * itemsPerPage, filteredShelters.length) + '件表示）'"></span>
+                        </p>
+                        <p class="text-sm text-gray-600" x-show="selectedRegion === 'all'">
+                            里親募集サイトを表示中
+                            <span x-text="'（' + filteredShelters.length + '件中' + Math.min(currentPage * itemsPerPage, filteredShelters.length) + '件表示）'"></span>
                         </p>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @forelse($shelters as $shelter)
+                    @forelse($shelters as $index => $shelter)
                         <div class="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 group shelter-card"
-                             x-show="isVisible('{{ $shelter->prefecture ? $shelter->prefecture->name : '' }}')"
+                             x-show="isVisible('{{ $shelter->prefecture ? $shelter->prefecture->name : '' }}', '{{ $shelter->kind }}') && isInCurrentPage({{ $index }})"
                              x-transition:enter="transition ease-out duration-300"
                              x-transition:enter-start="opacity-0 transform scale-95"
                              x-transition:enter-end="opacity-100 transform scale-100"
                              x-transition:leave="transition ease-in duration-200"
                              x-transition:leave-start="opacity-100 transform scale-100"
                              x-transition:leave-end="opacity-0 transform scale-95"
-                             data-prefecture="{{ $shelter->prefecture ? $shelter->prefecture->name : '' }}">
-                            <div class="flex items-start gap-4">
-                                <!-- 団体ロゴ・アイコン -->
-                                <div class="flex-shrink-0">
-                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center text-indigo-600 text-xl group-hover:scale-110 transition-transform duration-300">
-                                        🏢
+                             data-prefecture="{{ $shelter->prefecture ? $shelter->prefecture->name : '' }}"
+                             data-kind="{{ $shelter->kind }}"
+                             data-index="{{ $index }}">
+                            <!-- カード全体をflexboxで縦方向に配置 -->
+                            <div class="flex flex-col h-full">
+                                <!-- 上部コンテンツ -->
+                                <div class="flex items-start gap-4 flex-1">
+                                    <!-- 団体ロゴ・アイコン -->
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-amber-600 text-xl group-hover:scale-110 transition-transform duration-300">
+                                            🏢
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 団体情報 -->
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-amber-700 transition-colors">
+                                            {{ $shelter->name }}
+                                        </h4>
+                                        
+                                        <!-- 地域・種類 -->
+                                        <div class="flex flex-wrap gap-2">
+                                            @if($shelter->prefecture)
+                                                <span class="px-2 py-1 text-xs bg-amber-100 text-amber-700 rounded-full">
+                                                    {{ $shelter->prefecture->name }}
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <!-- 団体情報 -->
-                                <div class="flex-1 min-w-0">
-                                    <h4 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-indigo-700 transition-colors">
-                                        {{ $shelter->name }}
-                                    </h4>
-                                    
-                                    @if($shelter->area)
-                                        <p class="text-sm text-gray-600 mb-3 leading-relaxed">
-                                            {{ $shelter->area }}
-                                        </p>
-                                    @endif
-                                    
-                                    <!-- 地域・種類 -->
-                                    <div class="flex flex-wrap gap-2 mb-3">
-                                        @if($shelter->prefecture)
-                                            <span class="px-2 py-1 text-xs bg-indigo-100 text-indigo-700 rounded-full">
-                                                {{ $shelter->prefecture->name }}
-                                            </span>
-                                        @endif
-                                        @if($shelter->kind)
-                                            <span class="px-2 py-1 text-xs bg-purple-100 text-purple-700 rounded-full">
-                                                {{ $shelter->kind }}
-                                            </span>
-                                        @endif
-                                    </div>
-                                    
-                                    <!-- ウェブサイトリンク -->
+                                <!-- 下部の公式サイトボタン -->
+                                <div class="mt-4 flex justify-end">
                                     @if($shelter->website_url)
                                         <a href="{{ $shelter->website_url }}" 
                                            target="_blank" 
                                            rel="noopener noreferrer"
-                                           class="inline-flex items-center gap-2 px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium">
+                                           class="inline-flex items-center gap-2 px-4 py-2 text-sm bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors duration-200 font-medium">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                             </svg>
@@ -523,7 +525,7 @@
                     @endforelse
                     
                     <!-- フィルター結果が空の場合 -->
-                    <div class="col-span-full text-center py-12" x-show="selectedRegion !== 'all' && !hasVisibleShelters()">
+                    <div class="col-span-full text-center py-12" x-show="selectedRegion !== 'all' && filteredShelters.length === 0">
                         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-400 text-2xl">
                             🔍
                         </div>
@@ -532,13 +534,12 @@
                 </div>
                 
                 <!-- もっと見るボタン -->
-                @if($shelters->count() > 6)
-                    <div class="text-center mt-8">
-                        <button class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium">
-                            もっと見る
-                        </button>
-                    </div>
-                @endif
+                <div class="text-center mt-8" x-show="shouldShowLoadMore()">
+                    <button @click="loadMore()" 
+                            class="px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors duration-200 font-medium">
+                        もっと見る
+                    </button>
+                </div>
             </section>
         </main>
     </div>
@@ -547,6 +548,9 @@
         function shelterFilter() {
             return {
                 selectedRegion: 'all',
+                itemsPerPage: 5,
+                currentPage: 1,
+                filteredShelters: [],
                 
                 // 地域マッピング
                 regionMapping: {
@@ -560,19 +564,31 @@
                 
                 init() {
                     // 初期化時に全件表示
-                    this.filterShelters();
+                    this.updateFilteredShelters();
                 },
                 
                 filterShelters() {
-                    // フィルタリング処理は isVisible メソッドで行う
+                    // フィルタリング時にページをリセット
+                    this.currentPage = 1;
+                    this.updateFilteredShelters();
                 },
                 
-                isVisible(prefectureName) {
+                updateFilteredShelters() {
+                    const allCards = document.querySelectorAll('.shelter-card');
+                    this.filteredShelters = Array.from(allCards).filter(card => {
+                        const prefecture = card.getAttribute('data-prefecture');
+                        const kind = card.getAttribute('data-kind');
+                        return this.isVisible(prefecture, kind);
+                    });
+                },
+                
+                isVisible(prefectureName, shelterKind) {
                     if (this.selectedRegion === 'all') {
-                        return true;
+                        // 全国選択時は里親募集サイト（kind=site）のみ表示
+                        return shelterKind === 'site';
                     }
                     
-                    if (!prefectureName) {
+                    if (!prefectureName || prefectureName === '') {
                         return false;
                     }
                     
@@ -596,6 +612,34 @@
                 hasVisibleShelters() {
                     const cards = document.querySelectorAll('.shelter-card');
                     return Array.from(cards).some(card => !card.hasAttribute('style') || !card.style.display.includes('none'));
+                },
+                
+                isInCurrentPage(index) {
+                    // フィルタリング後の表示順序で判定
+                    const visibleCards = this.getVisibleCards();
+                    const visibleIndex = visibleCards.findIndex(card => 
+                        parseInt(card.getAttribute('data-index')) === index
+                    );
+                    
+                    if (visibleIndex === -1) return false;
+                    
+                    const maxIndex = this.currentPage * this.itemsPerPage - 1;
+                    return visibleIndex <= maxIndex;
+                },
+                
+                loadMore() {
+                    this.currentPage++;
+                },
+                
+                shouldShowLoadMore() {
+                    const totalVisible = this.filteredShelters.length;
+                    const currentlyShowing = this.currentPage * this.itemsPerPage;
+                    
+                    return totalVisible > currentlyShowing;
+                },
+                
+                getVisibleCards() {
+                    return this.filteredShelters;
                 }
             }
         }

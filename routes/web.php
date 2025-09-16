@@ -11,6 +11,18 @@ use App\Http\Controllers\ShelterController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// ペットプロフィール詳細（公開ページ）
+Route::get('/pets/{pet}', [PetController::class, 'show'])->name('pets.show');
+
+// シェア用URL生成（認証必要）
+Route::post('/pets/{pet}/generate-share-link', [PetController::class, 'generateShareLink'])->name('pets.generate-share-link');
+
+// QRコード生成（認証必要）
+Route::get('/pets/{pet}/qr-code', [PetController::class, 'generateQrCode'])->name('pets.qr-code');
+
+// シェア用URL（公開ページ）
+Route::get('/share/{token}', [PetController::class, 'share'])->name('pets.share');
+
 // ダッシュボードも同じ表示に統一
 Route::get('/mypage', [MyPageController::class, 'show'])
     ->middleware(['auth', 'verified'])
@@ -47,8 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/mypage/pets/links', [PetController::class, 'saveLinks'])->name('mypage.pets.links.store');
     Route::delete('/mypage/pets/links', [PetController::class, 'destroyLinks'])->name('mypage.pets.links.destroy');
 
-    // ペットプロフィール詳細（公開ページ）
-    Route::get('/pets/{pet}', [PetController::class, 'show'])->name('pets.show');
+    // ペットプロフィール詳細（公開ページ） → 公開に変更済み
 
     // ペット登録ガイド（ワイヤーフレーム準拠の詳細ページ）
     Route::view('/mypage/pets/detail', 'pets.detail_guide')->name('mypage.pets.detail_guide');
