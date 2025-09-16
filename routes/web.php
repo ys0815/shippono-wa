@@ -6,11 +6,10 @@ use App\Http\Controllers\PetController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MyPageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShelterController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // ダッシュボードも同じ表示に統一
 Route::get('/mypage', [MyPageController::class, 'show'])
