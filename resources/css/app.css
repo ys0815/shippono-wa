@@ -107,6 +107,83 @@
     .nav-inactive {
         @apply inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300;
     }
+
+    /* ========== Sections & Headings (Unified) ========== */
+    .section {
+        @apply relative py-12;
+    }
+    .section--white {
+        @apply bg-white border-t border-b border-gray-200;
+    }
+    .section--muted {
+        @apply bg-gray-50 border-t border-b border-gray-200;
+    }
+    .section-inner {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+    .section-desc {
+        @apply text-sm text-gray-600;
+    }
+
+    .heading {
+        @apply text-3xl font-bold text-gray-800 mb-3 relative inline-block font-sans;
+    }
+    .heading.is-amber::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -6px;
+        width: 6rem;
+        height: 6px;
+        background: linear-gradient(to right, #f59e0b, #fb923c);
+        border-radius: 9999px;
+    }
+    .heading.is-pink::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -6px;
+        width: 6rem;
+        height: 6px;
+        background: linear-gradient(to right, #ec4899, #a855f7);
+        border-radius: 9999px;
+    }
+    .heading.is-green::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -6px;
+        width: 6rem;
+        height: 6px;
+        background: linear-gradient(to right, #10b981, #3b82f6);
+        border-radius: 9999px;
+    }
+
+    /* Additional button variants */
+    .btn-success {
+        background-color: #10b981;
+        color: #fff;
+    }
+    .btn-success:hover {
+        background-color: #059669;
+    }
+    .btn-info {
+        background-color: #3b82f6;
+        color: #fff;
+    }
+    .btn-info:hover {
+        background-color: #2563eb;
+    }
+    .btn-danger-outline {
+        @apply border text-red-700 bg-white;
+        border-color: #fecaca;
+    }
+    .btn-danger-outline:hover {
+        background-color: #fef2f2;
+    }
 }
 
 @layer base {
