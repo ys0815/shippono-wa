@@ -15,34 +15,38 @@
 
     <!-- メインコンテンツ -->
     <main class="max-w-4xl mx-auto">
-        <!-- メディア表示（Instagram風 - 上部に全面表示） -->
+        <!-- メディア表示 -->
         @if($post->media->count() > 0)
             <div class="relative">
                 @if($post->media->count() === 1)
                     <!-- 単一メディア -->
                     @php $media = $post->media->first(); @endphp
-                    <div class="media-item cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
-                        @if($media->type === 'image')
-                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-auto object-cover max-h-[400px] pointer-events-none">
-                        @elseif($media->type === 'video')
-                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-auto object-cover max-h-[400px] pointer-events-none" muted>
-                                お使いのブラウザは動画をサポートしていません。
-                            </video>
-                        @endif
+                    <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
+                        <div class="w-full h-80 sm:h-96 overflow-hidden">
+                            @if($media->type === 'image')
+                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover pointer-events-none">
+                            @elseif($media->type === 'video')
+                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover pointer-events-none" muted>
+                                    お使いのブラウザは動画をサポートしていません。
+                                </video>
+                            @endif
+                        </div>
                     </div>
                 @else
                     <!-- 複数メディア - カルーセル -->
-                    <div class="relative">
-                        <div id="media-carousel" class="flex transition-transform duration-300 ease-in-out" style="width: {{ $post->media->count() * 100 }}%;">
+                    <div class="relative overflow-hidden">
+                        <div id="media-carousel" class="flex transition-transform duration-300 ease-in-out">
                             @foreach($post->media as $index => $media)
-                                <div class="media-item w-full h-auto flex-shrink-0 max-h-[400px] overflow-hidden cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
-                                    @if($media->type === 'image')
-                                        <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover max-h-[400px] pointer-events-none">
-                                    @elseif($media->type === 'video')
-                                        <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover max-h-[400px] pointer-events-none" muted>
-                                            お使いのブラウザは動画をサポートしていません。
-                                        </video>
-                                    @endif
+                                <div class="media-item w-full flex-shrink-0 cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
+                                    <div class="w-full h-80 sm:h-96 overflow-hidden">
+                                        @if($media->type === 'image')
+                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover pointer-events-none">
+                                        @elseif($media->type === 'video')
+                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover pointer-events-none" muted>
+                                                お使いのブラウザは動画をサポートしていません。
+                                            </video>
+                                        @endif
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -64,7 +68,7 @@
                     
                     <!-- インジケーター -->
                     @if($post->media->count() > 1)
-                        <div class="flex justify-center space-x-2 mt-4">
+                        <div class="flex justify-center space-x-2 mt-0 bg-white px-4 py-2 rounded-lg">
                             @foreach($post->media as $index => $media)
                                 <button onclick="goToMedia({{ $index }})" 
                                         class="w-2 h-2 rounded-full transition-all {{ $index === 0 ? 'bg-amber-500' : 'bg-gray-300' }}"
@@ -87,7 +91,7 @@
             <h1 class="text-2xl font-bold text-gray-900 mb-4">{{ e($post->title) }}</h1>
 
             <!-- 内容 -->
-            <div class="text-gray-700 mb-6 whitespace-pre-wrap">{{ e($post->content) }}</div>
+            <div class="text-gray-700 mb-6 whitespace-pre-wrap">{!! nl2br(e($post->content)) !!}</div>
 
             <!-- ペット情報 -->
             @if($post->pet)
@@ -139,25 +143,40 @@
     </main>
 
     <!-- メディア表示用モーダル -->
-    <div id="media-modal" class="fixed inset-0 z-[9999] hidden bg-black bg-opacity-90 flex items-center justify-center p-4" onclick="closeMediaModal(event)">
-        <div class="relative w-full h-full max-w-screen-xl max-h-screen-xl flex items-center justify-center" onclick="event.stopPropagation()">
-            <button onclick="closeMediaModal()" class="absolute top-4 right-4 text-white text-4xl z-10">
+    <div id="media-modal" class="fixed inset-0 z-[9999] hidden bg-black bg-opacity-95 flex items-center justify-center p-2 sm:p-4" onclick="closeMediaModal(event)">
+        <div class="relative w-full h-full max-w-screen-2xl max-h-screen flex items-center justify-center" onclick="event.stopPropagation()">
+            <!-- 閉じるボタン -->
+            <button onclick="closeMediaModal()" class="absolute top-2 right-2 sm:top-4 sm:right-4 text-white text-3xl sm:text-4xl z-10 bg-black bg-opacity-50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center hover:bg-opacity-70 transition-all">
                 &times;
             </button>
             
-            <div id="modal-media-container" class="relative w-full h-full flex items-center justify-center">
-                <!-- メディアはJavaScriptで動的に挿入されます -->
+            <!-- メディアコンテナ -->
+            <div id="modal-media-container" class="relative w-full h-full flex items-center justify-center overflow-hidden">
+                <!-- カルーセル表示 -->
+                <div id="modal-media-carousel" class="flex transition-transform duration-300 ease-in-out h-full">
+                    @foreach($post->media as $index => $media)
+                        <div class="w-full flex-shrink-0 flex items-center justify-center">
+                            @if($media->type === 'image')
+                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="max-w-full max-h-full object-contain" style="max-height: 90vh;">
+                            @elseif($media->type === 'video')
+                                <video src="{{ e(Storage::url($media->url)) }}" class="max-w-full max-h-full object-contain" controls muted style="max-height: 90vh;">
+                                    お使いのブラウザは動画をサポートしていません。
+                                </video>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
             </div>
 
             <!-- モーダル内のナビゲーションボタン -->
             @if($post->media->count() > 1)
-                <button onclick="modalPreviousMedia()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-3 hover:bg-opacity-70 transition-all">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <button onclick="modalPreviousMedia()" class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 sm:p-3 hover:bg-opacity-70 transition-all z-10">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                     </svg>
                 </button>
-                <button onclick="modalNextMedia()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-3 hover:bg-opacity-70 transition-all">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <button onclick="modalNextMedia()" class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 sm:p-3 hover:bg-opacity-70 transition-all z-10">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
                     </svg>
                 </button>
@@ -165,11 +184,12 @@
 
             <!-- モーダル内のインジケーター -->
             @if($post->media->count() > 1)
-                <div class="absolute bottom-4 flex justify-center space-x-2">
+                <div class="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center space-x-2 bg-white px-4 py-2 rounded-lg">
                     @foreach($post->media as $index => $media)
                         <button onclick="modalGoToMedia({{ $index }})" 
-                                class="w-3 h-3 rounded-full transition-all {{ $index === 0 ? 'bg-amber-500' : 'bg-gray-300' }}"
-                                id="modal-indicator-{{ $index }}"></button>
+                                class="w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all bg-gray-300 hover:bg-gray-400" 
+                                id="modal-indicator-{{ $index }}">
+                        </button>
                     @endforeach
                 </div>
             @endif
@@ -379,7 +399,6 @@
     @endphp
 
     <script>
-
         // メディアカルーセルの制御
         let currentMediaIndex = 0;
         const totalMedia = {{ $post->media->count() }};
@@ -405,7 +424,8 @@
         function updateMediaDisplay() {
             const carousel = document.getElementById('media-carousel');
             if (carousel) {
-                carousel.style.transform = `translateX(-${currentMediaIndex * 100}%)`;
+                const translateX = -(currentMediaIndex * 100);
+                carousel.style.transform = `translateX(${translateX}%)`;
             }
             
             // インジケーターの更新
@@ -425,43 +445,20 @@
         function sharePost() {
             if (navigator.share) {
                 navigator.share({
-                    title: '{{ $post->title }}',
-                    text: '{{ Str::limit($post->content, 100) }}',
+                    title: '{{ Str::limit(strip_tags(str_replace(['"', "'", "\n", "\r"], '', $post->title)), 50) }}',
+                    text: '{{ Str::limit(strip_tags(str_replace(['"', "'", "\n", "\r"], '', $post->content)), 100) }}',
                     url: window.location.href
-                });
+                }).catch(err => console.log('Error sharing:', err));
             } else {
                 // フォールバック: URLをクリップボードにコピー
                 navigator.clipboard.writeText(window.location.href).then(() => {
                     alert('URLをクリップボードにコピーしました');
+                }).catch(err => {
+                    console.error('Failed to copy URL:', err);
+                    alert('シェアに失敗しました');
                 });
             }
         }
-
-        // メディアクリックイベント
-        document.addEventListener('click', function(event) {
-            console.log('Click detected on:', event.target);
-            const mediaItem = event.target.closest('.media-item');
-            console.log('Media item found:', mediaItem);
-            
-            if (mediaItem) {
-                const type = mediaItem.dataset.mediaType;
-                const url = mediaItem.dataset.mediaUrl;
-                const index = parseInt(mediaItem.dataset.mediaIndex);
-                console.log('Media click detected:', { type, url, index });
-                
-                // データの検証
-                if (!type || !url) {
-                    console.error('Invalid media data:', { type, url, index });
-                    return;
-                }
-                
-                try {
-                    openMediaModal(type, url, index);
-                } catch (error) {
-                    console.error('Error opening modal:', error);
-                }
-            }
-        });
 
         // メディアモーダル制御
         let modalCurrentMediaIndex = 0;
@@ -494,29 +491,31 @@
                 return;
             }
             
-            mediaContainer.innerHTML = ''; // Clear previous media
-
             modalCurrentMediaIndex = initialIndex;
             console.log('Setting modal index to:', modalCurrentMediaIndex);
             
-            try {
-                updateModalMediaDisplay();
-            } catch (error) {
-                console.error('Error updating modal display:', error);
-                return;
+            // カルーセル位置を直接設定
+            const carousel = document.getElementById('modal-media-carousel');
+            if (carousel) {
+                const translateX = -(modalCurrentMediaIndex * 100);
+                carousel.style.transform = `translateX(${translateX}%)`;
             }
-
+            
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            
             console.log('Modal opened successfully');
         }
 
         function closeMediaModal(event) {
-            // 背景クリック時のみ閉じる
-            if (event && event.target.id !== 'media-modal') {
+            // イベントが渡された場合のみ背景クリックチェック
+            if (event && event.target && event.target.id !== 'media-modal') {
                 return;
             }
+            
             const modal = document.getElementById('media-modal');
+            if (!modal) return;
+            
             modal.classList.add('hidden');
             document.body.style.overflow = ''; // Restore scrolling
 
@@ -529,43 +528,23 @@
         }
 
         function updateModalMediaDisplay() {
-            console.log('updateModalMediaDisplay called, index:', modalCurrentMediaIndex);
-            console.log('mediaData:', mediaData);
-            
-            const mediaContainer = document.getElementById('modal-media-container');
-            if (!mediaContainer) {
-                console.error('Media container not found in updateModalMediaDisplay');
-                return;
+            const carousel = document.getElementById('modal-media-carousel');
+            if (carousel) {
+                const translateX = -(modalCurrentMediaIndex * 100);
+                carousel.style.transform = `translateX(${translateX}%)`;
             }
             
-            mediaContainer.innerHTML = ''; // Clear previous media
-
-            if (!mediaData || mediaData.length === 0) {
-                console.error('No media data available');
-                return;
-            }
+            // 動画の自動再生制御
+            const videos = document.querySelectorAll('#modal-media-carousel video');
+            videos.forEach((video, index) => {
+                if (index === modalCurrentMediaIndex) {
+                    video.play().catch(e => console.log('Video autoplay failed:', e));
+                } else {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
             
-            if (modalCurrentMediaIndex >= mediaData.length) {
-                console.error('Invalid media index:', modalCurrentMediaIndex, 'max:', mediaData.length - 1);
-                return;
-            }
-
-            const media = mediaData[modalCurrentMediaIndex];
-            console.log('Current media:', media);
-            
-            let mediaElement;
-
-            if (media.type === 'image') {
-                mediaElement = `<img src="${media.url}" class="max-w-full max-h-full object-contain" alt="Full screen image">`;
-            } else if (media.type === 'video') {
-                mediaElement = `<video src="${media.url}" class="max-w-full max-h-full object-contain" controls autoplay muted></video>`;
-            } else {
-                console.error('Unknown media type:', media.type);
-                return;
-            }
-            
-            console.log('Media element HTML:', mediaElement);
-            mediaContainer.innerHTML = mediaElement;
             updateModalIndicators();
         }
 
@@ -592,13 +571,98 @@
                 const indicator = document.getElementById(`modal-indicator-${i}`);
                 if (indicator) {
                     if (i === modalCurrentMediaIndex) {
-                        indicator.className = 'w-3 h-3 rounded-full transition-all bg-amber-500';
+                        indicator.className = 'w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all bg-amber-500';
                     } else {
-                        indicator.className = 'w-3 h-3 rounded-full transition-all bg-gray-300';
+                        indicator.className = 'w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all bg-gray-300 hover:bg-gray-400';
                     }
                 }
             }
         }
+
+        // メディアクリックイベントリスナー
+        document.addEventListener('click', function(event) {
+            console.log('Click detected on:', event.target);
+            const mediaItem = event.target.closest('.media-item');
+            console.log('Media item found:', mediaItem);
+            
+            if (mediaItem) {
+                const type = mediaItem.dataset.mediaType;
+                const url = mediaItem.dataset.mediaUrl;
+                const index = parseInt(mediaItem.dataset.mediaIndex);
+                console.log('Media click detected:', { type, url, index });
+                
+                // データの検証
+                if (!type || !url) {
+                    console.error('Invalid media data:', { type, url, index });
+                    return;
+                }
+                
+                try {
+                    openMediaModal(type, url, index);
+                } catch (error) {
+                    console.error('Error opening modal:', error);
+                    alert('ポップアップの表示に失敗しました。');
+                }
+            }
+        });
+
+        // メディアクリックイベント
+        document.addEventListener('click', function(event) {
+            const mediaItem = event.target.closest('.media-item');
+            
+            if (mediaItem) {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                const type = mediaItem.dataset.mediaType;
+                const url = mediaItem.dataset.mediaUrl;
+                const index = parseInt(mediaItem.dataset.mediaIndex);
+                
+                console.log('Media click detected:', { type, url, index });
+                
+                // データの検証
+                if (!type || !url || isNaN(index)) {
+                    console.error('Invalid media data:', { type, url, index });
+                    alert('メディアの読み込みに失敗しました。');
+                    return;
+                }
+                
+                // インデックスの範囲チェック
+                if (index < 0 || index >= mediaData.length) {
+                    console.error('Invalid media index:', index, 'max:', mediaData.length - 1);
+                    return;
+                }
+                
+                try {
+                    openMediaModal(type, url, index);
+                } catch (error) {
+                    console.error('Error opening modal:', error);
+                    alert('ポップアップの表示に失敗しました。');
+                }
+            }
+        });
+
+        // キーボード操作
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('media-modal');
+            if (!modal || modal.classList.contains('hidden')) return;
+            
+            switch(event.key) {
+                case 'Escape':
+                    closeMediaModal();
+                    break;
+                case 'ArrowLeft':
+                    if (modalTotalMedia > 1) {
+                        modalPreviousMedia();
+                    }
+                    break;
+                case 'ArrowRight':
+                    if (modalTotalMedia > 1) {
+                        modalNextMedia();
+                    }
+                    break;
+            }
+        });
     </script>
     </div>
 </x-guest-layout>

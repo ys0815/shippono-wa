@@ -114,11 +114,6 @@ class PetController extends Controller
             ->take($perPage)
             ->get();
 
-        // 各投稿の閲覧数をカウント
-        foreach ($posts as $post) {
-            $post->incrementViewCount();
-        }
-
         return response()->json([
             'posts' => $posts->map(function ($post) {
                 return [
