@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $stats = SiteStatsService::compute();
             Cache::forever(SiteStatsService::CACHE_KEY, $stats);
-        })->cron('0 8,12,18 * * *');
+        })->dailyAt('08:00');
     }
 
     protected function commands(): void

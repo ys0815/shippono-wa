@@ -8,7 +8,7 @@
         <meta property="og:type" content="profile">
         <meta property="og:site_name" content="#しっぽのわ">
         
-        <!-- Twitter Card -->
+        <!-- X Card -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="{{ $shareLink->title }}">
         <meta name="twitter:description" content="{{ $shareLink->description }}">

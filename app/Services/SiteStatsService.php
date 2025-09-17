@@ -9,14 +9,17 @@ use App\Models\Shelter;
 
 class SiteStatsService
 {
-    public const CACHE_KEY = 'site_stats:v1';
+    public const CACHE_KEY = 'site_stats:v2';
 
     public static function compute(): array
     {
         $postsGallery = Post::where('type', 'gallery')->count();
         $postsInterview = Post::where('type', 'interview')->count();
         $pets = Pet::count();
-        $shelters = Shelter::count();
+        // 重複した団体名を除外してカウント
+        $shelters = Shelter::select('name')
+            ->distinct()
+            ->count();
         $likes = Like::count();
 
         return [

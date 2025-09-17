@@ -64,7 +64,7 @@
         </header>
 
         <div>
-            <x-input-label for="sns_x" :value="__('X（旧Twitter）')" />
+            <x-input-label for="sns_x" :value="__('X')" />
             <div class="flex items-center gap-2">
                 <span class="text-gray-500">@</span>
                 <x-text-input id="sns_x" name="sns_x" type="text" class="mt-1 block w-full" :value="old('sns_x', $user->sns_x)" placeholder="example._pet" />
