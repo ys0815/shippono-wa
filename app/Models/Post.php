@@ -17,6 +17,7 @@ class Post extends Model
         'title',
         'content',
         'status',
+        'view_count',
     ];
 
     public function user(): BelongsTo
@@ -37,5 +38,13 @@ class Post extends Model
     public function interviewContent()
     {
         return $this->hasOne(InterviewContent::class);
+    }
+
+    /**
+     * 閲覧数をインクリメント
+     */
+    public function incrementViewCount()
+    {
+        $this->increment('view_count');
     }
 }

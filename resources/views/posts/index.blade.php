@@ -132,13 +132,13 @@
                                     </span>
                                 </div>
                                 <div class="text-sm text-gray-500">
-                                    {{ $post->created_at->format('Y/m/d') }}
+                                    {{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y/m/d') }}
                                 </div>
                             </div>
                             
                             <!-- タイトルと本文 -->
                             <h3 class="text-lg font-medium text-gray-900 mb-2">{{ $post->title }}</h3>
-                            <p class="text-gray-600 mb-4">{{ Str::limit($post->content, 100) }}</p>
+                            <div class="text-gray-600 mb-4 whitespace-pre-wrap">{{ Str::limit($post->content, 100) }}</div>
                             
                             <!-- メディア表示（画像・動画） -->
                             @if($post->media->count() > 0)
@@ -147,10 +147,10 @@
                                         @if($media->type === 'image')
                                             <img src="{{ Storage::url($media->url) }}" 
                                                  alt="投稿画像" 
-                                                 class="w-20 h-20 object-cover rounded-lg">
+                                                 class="w-20 h-20 object-cover rounded-lg max-h-[80px]">
                                         @elseif($media->type === 'video')
                                             <video src="{{ Storage::url($media->url) }}" 
-                                                   class="w-20 h-20 object-cover rounded-lg"
+                                                   class="w-20 h-20 object-cover rounded-lg max-h-[80px]"
                                                    controls>
                                                 お使いのブラウザは動画をサポートしていません。
                                             </video>
@@ -164,11 +164,11 @@
                                 <div class="flex items-center space-x-4 text-sm text-gray-500">
                                     <span class="flex items-center">
                                         <span class="mr-1">👀</span>
-                                        {{ rand(100, 2000) }} <!-- 仮の閲覧数 -->
+                                        {{ $post->view_count ?? 0 }}
                                     </span>
                                     <span class="flex items-center">
                                         <span class="mr-1">📅</span>
-                                        {{ $post->created_at->format('Y/m/d') }}
+                                        {{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y/m/d') }}
                                     </span>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                             <div class="flex space-x-2">
                                 <a href="{{ route('mypage.posts.edit', $post) }}" 
                                    class="px-3 py-1 text-sm rounded text-white transition duration-200" 
-                                   style="background-color: #f59e0b; hover:background-color: #d97706;">
+                                   style="background-color: rgb(59 130 246); hover:background-color: rgb(37 99 235);">
                                     編集
                                 </a>
                                 <button type="button" 
@@ -194,7 +194,7 @@
                                             }
                                         }))"
                                         class="px-3 py-1 text-sm rounded text-white transition duration-200" 
-                                        style="background-color: #dc2626; hover:background-color: #b91c1c;">
+                                        style="background-color: rgb(239 68 68); hover:background-color: rgb(220 38 38);">
                                     削除
                                 </button>
                                 <form id="delete-form-{{ $post->id }}" 
@@ -220,7 +220,7 @@
                                                 }
                                             }))"
                                             class="px-3 py-1 text-sm rounded text-white transition duration-200" 
-                                            style="background-color: #f59e0b; hover:background-color: #d97706;">
+                                            style="background-color: rgb(234 179 8); hover:background-color: rgb(217 119 6);">
                                         非公開
                                     </button>
                                     <form id="hide-form-{{ $post->id }}" 

@@ -72,15 +72,52 @@ class PetController extends Controller
     {
         $page = $request->get('page', 1);
         $perPage = 5;
+        $sort = $request->get('sort', 'newest');
+        $timeFilter = $request->get('time_filter', 'all');
 
-        $posts = $pet->posts()
+        $query = $pet->posts()
             ->where('status', 'published')
             ->where('type', 'gallery')
-            ->with('media')
-            ->latest()
-            ->skip(($page - 1) * $perPage)
+            ->with('media');
+
+        // 期間フィルター
+        if ($timeFilter !== 'all') {
+            $now = now();
+            switch ($timeFilter) {
+                case 'today':
+                    $query->whereDate('created_at', $now->toDateString());
+                    break;
+                case 'week':
+                    $query->where('created_at', '>=', $now->subWeek());
+                    break;
+                case 'month':
+                    $query->where('created_at', '>=', $now->subMonth());
+                    break;
+            }
+        }
+
+        // ソート
+        switch ($sort) {
+            case 'oldest':
+                $query->oldest();
+                break;
+            case 'popular':
+                $query->withCount('likes')->orderBy('likes_count', 'desc');
+                break;
+            case 'newest':
+            default:
+                $query->latest();
+                break;
+        }
+
+        $posts = $query->skip(($page - 1) * $perPage)
             ->take($perPage)
             ->get();
+
+        // 各投稿の閲覧数をカウント
+        foreach ($posts as $post) {
+            $post->incrementViewCount();
+        }
 
         return response()->json([
             'posts' => $posts->map(function ($post) {
@@ -88,7 +125,7 @@ class PetController extends Controller
                     'id' => $post->id,
                     'title' => $post->title,
                     'content' => $post->content,
-                    'created_at' => $post->created_at->format('Y年n月j日'),
+                    'created_at' => $post->created_at->setTimezone('Asia/Tokyo')->format('Y年n月j日 H:i'),
                     'media' => $post->media->map(function ($media) {
                         // URLを正しいパスに変換
                         $url = $media->url;

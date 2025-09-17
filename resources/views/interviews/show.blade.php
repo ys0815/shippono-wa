@@ -258,7 +258,7 @@
                     @endif
                 </div>
                 <div class="text-sm text-gray-500">
-                    投稿日時：{{ $post->created_at->format('Y年n月j日 H:i') }}
+                    投稿日時：{{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y年n月j日 H:i') }}
                 </div>
             </div>
 

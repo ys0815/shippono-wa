@@ -446,4 +446,21 @@ class PostController extends Controller
         // デフォルトは画像として扱う
         return 'image';
     }
+
+    /**
+     * 投稿詳細ページの表示（公開）
+     */
+    public function show(Post $post)
+    {
+        // 公開済みの投稿のみ表示
+        abort_unless($post->status === 'published', 404);
+
+        // 閲覧数をカウント
+        $post->incrementViewCount();
+
+        // 関連データを読み込み
+        $post->load(['pet.user', 'media', 'user']);
+
+        return view('posts.show', compact('post'));
+    }
 }

@@ -63,7 +63,7 @@
                                     </span>
                                 @endif
                                 <span>飼い主さん：{{ $post->pet->user->display_name ?? $post->pet->user->name }}</span>
-                                <span class="ml-auto">{{ $post->created_at->format('Y.m.d') }}</span>
+                                <span class="ml-auto">{{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y.m.d') }}</span>
                             </div>
                         </div>
                     </div>

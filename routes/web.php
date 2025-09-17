@@ -100,3 +100,6 @@ require __DIR__ . '/auth.php';
 // 里親インタビュー（公開）
 Route::get('/interviews', [InterviewController::class, 'index'])->name('interviews.index');
 Route::get('/interviews/{post}', [InterviewController::class, 'show'])->name('interviews.show');
+
+// 投稿詳細ページ（公開）
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');

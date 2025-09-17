@@ -551,6 +551,33 @@
                             <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">今日の幸せ、シェアしよう</span>
                             <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
                         </h2>
+                        
+                        <!-- フィルター・ソート機能 -->
+                        <div class="mb-6 bg-white rounded-lg border border-amber-100 p-4">
+                            <div class="flex flex-row gap-4 items-center">
+                                <!-- 並び順 -->
+                                <div class="flex-1">
+                                    <label class="block text-xs text-gray-700 mb-1">並び順</label>
+                                    <select id="sort-order" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                        <option value="newest">新着順</option>
+                                        <option value="oldest">古い順</option>
+                                        <option value="popular">人気順</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- 期間 -->
+                                <div class="flex-1">
+                                    <label class="block text-xs text-gray-700 mb-1">期間</label>
+                                    <select id="time-filter" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                        <option value="all">すべて</option>
+                                        <option value="today">今日</option>
+                                        <option value="week">今週</option>
+                                        <option value="month">今月</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div id="posts-container" class="space-y-6">
                             <!-- 投稿はJavaScriptで動的に読み込まれます -->
                         </div>
@@ -601,9 +628,41 @@
         let currentPage = 1;
         let isLoading = false;
         let hasMorePosts = true;
+        let currentSort = 'newest';
+        let currentTimeFilter = 'all';
+        let allPosts = [];
 
         // 初期投稿読み込み
         loadPosts();
+
+        // フィルター・ソート機能のイベントリスナー
+        document.getElementById('sort-order').addEventListener('change', function() {
+            currentSort = this.value;
+            resetAndReloadPosts();
+        });
+
+        document.getElementById('time-filter').addEventListener('change', function() {
+            currentTimeFilter = this.value;
+            resetAndReloadPosts();
+        });
+
+
+        function resetAndReloadPosts() {
+            currentPage = 1;
+            hasMorePosts = true;
+            allPosts = [];
+            document.getElementById('posts-container').innerHTML = '';
+            document.getElementById('no-more-posts').classList.add('hidden');
+            loadPosts();
+        }
+
+        function refreshPostsDisplay() {
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+            allPosts.forEach(post => {
+                addPostToContainer(post);
+            });
+        }
 
         function loadPosts() {
             if (isLoading || !hasMorePosts) return;
@@ -611,7 +670,13 @@
             isLoading = true;
             document.getElementById('loading-indicator').classList.remove('hidden');
             
-            fetch(`/api/pets/{{ $pet->id }}/posts?page=${currentPage}`)
+            const params = new URLSearchParams({
+                page: currentPage,
+                sort: currentSort,
+                time_filter: currentTimeFilter
+            });
+            
+            fetch(`/api/pets/{{ $pet->id }}/posts?${params}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.posts.length === 0) {
@@ -619,6 +684,7 @@
                         document.getElementById('no-more-posts').classList.remove('hidden');
                     } else {
                         data.posts.forEach(post => {
+                            allPosts.push(post);
                             addPostToContainer(post);
                         });
                         currentPage++;
@@ -637,39 +703,89 @@
         function addPostToContainer(post) {
             const container = document.getElementById('posts-container');
             const postElement = document.createElement('div');
-            postElement.className = 'bg-gray-50 rounded-lg p-4';
+            postElement.className = 'bg-gray-50 rounded-lg p-6';
             
             let mediaHtml = '';
             if (post.media.length > 0) {
-                mediaHtml = '<div class="mb-4">';
-                post.media.slice(0, 3).forEach(media => {
-                    // API側で既に正しいURLが設定されているので、そのまま使用
+                // 複数メディアのスクロール切り替えシステム
+                mediaHtml = `<div class="mb-4">`;
+                
+                if (post.media.length === 1) {
+                    // 単一メディアの場合
+                    const media = post.media[0];
                     let mediaUrl = media.url;
                     console.log('Media URL:', mediaUrl, 'Type:', media.type);
                     
                     if (media.type === 'image') {
-                        mediaHtml += `<div class="w-24 h-24 object-cover rounded-lg inline-block mr-2 overflow-hidden">
-                                        <img src="${mediaUrl}" alt="${post.title}" class="w-full h-full object-cover" 
+                        mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3">
+                                        <img src="${mediaUrl}" alt="${post.title}" class="w-full h-full object-cover max-h-[300px]" 
                                              onerror="console.error('Image load error:', this.src); this.style.display='none';">
                                       </div>`;
                     } else if (media.type === 'video') {
-                        mediaHtml += `<div class="w-24 h-24 object-cover rounded-lg inline-block mr-2 overflow-hidden relative">
+                        mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative">
                                         <video src="${mediaUrl}" class="w-full h-full object-cover" muted 
                                                onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                         </video>
                                         <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-                                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M8 5v14l11-7z"/>
                                             </svg>
                                         </div>
                                       </div>`;
                     }
-                });
-                if (post.media.length > 3) {
-                    mediaHtml += `<div class="w-24 h-24 bg-gray-200 rounded-lg inline-flex items-center justify-center text-gray-500 text-sm">
-                                    +${post.media.length - 3}
-                                  </div>`;
+                } else {
+                    // 複数メディアの場合 - スクロール切り替えシステム
+                    mediaHtml += `<div class="relative">
+                                    <div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative">
+                                        <div id="media-carousel-${post.id}" class="flex transition-transform duration-300 ease-in-out" style="width: ${post.media.length * 100}%;">
+                                            ${post.media.map((media, index) => {
+                                                let mediaUrl = media.url;
+                                                if (media.type === 'image') {
+                                                    return `<div class="w-full h-80 flex-shrink-0">
+                                                                <img src="${mediaUrl}" alt="${post.title}" class="w-full h-full object-cover max-h-[300px]" 
+                                                                     onerror="console.error('Image load error:', this.src); this.style.display='none';">
+                                                            </div>`;
+                                                } else if (media.type === 'video') {
+                                                    return `<div class="w-full h-80 flex-shrink-0 relative">
+                                                                <video src="${mediaUrl}" class="w-full h-full object-cover" muted 
+                                                                       onerror="console.error('Video load error:', this.src); this.style.display='none';">
+                                                                </video>
+                                                                <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                                                                    <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                                                        <path d="M8 5v14l11-7z"/>
+                                                                    </svg>
+                                                                </div>
+                                                            </div>`;
+                                                }
+                                            }).join('')}
+                                        </div>
+                                        
+                                        <!-- ナビゲーションボタン -->
+                                        <button onclick="previousMedia(${post.id}, ${post.media.length})" 
+                                                class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-70 transition-all">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                                            </svg>
+                                        </button>
+                                        <button onclick="nextMedia(${post.id}, ${post.media.length})" 
+                                                class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-70 transition-all">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- インジケーター -->
+                                    <div class="flex justify-center space-x-2 mb-3">
+                                        ${post.media.map((_, index) => 
+                                            `<button onclick="goToMedia(${post.id}, ${index}, ${post.media.length})" 
+                                                     class="w-2 h-2 rounded-full transition-all ${index === 0 ? 'bg-amber-500' : 'bg-gray-300'}"
+                                                     id="indicator-${post.id}-${index}"></button>`
+                                        ).join('')}
+                                    </div>
+                                </div>`;
                 }
+                
                 mediaHtml += '</div>';
             }
 
@@ -704,22 +820,34 @@
             @endauth
 
             postElement.innerHTML = `
-                <div class="flex justify-between items-start mb-3">
-                    <div class="flex items-center">
+                <!-- ヘッダー情報（コンパクト） -->
+                <div class="flex justify-between items-center mb-3">
+                    <div class="flex items-center gap-2">
                         <span class="text-xs text-white px-2 py-1 rounded" style="background-color: #f59e0b;">
                             今日の幸せ
                         </span>
-                    </div>
-                    <div class="text-sm text-gray-500">
-                        ${post.created_at}
+                        <span class="text-xs text-gray-500">${post.created_at || '日時不明'}</span>
                     </div>
                 </div>
                 
-                <h3 class="text-lg font-medium text-gray-900 mb-2">${post.title}</h3>
-                ${post.content ? `<p class="text-gray-600 mb-4">${post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content}</p>` : ''}
-                
+                <!-- メイン画像（最優先表示） -->
                 ${mediaHtml}
                 
+                <!-- テキスト情報（画像の下にコンパクト配置） -->
+                <div class="mt-3">
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">${post.title}</h3>
+                    ${post.content ? `<div class="text-gray-600 text-sm whitespace-pre-wrap">${post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content}</div>` : ''}
+                </div>
+                
+                <!-- 続きを見るボタン -->
+                <div class="mt-3 flex justify-end">
+                    <button onclick="viewPostDetail(${post.id})" 
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200 shadow-sm">
+                        続きを見る
+                    </button>
+                </div>
+                
+                <!-- アクションボタン -->
                 ${actionButtons}
             `;
             
@@ -729,8 +857,56 @@
         // スクロールイベントリスナー
         window.addEventListener('scroll', function() {
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
-                loadPosts();
+                if (!isLoading && hasMorePosts) {
+                    loadPosts();
+                }
             }
         });
+
+        // メディア切り替え関数
+        function previousMedia(postId, totalMedia) {
+            const carousel = document.getElementById(`media-carousel-${postId}`);
+            const currentIndex = parseInt(carousel.dataset.currentIndex || 0);
+            const newIndex = currentIndex > 0 ? currentIndex - 1 : totalMedia - 1;
+            
+            carousel.style.transform = `translateX(-${newIndex * 100}%)`;
+            carousel.dataset.currentIndex = newIndex;
+            updateIndicators(postId, newIndex, totalMedia);
+        }
+
+        function nextMedia(postId, totalMedia) {
+            const carousel = document.getElementById(`media-carousel-${postId}`);
+            const currentIndex = parseInt(carousel.dataset.currentIndex || 0);
+            const newIndex = currentIndex < totalMedia - 1 ? currentIndex + 1 : 0;
+            
+            carousel.style.transform = `translateX(-${newIndex * 100}%)`;
+            carousel.dataset.currentIndex = newIndex;
+            updateIndicators(postId, newIndex, totalMedia);
+        }
+
+        function goToMedia(postId, index, totalMedia) {
+            const carousel = document.getElementById(`media-carousel-${postId}`);
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+            carousel.dataset.currentIndex = index;
+            updateIndicators(postId, index, totalMedia);
+        }
+
+        function updateIndicators(postId, currentIndex, totalMedia) {
+            for (let i = 0; i < totalMedia; i++) {
+                const indicator = document.getElementById(`indicator-${postId}-${i}`);
+                if (indicator) {
+                    if (i === currentIndex) {
+                        indicator.className = 'w-2 h-2 rounded-full transition-all bg-amber-500';
+                    } else {
+                        indicator.className = 'w-2 h-2 rounded-full transition-all bg-gray-300';
+                    }
+                }
+            }
+        }
+
+        // 続きを見るボタンの関数
+        function viewPostDetail(postId) {
+            window.location.href = `/posts/${postId}`;
+        }
     </script>
 </x-guest-layout>

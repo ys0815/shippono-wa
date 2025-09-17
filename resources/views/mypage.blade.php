@@ -105,15 +105,14 @@
                     <div class="flex justify-between items-start mb-1">
                         <span class="text-xs text-white px-2 py-1 rounded" 
                               style="background-color: #f59e0b;">{{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}</span>
-                        <span class="text-xs text-gray-500">{{ $post->created_at->format('Y/m/d') }}</span>
+                        <span class="text-xs text-gray-500">{{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y/m/d') }}</span>
                     </div>
                     <h3 class="font-medium text-gray-800 text-sm">{{ $post->title }}</h3>
                     @if($post->content)
-                        <p class="text-xs text-gray-600 mt-1">{{ Str::limit($post->content, 30) }}</p>
+                        <div class="text-xs text-gray-600 mt-1 whitespace-pre-wrap">{{ Str::limit($post->content, 30) }}</div>
                     @endif
                     <div class="flex items-center mt-2 text-xs text-gray-500">
-                        <span class="mr-3">👁️ 0</span>
-                        <span>❤️ 0</span>
+                        <span class="mr-3">👁️ {{ $post->view_count ?? 0 }}</span>
                     </div>
                 </div>
             @empty
