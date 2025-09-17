@@ -181,20 +181,26 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs text-gray-700 mb-1">地域</label>
-                            <select class="w-full border rounded-md px-2 py-1.5 focus:ring-amber-500 focus:border-amber-500">
-                                <option>地域を選択</option>
+                            <label class="block text-xs text-gray-700 mb-1">性別</label>
+                            <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option>すべて</option>
+                                <option>オス</option>
+                                <option>メス</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs text-gray-700 mb-1">保護施設</label>
-                            <select class="w-full border rounded-md px-2 py-1.5 focus:ring-amber-500 focus:border-amber-500">
-                                <option>施設を選択</option>
+                            <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option>すべて</option>
+                                <option>施設A</option>
+                                <option>施設B</option>
+                                <option>施設C</option>
                             </select>
                         </div>
                     </div>
-                    <div class="pt-1">
-                        <button type="button" class="w-full btn btn-brand">絞り込む</button>
+                    <div class="flex gap-2">
+                        <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white text-sm rounded-md hover:bg-amber-600 transition">検索</button>
+                        <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">閉じる</button>
                     </div>
                 </form>
             </div>

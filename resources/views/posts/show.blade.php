@@ -1,53 +1,17 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>#しっぽのわ - {{ $post->title }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-        .notebook-lines {
-            background-image: repeating-linear-gradient(
-                transparent,
-                transparent 1.4em,
-                #e5e7eb 1.4em,
-                #e5e7eb calc(1.4em + 1px)
-            );
-            line-height: 1.4em;
-        }
-    </style>
-</head>
-<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 min-h-screen">
-    <!-- ヘッダー -->
-    <header class="bg-white shadow-sm border-b border-amber-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- ハンバーガーメニュー -->
-                <button id="menu-toggle" class="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
+<x-guest-layout>
+    <div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
+        <!-- Header -->
+        <header class="sticky top-0 z-[900] bg-white/90 backdrop-blur border-b border-amber-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+                <button type="button" @click="sidebar=true" class="p-2 rounded hover:bg-amber-50 text-gray-700" aria-label="メニューを開く">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
                 </button>
-
-                <!-- ロゴ -->
-                <div class="flex items-center">
-                    <h1 class="text-xl font-bold text-gray-800">#しっぽのわ</h1>
-                </div>
-
-                <!-- 検索ボタン -->
-                <button id="search-toggle" class="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
+                <h1 class="text-lg font-semibold text-gray-900"># しっぽのわ</h1>
+                <button type="button" @click="search=true" class="p-2 rounded hover:bg-amber-50 text-gray-700" aria-label="検索を開く">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z" clip-rule="evenodd"/></svg>
                 </button>
             </div>
-        </div>
-    </header>
+        </header>
 
     <!-- メインコンテンツ -->
     <main class="max-w-4xl mx-auto">
@@ -57,11 +21,11 @@
                 @if($post->media->count() === 1)
                     <!-- 単一メディア -->
                     @php $media = $post->media->first(); @endphp
-                    <div onclick="openMediaModal('{{ $media->type }}', '{{ Storage::url($media->url) }}', 0)" class="cursor-pointer">
+                    <div class="media-item cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
                         @if($media->type === 'image')
-                            <img src="{{ Storage::url($media->url) }}" alt="{{ $post->title }}" class="w-full h-auto object-cover max-h-[400px]">
+                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-auto object-cover max-h-[400px] pointer-events-none">
                         @elseif($media->type === 'video')
-                            <video src="{{ Storage::url($media->url) }}" class="w-full h-auto object-cover max-h-[400px]" muted>
+                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-auto object-cover max-h-[400px] pointer-events-none" muted>
                                 お使いのブラウザは動画をサポートしていません。
                             </video>
                         @endif
@@ -71,11 +35,11 @@
                     <div class="relative">
                         <div id="media-carousel" class="flex transition-transform duration-300 ease-in-out" style="width: {{ $post->media->count() * 100 }}%;">
                             @foreach($post->media as $index => $media)
-                                <div class="w-full h-auto flex-shrink-0 max-h-[400px] overflow-hidden" onclick="openMediaModal('{{ $media->type }}', '{{ Storage::url($media->url) }}', {{ $index }})">
+                                <div class="media-item w-full h-auto flex-shrink-0 max-h-[400px] overflow-hidden cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
                                     @if($media->type === 'image')
-                                        <img src="{{ Storage::url($media->url) }}" alt="{{ $post->title }}" class="w-full h-full object-cover max-h-[400px]">
+                                        <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover max-h-[400px] pointer-events-none">
                                     @elseif($media->type === 'video')
-                                        <video src="{{ Storage::url($media->url) }}" class="w-full h-full object-cover max-h-[400px]" muted>
+                                        <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover max-h-[400px] pointer-events-none" muted>
                                             お使いのブラウザは動画をサポートしていません。
                                         </video>
                                     @endif
@@ -120,10 +84,10 @@
             </div>
 
             <!-- タイトル -->
-            <h1 class="text-2xl font-bold text-gray-900 mb-4">{{ $post->title }}</h1>
+            <h1 class="text-2xl font-bold text-gray-900 mb-4">{{ e($post->title) }}</h1>
 
             <!-- 内容 -->
-            <div class="text-gray-700 mb-6 whitespace-pre-wrap">{{ $post->content }}</div>
+            <div class="text-gray-700 mb-6 whitespace-pre-wrap">{{ e($post->content) }}</div>
 
             <!-- ペット情報 -->
             @if($post->pet)
@@ -138,15 +102,15 @@
                                         $imageUrl = '/storage/' . ltrim($imageUrl, '/');
                                     }
                                 @endphp
-                                <img src="{{ $imageUrl }}" alt="{{ $post->pet->name }}" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
+                                <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
                             @else
                                 <span class="text-gray-500 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
                             @endif
                         </a>
                         <div>
-                            <div class="font-medium" style="color: rgb(217 119 6);">名前: {{ $post->pet->name }}</div>
-                            @if($post->pet->user)
-                                <div class="text-sm" style="color: rgb(217 119 6);">飼い主さん: {{ $post->pet->user->display_name ?? $post->pet->user->name }}</div>
+                            <div class="font-medium" style="color: rgb(217 119 6);">名前: {{ e($post->pet->name) }}</div>
+                                @if($post->pet->user)
+                                    <div class="text-sm" style="color: rgb(217 119 6);">飼い主さん: {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}</div>
                             @endif
                         </div>
                     </div>
@@ -212,23 +176,38 @@
         </div>
     </div>
 
-    <!-- サイドバー -->
-    <div id="sidebar" class="fixed inset-0 z-50 hidden">
-        <div class="fixed inset-0 bg-black bg-opacity-50" onclick="closeSidebar()"></div>
-        <div class="fixed left-0 top-0 h-full w-80 bg-white shadow-xl transform -translate-x-full transition-transform duration-300 ease-in-out" id="sidebar-content">
-            <div class="p-6">
-                <!-- ヘッダー -->
-                <div class="flex items-center justify-between mb-8">
-                    <h2 class="text-lg font-semibold text-gray-800">メニュー</h2>
-                    <button onclick="closeSidebar()" class="p-2 rounded-md text-gray-400 hover:text-gray-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <!-- Sidebar -->
+        <div x-cloak x-show="sidebar" @keydown.escape.window="sidebar=false">
+            <div class="fixed inset-0 bg-black/50 z-[1100]" @click="sidebar=false"></div>
+            <aside class="fixed top-0 left-0 z-[1200] w-72 md:w-80 max-w-[85vw] h-full bg-white shadow-lg overflow-y-auto"
+                   x-transition:enter="transition ease-in-out duration-300 transform"
+                   x-transition:enter-start="-translate-x-full"
+                   x-transition:enter-end="translate-x-0"
+                   x-transition:leave="transition ease-in-out duration-300 transform"
+                   x-transition:leave-start="translate-x-0"
+                   x-transition:leave-end="-translate-x-full">
+                
+                <!-- Header -->
+                <div class="p-4 border-b bg-amber-50 border-amber-200 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img src="{{ asset('images/icon.png') }}" alt="# しっぽのわ" class="w-12 h-12">
+                        <div>
+                            <div class="text-lg font-bold text-gray-800"># しっぽのわ</div>
+                            <div class="text-sm text-gray-600">保護動物と家族の幸せを共有</div>
+                        </div>
+                    </div>
+                    <button @click="sidebar=false" aria-label="メニューを閉じる" 
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-100 focus:outline-none transition">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
                     </button>
                 </div>
 
-                <!-- メニュー項目 -->
-                <nav class="space-y-6">
+                <!-- Menu blocks -->
+                <nav class="p-4 space-y-6" aria-label="サイドバー">
+                    @guest
                     <!-- ゲスト用アカウント項目 -->
                     <div>
                         <div class="text-xs font-semibold text-amber-700 mb-2">アカウント</div>
@@ -237,15 +216,79 @@
                             <a href="{{ route('login') }}" class="flex-1 px-4 py-2 text-sm border border-gray-300 rounded text-gray-700 bg-white hover:bg-gray-50 text-center">ログイン</a>
                         </div>
                     </div>
+                    @endguest
 
-                    <!-- メニュー項目 -->
+                    @auth
+                    <!-- ログイン時ユーザー情報 -->
                     <div>
-                        <div class="text-xs font-semibold text-amber-700 mb-2">メニュー</div>
-                        <div class="space-y-2">
-                            <a href="{{ route('home') }}" class="block px-3 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md">ホーム</a>
-                            <a href="{{ route('interviews.index') }}" class="block px-3 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md">里親インタビュー</a>
+                        <div class="text-xs font-semibold text-amber-700 mb-2">ユーザー</div>
+                        <div class="p-3 bg-amber-50 rounded-lg">
+                            <div class="text-sm font-medium text-gray-800">{{ Auth::user()->display_name ?? Auth::user()->name }}</div>
+                            <div class="text-xs text-gray-600">{{ Auth::user()->email }}</div>
                         </div>
                     </div>
+
+                    <!-- マイページ -->
+                    <div>
+                        <div class="text-xs font-semibold text-amber-700 mb-2">メイン</div>
+                        <ul class="space-y-1">
+                            <li><a @click="sidebar=false" href="{{ route('mypage') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">マイページ</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('mypage.posts') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">投稿管理</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('mypage.pets') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットプロフィール管理</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('mypage.likes') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">いいね一覧</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 作成 -->
+                    <div>
+                        <div class="text-xs font-semibold text-amber-700 mb-2">作成</div>
+                        <ul class="space-y-1">
+                            <li><a @click="sidebar=false" href="{{ route('mypage.posts.gallery.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">今日の幸せを投稿</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('mypage.posts.interview.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">里親インタビューを投稿</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('mypage.pets.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットを登録</a></li>
+                        </ul>
+                    </div>
+                    @endauth
+
+                    <!-- サイト情報 -->
+                    <div>
+                        <div class="text-xs font-semibold text-amber-700 mb-2">サイト</div>
+                        <ul class="space-y-1">
+                            <li><a @click="sidebar=false" href="/" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">#しっぽのわとは？</a></li>
+                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">犬の卒業生を見る</a></li>
+                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">猫の卒業生を見る</a></li>
+                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">うさぎの卒業生を見る</a></li>
+                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">その他の卒業生を見る</a></li>
+                            <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">保護団体リンク集</a></li>
+                        </ul>
+                    </div>
+
+                    @auth
+                    <!-- 設定 -->
+                    <div>
+                        <div class="text-xs font-semibold text-amber-700 mb-2">設定</div>
+                        <ul class="space-y-1">
+                            <li><a @click="sidebar=false" href="{{ route('profile.edit') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">プロフィール編集</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('mypage.profile.email') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">メールアドレス変更</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('mypage.profile.password') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">パスワード変更</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- ログアウト -->
+                    <div>
+                        <div class="text-xs font-semibold text-amber-700 mb-2">その他</div>
+                        <ul class="space-y-1">
+                            <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ヘルプ・サポート</a></li>
+                            <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">お問い合わせ</a></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" class="inline">
+                                    @csrf
+                                    <button type="submit" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ログアウト</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    @endauth
 
                     <!-- ソーシャルメディア -->
                     <div>
@@ -277,58 +320,65 @@
                         </div>
                     </div>
                 </nav>
-            </div>
+            </aside>
         </div>
-    </div>
 
-    <!-- 検索モーダル -->
-    <div id="search-modal" class="fixed inset-0 z-50 hidden">
-        <div class="fixed inset-0 bg-black bg-opacity-50" onclick="closeSearchModal()"></div>
-        <div class="fixed top-0 left-0 right-0 bg-white shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out" id="search-modal-content">
-            <div class="p-4">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-1">
-                        <input type="text" 
-                               placeholder="投稿を検索..." 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent">
+        <!-- Search modal -->
+        <div x-cloak x-show="search" @keydown.escape.window="search=false">
+            <div class="fixed inset-0 bg-black/50 z-[950]" @click="search=false"></div>
+            <div class="fixed top-16 right-4 left-4 sm:left-auto sm:w-[28rem] bg-white z-[960] rounded-lg shadow-xl p-4"
+                 x-transition:enter="transition ease-out duration-150"
+                 x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2">
+                <h3 class="text-sm font-semibold text-gray-800 mb-3">絞り込み検索</h3>
+                <form class="space-y-3">
+                    <div>
+                        <div class="text-xs text-gray-700 mb-1">動物の種類</div>
+                        <div class="flex flex-wrap gap-3 text-sm">
+                            <label class="flex items-center gap-1"><input type="checkbox"> 犬</label>
+                            <label class="flex items-center gap-1"><input type="checkbox"> 猫</label>
+                            <label class="flex items-center gap-1"><input type="checkbox"> うさぎ</label>
+                            <label class="flex items-center gap-1"><input type="checkbox"> その他</label>
+                        </div>
                     </div>
-                    <button onclick="closeSearchModal()" class="p-2 text-gray-400 hover:text-gray-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-gray-700 mb-1">性別</label>
+                            <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option>すべて</option>
+                                <option>オス</option>
+                                <option>メス</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-700 mb-1">保護施設</label>
+                            <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option>すべて</option>
+                                <option>施設A</option>
+                                <option>施設B</option>
+                                <option>施設C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white text-sm rounded-md hover:bg-amber-600 transition">検索</button>
+                        <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">閉じる</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
+
+    @php
+        $safeMediaData = $post->media->map(function($m) {
+            return [
+                'type' => $m->type,
+                'url' => Storage::url($m->url)
+            ];
+        });
+    @endphp
 
     <script>
-        // サイドバーの制御
-        function openSidebar() {
-            document.getElementById('sidebar').classList.remove('hidden');
-            document.getElementById('sidebar-content').classList.remove('-translate-x-full');
-        }
-
-        function closeSidebar() {
-            document.getElementById('sidebar-content').classList.add('-translate-x-full');
-            setTimeout(() => {
-                document.getElementById('sidebar').classList.add('hidden');
-            }, 300);
-        }
-
-        // 検索モーダルの制御
-        function openSearchModal() {
-            document.getElementById('search-modal').classList.remove('hidden');
-            document.getElementById('search-modal-content').classList.remove('-translate-y-full');
-            document.querySelector('#search-modal input').focus();
-        }
-
-        function closeSearchModal() {
-            document.getElementById('search-modal-content').classList.add('-translate-y-full');
-            setTimeout(() => {
-                document.getElementById('search-modal').classList.add('hidden');
-            }, 300);
-        }
 
         // メディアカルーセルの制御
         let currentMediaIndex = 0;
@@ -387,25 +437,78 @@
             }
         }
 
-        // イベントリスナー
-        document.getElementById('menu-toggle').addEventListener('click', openSidebar);
-        document.getElementById('search-toggle').addEventListener('click', openSearchModal);
+        // メディアクリックイベント
+        document.addEventListener('click', function(event) {
+            console.log('Click detected on:', event.target);
+            const mediaItem = event.target.closest('.media-item');
+            console.log('Media item found:', mediaItem);
+            
+            if (mediaItem) {
+                const type = mediaItem.dataset.mediaType;
+                const url = mediaItem.dataset.mediaUrl;
+                const index = parseInt(mediaItem.dataset.mediaIndex);
+                console.log('Media click detected:', { type, url, index });
+                
+                // データの検証
+                if (!type || !url) {
+                    console.error('Invalid media data:', { type, url, index });
+                    return;
+                }
+                
+                try {
+                    openMediaModal(type, url, index);
+                } catch (error) {
+                    console.error('Error opening modal:', error);
+                }
+            }
+        });
 
         // メディアモーダル制御
         let modalCurrentMediaIndex = 0;
         const modalTotalMedia = {{ $post->media->count() }};
-        const mediaData = @json($post->media->map(fn($m) => ['type' => $m->type, 'url' => Storage::url($m->url)]));
+        
+        const mediaData = @json($safeMediaData);
 
+        // メディアモーダル関数
         function openMediaModal(type, src, initialIndex) {
+            console.log('openMediaModal called:', { type, src, initialIndex });
+            
+            // パラメータの検証
+            if (!type || !src) {
+                console.error('Invalid parameters:', { type, src, initialIndex });
+                return;
+            }
+            
             const modal = document.getElementById('media-modal');
             const mediaContainer = document.getElementById('modal-media-container');
+            
+            console.log('Modal elements:', { modal, mediaContainer });
+            
+            if (!modal) {
+                console.error('Modal element not found');
+                return;
+            }
+            
+            if (!mediaContainer) {
+                console.error('Media container not found');
+                return;
+            }
+            
             mediaContainer.innerHTML = ''; // Clear previous media
 
             modalCurrentMediaIndex = initialIndex;
-            updateModalMediaDisplay();
+            console.log('Setting modal index to:', modalCurrentMediaIndex);
+            
+            try {
+                updateModalMediaDisplay();
+            } catch (error) {
+                console.error('Error updating modal display:', error);
+                return;
+            }
 
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            console.log('Modal opened successfully');
         }
 
         function closeMediaModal(event) {
@@ -426,17 +529,42 @@
         }
 
         function updateModalMediaDisplay() {
+            console.log('updateModalMediaDisplay called, index:', modalCurrentMediaIndex);
+            console.log('mediaData:', mediaData);
+            
             const mediaContainer = document.getElementById('modal-media-container');
+            if (!mediaContainer) {
+                console.error('Media container not found in updateModalMediaDisplay');
+                return;
+            }
+            
             mediaContainer.innerHTML = ''; // Clear previous media
 
+            if (!mediaData || mediaData.length === 0) {
+                console.error('No media data available');
+                return;
+            }
+            
+            if (modalCurrentMediaIndex >= mediaData.length) {
+                console.error('Invalid media index:', modalCurrentMediaIndex, 'max:', mediaData.length - 1);
+                return;
+            }
+
             const media = mediaData[modalCurrentMediaIndex];
+            console.log('Current media:', media);
+            
             let mediaElement;
 
             if (media.type === 'image') {
                 mediaElement = `<img src="${media.url}" class="max-w-full max-h-full object-contain" alt="Full screen image">`;
             } else if (media.type === 'video') {
                 mediaElement = `<video src="${media.url}" class="max-w-full max-h-full object-contain" controls autoplay muted></video>`;
+            } else {
+                console.error('Unknown media type:', media.type);
+                return;
             }
+            
+            console.log('Media element HTML:', mediaElement);
             mediaContainer.innerHTML = mediaElement;
             updateModalIndicators();
         }
@@ -472,5 +600,5 @@
             }
         }
     </script>
-</body>
-</html>
+    </div>
+</x-guest-layout>

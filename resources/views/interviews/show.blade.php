@@ -444,36 +444,26 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs text-gray-700 mb-1">地域</label>
+                        <label class="block text-xs text-gray-700 mb-1">性別</label>
                         <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                             <option>すべて</option>
-                            <option>北海道・東北</option>
-                            <option>関東</option>
-                            <option>中部・東海</option>
-                            <option>関西</option>
-                            <option>中国・四国</option>
-                            <option>九州・沖縄</option>
+                            <option>オス</option>
+                            <option>メス</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-700 mb-1">年齢</label>
+                        <label class="block text-xs text-gray-700 mb-1">保護施設</label>
                         <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                             <option>すべて</option>
-                            <option>0-1歳</option>
-                            <option>2-3歳</option>
-                            <option>4-6歳</option>
-                            <option>7-10歳</option>
-                            <option>11歳以上</option>
+                            <option>施設A</option>
+                            <option>施設B</option>
+                            <option>施設C</option>
                         </select>
                     </div>
                 </div>
-                <div>
-                    <label class="block text-xs text-gray-700 mb-1">キーワード</label>
-                    <input type="text" placeholder="名前や特徴で検索..." class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
-                </div>
-                <div class="flex gap-2 pt-2">
+                <div class="flex gap-2">
                     <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white text-sm rounded-md hover:bg-amber-600 transition">検索</button>
-                    <button type="button" @click="search=false" class="px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded-md hover:bg-gray-50 transition">キャンセル</button>
+                    <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">閉じる</button>
                 </div>
             </form>
         </div>
