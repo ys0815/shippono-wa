@@ -114,6 +114,9 @@ class PetController extends Controller
             ->take($perPage)
             ->get();
 
+        // 投稿総数を取得（フィルター適用後）
+        $totalPosts = $query->count();
+
         return response()->json([
             'posts' => $posts->map(function ($post) {
                 return [
@@ -137,6 +140,7 @@ class PetController extends Controller
                 ];
             }),
             'hasMore' => $posts->count() === $perPage,
+            'totalPosts' => $totalPosts,
         ]);
     }
 

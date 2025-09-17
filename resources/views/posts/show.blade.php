@@ -24,9 +24,9 @@
                     <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
                         <div class="w-full h-80 sm:h-96 overflow-hidden">
                             @if($media->type === 'image')
-                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover pointer-events-none">
+                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover ">
                             @elseif($media->type === 'video')
-                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover pointer-events-none" muted>
+                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover " muted>
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
                             @endif
@@ -40,9 +40,9 @@
                                 <div class="media-item w-full flex-shrink-0 cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
                                     <div class="w-full h-80 sm:h-96 overflow-hidden">
                                         @if($media->type === 'image')
-                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover pointer-events-none">
+                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover ">
                                         @elseif($media->type === 'video')
-                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover pointer-events-none" muted>
+                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover " muted>
                                                 お使いのブラウザは動画をサポートしていません。
                                             </video>
                                         @endif
@@ -502,7 +502,7 @@
             }
             
             modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            // デベロッパーツールでのスクロールを阻害しないよう、bodyのoverflow制御を削除
             
             console.log('Modal opened successfully');
         }
@@ -517,7 +517,7 @@
             if (!modal) return;
             
             modal.classList.add('hidden');
-            document.body.style.overflow = ''; // Restore scrolling
+            // デベロッパーツールでのスクロールを阻害しないよう、bodyのoverflow制御を削除
 
             // Stop all videos in the modal
             const videos = modal.querySelectorAll('video');

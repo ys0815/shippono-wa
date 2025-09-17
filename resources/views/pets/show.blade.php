@@ -206,9 +206,9 @@
             </div>
         </div>
 
-        <main class="w-full">
+        <main class="w-full max-w-6xl mx-auto">
             <!-- 統合プロフィールヘッダー -->
-            <section class="bg-white border border-gray-200 p-5 sm:p-8 mb-8">
+            <section class="bg-white border border-gray-200 p-5 sm:p-8">
                 <!-- 背景画像エリア -->
                 <div class="relative h-36 sm:h-40 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 mb-8">
                     @if($pet->header_image_url)
@@ -237,8 +237,8 @@
                 <div class="pt-14">
                     <!-- ペット名と性別 -->
                     <div class="flex items-center justify-center sm:justify-start gap-4 mb-6">
-                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 leading-tight">{{ $pet->name }}</h1>
-                        <span class="text-2xl sm:text-3xl {{ $pet->gender === 'male' ? 'text-blue-400' : ($pet->gender === 'female' ? 'text-pink-400' : 'text-gray-400') }}">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-tight">{{ $pet->name }}</h1>
+                        <span class="text-2xl sm:text-3xl lg:text-4xl {{ $pet->gender === 'male' ? 'text-blue-400' : ($pet->gender === 'female' ? 'text-pink-400' : 'text-gray-400') }}">
                             {{ __(['male' => '♂', 'female' => '♀', 'unknown' => '?'][$pet->gender] ?? '?') }}
                         </span>
                     </div>
@@ -323,42 +323,13 @@
                     <!-- 区切り線 -->
                     <div class="border-t border-gray-200 mb-8"></div>
 
-                    <!-- 基本情報 -->
-                    <div class="mb-8">
-                        <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
-                            <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">基本情報</span>
-                            <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
-                        </h2>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-base text-gray-700">
-                            @if($pet->breed)
-                                <div>
-                                    <dt class="text-gray-500">品種</dt>
-                                    <dd class="mt-1 font-medium">{{ $pet->breed }}</dd>
-                                </div>
-                            @endif
-                            @if($pet->birth_date)
-                                <div>
-                                    <dt class="text-gray-500">誕生日</dt>
-                                    <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->birth_date)->format('Y年n月j日') }}</dd>
-                                </div>
-                            @endif
-                            @if($pet->rescue_date)
-                                <div>
-                                    <dt class="text-gray-500">お迎え記念日</dt>
-                                    <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->rescue_date)->format('Y年n月j日') }}</dd>
-                                </div>
-                            @endif
+                    <!-- プロフィール本文 -->
+                    @if($pet->profile_description)
+                        <div class="mb-8">
+                            <dt class="text-gray-500 mb-3 text-base">プロフィール</dt>
+                            <dd class="prose prose-base max-w-none text-gray-700 leading-relaxed">{{ $pet->profile_description }}</dd>
                         </div>
-
-                        <!-- プロフィール本文 -->
-                        @if($pet->profile_description)
-                            <div class="mt-6">
-                                <dt class="text-gray-500 mb-3 text-base">プロフィール</dt>
-                                <dd class="prose prose-base max-w-none text-gray-700 leading-relaxed">{{ $pet->profile_description }}</dd>
-                            </div>
-                        @endif
-                    </div>
+                    @endif
 
                     <!-- 区切り線 -->
                     <div class="border-t border-gray-200 mb-8"></div>
@@ -400,7 +371,7 @@
                                 <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">一緒に暮らす家族</span>
                                 <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
                             </h2>
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                                 @foreach($familyPets as $familyPet)
                                     <a href="{{ route('pets.show', $familyPet->id) }}" class="group">
                                         <div class="bg-gray-50 rounded-lg p-5 hover:bg-gray-100 transition">
@@ -541,8 +512,94 @@
                     <!-- 区切り線 -->
                     <div class="border-t border-gray-200 mb-8"></div>
 
-                    <!-- 今日の幸せシェアしよう -->
-                    <div>
+                    <!-- レスポンシブレイアウト: 大きな画面では横並び -->
+                    <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+                        <!-- プロフィール情報（左側） -->
+                        <div class="lg:col-span-1">
+                            <!-- 基本情報 -->
+                            <div class="mb-8">
+                                <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
+                                    <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">基本情報</span>
+                                    <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
+                                </h2>
+                                
+                                <div class="grid grid-cols-1 gap-x-8 gap-y-4 text-base text-gray-700">
+                                    @if($pet->breed)
+                                        <div>
+                                            <dt class="text-gray-500">品種</dt>
+                                            <dd class="mt-1 font-medium">{{ $pet->breed }}</dd>
+                                        </div>
+                                    @endif
+                                    @if($pet->birth_date)
+                                        <div>
+                                            <dt class="text-gray-500">誕生日</dt>
+                                            <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->birth_date)->format('Y年n月j日') }}</dd>
+                                        </div>
+                                    @endif
+                                    @if($pet->rescue_date)
+                                        <div>
+                                            <dt class="text-gray-500">お迎え記念日</dt>
+                                            <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->rescue_date)->format('Y年n月j日') }}</dd>
+                                        </div>
+                                    @endif
+                                    @if($pet->shelter)
+                                        <div>
+                                            <dt class="text-gray-500">保護施設</dt>
+                                            <dd class="mt-1 font-medium">
+                                                <a href="{{ $pet->shelter->website_url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="text-amber-600 hover:text-amber-800 transition">
+                                                    {{ $pet->shelter->name }}
+                                                </a>
+                                            </dd>
+                                        </div>
+                                    @endif
+                                    @if($pet->area)
+                                        <div>
+                                            <dt class="text-gray-500">地域</dt>
+                                            <dd class="mt-1 font-medium">{{ $pet->area }}</dd>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <!-- 家族ペット -->
+                            @if($familyPets->count() > 0)
+                                <div class="mb-8">
+                                    <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
+                                        <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">一緒に暮らす家族</span>
+                                        <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
+                                    </h2>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        @foreach($familyPets as $familyPet)
+                                            <a href="{{ route('pets.show', $familyPet->id) }}" class="group">
+                                                <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition">
+                                                    <div class="w-16 h-16 mx-auto rounded-full overflow-hidden border-2 border-amber-200 mb-3">
+                                                        @if($familyPet->profile_image_url)
+                                                            <img src="{{ $familyPet->profile_image_url }}" alt="{{ $familyPet->name }}" class="w-full h-full object-cover">
+                                                        @else
+                                                            <div class="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
+                                                                <span class="text-amber-600 text-sm font-bold">{{ mb_substr($familyPet->name, 0, 2) }}</span>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h3 class="font-medium text-gray-800 group-hover:text-amber-600 transition text-sm">{{ $familyPet->name }}</h3>
+                                                        <p class="text-xs text-gray-500 leading-relaxed">
+                                                            {{ __('dog' === $familyPet->species ? '犬' : ('cat' === $familyPet->species ? '猫' : ('rabbit' === $familyPet->species ? 'うさぎ' : 'その他'))) }}
+                                                            <span class="{{ $familyPet->gender === 'male' ? 'text-blue-400' : ($familyPet->gender === 'female' ? 'text-pink-400' : 'text-gray-400') }}">
+                                                                {{ __(['male' => '♂', 'female' => '♀', 'unknown' => '?'][$familyPet->gender] ?? '?') }}
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- 投稿一覧（右側） -->
+                        <div class="lg:col-span-2">
                         <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
                             <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">今日の幸せ、シェアしよう</span>
                             <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
@@ -589,6 +646,15 @@
                         <div id="no-more-posts" class="text-center py-6 text-gray-500 text-base hidden">
                             これ以上投稿はありません
                         </div>
+                        <div id="scroll-hint" class="text-center py-4 hidden">
+                            <div class="inline-flex items-center px-4 py-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-700 text-sm">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                                </svg>
+                                スクロールして、もっと見る
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -627,6 +693,7 @@
         let currentSort = 'newest';
         let currentTimeFilter = 'all';
         let allPosts = [];
+        let totalPosts = 0;
 
         // 初期投稿読み込み
         loadPosts();
@@ -647,8 +714,10 @@
             currentPage = 1;
             hasMorePosts = true;
             allPosts = [];
+            totalPosts = 0;
             document.getElementById('posts-container').innerHTML = '';
             document.getElementById('no-more-posts').classList.add('hidden');
+            document.getElementById('scroll-hint').classList.add('hidden');
             loadPosts();
         }
 
@@ -658,6 +727,19 @@
             allPosts.forEach(post => {
                 addPostToContainer(post);
             });
+        }
+
+        function updateScrollHint() {
+            const scrollHint = document.getElementById('scroll-hint');
+            const noMorePosts = document.getElementById('no-more-posts');
+            
+            // 投稿総数が5件以上で、まだ読み込める投稿がある場合のみ表示
+            if (totalPosts >= 5 && hasMorePosts && allPosts.length < totalPosts) {
+                scrollHint.classList.remove('hidden');
+                noMorePosts.classList.add('hidden');
+            } else {
+                scrollHint.classList.add('hidden');
+            }
         }
 
         function loadPosts() {
@@ -675,6 +757,11 @@
             fetch(`/api/pets/{{ $pet->id }}/posts?${params}`)
                 .then(response => response.json())
                 .then(data => {
+                    // 投稿総数を取得（初回のみ）
+                    if (currentPage === 1) {
+                        totalPosts = data.totalPosts || 0;
+                    }
+                    
                     if (data.posts.length === 0) {
                         hasMorePosts = false;
                         document.getElementById('no-more-posts').classList.remove('hidden');
@@ -686,6 +773,9 @@
                         currentPage++;
                         hasMorePosts = data.hasMore;
                     }
+                    
+                    // 説明文の表示制御
+                    updateScrollHint();
                 })
                 .catch(error => {
                     console.error('Error loading posts:', error);
@@ -730,10 +820,10 @@
                                       </div>`;
                     }
                 } else {
-                    // 複数メディアの場合 - スクロール切り替えシステム
+                    // 複数メディアの場合 - スクロール切り替えシステム（単一投稿と同じサイズ）
                     mediaHtml += `<div class="relative">
                                     <div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative">
-                                        <div id="media-carousel-${post.id}" class="flex transition-transform duration-300 ease-in-out" style="width: ${post.media.length * 100}%;">
+                                        <div id="media-carousel-${post.id}" class="flex transition-transform duration-300 ease-in-out">
                                             ${post.media.map((media, index) => {
                                                 let mediaUrl = media.url;
                                                 if (media.type === 'image') {
@@ -832,19 +922,24 @@
                 <!-- テキスト情報（画像の下にコンパクト配置） -->
                 <div class="mt-3">
                     <h3 class="text-lg font-medium text-gray-900 mb-2">${post.title}</h3>
-                    ${post.content ? `<div class="text-gray-600 text-sm whitespace-pre-wrap">${post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content}</div>` : ''}
+                    <!-- 投稿本文は非表示（投稿詳細ページでのみ表示） -->
                 </div>
                 
-                <!-- 続きを見るボタン -->
-                <div class="mt-3 flex justify-end">
-                    <button onclick="viewPostDetail(${post.id})" 
-                            class="px-4 py-2 text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200 shadow-sm">
-                        続きを見る
-                    </button>
+                <!-- ボタンエリア（水平に下揃え） -->
+                <div class="mt-3 flex justify-between items-end">
+                    <!-- アクションボタン（左側） -->
+                    <div>
+                        ${actionButtons}
+                    </div>
+                    
+                    <!-- 続きを見るボタン（右側） -->
+                    <div>
+                        <button onclick="viewPostDetail(${post.id})" 
+                                class="px-4 py-2 text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200 shadow-sm">
+                            続きを見る
+                        </button>
+                    </div>
                 </div>
-                
-                <!-- アクションボタン -->
-                ${actionButtons}
             `;
             
             container.appendChild(postElement);
