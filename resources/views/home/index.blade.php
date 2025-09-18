@@ -218,23 +218,21 @@
                 <img src="{{ asset('images/' . $heroImage) }}" 
                      alt="保護動物と家族の幸せ" 
                      class="w-full h-full object-cover"
-                     style="width: 100%; max-height: 400px;">
-                <!-- オーバーレイ（テキストの可読性向上） -->
-                <div class="absolute inset-0 bg-black/40"></div>
+                     style="max-height: 400px; object-position: center;">
+                <!-- オーバーレイ（薄い白のオーバーレイ） -->
+                <div class="absolute inset-0 bg-white/10"></div>
             </div>
             
             <!-- コンテンツ（画像の上に重ねて表示） -->
             <div class="relative z-10 h-full flex items-center justify-center" style="min-height: 400px;">
-                <div class="text-center text-white px-4 max-w-4xl">
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                        保護動物と家族の幸せを<br class="hidden sm:block">共有するプラットフォーム
-                    </h1>
-                    <p class="text-base sm:text-lg mb-6 opacity-90 max-w-2xl mx-auto">
-                        温かいストーリーをお届けします。
+                <div class="text-center text-gray-800 px-4 max-w-4xl">
+                    <p class="text-base sm:text-xl lg:text-2xl font-medium mb-10 opacity-90 max-w-3xl mx-auto leading-relaxed tracking-wide"
+                       style="text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">
+                        <span class="block sm:inline">保護動物と家族の幸せな毎日を、</span><span class="block sm:inline">みんなで分かち合う場所</span>
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <div class="flex flex-row flex-wrap gap-4 justify-center">
                         <a href="{{ route('login') }}" 
-                           class="px-6 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-white hover:bg-white/30 transition-all duration-300 font-semibold text-sm">
+                           class="px-6 py-2 bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 rounded-full text-white hover:bg-gray-700/80 transition-all duration-300 font-semibold text-sm">
                            ログイン
                         </a>
                         <a href="{{ route('register') }}" 
