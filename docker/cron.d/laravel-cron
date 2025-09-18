@@ -1,0 +1,6 @@
+# Laravel Scheduler
+# 毎分スケジューラーを実行（Laravelの標準的な方法）
+* * * * * root cd /var/www/html && php artisan schedule:run >> /var/log/cron.log 2>&1
+
+# 日本時間の朝8時に統計情報を更新（直接実行）
+0 8 * * * root cd /var/www/html && php artisan stats:update >> /var/log/cron.log 2>&1

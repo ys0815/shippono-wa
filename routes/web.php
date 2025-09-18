@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShelterController;
 use App\Http\Controllers\InterviewController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -103,3 +104,15 @@ Route::get('/interviews/{post}', [InterviewController::class, 'show'])->name('in
 
 // 投稿詳細ページ（公開）
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+// 統計情報更新（認証必要）
+Route::post('/stats/update', function () {
+    Artisan::call('stats:update');
+    return redirect()->back()->with('status', 'stats-updated');
+})->middleware('auth')->name('stats.update');
+
+// ペット検索結果ページ
+Route::get('/pets/search/{species}', [PetController::class, 'search'])->name('pets.search');
+
+// ペット検索API（無限スクロール用）
+Route::get('/api/pets/search/{species}', [PetController::class, 'searchApi'])->name('api.pets.search');

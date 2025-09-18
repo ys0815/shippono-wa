@@ -323,13 +323,48 @@
                     <!-- 区切り線 -->
                     <div class="border-t border-gray-200 mb-8"></div>
 
-                    <!-- プロフィール本文 -->
-                    @if($pet->profile_description)
-                        <div class="mb-8">
-                            <dt class="text-gray-500 mb-3 text-base">プロフィール</dt>
-                            <dd class="prose prose-base max-w-none text-gray-700 leading-relaxed">{{ $pet->profile_description }}</dd>
+                    <!-- 基本情報 -->
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
+                            <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">基本情報</span>
+                            <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 gap-x-8 gap-y-4 text-base text-gray-700">
+                            @if($pet->breed)
+                                <div>
+                                    <dt class="text-gray-500">品種</dt>
+                                    <dd class="mt-1 font-medium">{{ $pet->breed }}</dd>
+                                </div>
+                            @endif
+                            @if($pet->birth_date)
+                                <div>
+                                    <dt class="text-gray-500">誕生日</dt>
+                                    <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->birth_date)->format('Y年n月j日') }}</dd>
+                                </div>
+                            @endif
+                            @if($pet->rescue_date)
+                                <div>
+                                    <dt class="text-gray-500">お迎え記念日</dt>
+                                    <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->rescue_date)->format('Y年n月j日') }}</dd>
+                                </div>
+                            @endif
+                            @if($pet->area)
+                                <div>
+                                    <dt class="text-gray-500">地域</dt>
+                                    <dd class="mt-1 font-medium">{{ $pet->area }}</dd>
+                                </div>
+                            @endif
                         </div>
-                    @endif
+                        
+                        <!-- プロフィール本文 -->
+                        @if($pet->profile_description)
+                            <div class="mt-6">
+                                <dt class="text-gray-500 mb-3 text-base">プロフィール</dt>
+                                <dd class="prose prose-base max-w-none text-gray-700 leading-relaxed">{{ $pet->profile_description }}</dd>
+                            </div>
+                        @endif
+                    </div>
 
                     <!-- 区切り線 -->
                     <div class="border-t border-gray-200 mb-8"></div>
@@ -512,55 +547,11 @@
                     <!-- 区切り線 -->
                     <div class="border-t border-gray-200 mb-8"></div>
 
+
                     <!-- レスポンシブレイアウト: 大きな画面では横並び -->
                     <div class="lg:grid lg:grid-cols-3 lg:gap-8">
                         <!-- プロフィール情報（左側） -->
                         <div class="lg:col-span-1">
-                            <!-- 基本情報 -->
-                            <div class="mb-8">
-                                <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
-                                    <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">基本情報</span>
-                                    <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
-                                </h2>
-                                
-                                <div class="grid grid-cols-1 gap-x-8 gap-y-4 text-base text-gray-700">
-                                    @if($pet->breed)
-                                        <div>
-                                            <dt class="text-gray-500">品種</dt>
-                                            <dd class="mt-1 font-medium">{{ $pet->breed }}</dd>
-                                        </div>
-                                    @endif
-                                    @if($pet->birth_date)
-                                        <div>
-                                            <dt class="text-gray-500">誕生日</dt>
-                                            <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->birth_date)->format('Y年n月j日') }}</dd>
-                                        </div>
-                                    @endif
-                                    @if($pet->rescue_date)
-                                        <div>
-                                            <dt class="text-gray-500">お迎え記念日</dt>
-                                            <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->rescue_date)->format('Y年n月j日') }}</dd>
-                                        </div>
-                                    @endif
-                                    @if($pet->shelter)
-                                        <div>
-                                            <dt class="text-gray-500">保護施設</dt>
-                                            <dd class="mt-1 font-medium">
-                                                <a href="{{ $pet->shelter->website_url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="text-amber-600 hover:text-amber-800 transition">
-                                                    {{ $pet->shelter->name }}
-                                                </a>
-                                            </dd>
-                                        </div>
-                                    @endif
-                                    @if($pet->area)
-                                        <div>
-                                            <dt class="text-gray-500">地域</dt>
-                                            <dd class="mt-1 font-medium">{{ $pet->area }}</dd>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-
                             <!-- 家族ペット -->
                             @if($familyPets->count() > 0)
                                 <div class="mb-8">
@@ -695,8 +686,10 @@
         let allPosts = [];
         let totalPosts = 0;
 
-        // 初期投稿読み込み
-        loadPosts();
+        // 初期投稿読み込み（デフォルトで5件表示）
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPosts();
+        });
 
         // フィルター・ソート機能のイベントリスナー
         document.getElementById('sort-order').addEventListener('change', function() {
@@ -711,6 +704,7 @@
 
 
         function resetAndReloadPosts() {
+            console.log('Resetting and reloading posts');
             currentPage = 1;
             hasMorePosts = true;
             allPosts = [];
@@ -733,17 +727,29 @@
             const scrollHint = document.getElementById('scroll-hint');
             const noMorePosts = document.getElementById('no-more-posts');
             
+            console.log('Updating scroll hint:', { totalPosts, hasMorePosts, allPostsLength: allPosts.length });
+            
             // 投稿総数が5件以上で、まだ読み込める投稿がある場合のみ表示
             if (totalPosts >= 5 && hasMorePosts && allPosts.length < totalPosts) {
                 scrollHint.classList.remove('hidden');
                 noMorePosts.classList.add('hidden');
+                console.log('Scroll hint shown');
             } else {
                 scrollHint.classList.add('hidden');
+                if (!hasMorePosts && allPosts.length > 0) {
+                    noMorePosts.classList.remove('hidden');
+                    console.log('No more posts shown');
+                }
             }
         }
 
         function loadPosts() {
-            if (isLoading || !hasMorePosts) return;
+            if (isLoading || !hasMorePosts) {
+                console.log('loadPosts skipped:', { isLoading, hasMorePosts });
+                return;
+            }
+            
+            console.log('Loading posts - Page:', currentPage, 'Sort:', currentSort, 'TimeFilter:', currentTimeFilter);
             
             isLoading = true;
             document.getElementById('loading-indicator').classList.remove('hidden');
@@ -757,14 +763,18 @@
             fetch(`/api/pets/{{ $pet->id }}/posts?${params}`)
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Posts loaded:', data);
+                    
                     // 投稿総数を取得（初回のみ）
                     if (currentPage === 1) {
                         totalPosts = data.totalPosts || 0;
+                        console.log('Total posts:', totalPosts);
                     }
                     
                     if (data.posts.length === 0) {
                         hasMorePosts = false;
                         document.getElementById('no-more-posts').classList.remove('hidden');
+                        console.log('No more posts available');
                     } else {
                         data.posts.forEach(post => {
                             allPosts.push(post);
@@ -772,6 +782,7 @@
                         });
                         currentPage++;
                         hasMorePosts = data.hasMore;
+                        console.log('Posts added. Current page:', currentPage, 'Has more:', hasMorePosts, 'All posts count:', allPosts.length);
                     }
                     
                     // 説明文の表示制御
@@ -947,7 +958,8 @@
 
         // スクロールイベントリスナー
         window.addEventListener('scroll', function() {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+            // ページの最下部に近づいたら次の投稿を読み込み
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
                 if (!isLoading && hasMorePosts) {
                     loadPosts();
                 }

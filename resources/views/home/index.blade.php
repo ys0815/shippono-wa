@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
     <div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
         <!-- Header -->
         <header class="sticky top-0 z-[900] bg-white/90 backdrop-blur border-b border-amber-100">
@@ -92,11 +97,11 @@
                         <div class="text-xs font-semibold text-amber-700 mb-2">サイト</div>
                         <ul class="space-y-1">
                             <li><a @click="sidebar=false" href="/" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">#しっぽのわとは？</a></li>
-                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">犬の卒業生を見る</a></li>
-                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">猫の卒業生を見る</a></li>
-                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">うさぎの卒業生を見る</a></li>
-                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">その他の卒業生を見る</a></li>
-                            <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">保護団体リンク集</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('pets.search', 'dog') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">犬の家族を見る</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('pets.search', 'cat') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">猫の家族を見る</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('pets.search', 'rabbit') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">うさぎの家族を見る</a></li>
+                            <li><a @click="sidebar=false" href="{{ route('pets.search', 'other') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">その他の家族を見る</a></li>
+                            <li><a @click="sidebar=false; scrollToShelters()" href="#shelters" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">保護団体リンク集</a></li>
                         </ul>
                     </div>
 
@@ -229,11 +234,11 @@
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
-                            新着の保護動物一覧
+                            家族になった子たち新着
                         </span>
                         <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
-                    <p class="text-sm text-gray-600">かわいいペットたちがあなたを待っています</p>
+                    <p class="text-sm text-gray-600">かわいい家族たちがあなたを待っています</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach($recentPets as $pet)
@@ -379,6 +384,22 @@
                         <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
                     <p class="text-sm text-gray-600">みんなの活動を数字で見てみよう</p>
+                    @if(isset($stats['updated_at']))
+                        <p class="text-xs text-gray-500 mt-2">最終更新: {{ \Carbon\Carbon::parse($stats['updated_at'])->format('Y年n月j日 H:i') }}</p>
+                    @endif
+                    @auth
+                        <div class="mt-3">
+                            @if(session('status') === 'stats-updated')
+                                <div class="text-xs text-green-600 mb-2">統計情報が更新されました</div>
+                            @endif
+                            <form action="{{ route('stats.update') }}" method="POST" class="inline">
+                                @csrf
+                                <button type="submit" class="px-3 py-1 text-xs bg-amber-500 text-white rounded hover:bg-amber-600 transition">
+                                    統計情報を更新
+                                </button>
+                            </form>
+                        </div>
+                    @endauth
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
                     <div class="text-center group">
@@ -435,7 +456,7 @@
             </section>
 
             <!-- 保護団体リンク集 -->
-            <section class="relative bg-gray-50 border-t border-b border-gray-200 py-12" x-data="shelterFilter()">
+            <section id="shelters" class="relative bg-gray-50 border-t border-b border-gray-200 py-12" x-data="shelterFilter()">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
@@ -571,6 +592,22 @@
     </div>
 
     <script>
+        // スムーズスクロール機能
+        function scrollToShelters() {
+            const sheltersSection = document.getElementById('shelters');
+            if (sheltersSection) {
+                // ヘッダーの高さを考慮してオフセットを調整
+                const headerHeight = 56; // h-14 = 56px
+                const offsetTop = sheltersSection.offsetTop - headerHeight - 20; // 20pxの余白
+                
+                // スムーズスクロール実行
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
         function shelterFilter() {
             return {
                 selectedRegion: 'all',

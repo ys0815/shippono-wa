@@ -68,6 +68,135 @@ class PetController extends Controller
         return view('pets.show', compact('pet', 'isLiked', 'likeCount', 'familyPets'));
     }
 
+    public function search(Request $request, string $species): View
+    {
+        // 種別の検証
+        $validSpecies = ['dog', 'cat', 'rabbit', 'other'];
+        if (!in_array($species, $validSpecies)) {
+            abort(404);
+        }
+
+        // 種別名の日本語変換
+        $speciesNames = [
+            'dog' => '犬',
+            'cat' => '猫',
+            'rabbit' => 'うさぎ',
+            'other' => 'その他'
+        ];
+
+        $speciesName = $speciesNames[$species];
+
+        // ソート順の取得
+        $sort = $request->get('sort', 'newest');
+        $validSorts = ['newest', 'oldest', 'updated'];
+        if (!in_array($sort, $validSorts)) {
+            $sort = 'newest';
+        }
+
+        // ペット一覧の取得（初期5件）
+        $query = Pet::with(['user:id,name,display_name', 'shelter:id,name,area,kind,website_url'])
+            ->where('species', $species);
+
+        // ソート適用
+        switch ($sort) {
+            case 'oldest':
+                $query->oldest();
+                break;
+            case 'updated':
+                $query->orderBy('updated_at', 'desc');
+                break;
+            case 'newest':
+            default:
+                $query->latest();
+                break;
+        }
+
+        $pets = $query->take(5)->get();
+        $totalCount = Pet::where('species', $species)->count();
+
+        return view('pets.search', compact('species', 'speciesName', 'pets', 'totalCount', 'sort'));
+    }
+
+    public function searchApi(Request $request, string $species)
+    {
+        // 種別の検証
+        $validSpecies = ['dog', 'cat', 'rabbit', 'other'];
+        if (!in_array($species, $validSpecies)) {
+            return response()->json(['error' => 'Invalid species'], 400);
+        }
+
+        $page = $request->get('page', 1);
+        $perPage = 5;
+        $sort = $request->get('sort', 'newest');
+        $validSorts = ['newest', 'oldest', 'updated'];
+        if (!in_array($sort, $validSorts)) {
+            $sort = 'newest';
+        }
+
+        $query = Pet::with(['user:id,name,display_name', 'shelter:id,name,area,kind,website_url'])
+            ->where('species', $species);
+
+        // ソート適用
+        switch ($sort) {
+            case 'oldest':
+                $query->oldest();
+                break;
+            case 'updated':
+                $query->orderBy('updated_at', 'desc');
+                break;
+            case 'newest':
+            default:
+                $query->latest();
+                break;
+        }
+
+        $pets = $query->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+
+        $totalCount = Pet::where('species', $species)->count();
+
+        return response()->json([
+            'pets' => $pets->map(function ($pet) {
+                // インタビューポストを取得
+                $interviewPost = $pet->posts()
+                    ->where('type', 'interview')
+                    ->where('status', 'published')
+                    ->latest()
+                    ->first();
+
+                return [
+                    'id' => $pet->id,
+                    'name' => $pet->name,
+                    'species' => $pet->species,
+                    'gender' => $pet->gender,
+                    'breed' => $pet->breed,
+                    'age_years' => $pet->age_years,
+                    'age_months' => $pet->age_months,
+                    'estimated_age' => $pet->estimated_age,
+                    'profile_description' => $pet->profile_description,
+                    'profile_image_url' => $pet->profile_image_url,
+                    'user' => [
+                        'name' => $pet->user->display_name ?? $pet->user->name,
+                    ],
+                    'shelter' => $pet->shelter ? [
+                        'name' => $pet->shelter->name,
+                        'area' => $pet->shelter->area,
+                        'website_url' => $pet->shelter->website_url,
+                    ] : null,
+                    'interview_post' => $interviewPost ? [
+                        'id' => $interviewPost->id,
+                        'title' => $interviewPost->title,
+                    ] : null,
+                    'created_at' => $pet->created_at->setTimezone('Asia/Tokyo')->format('Y年n月j日'),
+                    'updated_at' => $pet->updated_at->setTimezone('Asia/Tokyo')->format('Y年n月j日'),
+                ];
+            }),
+            'hasMore' => $pets->count() === $perPage,
+            'totalCount' => $totalCount,
+        ]);
+    }
+
     public function getPosts(Request $request, Pet $pet)
     {
         $page = $request->get('page', 1);

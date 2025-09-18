@@ -114,6 +114,27 @@ services:
             - "/dev/shm:/dev/shm"
         networks:
             - sail
+
+    cron:
+        build:
+            context: "./vendor/laravel/sail/runtimes/8.4"
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: "${WWWGROUP}"
+        image: "sail-8.4/app"
+        environment:
+            WWWUSER: "${WWWUSER}"
+            LARAVEL_SAIL: 1
+        volumes:
+            - ".:/var/www/html"
+            - "./docker/cron.d/laravel-cron:/etc/cron.d/laravel-cron"
+        networks:
+            - sail
+        depends_on:
+            - mysql
+        command: >
+            sh -c "cron && tail -f /var/log/cron.log"
+
 networks:
     sail:
         driver: bridge

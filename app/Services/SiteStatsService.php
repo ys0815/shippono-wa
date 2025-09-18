@@ -13,13 +13,24 @@ class SiteStatsService
 
     public static function compute(): array
     {
-        $postsGallery = Post::where('type', 'gallery')->count();
-        $postsInterview = Post::where('type', 'interview')->count();
+        // 公開済みの投稿のみをカウント
+        $postsGallery = Post::where('type', 'gallery')
+            ->where('status', 'published')
+            ->count();
+
+        $postsInterview = Post::where('type', 'interview')
+            ->where('status', 'published')
+            ->count();
+
+        // 登録されているペット数
         $pets = Pet::count();
+
         // 重複した団体名を除外してカウント
         $shelters = Shelter::select('name')
             ->distinct()
             ->count();
+
+        // いいね数
         $likes = Like::count();
 
         return [
@@ -28,6 +39,7 @@ class SiteStatsService
             'pets' => $pets,
             'shelters' => $shelters,
             'likes' => $likes,
+            'updated_at' => now()->toDateTimeString(),
         ];
     }
 }
