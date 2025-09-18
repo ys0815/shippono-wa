@@ -230,7 +230,7 @@
                         保護動物と家族の幸せを<br class="hidden sm:block">共有するプラットフォーム
                     </h1>
                     <p class="text-base sm:text-lg mb-6 opacity-90 max-w-2xl mx-auto">
-                        新着の保護動物情報や里親インタビューを、やさしいUIでお届けします。
+                        温かいストーリーをお届けします。
                     </p>
                     <div class="flex flex-col sm:flex-row gap-3 justify-center">
                         <a href="{{ route('login') }}" 
