@@ -28,10 +28,26 @@ class HomeController extends Controller
             ->latest()
             ->get();
 
+        // ヒーロー画像のランダム選択
+        $heroImages = [
+            'hero-01.jpeg',
+            'hero-02.jpeg',
+            'hero-03.jpeg',
+            'hero-04.jpeg',
+            'hero-05.jpeg',
+            'hero-06.jpeg',
+            'hero-07.jpeg',
+            'hero-08.jpeg',
+            'hero-09.jpeg',
+            'hero-10.jpeg'
+        ];
+        $randomHeroImage = $heroImages[array_rand($heroImages)];
+
         return view('home.index', [
             'stats' => $stats,
             'recentPets' => $recentPets,
             'shelters' => $shelters,
+            'heroImage' => $randomHeroImage,
         ]);
     }
 }

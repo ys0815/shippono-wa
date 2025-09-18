@@ -42,7 +42,11 @@ class PetController extends Controller
     public function show(Pet $pet): View
     {
         $pet->load(['user', 'shelter', 'posts' => function ($query) {
-            $query->where('status', 'published')->latest()->limit(5)->with('media');
+            $query->where('status', 'published')
+                ->where('type', 'gallery')
+                ->orderBy('view_count', 'desc')
+                ->limit(5)
+                ->with('media');
         }, 'familyLinksAsPet1.pet2', 'familyLinksAsPet2.pet1']);
 
         // 現在のユーザーがこのペットにいいねしているかチェック
@@ -231,7 +235,7 @@ class PetController extends Controller
                 $query->oldest();
                 break;
             case 'popular':
-                $query->withCount('likes')->orderBy('likes_count', 'desc');
+                $query->orderBy('view_count', 'desc');
                 break;
             case 'newest':
             default:

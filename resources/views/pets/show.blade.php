@@ -210,114 +210,126 @@
             <!-- 統合プロフィールヘッダー -->
             <section class="bg-white border border-gray-200 p-5 sm:p-8">
                 <!-- 背景画像エリア -->
-                <div class="relative h-36 sm:h-40 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 mb-8">
+                <div class="relative h-36 sm:h-40 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 mb-8 -mx-5 sm:-mx-8 -mt-5 sm:-mt-8">
                     @if($pet->header_image_url)
                         <img src="{{ $pet->header_image_url }}" alt="header" class="absolute inset-0 w-full h-full object-cover">
                         <!-- オーバーレイ -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
                     @endif
                     
-                    <!-- 装飾的な要素 -->
-                    <div class="absolute top-2 right-2 w-12 h-12 bg-white/20 rounded-full blur-xl"></div>
-                    <div class="absolute bottom-2 left-2 w-8 h-8 bg-amber-200/30 rounded-full blur-lg"></div>
-
                     <!-- アイコンを背景バナー内に配置 -->
-                    <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-white shadow-lg bg-amber-100">
+                    <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-white shadow-lg bg-amber-100">
                         @if($pet->profile_image_url)
                             <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
-                                <span class="text-amber-600 text-3xl sm:text-4xl font-bold">{{ mb_substr($pet->name, 0, 2) }}</span>
+                                <span class="text-amber-600 text-4xl sm:text-5xl font-bold">{{ mb_substr($pet->name, 0, 2) }}</span>
                             </div>
                         @endif
                     </div>
                 </div>
                 
                 <!-- プロフィール情報 -->
-                <div class="pt-14">
+                <div class="pt-8">
                     <!-- ペット名と性別 -->
                     <div class="flex items-center justify-center sm:justify-start gap-4 mb-6">
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-tight">{{ $pet->name }}</h1>
-                        <span class="text-2xl sm:text-3xl lg:text-4xl {{ $pet->gender === 'male' ? 'text-blue-400' : ($pet->gender === 'female' ? 'text-pink-400' : 'text-gray-400') }}">
-                            {{ __(['male' => '♂', 'female' => '♀', 'unknown' => '?'][$pet->gender] ?? '?') }}
-                        </span>
+                        <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-tight">
+                            {{ $pet->name }} 
+                            <span class="text-2xl sm:text-3xl lg:text-4xl font-normal {{ $pet->gender === 'male' ? 'text-blue-500' : ($pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
+                                {{ __(['male' => '♂', 'female' => '♀', 'unknown' => '?'][$pet->gender] ?? '?') }}
+                            </span>
+                            @if($pet->age_years !== null || $pet->age_months !== null)
+                                <span class="text-sm sm:text-base lg:text-lg text-gray-500 ml-1">
+                                    @if($pet->age_years > 0 && $pet->age_months > 0)
+                                        (推定{{ $pet->age_years }}歳{{ $pet->age_months }}ヶ月)
+                                    @elseif($pet->age_years > 0)
+                                        (推定{{ $pet->age_years }}歳)
+                                    @elseif($pet->age_months > 0)
+                                        (推定{{ $pet->age_months }}ヶ月)
+                                    @endif
+                                </span>
+                            @endif
+                        </div>
                     </div>
                     
-                    <!-- 飼い主さん -->
-                    <div class="mb-6">
-                        <p class="text-gray-600 text-lg leading-relaxed">
-                            <span class="font-medium text-amber-600">飼い主さん：</span>
-                            {{ $pet->user->display_name ?? $pet->user->name }}さん
-                        </p>
-                    </div>
-
-                    <!-- SNSリンク -->
-                    @if($pet->user->sns_x || $pet->user->sns_instagram || $pet->user->sns_facebook)
-                        <div class="mb-6">
-                            <p class="text-sm text-amber-600 font-medium mb-3">SNSアカウント</p>
-                            <div class="flex justify-center sm:justify-start gap-3">
-                                @if($pet->user->sns_x)
-                                    <a href="{{ $pet->user->sns_x }}" target="_blank" rel="noopener noreferrer" 
-                                       class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 hover:scale-110 transition-all duration-200 shadow-lg">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                                        </svg>
-                                    </a>
-                                @endif
-                                @if($pet->user->sns_instagram)
-                                    <a href="{{ $pet->user->sns_instagram }}" target="_blank" rel="noopener noreferrer" 
-                                       class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 hover:scale-110 transition-all duration-200 shadow-lg">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                        </svg>
-                                    </a>
-                                @endif
-                                @if($pet->user->sns_facebook)
-                                    <a href="{{ $pet->user->sns_facebook }}" target="_blank" rel="noopener noreferrer" 
-                                       class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 hover:scale-110 transition-all duration-200 shadow-lg">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                        </svg>
-                                    </a>
-                                @endif
+                    <!-- 飼い主情報・SNS・いいね統合エリア -->
+                    <div class="mb-8">
+                        <!-- 飼い主さん名とSNSリンク -->
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                            <!-- 飼い主さん名 -->
+                            <div class="text-center sm:text-left">
+                                <p class="text-gray-600 text-lg leading-relaxed">
+                                    <span class="font-medium text-amber-600">飼い主さん：</span>
+                                    <span class="font-semibold text-gray-800">{{ $pet->user->display_name ?? $pet->user->name }}さん</span>
+                                </p>
                             </div>
-                        </div>
-                    @endif
-
-                    <!-- いいねボタン -->
-                    <div class="flex justify-center sm:justify-start mb-8">
-                        @auth
-                            @if($isLiked)
-                                <form action="{{ route('likes.destroy', $pet->id) }}" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-400 to-pink-500 text-white rounded-full hover:from-red-500 hover:to-pink-600 hover:scale-105 transition-all duration-200 shadow-lg">
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
-                                        </svg>
-                                        <span class="font-medium text-sm">{{ $likeCount }}</span>
-                                    </button>
-                                </form>
-                            @else
-                                <form action="{{ route('likes.store') }}" method="POST" class="inline">
-                                    @csrf
-                                    <input type="hidden" name="pet_id" value="{{ $pet->id }}">
-                                    <button type="submit" class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-600 rounded-full hover:from-amber-200 hover:to-orange-200 hover:scale-105 transition-all duration-200 shadow-lg border border-amber-200">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                        </svg>
-                                        <span class="font-medium text-sm">{{ $likeCount }}</span>
-                                    </button>
-                                </form>
+                            
+                            <!-- SNSリンク -->
+                            @if($pet->user->sns_x || $pet->user->sns_instagram || $pet->user->sns_facebook)
+                                <div class="flex justify-center sm:justify-end gap-3">
+                                    @if($pet->user->sns_x)
+                                        <a href="{{ $pet->user->sns_x }}" target="_blank" rel="noopener noreferrer" 
+                                           class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 hover:scale-110 transition-all duration-200 shadow-lg group">
+                                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                            </svg>
+                                        </a>
+                                    @endif
+                                    @if($pet->user->sns_instagram)
+                                        <a href="{{ $pet->user->sns_instagram }}" target="_blank" rel="noopener noreferrer" 
+                                           class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 hover:scale-110 transition-all duration-200 shadow-lg group">
+                                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                            </svg>
+                                        </a>
+                                    @endif
+                                    @if($pet->user->sns_facebook)
+                                        <a href="{{ $pet->user->sns_facebook }}" target="_blank" rel="noopener noreferrer" 
+                                           class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 hover:scale-110 transition-all duration-200 shadow-lg group">
+                                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                            </svg>
+                                        </a>
+                                    @endif
+                                </div>
                             @endif
-                        @else
-                            <div class="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-400 rounded-full shadow-lg">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                                <span class="font-medium text-sm">{{ $likeCount }}</span>
-                            </div>
-                        @endauth
+                        </div>
+                        
+                        <!-- いいねボタン -->
+                        <div class="flex justify-center sm:justify-start">
+                            @auth
+                                @if($isLiked)
+                                    <form action="{{ route('likes.destroy', $pet->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-red-400 to-pink-500 text-white rounded-full hover:from-red-500 hover:to-pink-600 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                                            <svg class="w-5 h-5 fill-current group-hover:scale-110 transition-transform duration-200" viewBox="0 0 20 20">
+                                                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+                                            </svg>
+                                            <span class="font-semibold text-base">{{ $likeCount }}</span>
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('likes.store') }}" method="POST" class="inline">
+                                        @csrf
+                                        <input type="hidden" name="pet_id" value="{{ $pet->id }}">
+                                        <button type="submit" class="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-600 rounded-full hover:from-amber-200 hover:to-orange-200 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-amber-200">
+                                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                            </svg>
+                                            <span class="font-semibold text-base">{{ $likeCount }}</span>
+                                        </button>
+                                    </form>
+                                @endif
+                            @else
+                                <div class="flex items-center gap-3 px-6 py-3 bg-gray-100 text-gray-400 rounded-full shadow-lg">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                    <span class="font-semibold text-base">{{ $likeCount }}</span>
+                                </div>
+                            @endauth
+                        </div>
                     </div>
 
                     <!-- 区切り線 -->
@@ -603,9 +615,9 @@
                                 <div class="flex-1">
                                     <label class="block text-xs text-gray-700 mb-1">並び順</label>
                                     <select id="sort-order" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                        <option value="popular">人気順</option>
                                         <option value="newest">新着順</option>
                                         <option value="oldest">古い順</option>
-                                        <option value="popular">人気順</option>
                                     </select>
                                 </div>
                                 
@@ -681,7 +693,7 @@
         let currentPage = 1;
         let isLoading = false;
         let hasMorePosts = true;
-        let currentSort = 'newest';
+        let currentSort = 'popular';
         let currentTimeFilter = 'all';
         let allPosts = [];
         let totalPosts = 0;

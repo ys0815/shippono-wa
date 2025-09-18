@@ -212,18 +212,36 @@
         </div>
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20">
-            <!-- Hero -->
-            <section class="relative bg-gray-50 border border-gray-200 rounded-2xl p-8 shadow-sm">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
-                    <div class="sm:col-span-1">
-                        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1080&auto=format&fit=crop" alt="main" class="w-full h-40 object-cover rounded-xl shadow">
-                    </div>
-                    <div class="sm:col-span-2">
-                        <h2 class="text-xl sm:text-2xl font-bold text-gray-900 font-sans">保護動物と家族の幸せを共有するプラットフォーム</h2>
-                        <p class="text-sm text-gray-700 mt-3">新着の保護動物情報や里親インタビューを、やさしいUIでお届けします。</p>
-                        <div class="mt-4 flex gap-3">
-                            <a href="{{ route('login') }}" class="btn btn-outline">ログイン</a>
-                            <a href="{{ route('register') }}" class="btn btn-brand">新規登録</a>
+            <!-- Hero Section - 全面画像版 -->
+            <section class="relative w-full overflow-hidden rounded-2xl shadow-2xl" style="max-height: 400px;">
+                <!-- 背景画像 -->
+                <div class="absolute inset-0">
+                    <img src="{{ asset('images/' . $heroImage) }}" 
+                         alt="保護動物と家族の幸せ" 
+                         class="w-full h-full object-cover"
+                         style="width: 100%; max-height: 400px;">
+                    <!-- オーバーレイ（テキストの可読性向上） -->
+                    <div class="absolute inset-0 bg-black/40"></div>
+                </div>
+                
+                <!-- コンテンツ（画像の上に重ねて表示） -->
+                <div class="relative z-10 h-full flex items-center justify-center" style="min-height: 400px;">
+                    <div class="text-center text-white px-4 max-w-4xl">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                            保護動物と家族の幸せを<br class="hidden sm:block">共有するプラットフォーム
+                        </h1>
+                        <p class="text-base sm:text-lg mb-6 opacity-90 max-w-2xl mx-auto">
+                            新着の保護動物情報や里親インタビューを、やさしいUIでお届けします。
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                            <a href="{{ route('login') }}" 
+                               class="px-6 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-white hover:bg-white/30 transition-all duration-300 font-semibold text-sm">
+                               ログイン
+                            </a>
+                            <a href="{{ route('register') }}" 
+                               class="px-6 py-2 bg-amber-500 hover:bg-amber-600 rounded-full text-white transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl">
+                               新規登録
+                            </a>
                         </div>
                     </div>
                 </div>
