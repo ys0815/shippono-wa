@@ -4,7 +4,9 @@
         <button type="button" @click="sidebar=true" class="p-2 rounded hover:bg-amber-50 text-gray-700">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
-        <h1 class="text-lg font-semibold text-gray-900"># しっぽのわ</h1>
+        <a href="{{ route('home') }}" class="flex items-center">
+            <img src="{{ asset('images/icon.png') }}" alt="# しっぽのわ" class="h-8 sm:h-12 w-auto">
+        </a>
         <button type="button" @click="search=true" class="p-2 rounded hover:bg-amber-50 text-gray-700">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z" clip-rule="evenodd"/></svg>
         </button>
@@ -75,6 +77,7 @@
                 <div class="space-y-2">
                     <a href="{{ route('home') }}" class="block px-3 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md transition">トップページ</a>
                     <a href="{{ route('interviews.index') }}" class="block px-3 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md transition">里親インタビュー</a>
+                    <a href="{{ route('pets.search', 'all') }}" class="block px-3 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md transition">ペット検索</a>
                 </div>
             </div>
         </nav>
@@ -87,16 +90,31 @@
     <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[1200] w-full max-w-md mx-4">
         <div class="bg-white rounded-lg shadow-xl p-6">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">検索</h3>
-            <form method="GET" action="{{ route('interviews.index') }}" class="space-y-4">
+            <div class="space-y-4">
+                <!-- インタビュー検索 -->
                 <div>
-                    <input type="text" name="q" placeholder="キーワードで検索..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-amber-500 focus:border-amber-500">
+                    <h4 class="text-sm font-medium text-gray-700 mb-2">里親インタビュー</h4>
+                    <form method="GET" action="{{ route('interviews.index') }}" class="space-y-2">
+                        <div>
+                            <input type="text" name="q" placeholder="キーワードで検索..." 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-amber-500 focus:border-amber-500">
+                        </div>
+                        <button type="submit" class="w-full px-4 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600 transition">検索</button>
+                    </form>
                 </div>
+                
+                <!-- ペット検索 -->
+                <div>
+                    <h4 class="text-sm font-medium text-gray-700 mb-2">ペット検索</h4>
+                    <div class="space-y-2">
+                        <a href="{{ route('pets.search', 'all') }}" class="block w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition text-center">ペットを探す</a>
+                    </div>
+                </div>
+                
                 <div class="flex gap-2">
-                    <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600 transition">検索</button>
-                    <button type="button" @click="search=false" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition">キャンセル</button>
+                    <button type="button" @click="search=false" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition">閉じる</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

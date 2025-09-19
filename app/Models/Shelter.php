@@ -21,4 +21,9 @@ class Shelter extends Model
     {
         return $this->belongsTo(Prefecture::class);
     }
+
+    public function pets()
+    {
+        return $this->hasMany(Pet::class);
+    }
 }

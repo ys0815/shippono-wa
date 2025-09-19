@@ -90,7 +90,6 @@ Route::middleware('auth')->group(function () {
 // 保護団体選択API（SPA/フォーム補助用）
 Route::middleware('auth')->prefix('api')->group(function () {
     Route::get('/shelters/areas', [ShelterController::class, 'areas']);
-    Route::get('/shelters', [ShelterController::class, 'index']);
 });
 
 // ペット投稿API（無限スクロール用）
@@ -116,3 +115,6 @@ Route::get('/pets/search/{species}', [PetController::class, 'search'])->name('pe
 
 // ペット検索API（無限スクロール用）
 Route::get('/api/pets/search/{species}', [PetController::class, 'searchApi'])->name('api.pets.search');
+
+// 保護団体詳細ページ（公開）
+Route::get('/shelters/{shelter}', [ShelterController::class, 'show'])->name('shelters.show');

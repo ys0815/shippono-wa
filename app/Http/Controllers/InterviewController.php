@@ -39,6 +39,23 @@ class InterviewController extends Controller
 
         $post->load(['pet.user', 'media', 'interviewContent']);
 
-        return view('interviews.show', compact('post'));
+        // 関連する里親インタビューを取得（同じペットの他のインタビュー、または同じ種別のペットのインタビュー）
+        $relatedPosts = Post::with(['pet.user', 'media'])
+            ->where('type', 'interview')
+            ->where('status', 'published')
+            ->where('id', '!=', $post->id)
+            ->where(function ($query) use ($post) {
+                // 同じペットの他のインタビュー
+                $query->where('pet_id', $post->pet_id)
+                    // または同じ種別のペットのインタビュー
+                    ->orWhereHas('pet', function ($petQuery) use ($post) {
+                        $petQuery->where('species', $post->pet->species);
+                    });
+            })
+            ->latest()
+            ->limit(3)
+            ->get();
+
+        return view('interviews.show', compact('post', 'relatedPosts'));
     }
 }
