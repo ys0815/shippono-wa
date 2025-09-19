@@ -186,48 +186,182 @@
             <!-- Search modal -->
             <div x-cloak x-show="search" @keydown.escape.window="search=false">
                 <div class="fixed inset-0 bg-black/50 z-[950]" @click="search=false"></div>
-                <div class="fixed top-16 right-4 left-4 sm:left-auto sm:w-[28rem] bg-white z-[960] rounded-lg shadow-xl p-4"
+                <div class="fixed top-16 right-4 left-4 sm:left-auto sm:w-[32rem] bg-white z-[960] rounded-lg shadow-xl p-6"
                      x-transition:enter="transition ease-out duration-150"
                      x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
                      x-transition:leave="transition ease-in duration-150"
                      x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2">
-                    <h3 class="text-sm font-semibold text-gray-800 mb-3">絞り込み検索</h3>
-                    <form class="space-y-3">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">絞り込み検索</h3>
+                    <form action="{{ route('pets.search', 'all') }}" method="GET" x-data="shelterPicker()" x-init="init()" class="space-y-4">
+                        <!-- 動物の種類 -->
                         <div>
-                            <div class="text-xs text-gray-700 mb-1">動物の種類</div>
-                            <div class="flex flex-wrap gap-3 text-sm">
-                                <label class="flex items-center gap-1"><input type="checkbox"> 犬</label>
-                                <label class="flex items-center gap-1"><input type="checkbox"> 猫</label>
-                                <label class="flex items-center gap-1"><input type="checkbox"> うさぎ</label>
-                                <label class="flex items-center gap-1"><input type="checkbox"> その他</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">動物の種類</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <label class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-amber-50 cursor-pointer">
+                                    <input type="radio" name="species" value="dog" class="mr-2 text-amber-600 focus:ring-amber-500">
+                                    <span class="text-sm">犬</span>
+                                </label>
+                                <label class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-amber-50 cursor-pointer">
+                                    <input type="radio" name="species" value="cat" class="mr-2 text-amber-600 focus:ring-amber-500">
+                                    <span class="text-sm">猫</span>
+                                </label>
+                                <label class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-amber-50 cursor-pointer">
+                                    <input type="radio" name="species" value="rabbit" class="mr-2 text-amber-600 focus:ring-amber-500">
+                                    <span class="text-sm">うさぎ</span>
+                                </label>
+                                <label class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-amber-50 cursor-pointer">
+                                    <input type="radio" name="species" value="other" class="mr-2 text-amber-600 focus:ring-amber-500">
+                                    <span class="text-sm">その他</span>
+                                </label>
                             </div>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs text-gray-700 mb-1">性別</label>
-                                <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                    <option>すべて</option>
-                                    <option>オス</option>
-                                    <option>メス</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-700 mb-1">保護施設</label>
-                                <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                    <option>すべて</option>
-                                    <option>施設A</option>
-                                    <option>施設B</option>
-                                    <option>施設C</option>
-                                </select>
-                            </div>
+
+                        <!-- 性別 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">性別</label>
+                            <select name="gender" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option value="">すべて</option>
+                                <option value="male">オス</option>
+                                <option value="female">メス</option>
+                                <option value="unknown">不明</option>
+                            </select>
                         </div>
-                        <div class="flex gap-2">
-                            <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white text-sm rounded-md hover:bg-amber-600 transition">検索</button>
-                            <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">閉じる</button>
+
+                        <!-- 保護施設の種別 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">保護施設の種別</label>
+                            <select name="shelter_kind" x-model="kind" @change="handleKindChange()" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option value="">すべて</option>
+                                <option value="facility">保護団体・施設</option>
+                                <option value="site">里親サイト</option>
+                                <option value="unknown">不明</option>
+                            </select>
+                        </div>
+
+                        <!-- 保護施設の所在地 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">保護施設の所在地</label>
+                            <select name="shelter_area" x-model="area" @change="handleAreaChange()" :disabled="kind==='unknown'" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option value="">すべて</option>
+                                <template x-for="a in filteredAreas" :key="a">
+                                    <option :value="a" x-text="labels[a]"></option>
+                                </template>
+                            </select>
+                        </div>
+
+                        <!-- 保護施設名 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">保護施設名</label>
+                            <select name="shelter_id" x-model="shelterId" :disabled="kind==='unknown' || list.length===0" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option value="">すべて</option>
+                                <option value="" x-show="loading">読み込み中...</option>
+                                <template x-for="s in list" :key="s.id">
+                                    <option :value="s.id" x-text="s.name"></option>
+                                </template>
+                            </select>
+                            <p class="text-xs text-gray-500 mt-1" x-show="kind==='unknown'">※ 不明を選んだ場合は未選択のままで構いません。</p>
+                        </div>
+
+                        <!-- ソート順 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">並び順</label>
+                            <select name="sort" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option value="newest">新着順</option>
+                                <option value="oldest">登録順</option>
+                                <option value="updated">更新順</option>
+                            </select>
+                        </div>
+
+                        <div class="flex gap-3 pt-2">
+                            <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white text-sm rounded-md hover:bg-amber-600 transition font-medium">
+                                検索する
+                            </button>
+                            <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 transition">
+                                閉じる
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
+        <script>
+            function shelterPicker(){
+                return {
+                    kind: '',
+                    area: '',
+                    areas: ['hokkaido_tohoku','kanto','chubu_tokai','kinki','chugoku_shikoku','kyushu_okinawa','national'],
+                    labels: { 
+                        hokkaido_tohoku: '北海道・東北', 
+                        kanto: '関東', 
+                        chubu_tokai: '中部・東海', 
+                        kinki: '近畿', 
+                        chugoku_shikoku: '中国・四国', 
+                        kyushu_okinawa: '九州・沖縄', 
+                        national: '全国' 
+                    },
+                    list: [], 
+                    loading: false, 
+                    shelterId: '',
+                    init(){ 
+                        console.log('Search Alpine.js init started');
+                        
+                        // 初期化
+                        this.kind = '';
+                        this.area = '';
+                        this.shelterId = '';
+                        this.list = [];
+                    },
+                    handleKindChange() {
+                        this.shelterId = '';
+                        if (this.kind === 'site') {
+                            this.area = 'national';
+                        } else if (!this.area) {
+                            this.area = '';
+                        }
+                        this.fetchList();
+                    },
+                    handleAreaChange() {
+                        this.shelterId = '';
+                        this.fetchList();
+                    },
+                    get filteredAreas(){ 
+                        return this.kind==='site' ? ['national'] : this.areas; 
+                    },
+                    async fetchList(){
+                        if(this.kind==='unknown'){ 
+                            this.list=[]; 
+                            return; 
+                        }
+                        if(!this.area){ 
+                            this.list=[]; 
+                            return; 
+                        }
+                        
+                        this.loading = true;
+                        try {
+                            const url = `/api/shelters?kind=${this.kind}&area=${this.area}`;
+                            console.log('Fetching:', url);
+                            const res = await fetch(url, { 
+                                headers: { 
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                    'Accept': 'application/json'
+                                } 
+                            });
+                            const all = await res.json();
+                            console.log('API response:', all);
+                            // クライアント側でも kind/area で厳密に絞り込み
+                            this.list = all.filter(s => s.kind===this.kind && s.area===this.area);
+                            console.log('Filtered list:', this.list);
+                        } catch (error) {
+                            console.error('Error fetching shelters:', error);
+                            this.list = [];
+                        } finally { 
+                            this.loading = false; 
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

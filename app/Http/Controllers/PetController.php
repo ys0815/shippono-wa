@@ -74,8 +74,8 @@ class PetController extends Controller
 
     public function search(Request $request, string $species): View
     {
-        // 種別の検証
-        $validSpecies = ['dog', 'cat', 'rabbit', 'other'];
+        // 種別の検証（'all'も許可）
+        $validSpecies = ['dog', 'cat', 'rabbit', 'other', 'all'];
         if (!in_array($species, $validSpecies)) {
             abort(404);
         }
@@ -85,24 +85,62 @@ class PetController extends Controller
             'dog' => '犬',
             'cat' => '猫',
             'rabbit' => 'うさぎ',
-            'other' => 'その他'
+            'other' => 'その他',
+            'all' => 'すべて'
         ];
 
         $speciesName = $speciesNames[$species];
 
-        // ソート順の取得
-        $sort = $request->get('sort', 'newest');
+        // 検索条件の取得
+        $filters = [
+            'species' => $request->get('species', $species === 'all' ? '' : $species),
+            'gender' => $request->get('gender', ''),
+            'shelter_kind' => $request->get('shelter_kind', ''),
+            'shelter_area' => $request->get('shelter_area', ''),
+            'shelter_id' => $request->get('shelter_id', ''),
+            'sort' => $request->get('sort', 'newest')
+        ];
+
+        // ソート順の検証
         $validSorts = ['newest', 'oldest', 'updated'];
-        if (!in_array($sort, $validSorts)) {
-            $sort = 'newest';
+        if (!in_array($filters['sort'], $validSorts)) {
+            $filters['sort'] = 'newest';
         }
 
-        // ペット一覧の取得（初期5件）
-        $query = Pet::with(['user:id,name,display_name', 'shelter:id,name,area,kind,website_url'])
-            ->where('species', $species);
+        // ペット一覧の取得
+        $query = Pet::with(['user:id,name,display_name', 'shelter:id,name,area,kind,website_url', 'shelter.prefecture:id,name']);
+
+        // 種別でフィルタリング
+        if ($filters['species'] && $filters['species'] !== 'all') {
+            $query->where('species', $filters['species']);
+        }
+
+        // 性別でフィルタリング
+        if ($filters['gender']) {
+            $query->where('gender', $filters['gender']);
+        }
+
+        // 保護施設の種別でフィルタリング
+        if ($filters['shelter_kind']) {
+            $query->whereHas('shelter', function ($q) use ($filters) {
+                $q->where('kind', $filters['shelter_kind']);
+            });
+        }
+
+        // 保護施設の所在地でフィルタリング
+        if ($filters['shelter_area']) {
+            $query->whereHas('shelter', function ($q) use ($filters) {
+                $q->where('area', $filters['shelter_area']);
+            });
+        }
+
+        // 保護施設名でフィルタリング
+        if ($filters['shelter_id']) {
+            $query->where('shelter_id', $filters['shelter_id']);
+        }
 
         // ソート適用
-        switch ($sort) {
+        switch ($filters['sort']) {
             case 'oldest':
                 $query->oldest();
                 break;
@@ -116,32 +154,74 @@ class PetController extends Controller
         }
 
         $pets = $query->take(5)->get();
-        $totalCount = Pet::where('species', $species)->count();
+        $totalCount = $query->count();
 
-        return view('pets.search', compact('species', 'speciesName', 'pets', 'totalCount', 'sort'));
+        // 検索に使用した条件を保持
+        $searchParams = $request->only(['species', 'gender', 'shelter_kind', 'shelter_area', 'shelter_id', 'sort']);
+
+        return view('pets.search', compact('species', 'speciesName', 'pets', 'totalCount', 'filters', 'searchParams'));
     }
 
     public function searchApi(Request $request, string $species)
     {
-        // 種別の検証
-        $validSpecies = ['dog', 'cat', 'rabbit', 'other'];
+        // 種別の検証（'all'も許可）
+        $validSpecies = ['dog', 'cat', 'rabbit', 'other', 'all'];
         if (!in_array($species, $validSpecies)) {
             return response()->json(['error' => 'Invalid species'], 400);
         }
 
         $page = $request->get('page', 1);
         $perPage = 5;
-        $sort = $request->get('sort', 'newest');
+
+        // 検索条件の取得
+        $filters = [
+            'species' => $request->get('species', $species === 'all' ? '' : $species),
+            'gender' => $request->get('gender', ''),
+            'shelter_kind' => $request->get('shelter_kind', ''),
+            'shelter_area' => $request->get('shelter_area', ''),
+            'shelter_id' => $request->get('shelter_id', ''),
+            'sort' => $request->get('sort', 'newest')
+        ];
+
+        // ソート順の検証
         $validSorts = ['newest', 'oldest', 'updated'];
-        if (!in_array($sort, $validSorts)) {
-            $sort = 'newest';
+        if (!in_array($filters['sort'], $validSorts)) {
+            $filters['sort'] = 'newest';
         }
 
-        $query = Pet::with(['user:id,name,display_name', 'shelter:id,name,area,kind,website_url'])
-            ->where('species', $species);
+        $query = Pet::with(['user:id,name,display_name', 'shelter:id,name,area,kind,website_url', 'shelter.prefecture:id,name']);
+
+        // 種別でフィルタリング
+        if ($filters['species'] && $filters['species'] !== 'all') {
+            $query->where('species', $filters['species']);
+        }
+
+        // 性別でフィルタリング
+        if ($filters['gender']) {
+            $query->where('gender', $filters['gender']);
+        }
+
+        // 保護施設の種別でフィルタリング
+        if ($filters['shelter_kind']) {
+            $query->whereHas('shelter', function ($q) use ($filters) {
+                $q->where('kind', $filters['shelter_kind']);
+            });
+        }
+
+        // 保護施設の所在地でフィルタリング
+        if ($filters['shelter_area']) {
+            $query->whereHas('shelter', function ($q) use ($filters) {
+                $q->where('area', $filters['shelter_area']);
+            });
+        }
+
+        // 保護施設名でフィルタリング
+        if ($filters['shelter_id']) {
+            $query->where('shelter_id', $filters['shelter_id']);
+        }
 
         // ソート適用
-        switch ($sort) {
+        switch ($filters['sort']) {
             case 'oldest':
                 $query->oldest();
                 break;
@@ -158,7 +238,7 @@ class PetController extends Controller
             ->take($perPage)
             ->get();
 
-        $totalCount = Pet::where('species', $species)->count();
+        $totalCount = $query->count();
 
         return response()->json([
             'pets' => $pets->map(function ($pet) {

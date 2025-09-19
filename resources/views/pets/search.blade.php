@@ -211,6 +211,59 @@
                 <p class="text-sm text-gray-600">かわいい{{ $speciesName }}の家族たちがあなたを待っています</p>
             </div>
 
+            <!-- 検索条件表示 -->
+            @if(isset($searchParams) && array_filter($searchParams))
+            <div class="mb-6 bg-amber-50 rounded-lg border border-amber-200 p-4">
+                <h3 class="text-sm font-semibold text-gray-800 mb-3">現在の検索条件</h3>
+                <div class="flex flex-wrap gap-2">
+                    @if(isset($searchParams['species']) && $searchParams['species'])
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                            動物の種類: {{ $speciesNames[$searchParams['species']] ?? $searchParams['species'] }}
+                        </span>
+                    @endif
+                    @if(isset($searchParams['gender']) && $searchParams['gender'])
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            性別: {{ $searchParams['gender'] === 'male' ? 'オス' : ($searchParams['gender'] === 'female' ? 'メス' : '不明') }}
+                        </span>
+                    @endif
+                    @if(isset($searchParams['shelter_kind']) && $searchParams['shelter_kind'])
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            施設種別: {{ $searchParams['shelter_kind'] === 'facility' ? '保護団体・施設' : ($searchParams['shelter_kind'] === 'site' ? '里親サイト' : '不明') }}
+                        </span>
+                    @endif
+                    @if(isset($searchParams['shelter_area']) && $searchParams['shelter_area'])
+                        @php
+                            $areaLabels = [
+                                'hokkaido_tohoku' => '北海道・東北',
+                                'kanto' => '関東',
+                                'chubu_tokai' => '中部・東海',
+                                'kinki' => '近畿',
+                                'chugoku_shikoku' => '中国・四国',
+                                'kyushu_okinawa' => '九州・沖縄',
+                                'national' => '全国'
+                            ];
+                        @endphp
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                            所在地: {{ $areaLabels[$searchParams['shelter_area']] ?? $searchParams['shelter_area'] }}
+                        </span>
+                    @endif
+                    @if(isset($searchParams['shelter_id']) && $searchParams['shelter_id'])
+                        @php
+                            $shelter = \App\Models\Shelter::find($searchParams['shelter_id']);
+                        @endphp
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-pink-100 text-pink-800">
+                            施設名: {{ $shelter->name ?? '不明' }}
+                        </span>
+                    @endif
+                </div>
+                <div class="mt-3">
+                    <a href="{{ route('pets.search', 'all') }}" class="text-sm text-amber-600 hover:text-amber-700 underline">
+                        検索条件をクリア
+                    </a>
+                </div>
+            </div>
+            @endif
+
             <!-- ソート機能 -->
             <div class="mb-8 bg-white rounded-lg border border-amber-100 p-4">
                 <div class="flex items-center justify-between gap-4">
@@ -220,9 +273,9 @@
                     <div class="flex items-center gap-4">
                         <label class="text-sm text-gray-700">並び順:</label>
                         <select id="sort-order" class="px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
-                            <option value="newest" {{ $sort === 'newest' ? 'selected' : '' }}>新着順</option>
-                            <option value="updated" {{ $sort === 'updated' ? 'selected' : '' }}>更新順</option>
-                            <option value="oldest" {{ $sort === 'oldest' ? 'selected' : '' }}>古い順</option>
+                            <option value="newest" {{ $filters['sort'] === 'newest' ? 'selected' : '' }}>新着順</option>
+                            <option value="updated" {{ $filters['sort'] === 'updated' ? 'selected' : '' }}>更新順</option>
+                            <option value="oldest" {{ $filters['sort'] === 'oldest' ? 'selected' : '' }}>古い順</option>
                         </select>
                     </div>
                 </div>
@@ -266,10 +319,13 @@
         let currentPage = 1;
         let isLoading = false;
         let hasMorePets = true;
-        let currentSort = '{{ $sort }}';
+        let currentSort = '{{ $filters['sort'] }}';
         let allPets = [];
         let totalCount = {{ $totalCount }};
         let speciesName = '{{ $speciesName }}';
+        
+        // 検索パラメータ
+        let searchParams = @json($searchParams ?? []);
 
         // ソート機能のイベントリスナー
         document.getElementById('sort-order').addEventListener('change', function() {
@@ -308,7 +364,8 @@
             
             const params = new URLSearchParams({
                 page: currentPage,
-                sort: currentSort
+                sort: currentSort,
+                ...searchParams
             });
             
             fetch(`/api/pets/search/{{ $species }}?${params}`)
