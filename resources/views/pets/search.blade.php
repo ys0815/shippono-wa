@@ -5,18 +5,6 @@
         }
     </style>
     <div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
-        <!-- Header -->
-        <header class="sticky top-0 z-[900] bg-white/90 backdrop-blur border-b border-amber-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-                <button type="button" @click="sidebar=true" class="p-2 rounded hover:bg-amber-50 text-gray-700" aria-label="メニューを開く">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-                </button>
-                <h1 class="text-lg font-semibold text-gray-900"># しっぽのわ</h1>
-                <button type="button" @click="search=true" class="p-2 rounded hover:bg-amber-50 text-gray-700" aria-label="検索を開く">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z" clip-rule="evenodd"/></svg>
-                </button>
-            </div>
-        </header>
 
         <!-- Sidebar -->
         <div x-cloak x-show="sidebar" @keydown.escape.window="sidebar=false">
