@@ -122,14 +122,14 @@
                         <x-input-label for="estimated_age" :value="__('推定年齢')" />
                         <div class="mt-1 space-y-2">
                             <div class="flex items-center gap-2">
-                                <input id="age_years" name="age_years" type="number" min="0" max="40" step="1" placeholder="0" class="block w-20 border-gray-300 rounded" :value="old('age_years', $pet->age_years ?? '')" @input="updateTotalMonths()" />
+                                <input id="age_years" name="age_years" type="number" min="0" max="40" step="1" placeholder="0" class="block w-20 border-gray-300 rounded" value="{{ old('age_years', $pet->age_years ?? '') }}" @input="updateTotalMonths()" />
                                 <span class="text-gray-600 text-sm">歳</span>
-                                <input id="age_months" name="age_months" type="number" min="0" max="11" step="1" placeholder="0" class="block w-20 border-gray-300 rounded" :value="old('age_months', $pet->age_months ?? '')" @input="updateTotalMonths()" />
+                                <input id="age_months" name="age_months" type="number" min="0" max="11" step="1" placeholder="0" class="block w-20 border-gray-300 rounded" value="{{ old('age_months', $pet->age_months ?? '') }}" @input="updateTotalMonths()" />
                                 <span class="text-gray-600 text-sm">ヶ月</span>
                             </div>
                             <p class="text-xs text-gray-500">例: 1歳3ヶ月の場合は「1歳」「3ヶ月」、6ヶ月の場合は「0歳」「6ヶ月」</p>
                             <!-- 隠しフィールドで総月数を計算して保存 -->
-                            <input type="hidden" id="estimated_age" name="estimated_age" :value="calculateTotalMonths()" />
+                            <input type="hidden" id="estimated_age" name="estimated_age" value="{{ old('estimated_age', isset($pet) ? ((($pet->age_years ?? 0) * 12) + ($pet->age_months ?? 0)) : '') }}" />
                         </div>
                     </div>
 

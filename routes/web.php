@@ -83,8 +83,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// 保護団体選択API（SPA/フォーム補助用）
-Route::middleware('auth')->prefix('api')->group(function () {
+// 保護団体選択API（公開）
+Route::prefix('api')->group(function () {
+    // 一覧（kind/areaでフィルタ）
+    Route::get('/shelters', [ShelterController::class, 'index']);
+    // 地域ラベル一覧（固定）
     Route::get('/shelters/areas', [ShelterController::class, 'areas']);
 });
 

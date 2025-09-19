@@ -13,8 +13,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="{{ asset('js/shelter-picker.js') }}"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased bg-gray-50" style="font-family: 'Noto Sans JP', sans-serif;">
         <div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
@@ -199,49 +199,6 @@
                             this.area = '';
                             this.shelterId = '';
                             this.list = [];
-                        },
-                        handleKindChange() {
-                            this.shelterId = '';
-                            if (this.kind === 'site') {
-                                this.area = 'national';
-                            } else if (!this.area) {
-                                this.area = '';
-                            }
-                            // 保護団体リストを取得
-                            this.fetchList();
-                        },
-                        handleAreaChange() {
-                            this.shelterId = '';
-                            // 保護団体リストを取得
-                            this.fetchList();
-                        },
-                        async fetchList() {
-                            if (this.kind === 'unknown') {
-                                this.list = [];
-                                return;
-                            }
-                            if (!this.area) {
-                                this.list = [];
-                                return;
-                            }
-
-                            this.loading = true;
-                            try {
-                                const url = `/api/shelters?kind=${this.kind}&area=${this.area}`;
-                                const res = await fetch(url, {
-                                    headers: {
-                                        'X-Requested-With': 'XMLHttpRequest',
-                                        'Accept': 'application/json'
-                                    }
-                                });
-                                const all = await res.json();
-                                this.list = all.filter(s => s.kind === this.kind && s.area === this.area);
-                            } catch (error) {
-                                console.error('Error fetching shelters:', error);
-                                this.list = [];
-                            } finally {
-                                this.loading = false;
-                            }
                         }
                     })" x-init="init()" class="space-y-4">
                         <!-- 動物の種類 -->

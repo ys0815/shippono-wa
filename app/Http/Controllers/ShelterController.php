@@ -8,6 +8,29 @@ use Illuminate\Http\Request;
 class ShelterController extends Controller
 {
     /**
+     * GET /api/shelters
+     * kind/areaでフィルタした保護団体一覧を返す（公開API）
+     */
+    public function index(Request $request)
+    {
+        $kind = $request->query('kind');
+        $area = $request->query('area');
+
+        $query = Shelter::query()->select(['id', 'name', 'kind', 'area']);
+
+        if (!empty($kind) && $kind !== 'all') {
+            $query->where('kind', $kind);
+        }
+        if (!empty($area) && $area !== 'all') {
+            $query->where('area', $area);
+        }
+
+        $shelters = $query->orderBy('name')->get();
+
+        return response()->json($shelters);
+    }
+
+    /**
      * GET /api/shelters/areas
      * 返す: 所在地カテゴリ一覧（固定）
      */
