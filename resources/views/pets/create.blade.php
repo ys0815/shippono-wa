@@ -24,7 +24,55 @@
                     </div>
                 @endif
 
-                <form method="post" action="{{ isset($pet) ? route('mypage.pets.update', $pet->id) : route('mypage.pets.store') }}" enctype="multipart/form-data" x-data="shelterPicker()" x-init="init()" class="space-y-6">
+                <form method="post" action="{{ isset($pet) ? route('mypage.pets.update', $pet->id) : route('mypage.pets.store') }}" enctype="multipart/form-data" x-data="ShelterPicker.create({
+                    kind: 'facility',
+                    area: '{{ old('shelter_area', '') }}',
+                    shelterId: '{{ old('shelter_id', '') }}',
+                    isInitializing: true,
+                    init() {
+                        console.log('Alpine.js init started');
+                        
+                        // 既存のペットデータがある場合は設定
+                        @if(isset($pet))
+                            // 既存データから値を設定
+                            this.kind = '{{ old('shelter_kind', $pet->shelter->kind ?? 'facility') }}';
+                            this.area = '{{ old('shelter_area', $pet->shelter->area ?? '') }}';
+                            this.shelterId = '{{ old('shelter_id', $pet->shelter_id ?? '') }}';
+                            console.log('Pet data - kind:', this.kind, 'area:', this.area, 'shelterId:', this.shelterId);
+                            
+                            // 非同期でリストを取得
+                            this.$nextTick(() => {
+                                this.fetchList().then(() => {
+                                    // リスト取得後にshelterIdを再設定
+                                    this.shelterId = '{{ old('shelter_id', $pet->shelter_id ?? '') }}';
+                                    console.log('After fetchList - shelterId:', this.shelterId);
+                                });
+                            });
+                        @else
+                            this.kind = '{{ old('shelter_kind', 'facility') }}';
+                            this.area = '{{ old('shelter_area', '') }}';
+                            this.shelterId = '{{ old('shelter_id', '') }}';
+                            this.fetchList();
+                        @endif
+                        
+                        // 年齢の初期化
+                        this.$nextTick(() => {
+                            // 既存の年齢データがある場合は、隠しフィールドに設定
+                            @if(isset($pet) && ($pet->age_years !== null || $pet->age_months !== null))
+                                const years = {{ $pet->age_years ?? 0 }};
+                                const months = {{ $pet->age_months ?? 0 }};
+                                const totalMonths = (years * 12) + months;
+                                const hiddenInput = document.getElementById('estimated_age');
+                                if (hiddenInput) {
+                                    hiddenInput.value = totalMonths;
+                                }
+                                console.log('Set existing age - years:', years, 'months:', months, 'total:', totalMonths);
+                            @else
+                                this.updateTotalMonths();
+                            @endif
+                        });
+                    }
+                })" x-init="init()" class="space-y-6">
                     @csrf
                     @if(isset($pet))
                         @method('PUT')
@@ -174,173 +222,33 @@
     </div>
 
     <script>
-        function shelterPicker(){
-            return {
-                kind: 'facility',
-                area: '',
-                areas: ['hokkaido_tohoku','kanto','chubu_tokai','kinki','chugoku_shikoku','kyushu_okinawa','national'],
-                labels: { hokkaido_tohoku: '北海道・東北', kanto: '関東', chubu_tokai: '中部・東海', kinki: '近畿', chugoku_shikoku: '中国・四国', kyushu_okinawa: '九州・沖縄', national: '全国' },
-                list: [], loading: false, shelterId: '', isInitializing: true,
-                init(){ 
-                    console.log('Alpine.js init started');
-                    
-                    // 既存のペットデータがある場合は設定
-                    @if(isset($pet))
-                        // 既存データから値を設定
-                        this.kind = '{{ old('shelter_kind', $pet->shelter->kind ?? 'facility') }}';
-                        this.area = '{{ old('shelter_area', $pet->shelter->area ?? '') }}';
-                        this.shelterId = '{{ old('shelter_id', $pet->shelter_id ?? '') }}';
-                        console.log('Pet data - kind:', this.kind, 'area:', this.area, 'shelterId:', this.shelterId);
-                        
-                        // 非同期でリストを取得
-                        this.$nextTick(() => {
-                            this.fetchList().then(() => {
-                                // リスト取得後にshelterIdを再設定
-                                this.shelterId = '{{ old('shelter_id', $pet->shelter_id ?? '') }}';
-                                console.log('After fetchList - shelterId:', this.shelterId);
-                            });
-                        });
-                    @else
-                        this.kind = '{{ old('shelter_kind', 'facility') }}';
-                        this.area = '{{ old('shelter_area', '') }}';
-                        this.shelterId = '{{ old('shelter_id', '') }}';
-                        this.fetchList();
-                    @endif
-                    
-                    // 年齢の初期化
-                    this.$nextTick(() => {
-                        // 既存の年齢データがある場合は、隠しフィールドに設定
-                        @if(isset($pet) && ($pet->age_years !== null || $pet->age_months !== null))
-                            const years = {{ $pet->age_years ?? 0 }};
-                            const months = {{ $pet->age_months ?? 0 }};
-                            const totalMonths = (years * 12) + months;
-                            const hiddenInput = document.getElementById('estimated_age');
-                            if (hiddenInput) {
-                                hiddenInput.value = totalMonths;
-                            }
-                            console.log('Set existing age - years:', years, 'months:', months, 'total:', totalMonths);
-                        @else
-                            this.updateTotalMonths();
-                        @endif
-                        
-                        // フォームの初期値を設定
-                        @if(isset($pet))
-                            const yearsInput = document.getElementById('age_years');
-                            const monthsInput = document.getElementById('age_months');
-                            if (yearsInput) {
-                                yearsInput.value = {{ $pet->age_years ?? 0 }};
-                                yearsInput.dispatchEvent(new Event('input'));
-                            }
-                            if (monthsInput) {
-                                monthsInput.value = {{ $pet->age_months ?? 0 }};
-                                monthsInput.dispatchEvent(new Event('input'));
-                            }
-                            
-                            // セレクトボックスの値を手動で設定
-                            const kindSelect = document.getElementById('shelter_kind');
-                            const areaSelect = document.getElementById('shelter_area');
-                            const shelterSelect = document.getElementById('shelter_id');
-                            
-                            if (kindSelect) {
-                                kindSelect.value = '{{ old('shelter_kind', $pet->shelter->kind ?? '') }}';
-                                console.log('Set kind select to:', kindSelect.value);
-                            }
-                            if (areaSelect) {
-                                areaSelect.value = '{{ old('shelter_area', $pet->shelter->area ?? '') }}';
-                                console.log('Set area select to:', areaSelect.value);
-                            }
-                            if (shelterSelect) {
-                                shelterSelect.value = '{{ old('shelter_id', $pet->shelter_id ?? '') }}';
-                                console.log('Set shelter select to:', shelterSelect.value);
-                            }
-                        @endif
-                    });
-                    
-                    console.log('Initialized with kind:', this.kind, 'area:', this.area, 'shelterId:', this.shelterId);
-                    console.log('Age years:', document.getElementById('age_years')?.value, 'Age months:', document.getElementById('age_months')?.value);
-                    
-                    // フォームの初期化を確実にするため、少し遅延して実行
-                    setTimeout(() => {
-                        @if(isset($pet))
-                            const yearsInput = document.getElementById('age_years');
-                            const monthsInput = document.getElementById('age_months');
-                            if (yearsInput && yearsInput.value === '') {
-                                yearsInput.value = {{ $pet->age_years ?? 0 }};
-                                yearsInput.dispatchEvent(new Event('input'));
-                            }
-                            if (monthsInput && monthsInput.value === '') {
-                                monthsInput.value = {{ $pet->age_months ?? 0 }};
-                                monthsInput.dispatchEvent(new Event('input'));
-                            }
-                        @endif
-                        
-                        // 初期化完了
-                        this.isInitializing = false;
-                        console.log('Initialization completed');
-                    }, 100);
-                },
-                handleKindChange() {
-                    // 初期化中でない場合のみshelterIdをクリア
-                    if (!this.isInitializing) {
-                        this.shelterId = '';
-                    }
-                    if (this.kind === 'site') {
-                        this.area = 'national';
-                    } else if (!this.area) {
-                        this.area = '';
-                    }
-                    this.fetchList();
-                },
-                handleAreaChange() {
-                    // 初期化中でない場合のみshelterIdをクリア
-                    if (!this.isInitializing) {
-                        this.shelterId = '';
-                    }
-                    this.fetchList();
-                },
-                get filteredAreas(){ return this.kind==='site' ? ['national'] : this.areas; },
-                setKind(k){ this.kind=k; if(this.kind==='site'){ this.area='national'; } this.fetchList(); },
-                async fetchList(){
-                    if(this.kind==='unknown'){ this.list=[]; return; }
-                    if(!this.area){ this.list=[]; return; } // area が空の場合はリストを空にする
-                    
-                    this.loading = true;
-                    try {
-                        const url = `/api/shelters?kind=${this.kind}&area=${this.area}`;
-                        console.log('Fetching:', url); // デバッグ用
-                        const res = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
-                        const all = await res.json();
-                        console.log('API response:', all); // デバッグ用
-                        // 念のためクライアント側でも kind/area で厳密に絞り込み
-                        this.list = all.filter(s => s.kind===this.kind && s.area===this.area);
-                        console.log('Filtered list:', this.list); // デバッグ用
-                        
-                        // 既存のshelterIdがリストに存在するかチェック（初期化中の場合のみ）
-                        if (this.isInitializing) {
-                            const currentShelterId = '{{ $pet->shelter_id ?? '' }}';
-                            if (currentShelterId && this.list.find(s => String(s.id) === String(currentShelterId))) {
-                                this.shelterId = currentShelterId;
-                                console.log('Set shelterId from existing data:', this.shelterId);
-                            }
-                        } else if (!this.list.find(s => String(s.id) === String(this.shelterId))) {
-                            this.shelterId = '';
-                        }
-                    } finally { this.loading = false; }
-                },
-                calculateTotalMonths() {
-                    const years = parseInt(document.getElementById('age_years')?.value || 0);
-                    const months = parseInt(document.getElementById('age_months')?.value || 0);
-                    return (years * 12) + months;
-                },
-                updateTotalMonths() {
-                    const totalMonths = this.calculateTotalMonths();
-                    const hiddenInput = document.getElementById('estimated_age');
-                    if (hiddenInput) {
-                        hiddenInput.value = totalMonths;
-                    }
-                }
+        // 年齢計算のヘルパー関数
+        function calculateTotalMonths() {
+            const years = parseInt(document.getElementById('age_years')?.value || 0);
+            const months = parseInt(document.getElementById('age_months')?.value || 0);
+            return (years * 12) + months;
+        }
+        
+        function updateTotalMonths() {
+            const totalMonths = calculateTotalMonths();
+            const hiddenInput = document.getElementById('estimated_age');
+            if (hiddenInput) {
+                hiddenInput.value = totalMonths;
             }
         }
+        
+        // 年齢入力フィールドのイベントリスナー
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearsInput = document.getElementById('age_years');
+            const monthsInput = document.getElementById('age_months');
+            
+            if (yearsInput) {
+                yearsInput.addEventListener('input', updateTotalMonths);
+            }
+            if (monthsInput) {
+                monthsInput.addEventListener('input', updateTotalMonths);
+            }
+        });
     </script>
 </x-app-layout>
 

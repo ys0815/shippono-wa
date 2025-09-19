@@ -66,10 +66,6 @@ Route::middleware('auth')->group(function () {
     // ペット登録ガイド（ワイヤーフレーム準拠の詳細ページ）
     Route::view('/mypage/pets/detail', 'pets.detail_guide')->name('mypage.pets.detail_guide');
 
-    // 保護団体選択画面（必要に応じて導線から遷移）
-    Route::get('/shelters/select', function () {
-        return view('shelters.select');
-    })->name('shelters.select');
 
     // いいね一覧
     Route::get('/mypage/likes', [LikeController::class, 'index'])->name('mypage.likes');

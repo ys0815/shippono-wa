@@ -1,200 +1,5 @@
 <x-guest-layout>
-    <div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
-
-        <!-- Sidebar -->
-        <div x-cloak x-show="sidebar" @keydown.escape.window="sidebar=false">
-            <div class="fixed inset-0 bg-black/50 z-[1100]" @click="sidebar=false"></div>
-            <aside class="fixed top-0 left-0 z-[1200] w-72 md:w-80 max-w-[85vw] h-full bg-white shadow-lg overflow-y-auto"
-                   x-transition:enter="transition ease-in-out duration-300 transform"
-                   x-transition:enter-start="-translate-x-full"
-                   x-transition:enter-end="translate-x-0"
-                   x-transition:leave="transition ease-in-out duration-300 transform"
-                   x-transition:leave-start="translate-x-0"
-                   x-transition:leave-end="-translate-x-full">
-                
-                <!-- Header -->
-                <div class="p-4 border-b bg-amber-50 border-amber-200 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <img src="{{ asset('images/icon.png') }}" alt="# しっぽのわ" class="w-12 h-12">
-                        <div>
-                            <div class="text-lg font-bold text-gray-800"># しっぽのわ</div>
-                            <div class="text-sm text-gray-600">保護動物と家族の幸せを共有</div>
-                        </div>
-                    </div>
-                    <button @click="sidebar=false" aria-label="メニューを閉じる" 
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-100 focus:outline-none transition">
-                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Menu blocks -->
-                <nav class="p-4 space-y-6" aria-label="サイドバー">
-                    @guest
-                    <!-- ゲスト用アカウント項目 -->
-                    <div>
-                        <div class="text-xs font-semibold text-amber-700 mb-2">アカウント</div>
-                        <div class="flex gap-2">
-                            <a href="{{ route('register') }}" class="flex-1 px-4 py-2 text-sm border border-gray-300 rounded text-gray-700 bg-white hover:bg-gray-50 text-center">新規登録</a>
-                            <a href="{{ route('login') }}" class="flex-1 px-4 py-2 text-sm border border-gray-300 rounded text-gray-700 bg-white hover:bg-gray-50 text-center">ログイン</a>
-                        </div>
-                    </div>
-                    @endguest
-
-                    @auth
-                    <!-- ログイン時ユーザー情報 -->
-                    <div>
-                        <div class="text-xs font-semibold text-amber-700 mb-2">ユーザー</div>
-                        <div class="p-3 bg-amber-50 rounded-lg">
-                            <div class="text-sm font-medium text-gray-800">{{ Auth::user()->display_name ?? Auth::user()->name }}</div>
-                            <div class="text-xs text-gray-600">{{ Auth::user()->email }}</div>
-                        </div>
-                    </div>
-
-                    <!-- マイページ -->
-                    <div>
-                        <div class="text-xs font-semibold text-amber-700 mb-2">メイン</div>
-                        <ul class="space-y-1">
-                            <li><a @click="sidebar=false" href="{{ route('mypage') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">マイページ</a></li>
-                            <li><a @click="sidebar=false" href="{{ route('mypage.posts') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">投稿管理</a></li>
-                            <li><a @click="sidebar=false" href="{{ route('mypage.pets') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットプロフィール管理</a></li>
-                            <li><a @click="sidebar=false" href="{{ route('mypage.likes') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">いいね一覧</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- 作成 -->
-                    <div>
-                        <div class="text-xs font-semibold text-amber-700 mb-2">作成</div>
-                        <ul class="space-y-1">
-                            <li><a @click="sidebar=false" href="{{ route('mypage.posts.gallery.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">今日の幸せを投稿</a></li>
-                            <li><a @click="sidebar=false" href="{{ route('mypage.posts.interview.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">里親インタビューを投稿</a></li>
-                            <li><a @click="sidebar=false" href="{{ route('mypage.pets.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットを登録</a></li>
-                        </ul>
-                    </div>
-                    @endauth
-
-                    <!-- サイト情報 -->
-                    <div>
-                        <div class="text-xs font-semibold text-amber-700 mb-2">サイト</div>
-                        <ul class="space-y-1">
-                            <li><a @click="sidebar=false" href="/" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">#しっぽのわとは？</a></li>
-                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">犬の卒業生を見る</a></li>
-                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">猫の卒業生を見る</a></li>
-                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">うさぎの卒業生を見る</a></li>
-                            <li><a @click="sidebar=false" href="#recent-pets" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">その他の卒業生を見る</a></li>
-                            <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">保護団体リンク集</a></li>
-                        </ul>
-                    </div>
-
-                    @auth
-                    <!-- 設定 -->
-                    <div>
-                        <div class="text-xs font-semibold text-amber-700 mb-2">設定</div>
-                        <ul class="space-y-1">
-                            <li><a @click="sidebar=false" href="{{ route('profile.edit') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">プロフィール編集</a></li>
-                            <li><a @click="sidebar=false" href="{{ route('mypage.profile.email') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">メールアドレス変更</a></li>
-                            <li><a @click="sidebar=false" href="{{ route('mypage.profile.password') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">パスワード変更</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- ログアウト -->
-                    <div>
-                        <div class="text-xs font-semibold text-amber-700 mb-2">その他</div>
-                        <ul class="space-y-1">
-                            <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ヘルプ・サポート</a></li>
-                            <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">お問い合わせ</a></li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}" class="inline">
-                                    @csrf
-                                    <button type="submit" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ログアウト</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                    @endauth
-
-                    <!-- ソーシャルメディア -->
-                    <div>
-                        <div class="text-xs font-semibold text-amber-700 mb-2">フォロー</div>
-                        <div class="flex gap-3">
-                            <!-- X (旧Twitter) -->
-                            <a href="#" target="_blank" rel="noopener noreferrer" 
-                               class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 hover:scale-110 transition-all duration-200 shadow-lg">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                                </svg>
-                            </a>
-                            
-                            <!-- Instagram -->
-                            <a href="#" target="_blank" rel="noopener noreferrer" 
-                               class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 hover:scale-110 transition-all duration-200 shadow-lg">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                </svg>
-                            </a>
-                            
-                            <!-- Facebook -->
-                            <a href="#" target="_blank" rel="noopener noreferrer" 
-                               class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 hover:scale-110 transition-all duration-200 shadow-lg">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </aside>
-        </div>
-
-        <!-- Search modal -->
-        <div x-cloak x-show="search" @keydown.escape.window="search=false">
-            <div class="fixed inset-0 bg-black/50 z-[950]" @click="search=false"></div>
-            <div class="fixed top-16 right-4 left-4 sm:left-auto sm:w-[28rem] bg-white z-[960] rounded-lg shadow-xl p-4"
-                 x-transition:enter="transition ease-out duration-150"
-                 x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-                 x-transition:leave="transition ease-in duration-150"
-                 x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2">
-                <h3 class="text-sm font-semibold text-gray-800 mb-3">絞り込み検索</h3>
-                <form class="space-y-3">
-                    <div>
-                        <div class="text-xs text-gray-700 mb-1">動物の種類</div>
-                        <div class="flex flex-wrap gap-3 text-sm">
-                            <label class="flex items-center gap-1"><input type="checkbox"> 犬</label>
-                            <label class="flex items-center gap-1"><input type="checkbox"> 猫</label>
-                            <label class="flex items-center gap-1"><input type="checkbox"> うさぎ</label>
-                            <label class="flex items-center gap-1"><input type="checkbox"> その他</label>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs text-gray-700 mb-1">性別</label>
-                            <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                <option>すべて</option>
-                                <option>オス</option>
-                                <option>メス</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-700 mb-1">保護施設</label>
-                            <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                <option>すべて</option>
-                                <option>施設A</option>
-                                <option>施設B</option>
-                                <option>施設C</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white text-sm rounded-md hover:bg-amber-600 transition">検索</button>
-                        <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">閉じる</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <main class="w-full max-w-6xl mx-auto">
+    <main class="w-full max-w-6xl mx-auto">
             <!-- 統合プロフィールヘッダー -->
             <section class="bg-white border border-gray-200 p-5 sm:p-8">
                 <!-- 背景画像エリア -->
@@ -603,8 +408,8 @@
                                 <div class="flex-1">
                                     <label class="block text-xs text-gray-700 mb-1">並び順</label>
                                     <select id="sort-order" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                        <option value="popular">人気順</option>
                                         <option value="newest">新着順</option>
+                                        <option value="popular">人気順</option>
                                         <option value="oldest">古い順</option>
                                     </select>
                                 </div>
@@ -652,7 +457,6 @@
 
 
         </main>
-    </div>
 
 
     <script>

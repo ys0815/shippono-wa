@@ -14,6 +14,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="{{ asset('js/shelter-picker.js') }}"></script>
     </head>
     <body class="font-sans text-gray-900 antialiased bg-gray-50" style="font-family: 'Noto Sans JP', sans-serif;">
         <div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
@@ -192,7 +193,57 @@
                      x-transition:leave="transition ease-in duration-150"
                      x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">絞り込み検索</h3>
-                    <form action="{{ route('pets.search', 'all') }}" method="GET" x-data="shelterPicker()" x-init="init()" class="space-y-4">
+                    <form action="{{ route('pets.search', 'all') }}" method="GET" x-data="ShelterPicker.create({
+                        init() {
+                            this.kind = '';
+                            this.area = '';
+                            this.shelterId = '';
+                            this.list = [];
+                        },
+                        handleKindChange() {
+                            this.shelterId = '';
+                            if (this.kind === 'site') {
+                                this.area = 'national';
+                            } else if (!this.area) {
+                                this.area = '';
+                            }
+                            // 保護団体リストを取得
+                            this.fetchList();
+                        },
+                        handleAreaChange() {
+                            this.shelterId = '';
+                            // 保護団体リストを取得
+                            this.fetchList();
+                        },
+                        async fetchList() {
+                            if (this.kind === 'unknown') {
+                                this.list = [];
+                                return;
+                            }
+                            if (!this.area) {
+                                this.list = [];
+                                return;
+                            }
+
+                            this.loading = true;
+                            try {
+                                const url = `/api/shelters?kind=${this.kind}&area=${this.area}`;
+                                const res = await fetch(url, {
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest',
+                                        'Accept': 'application/json'
+                                    }
+                                });
+                                const all = await res.json();
+                                this.list = all.filter(s => s.kind === this.kind && s.area === this.area);
+                            } catch (error) {
+                                console.error('Error fetching shelters:', error);
+                                this.list = [];
+                            } finally {
+                                this.loading = false;
+                            }
+                        }
+                    })" x-init="init()" class="space-y-4">
                         <!-- 動物の種類 -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">動物の種類</label>
@@ -252,7 +303,7 @@
                         <!-- 保護施設名 -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">保護施設名</label>
-                            <select name="shelter_id" x-model="shelterId" :disabled="kind==='unknown' || list.length===0" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <select name="shelter_id" x-model="shelterId" :disabled="kind==='unknown'" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">すべて</option>
                                 <option value="" x-show="loading">読み込み中...</option>
                                 <template x-for="s in list" :key="s.id">
@@ -272,6 +323,8 @@
                             </select>
                         </div>
 
+                        
+
                         <div class="flex gap-3 pt-2">
                             <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white text-sm rounded-md hover:bg-amber-600 transition font-medium">
                                 検索する
@@ -285,83 +338,5 @@
             </div>
         </div>
 
-        <script>
-            function shelterPicker(){
-                return {
-                    kind: '',
-                    area: '',
-                    areas: ['hokkaido_tohoku','kanto','chubu_tokai','kinki','chugoku_shikoku','kyushu_okinawa','national'],
-                    labels: { 
-                        hokkaido_tohoku: '北海道・東北', 
-                        kanto: '関東', 
-                        chubu_tokai: '中部・東海', 
-                        kinki: '近畿', 
-                        chugoku_shikoku: '中国・四国', 
-                        kyushu_okinawa: '九州・沖縄', 
-                        national: '全国' 
-                    },
-                    list: [], 
-                    loading: false, 
-                    shelterId: '',
-                    init(){ 
-                        console.log('Search Alpine.js init started');
-                        
-                        // 初期化
-                        this.kind = '';
-                        this.area = '';
-                        this.shelterId = '';
-                        this.list = [];
-                    },
-                    handleKindChange() {
-                        this.shelterId = '';
-                        if (this.kind === 'site') {
-                            this.area = 'national';
-                        } else if (!this.area) {
-                            this.area = '';
-                        }
-                        this.fetchList();
-                    },
-                    handleAreaChange() {
-                        this.shelterId = '';
-                        this.fetchList();
-                    },
-                    get filteredAreas(){ 
-                        return this.kind==='site' ? ['national'] : this.areas; 
-                    },
-                    async fetchList(){
-                        if(this.kind==='unknown'){ 
-                            this.list=[]; 
-                            return; 
-                        }
-                        if(!this.area){ 
-                            this.list=[]; 
-                            return; 
-                        }
-                        
-                        this.loading = true;
-                        try {
-                            const url = `/api/shelters?kind=${this.kind}&area=${this.area}`;
-                            console.log('Fetching:', url);
-                            const res = await fetch(url, { 
-                                headers: { 
-                                    'X-Requested-With': 'XMLHttpRequest',
-                                    'Accept': 'application/json'
-                                } 
-                            });
-                            const all = await res.json();
-                            console.log('API response:', all);
-                            // クライアント側でも kind/area で厳密に絞り込み
-                            this.list = all.filter(s => s.kind===this.kind && s.area===this.area);
-                            console.log('Filtered list:', this.list);
-                        } catch (error) {
-                            console.error('Error fetching shelters:', error);
-                            this.list = [];
-                        } finally { 
-                            this.loading = false; 
-                        }
-                    }
-                }
-            }
-        </script>
     </body>
 </html>
