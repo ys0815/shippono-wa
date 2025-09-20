@@ -24,7 +24,7 @@
                 <div class="text-center text-gray-800 px-4 max-w-4xl">
                     <p class="text-base sm:text-xl lg:text-2xl font-medium mb-10 opacity-90 max-w-3xl mx-auto leading-relaxed tracking-wide"
                        style="text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">
-                        <span class="block sm:inline">保護動物と家族の幸せな毎日を、</span><span class="block sm:inline">みんなで分かち合う場所</span>
+                        <span class="block sm:inline">保護動物と家族の幸せな毎日を</span><span class="block sm:inline">みんなで分かち合う場所</span>
                     </p>
                     <div class="flex flex-row flex-wrap gap-4 justify-center">
                         <a href="{{ route('login') }}" 
