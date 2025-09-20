@@ -12,10 +12,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+/**
+ * ユーザー登録コントローラー
+ * 
+ * 新規ユーザー登録機能を提供します：
+ * - 登録フォームの表示
+ * - 新規ユーザー登録処理
+ * - 登録後の自動ログイン
+ */
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * 登録フォーム表示
+     * 
+     * @return View 登録フォーム
      */
     public function create(): View
     {
@@ -23,18 +33,22 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
-     *
+     * 新規ユーザー登録処理
+     * 
+     * @param Request $request 登録データを含むリクエスト
+     * @return RedirectResponse ホームページへのリダイレクト
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
+        // バリデーション
         $request->validate([
             'display_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // ユーザー作成
         $user = User::create([
             'name' => $request->display_name, // Breeze互換のためnameにも保存
             'display_name' => $request->display_name,
@@ -42,8 +56,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // 登録イベントを発火（メール認証など）
         event(new Registered($user));
 
+        // 自動ログイン
         Auth::login($user);
 
         return redirect()->route('home');

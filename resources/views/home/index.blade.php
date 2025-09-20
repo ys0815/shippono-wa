@@ -51,7 +51,7 @@
                         </span>
                         <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
-                    <p class="text-sm text-gray-600">かわいい家族たちがあなたを待っています</p>
+                    <p class="text-sm text-gray-600">かわいい家族たちの生活を見てみよう</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach($recentPets as $pet)
@@ -162,7 +162,7 @@
                             <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <h4 class="text-xl font-bold text-gray-800 mb-3">幸せの可視化</h4>
-                        <p class="text-gray-600 leading-relaxed">保護動物と家族のストーリーを写真と文章で。</p>
+                        <p class="text-gray-600 leading-relaxed">保護動物と家族の温かいストーリーを、写真と文章で心に届けます。</p>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-6">
@@ -172,7 +172,7 @@
                             <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <h4 class="text-xl font-bold text-gray-800 mb-3">共感の輪</h4>
-                        <p class="text-gray-600 leading-relaxed">思いに触れて、優しい支援の循環を。</p>
+                        <p class="text-gray-600 leading-relaxed">一人ひとりの想いに触れて、優しさが広がる支援の循環を生み出します。</p>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-6">
@@ -182,7 +182,7 @@
                             <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <h4 class="text-xl font-bold text-gray-800 mb-3">命をつなぐ</h4>
-                        <p class="text-gray-600 leading-relaxed">施設や里親とつながる導線をわかりやすく。</p>
+                        <p class="text-gray-600 leading-relaxed">施設や里親さんとの出会いを、温かく分かりやすくお手伝いします。</p>
                     </div>
                 </div>
             </section>

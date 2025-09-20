@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
+/**
+ * 里親インタビューコントローラー
+ * 
+ * 里親インタビューの公開表示機能を提供します：
+ * - 里親インタビュー一覧の表示（検索・フィルタリング機能付き）
+ * - 里親インタビュー詳細ページの表示
+ * - 関連インタビューの表示
+ */
 class InterviewController extends Controller
 {
     /**
      * 里親インタビュー一覧（公開）
+     * 
+     * @param Request $request 検索条件を含むリクエスト
+     * @return \Illuminate\View\View インタビュー一覧ページ
      */
     public function index(Request $request)
     {
+        // 公開済みのインタビューのみを取得
         $query = Post::with(['pet.user'])
             ->where('type', 'interview')
             ->where('status', 'published')
@@ -25,6 +37,7 @@ class InterviewController extends Controller
             });
         }
 
+        // ページネーション（9件ずつ表示）
         $interviews = $query->paginate(9)->withQueryString();
 
         return view('interviews.index', compact('interviews'));
@@ -32,11 +45,16 @@ class InterviewController extends Controller
 
     /**
      * 里親インタビュー詳細（公開）
+     * 
+     * @param Post $post 表示するインタビュー投稿
+     * @return \Illuminate\View\View インタビュー詳細ページ
      */
     public function show(Post $post)
     {
+        // インタビュー投稿かつ公開済みのもののみ表示
         abort_unless($post->type === 'interview' && $post->status === 'published', 404);
 
+        // 関連データを読み込み（ペット、ユーザー、メディア、インタビュー内容）
         $post->load(['pet.user', 'media', 'interviewContent']);
 
         // 関連する里親インタビューを取得（同じペットの他のインタビュー、または同じ種別のペットのインタビュー）

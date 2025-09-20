@@ -13,10 +13,28 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
+/**
+ * ペット管理コントローラー
+ * 
+ * ペットの登録、編集、表示、検索、シェア機能を提供します：
+ * - ペットのCRUD操作（作成、読み取り、更新、削除）
+ * - ペット検索機能（種別、性別、保護団体などでフィルタリング）
+ * - ペット詳細ページの表示
+ * - ペットのシェアリンク生成とQRコード生成
+ * - 家族ペットのリンク機能
+ * - 投稿の取得（API）
+ */
 class PetController extends Controller
 {
+    /**
+     * ユーザーのペット一覧表示
+     * 
+     * @param Request $request
+     * @return View ペット一覧ページ
+     */
     public function index(Request $request): View
     {
+        // ログインユーザーのペット一覧を取得（投稿数、いいね数、保護団体情報も含む）
         $pets = Pet::where('user_id', Auth::id())
             ->with('posts:id,pet_id', 'likes:id,pet_id', 'shelter:id,name')
             ->latest()
@@ -25,13 +43,27 @@ class PetController extends Controller
         return view('pets.index', compact('pets'));
     }
 
+    /**
+     * ペット登録フォーム表示
+     * 
+     * @param Request $request
+     * @return View ペット登録フォーム
+     */
     public function create(Request $request): View
     {
         return view('pets.create');
     }
 
+    /**
+     * ペット編集フォーム表示
+     * 
+     * @param Request $request
+     * @param int $pet_id 編集するペットのID
+     * @return View ペット編集フォーム
+     */
     public function edit(Request $request, $pet_id): View
     {
+        // ユーザーが所有するペットのみ編集可能
         $pet = Pet::where('user_id', Auth::id())
             ->where('id', $pet_id)
             ->with('shelter:id,name,area,kind')
@@ -39,8 +71,15 @@ class PetController extends Controller
         return view('pets.create', compact('pet'));
     }
 
+    /**
+     * ペット詳細ページ表示
+     * 
+     * @param Pet $pet 表示するペット
+     * @return View ペット詳細ページ
+     */
     public function show(Pet $pet): View
     {
+        // ペットの関連データを読み込み（ユーザー、保護団体、公開投稿、家族リンク）
         $pet->load(['user', 'shelter', 'posts' => function ($query) {
             $query->where('status', 'published')
                 ->where('type', 'gallery')
@@ -57,10 +96,10 @@ class PetController extends Controller
                 ->exists();
         }
 
-        // いいね数
+        // いいね数を取得
         $likeCount = $pet->likes()->count();
 
-        // 家族ペットを取得
+        // 家族ペットを取得（双方向のリンクから）
         $familyPets = collect();
         foreach ($pet->familyLinksAsPet1 as $link) {
             $familyPets->push($link->pet2);
@@ -72,6 +111,13 @@ class PetController extends Controller
         return view('pets.show', compact('pet', 'isLiked', 'likeCount', 'familyPets'));
     }
 
+    /**
+     * ペット検索ページ表示
+     * 
+     * @param Request $request 検索条件を含むリクエスト
+     * @param string $species 検索する動物種別
+     * @return View ペット検索結果ページ
+     */
     public function search(Request $request, string $species): View
     {
         // 種別の検証（'all'も許可）
@@ -162,6 +208,13 @@ class PetController extends Controller
         return view('pets.search', compact('species', 'speciesName', 'pets', 'totalCount', 'filters', 'searchParams'));
     }
 
+    /**
+     * ペット検索API（AJAX用）
+     * 
+     * @param Request $request 検索条件を含むリクエスト
+     * @param string $species 検索する動物種別
+     * @return \Illuminate\Http\JsonResponse ペット検索結果のJSONレスポンス
+     */
     public function searchApi(Request $request, string $species)
     {
         // 種別の検証（'all'も許可）
@@ -281,6 +334,13 @@ class PetController extends Controller
         ]);
     }
 
+    /**
+     * ペットの投稿取得API（AJAX用）
+     * 
+     * @param Request $request ページネーション・ソート・フィルター条件を含むリクエスト
+     * @param Pet $pet 投稿を取得するペット
+     * @return \Illuminate\Http\JsonResponse 投稿一覧のJSONレスポンス
+     */
     public function getPosts(Request $request, Pet $pet)
     {
         $page = $request->get('page', 1);
@@ -357,8 +417,15 @@ class PetController extends Controller
         ]);
     }
 
+    /**
+     * ペットシェアページ表示
+     * 
+     * @param string $token シェアトークン
+     * @return View ペットシェアページ
+     */
     public function share(string $token): View
     {
+        // シェアリンクを取得（アクティブなもののみ）
         $shareLink = PetShareLink::where('share_token', $token)
             ->where('is_active', true)
             ->with(['pet.user', 'pet.shelter', 'pet.posts' => function ($query) {
@@ -390,6 +457,13 @@ class PetController extends Controller
         return view('pets.share', compact('pet', 'isLiked', 'likeCount', 'shareLink'));
     }
 
+    /**
+     * ペットシェアリンク生成
+     * 
+     * @param Request $request
+     * @param Pet $pet シェアリンクを生成するペット
+     * @return RedirectResponse ペット詳細ページへのリダイレクト
+     */
     public function generateShareLink(Request $request, Pet $pet): RedirectResponse
     {
         // ペットの所有者かチェック
@@ -427,6 +501,13 @@ class PetController extends Controller
             ->with('status', 'share-link-generated');
     }
 
+    /**
+     * ペットQRコード生成
+     * 
+     * @param Request $request
+     * @param Pet $pet QRコードを生成するペット
+     * @return \Illuminate\Http\Response SVG形式のQRコード画像
+     */
     public function generateQrCode(Request $request, Pet $pet)
     {
         // ペットの所有者かチェック
@@ -458,8 +539,15 @@ class PetController extends Controller
             ->header('Content-Disposition', 'inline; filename="' . $pet->name . '_qr_code.svg"');
     }
 
+    /**
+     * ペット登録処理
+     * 
+     * @param Request $request ペット情報を含むリクエスト
+     * @return RedirectResponse マイページペット一覧へのリダイレクト
+     */
     public function store(Request $request): RedirectResponse
     {
+        // バリデーション
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'species' => ['required', 'in:dog,cat,rabbit,other'],
@@ -513,8 +601,16 @@ class PetController extends Controller
         return redirect()->route('mypage.pets')->with('status', 'pet-created');
     }
 
+    /**
+     * ペット更新処理
+     * 
+     * @param Request $request 更新するペット情報を含むリクエスト
+     * @param int $pet_id 更新するペットのID
+     * @return RedirectResponse マイページペット一覧へのリダイレクト
+     */
     public function update(Request $request, $pet_id): RedirectResponse
     {
+        // ユーザーが所有するペットのみ更新可能
         $pet = Pet::where('user_id', Auth::id())
             ->where('id', $pet_id)
             ->firstOrFail();
@@ -567,8 +663,15 @@ class PetController extends Controller
         return redirect()->route('mypage.pets')->with('status', 'pet-updated');
     }
 
+    /**
+     * 家族ペットリンク管理ページ表示
+     * 
+     * @param Request $request
+     * @return View 家族ペットリンク管理ページ
+     */
     public function links(Request $request): View
     {
+        // ユーザーのペット一覧を取得
         $pets = Pet::where('user_id', Auth::id())
             ->with('shelter:id,name')
             ->latest()
@@ -585,8 +688,15 @@ class PetController extends Controller
         return view('pets.links', compact('pets', 'familyGroups'));
     }
 
+    /**
+     * 家族ペットリンク保存処理
+     * 
+     * @param Request $request 選択されたペットIDを含むリクエスト
+     * @return RedirectResponse 家族ペットリンク管理ページへのリダイレクト
+     */
     public function saveLinks(Request $request): RedirectResponse
     {
+        // バリデーション（最低2匹のペットが必要）
         $validated = $request->validate([
             'selected_pets' => ['required', 'array', 'min:2'],
             'selected_pets.*' => ['exists:pets,id'],
@@ -629,6 +739,12 @@ class PetController extends Controller
         }
     }
 
+    /**
+     * 家族ペットリンク削除処理
+     * 
+     * @param Request $request
+     * @return RedirectResponse 家族ペットリンク管理ページへのリダイレクト
+     */
     public function destroyLinks(Request $request): RedirectResponse
     {
         try {
@@ -643,7 +759,10 @@ class PetController extends Controller
     }
 
     /**
-     * 家族リンクをグループ化する
+     * 家族リンクをグループ化する（プライベートメソッド）
+     * 
+     * @param \Illuminate\Database\Eloquent\Collection $links 家族リンクのコレクション
+     * @return \Illuminate\Support\Collection グループ化された家族ペットのコレクション
      */
     private function groupFamilyLinks($links)
     {
@@ -696,7 +815,12 @@ class PetController extends Controller
     }
 
     /**
-     * 深さ優先探索でグループを構築
+     * 深さ優先探索でグループを構築（プライベートメソッド）
+     * 
+     * @param array $graph ペットIDの関係グラフ
+     * @param int $petId 現在のペットID
+     * @param array &$visited 訪問済みペットIDの配列（参照渡し）
+     * @param array &$group 現在のグループのペットID配列（参照渡し）
      */
     private function dfs($graph, $petId, &$visited, &$group)
     {

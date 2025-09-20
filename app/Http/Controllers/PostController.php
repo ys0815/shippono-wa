@@ -10,10 +10,23 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * 投稿管理コントローラー
+ * 
+ * 投稿の作成、編集、削除、表示機能を提供します：
+ * - 今日の幸せ投稿（ギャラリー投稿）の管理
+ * - 里親インタビュー投稿の管理
+ * - 投稿の公開/非公開切り替え
+ * - 投稿の検索・フィルタリング
+ * - メディアファイル（画像・動画）のアップロード管理
+ */
 class PostController extends Controller
 {
     /**
      * 投稿管理画面の表示
+     * 
+     * @param Request $request フィルター条件を含むリクエスト
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse 投稿管理ページまたはログインページ
      */
     public function index(Request $request)
     {
@@ -24,6 +37,7 @@ class PostController extends Controller
             return redirect()->route('login');
         }
 
+        // フィルター条件を取得
         $type = $request->get('type', 'gallery'); // デフォルトはgallery
         $keyword = $request->get('keyword');
         $period = $request->get('period', 'all');
@@ -72,6 +86,8 @@ class PostController extends Controller
 
     /**
      * 今日の幸せ投稿フォーム表示
+     * 
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse 投稿作成フォームまたはログインページ
      */
     public function createGallery()
     {
@@ -82,6 +98,7 @@ class PostController extends Controller
             return redirect()->route('login');
         }
 
+        // ユーザーのペット一覧を取得
         $pets = $user->pets;
 
         return view('posts.create-gallery', compact('pets'));
@@ -89,6 +106,9 @@ class PostController extends Controller
 
     /**
      * 今日の幸せ投稿の保存
+     * 
+     * @param Request $request 投稿データを含むリクエスト
+     * @return \Illuminate\Http\RedirectResponse 投稿管理ページへのリダイレクト
      */
     public function storeGallery(Request $request)
     {
@@ -99,6 +119,7 @@ class PostController extends Controller
             return redirect()->route('login');
         }
 
+        // バリデーション（メディアファイルは1-2個、10MBまで）
         $request->validate([
             'pet_id' => 'required|exists:pets,id',
             'title' => 'required|string|max:30',
@@ -140,6 +161,8 @@ class PostController extends Controller
 
     /**
      * 里親インタビュー投稿フォーム表示
+     * 
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse インタビュー投稿フォームまたはログインページ
      */
     public function createInterview()
     {
@@ -150,6 +173,7 @@ class PostController extends Controller
             return redirect()->route('login');
         }
 
+        // ユーザーのペット一覧を取得
         $pets = $user->pets;
 
         return view('posts.create-interview', compact('pets'));
@@ -157,6 +181,9 @@ class PostController extends Controller
 
     /**
      * 里親インタビュー投稿保存
+     * 
+     * @param Request $request インタビュー投稿データを含むリクエスト
+     * @return \Illuminate\Http\RedirectResponse 投稿管理ページへのリダイレクト
      */
     public function storeInterview(Request $request)
     {
@@ -167,6 +194,7 @@ class PostController extends Controller
             return redirect()->route('login');
         }
 
+        // バリデーション（質問1は200文字以上必須、その他は1000文字以内）
         $request->validate([
             'pet_id' => 'required|exists:pets,id',
             'title' => 'required|string|max:30',
@@ -222,6 +250,9 @@ class PostController extends Controller
 
     /**
      * 投稿の編集フォーム表示
+     * 
+     * @param Post $post 編集する投稿
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse 編集フォームまたはリダイレクト
      */
     public function edit(Post $post)
     {
@@ -251,6 +282,10 @@ class PostController extends Controller
 
     /**
      * 投稿の更新
+     * 
+     * @param Request $request 更新データを含むリクエスト
+     * @param Post $post 更新する投稿
+     * @return \Illuminate\Http\RedirectResponse 投稿管理ページへのリダイレクト
      */
     public function update(Request $request, Post $post)
     {
@@ -377,6 +412,9 @@ class PostController extends Controller
 
     /**
      * 投稿の削除
+     * 
+     * @param Post $post 削除する投稿
+     * @return \Illuminate\Http\RedirectResponse 投稿管理ページへのリダイレクト
      */
     public function destroy(Post $post)
     {
@@ -406,6 +444,9 @@ class PostController extends Controller
 
     /**
      * 投稿の非表示/表示切り替え
+     * 
+     * @param Post $post 切り替える投稿
+     * @return \Illuminate\Http\RedirectResponse 前のページへのリダイレクト
      */
     public function toggleVisibility(Post $post)
     {
@@ -431,7 +472,10 @@ class PostController extends Controller
     }
 
     /**
-     * ファイルタイプを判定する
+     * ファイルタイプを判定する（プライベートメソッド）
+     * 
+     * @param \Illuminate\Http\UploadedFile $file アップロードされたファイル
+     * @return string メディアタイプ（'image' または 'video'）
      */
     private function getMediaType($file)
     {
@@ -449,6 +493,9 @@ class PostController extends Controller
 
     /**
      * 投稿詳細ページの表示（公開）
+     * 
+     * @param Post $post 表示する投稿
+     * @return \Illuminate\View\View 投稿詳細ページ
      */
     public function show(Post $post)
     {
@@ -458,7 +505,7 @@ class PostController extends Controller
         // 閲覧数をカウント
         $post->incrementViewCount();
 
-        // 関連データを読み込み
+        // 関連データを読み込み（ペット、ユーザー、メディア）
         $post->load(['pet.user', 'media', 'user']);
 
         return view('posts.show', compact('post'));

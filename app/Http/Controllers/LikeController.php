@@ -7,10 +7,21 @@ use App\Models\Like;
 use App\Models\Pet;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * いいね管理コントローラー
+ * 
+ * ペットへのいいね機能を提供します：
+ * - いいね一覧の表示（フィルタリング機能付き）
+ * - いいねの追加
+ * - いいねの削除
+ */
 class LikeController extends Controller
 {
     /**
      * いいね一覧の表示
+     * 
+     * @param Request $request フィルター条件を含むリクエスト
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse いいね一覧ページまたはログインページ
      */
     public function index(Request $request)
     {
@@ -21,9 +32,11 @@ class LikeController extends Controller
             return redirect()->route('login');
         }
 
+        // フィルター条件を取得
         $species = $request->get('species', 'all');
         $period = $request->get('period', 'all');
 
+        // ユーザーのいいね一覧を取得（ペット情報も含む）
         $query = $user->likes()->with(['pet.user']);
 
         // 動物種でフィルタ
@@ -49,6 +62,7 @@ class LikeController extends Controller
             }
         }
 
+        // ページネーション（20件ずつ表示）
         $likes = $query->latest()->paginate(20);
 
         return view('likes.index', compact('likes', 'species', 'period'));
@@ -56,9 +70,13 @@ class LikeController extends Controller
 
     /**
      * いいねの追加
+     * 
+     * @param Request $request ペットIDを含むリクエスト
+     * @return \Illuminate\Http\RedirectResponse 前のページへのリダイレクト
      */
     public function store(Request $request)
     {
+        // バリデーション
         $request->validate([
             'pet_id' => 'required|exists:pets,id',
         ]);
@@ -92,6 +110,10 @@ class LikeController extends Controller
 
     /**
      * いいねの削除
+     * 
+     * @param Request $request
+     * @param int $petId いいねを削除するペットのID
+     * @return \Illuminate\Http\RedirectResponse 前のページへのリダイレクト
      */
     public function destroy(Request $request, $petId)
     {
@@ -102,6 +124,7 @@ class LikeController extends Controller
             return redirect()->route('login');
         }
 
+        // ユーザーのいいねを検索
         $like = Like::where('user_id', $user->id)
             ->where('pet_id', $petId)
             ->first();
@@ -110,6 +133,7 @@ class LikeController extends Controller
             return back()->with('error', 'いいねが見つかりません。');
         }
 
+        // いいねを削除
         $like->delete();
 
         return back()->with('success', 'いいねを取り消しました。');
