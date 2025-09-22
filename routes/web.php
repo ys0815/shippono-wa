@@ -16,6 +16,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // 「#しっぽのわとは？」ページ
 Route::view('/about', 'about')->name('about');
 
+// 「家族をお迎えする前に読むこと」ページ（公開）
+Route::view('/before-adoption', 'before_adoption')->name('before_adoption');
+
 // ペットプロフィール詳細（公開ページ）
 Route::get('/pets/{pet}', [PetController::class, 'show'])->name('pets.show');
 

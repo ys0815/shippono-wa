@@ -35,6 +35,9 @@
                     <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
                         {{ __('#しっぽのわとは？') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('before_adoption')" :active="request()->routeIs('before_adoption')">
+                        {{ __('家族をお迎えする前に') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('interviews.index')" :active="request()->routeIs('interviews.index')">
                         {{ __('里親インタビュー') }}
                     </x-nav-link>
@@ -142,6 +145,7 @@
             <ul class="space-y-1">
                 <li><a @click="sidebarOpen=false" href="{{ route('home') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ホーム</a></li>
                 <li><a @click="sidebarOpen=false" href="{{ route('about') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">#しっぽのわとは？</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('before_adoption') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">家族をお迎えする前に</a></li>
                 <li><a @click="sidebarOpen=false" href="{{ route('interviews.index') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">里親インタビュー</a></li>
             </ul>
         </div>
