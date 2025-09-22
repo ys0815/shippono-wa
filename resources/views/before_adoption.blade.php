@@ -95,8 +95,8 @@
                                         <img src="{{ asset('images/hero-02.jpeg') }}" 
                                              alt="家族とペットの絆" 
                                              class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -110,8 +110,8 @@
                                         <img src="{{ asset('images/hero-09.jpeg') }}" 
                                              alt="家族の理解と協力" 
                                              class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
                                     </div>
                                 </div>
                                 <div class="flex-1 order-1 md:order-2">
@@ -143,8 +143,8 @@
                                         <img src="{{ asset('images/hero-08.jpeg') }}" 
                                              alt="ペットの健康管理" 
                                              class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -158,8 +158,8 @@
                                         <img src="{{ asset('images/hero-05.jpeg') }}" 
                                              alt="責任ある飼い主" 
                                              class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
                                     </div>
                                 </div>
                                 <div class="flex-1 order-1 md:order-2">
@@ -191,8 +191,8 @@
                                         <img src="{{ asset('images/hero-06.jpeg') }}" 
                                              alt="ペットの習性理解" 
                                              class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -240,5 +240,3 @@
 
     </div>
 </x-guest-layout>
-
-
