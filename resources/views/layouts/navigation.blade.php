@@ -115,10 +115,17 @@
     
     <!-- Header -->
     <div class="p-4 border-b bg-amber-50 border-amber-200 flex items-center justify-between">
+        @auth
         <div>
             <div class="text-lg font-bold text-gray-800">{{ Auth::user()->display_name ?? Auth::user()->name }}</div>
             <div class="text-sm text-gray-600">{{ Auth::user()->email }}</div>
         </div>
+        @else
+        <div>
+            <div class="text-lg font-bold text-gray-800">#しっぽのわ</div>
+            <div class="text-sm text-gray-600">保護動物と家族の幸せを分かち合う</div>
+        </div>
+        @endauth
         <button @click="sidebarOpen=false" aria-label="メニューを閉じる" 
             class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-100 focus:outline-none transition">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -168,7 +175,6 @@
             </ul>
         </div>
 
-        @auth
         <div>
             <div class="text-xs font-semibold text-amber-700 mb-2">その他</div>
             <ul class="space-y-1">
