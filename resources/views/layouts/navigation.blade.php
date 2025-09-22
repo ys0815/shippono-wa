@@ -29,6 +29,16 @@
 
                 <!-- Navigation Links (desktop) -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('ホーム') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                        {{ __('#しっぽのわとは？') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('interviews.index')" :active="request()->routeIs('interviews.index')">
+                        {{ __('里親インタビュー') }}
+                    </x-nav-link>
+                    @auth
                     <x-nav-link :href="route('mypage')" :active="request()->routeIs('mypage')">
                         {{ __('マイページ') }}
                     </x-nav-link>
@@ -41,10 +51,12 @@
                     <x-nav-link :href="route('mypage.likes')" :active="request()->routeIs('mypage.likes*')">
                         {{ __('いいね一覧') }}
                     </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -71,6 +83,14 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endauth
+            
+            @guest
+            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md">ログイン</a>
+                <a href="{{ route('register') }}" class="ml-4 bg-amber-600 text-white px-4 py-2 rounded-md text-sm hover:bg-amber-700">新規登録</a>
+            </div>
+            @endguest
         </div>
     </div>
 </nav>
@@ -111,7 +131,17 @@
     <!-- Menu blocks -->
     <nav class="p-4 space-y-6" aria-label="サイドバー">
         <div>
-            <div class="text-xs font-semibold text-amber-700 mb-2">メイン</div>
+            <div class="text-xs font-semibold text-amber-700 mb-2">サイト</div>
+            <ul class="space-y-1">
+                <li><a @click="sidebarOpen=false" href="{{ route('home') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ホーム</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('about') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">#しっぽのわとは？</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('interviews.index') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">里親インタビュー</a></li>
+            </ul>
+        </div>
+
+        @auth
+        <div>
+            <div class="text-xs font-semibold text-amber-700 mb-2">マイページ</div>
             <ul class="space-y-1">
                 <li><a @click="sidebarOpen=false" href="{{ route('mypage') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">マイページ</a></li>
                 <li><a @click="sidebarOpen=false" href="{{ route('mypage.posts') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">投稿管理</a></li>
@@ -138,6 +168,7 @@
             </ul>
         </div>
 
+        @auth
         <div>
             <div class="text-xs font-semibold text-amber-700 mb-2">その他</div>
             <ul class="space-y-1">
@@ -151,6 +182,17 @@
                 </li>
             </ul>
         </div>
+        @endauth
+        
+        @guest
+        <div>
+            <div class="text-xs font-semibold text-amber-700 mb-2">アカウント</div>
+            <ul class="space-y-1">
+                <li><a @click="sidebarOpen=false" href="{{ route('login') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ログイン</a></li>
+                <li><a @click="sidebarOpen=false" href="{{ route('register') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">新規登録</a></li>
+            </ul>
+        </div>
+        @endguest
     </nav>
 </aside>
 

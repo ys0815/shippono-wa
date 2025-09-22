@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// 「#しっぽのわとは？」ページ
+Route::view('/about', 'about')->name('about');
+
 // ペットプロフィール詳細（公開ページ）
 Route::get('/pets/{pet}', [PetController::class, 'show'])->name('pets.show');
 
