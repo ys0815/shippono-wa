@@ -90,10 +90,14 @@
                                         こうした時に悲しい選択を避けるにも、"もしものときの対策法"を思い描いた上でペットを迎えるようにしましょう。
                                     </p>
                                 </div>
-                                <div class="w-full md:w-48 flex-shrink-0">
-                                    <img src="{{ asset('images/hero-02.jpeg') }}" 
-                                         alt="家族とペットの絆" 
-                                         class="w-full h-32 md:h-40 object-cover rounded-lg shadow-md">
+                                <div class="w-full md:w-72 flex-shrink-0">
+                                    <div class="relative overflow-visible">
+                                        <img src="{{ asset('images/hero-02.jpeg') }}" 
+                                             alt="家族とペットの絆" 
+                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,10 +105,14 @@
                         <!-- 心得2 -->
                         <div class="border-l-4 border-amber-500 pl-6">
                             <div class="flex flex-col md:flex-row gap-6 items-start">
-                                <div class="w-full md:w-48 flex-shrink-0 order-2 md:order-1">
-                                    <img src="{{ asset('images/hero-09.jpeg') }}" 
-                                         alt="家族の理解と協力" 
-                                         class="w-full h-32 md:h-40 object-cover rounded-lg shadow-md">
+                                <div class="w-full md:w-72 flex-shrink-0 order-2 md:order-1">
+                                    <div class="relative overflow-visible">
+                                        <img src="{{ asset('images/hero-09.jpeg') }}" 
+                                             alt="家族の理解と協力" 
+                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                    </div>
                                 </div>
                                 <div class="flex-1 order-1 md:order-2">
                                     <h3 class="text-xl font-bold text-gray-900 mb-3">2. 家族や周りの人の理解を得よう</h3>
@@ -130,10 +138,14 @@
                                         人間と違って、ペットの医療費は保険が効かないため、病気のときは治療費が高額になってしまうことも……。特に、幼少期やシニア期は体調を崩しやすいので、想像していたよりもお金がかかってしまうこともあります。そのため、金銭的に不安な方は飼育前に貯金を貯めたり、ペット保険を検討してみたりして、必要な時に適切な治療を受けさせてあげられるようにしていきましょう。
                                     </p>
                                 </div>
-                                <div class="w-full md:w-48 flex-shrink-0">
-                                    <img src="{{ asset('images/hero-08.jpeg') }}" 
-                                         alt="ペットの健康管理" 
-                                         class="w-full h-32 md:h-40 object-cover rounded-lg shadow-md">
+                                <div class="w-full md:w-72 flex-shrink-0">
+                                    <div class="relative overflow-visible">
+                                        <img src="{{ asset('images/hero-08.jpeg') }}" 
+                                             alt="ペットの健康管理" 
+                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -141,10 +153,14 @@
                         <!-- 心得4 -->
                         <div class="border-l-4 border-amber-500 pl-6">
                             <div class="flex flex-col md:flex-row gap-6 items-start">
-                                <div class="w-full md:w-48 flex-shrink-0 order-2 md:order-1">
-                                    <img src="{{ asset('images/hero-05.jpeg') }}" 
-                                         alt="責任ある飼い主" 
-                                         class="w-full h-32 md:h-40 object-cover rounded-lg shadow-md">
+                                <div class="w-full md:w-72 flex-shrink-0 order-2 md:order-1">
+                                    <div class="relative overflow-visible">
+                                        <img src="{{ asset('images/hero-05.jpeg') }}" 
+                                             alt="責任ある飼い主" 
+                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                    </div>
                                 </div>
                                 <div class="flex-1 order-1 md:order-2">
                                     <h3 class="text-xl font-bold text-gray-900 mb-3">4. 二度と悲しい思いをさせない</h3>
@@ -170,10 +186,14 @@
                                         私たちに個性があるように、動物にもそれぞれの個性があります。その個性を尊重し、彼らが快適に過ごせるように配慮していきましょう。
                                     </p>
                                 </div>
-                                <div class="w-full md:w-48 flex-shrink-0">
-                                    <img src="{{ asset('images/hero-06.jpeg') }}" 
-                                         alt="ペットの習性理解" 
-                                         class="w-full h-32 md:h-40 object-cover rounded-lg shadow-md">
+                                <div class="w-full md:w-72 flex-shrink-0">
+                                    <div class="relative overflow-visible">
+                                        <img src="{{ asset('images/hero-06.jpeg') }}" 
+                                             alt="ペットの習性理解" 
+                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
+                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5 bg-[radial-gradient(circle,_rgb(251_191_36_/_var(--tw-bg-opacity,_1))_0.8px,_transparent_0.8px)] [background-size:4px_4px]"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
