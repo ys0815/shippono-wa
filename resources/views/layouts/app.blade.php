@@ -48,5 +48,8 @@
             cancel-text="キャンセル"
             confirm-class="bg-red-600 hover:bg-red-700 text-white"
             icon="⚠️" />
+
+        <!-- Footer (global) -->
+        <x-footer />
     </body>
 </html>

@@ -293,6 +293,9 @@
                     </form>
                 </div>
             </div>
+
+            <!-- Footer (global) -->
+            <x-footer />
         </div>
 
     </body>

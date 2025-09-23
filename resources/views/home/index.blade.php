@@ -143,7 +143,7 @@
             </section>
 
             <!-- サービスコンセプト -->
-            <section class="relative bg-gray-50 border-t border-b border-gray-200 py-12">
+            <section class="relative bg-gray-50 border-gray-200 py-12">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
@@ -269,7 +269,7 @@
             </section>
 
             <!-- 保護団体リンク集 -->
-            <section id="shelters" class="relative bg-gray-50 border-t border-b border-gray-200 py-12" x-data="shelterFilter()">
+            <section id="shelters" class="relative bg-gray-50 border-gray-200 py-12" x-data="shelterFilter()">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
@@ -403,8 +403,7 @@
             </section>
         </main>
         
-        <!-- Footer -->
-        <x-footer />
+        <!-- Footer: moved to global layouts -->
     </div>
 
     <script>
