@@ -243,3 +243,147 @@
         @apply rounded-md border border-gray-300 focus:border-amber-500 focus:ring-amber-500;
     }
 }
+
+/* ========== Footer Styles ========== */
+@layer components {
+    .footer {
+        @apply bg-amber-50 border-t border-amber-200 shadow-sm;
+    }
+
+    .footer-content {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .footer-main {
+        @apply py-12;
+    }
+
+    .footer-grid {
+        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
+    }
+
+    .footer-brand {
+        @apply lg:col-span-1;
+    }
+
+    .footer-logo {
+        @apply flex items-center mb-4;
+    }
+
+    .footer-logo img {
+        @apply h-10 w-10 mr-3;
+    }
+
+    .footer-logo h3 {
+        @apply text-xl font-bold text-amber-900;
+    }
+
+    .footer-description {
+        @apply text-amber-800 text-sm leading-relaxed mb-4;
+    }
+
+    .footer-sub-description {
+        @apply text-amber-700 text-xs;
+    }
+
+    .footer-section {
+        @apply space-y-2 min-h-0;
+    }
+
+    .footer-section ul {
+        @apply flex flex-col;
+    }
+
+    .footer-section li {
+        @apply flex-shrink-0;
+    }
+
+    .footer-section h4 {
+        @apply text-lg font-semibold text-amber-900 mb-4;
+    }
+
+    .footer-link {
+        @apply text-amber-800 hover:text-amber-900 transition-colors duration-200 text-sm block;
+    }
+
+    .footer-social {
+        @apply flex space-x-4 mb-6;
+    }
+
+    .footer-social-link {
+        @apply w-10 h-10 bg-white border border-amber-300 hover:bg-amber-100 hover:border-amber-400 rounded-full flex items-center justify-center transition-colors duration-200 group shadow-sm;
+    }
+
+    .footer-social-icon {
+        @apply w-5 h-5 text-amber-700 group-hover:text-amber-800;
+    }
+
+    .footer-news {
+        @apply bg-white border border-amber-200 rounded-lg p-4 shadow-sm;
+    }
+
+    .footer-news h5 {
+        @apply text-sm font-semibold text-amber-900 mb-2;
+    }
+
+    .footer-news p {
+        @apply text-xs text-amber-800 leading-relaxed;
+    }
+
+    .footer-border {
+        @apply border-t border-amber-200;
+    }
+
+    .footer-copyright {
+        @apply py-6;
+    }
+
+    .footer-copyright-content {
+        @apply flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0;
+    }
+
+    .footer-copyright-text {
+        @apply text-sm text-amber-700;
+    }
+
+    .footer-tagline {
+        @apply text-xs text-amber-600;
+    }
+}
+
+/* レスポンシブ対応の追加スタイル */
+@media (max-width: 768px) {
+    .footer-grid {
+        @apply grid-cols-1 gap-8;
+    }
+
+    .footer-social {
+        @apply justify-center;
+    }
+
+    .footer-copyright-content {
+        @apply text-center;
+    }
+
+    .footer-section {
+        @apply mb-6;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-main {
+        @apply py-8;
+    }
+
+    .footer-section h4 {
+        @apply text-base mb-3;
+    }
+
+    .footer-link {
+        @apply text-sm;
+    }
+
+    .footer-grid {
+        @apply gap-6;
+    }
+}

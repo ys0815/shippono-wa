@@ -115,7 +115,7 @@
                         <div>
                             <div class="text-xs font-semibold text-amber-700 mb-2">サイト</div>
                             <ul class="space-y-1">
-                                <li><a @click="sidebar=false" href="/" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">#しっぽのわとは？</a></li>
+                                <li><a @click="sidebar=false" href="/about" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">#しっぽのわとは？</a></li>
                                 <li><a @click="sidebar=false" href="{{ route('pets.search', 'dog') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">犬の家族を見る</a></li>
                                 <li><a @click="sidebar=false" href="{{ route('pets.search', 'cat') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">猫の家族を見る</a></li>
                                 <li><a @click="sidebar=false" href="{{ route('pets.search', 'rabbit') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">うさぎの家族を見る</a></li>

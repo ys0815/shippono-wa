@@ -402,6 +402,9 @@
                 </div>
             </section>
         </main>
+        
+        <!-- Footer -->
+        <x-footer />
     </div>
 
     <script>
