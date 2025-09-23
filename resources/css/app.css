@@ -393,7 +393,28 @@
     position: relative;
     width: 100vw;
     left: 50%;
+    transform: translateX(-50%);
+    margin-left: calc(-50vw + 0px);
+    margin-right: calc(-50vw + 0px);
+}
+
+/* より確実な全画面幅実装（フォールバック） */
+.full-width-section-fallback {
+    position: relative;
+    width: 100vw;
+    left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+}
+
+/* モバイルでの全画面幅対応 */
+@media (max-width: 768px) {
+    .full-width-section {
+        width: 100vw;
+        left: 0;
+        transform: none;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+    }
 }
