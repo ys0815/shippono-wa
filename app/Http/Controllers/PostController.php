@@ -194,19 +194,18 @@ class PostController extends Controller
             return redirect()->route('login');
         }
 
-        // バリデーション（質問1は200文字以上必須、その他は1000文字以内）
+        // バリデーション（全質問は1000文字以内）
         $request->validate([
             'pet_id' => 'required|exists:pets,id',
             'title' => 'required|string|max:30',
             'main_image' => 'required|file|mimes:jpeg,png,jpg,gif|max:10240', // 10MBまで
-            'question1' => 'required|string|min:200|max:1000',
+            'question1' => 'required|string|max:1000',
             'question2' => 'required|string|max:1000',
             'question3' => 'required|string|max:1000',
             'question4' => 'required|string|max:1000',
             'question5' => 'required|string|max:1000',
             'status' => 'required|in:draft,published',
         ], [
-            'question1.min' => '新しい家族との出会いについて200文字以上でご記入ください。',
             'question1.max' => '新しい家族との出会いについて1000文字以内でご記入ください。',
             'question2.max' => '迎える前の不安と準備について1000文字以内でご記入ください。',
             'question3.max' => '迎えた後の変化と喜びについて1000文字以内でご記入ください。',
@@ -307,14 +306,13 @@ class PostController extends Controller
                 'pet_id' => 'required|exists:pets,id',
                 'title' => 'required|string|max:30',
                 'main_image' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:10240',
-                'question1' => 'required|string|min:200|max:1000',
+                'question1' => 'required|string|max:1000',
                 'question2' => 'required|string|max:1000',
                 'question3' => 'required|string|max:1000',
                 'question4' => 'required|string|max:1000',
                 'question5' => 'required|string|max:1000',
                 'status' => 'required|in:draft,published',
             ], [
-                'question1.min' => '新しい家族との出会いについて200文字以上でご記入ください。',
                 'question1.max' => '新しい家族との出会いについて1000文字以内でご記入ください。',
                 'question2.max' => '迎える前の不安と準備について1000文字以内でご記入ください。',
                 'question3.max' => '迎えた後の変化と喜びについて1000文字以内でご記入ください。',

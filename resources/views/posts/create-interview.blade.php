@@ -110,7 +110,6 @@
                                   name="question1" 
                                   rows="4" 
                                   required
-                                  minlength="200"
                                   maxlength="1000"
                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question1') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
