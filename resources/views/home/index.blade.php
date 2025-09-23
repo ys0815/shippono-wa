@@ -188,9 +188,11 @@
                 </div>
             </section>
 
-            <!-- 統計情報 -->
-            <section class="full-width-section bg-white border-t border-b border-gray-200">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        </main>
+
+        <!-- 統計情報 -->
+        <section class="w-full bg-white border-t border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
@@ -268,9 +270,10 @@
                         <div class="text-sm text-gray-600">いいね数</div>
                     </div>
                 </div>
-                </div>
-            </section>
+            </div>
+        </section>
 
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20">
             <!-- 保護団体リンク集 -->
             <section id="shelters" class="relative bg-gray-50 border-gray-200 py-12" x-data="shelterFilter()">
                 <div class="text-center mb-10">
