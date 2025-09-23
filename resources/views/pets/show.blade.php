@@ -88,8 +88,9 @@
                             @endif
                         </div>
                         
-                        <!-- いいねボタン -->
-                        <div class="flex justify-center sm:justify-start">
+                        <!-- いいねボタンとシェアボタン -->
+                        <div class="flex justify-center sm:justify-start gap-4">
+                            <!-- いいねボタン -->
                             @auth
                                 @if($isLiked)
                                     <form action="{{ route('likes.destroy', $pet->id) }}" method="POST" class="inline">
@@ -122,6 +123,14 @@
                                     <span class="font-semibold text-base">{{ $likeCount }}</span>
                                 </div>
                             @endauth
+
+                            <!-- シェアボタン -->
+                            <button onclick="openShareModal()" class="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full hover:from-amber-600 hover:to-orange-600 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                                <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+                                </svg>
+                                <span class="font-semibold text-base">シェア</span>
+                            </button>
                         </div>
                     </div>
 
@@ -243,111 +252,6 @@
                         <div class="border-t border-gray-200 mb-8"></div>
                     @endif
 
-                    <!-- シェア機能 -->
-                    <div class="mb-8">
-                        <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
-                            <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">シェア用URL発行</span>
-                            <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
-                        </h2>
-                        
-                        @auth
-                            @if($pet->user_id === Auth::id())
-                                <div class="space-y-6">
-                                    <!-- シェア用URL生成ボタン -->
-                                    <form action="{{ route('pets.generate-share-link', $pet) }}" method="POST" class="inline">
-                                        @csrf
-                                        <button type="submit" class="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full hover:from-amber-600 hover:to-orange-600 transition font-medium">
-                                            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
-                                            </svg>
-                                            シェア用URL発行
-                                        </button>
-                                    </form>
-
-                                    <!-- 生成されたURL表示 -->
-                                    @if(session('share_url'))
-                                        <div class="mt-6 p-5 bg-gray-50 rounded-lg">
-                                            <label class="block text-base font-medium text-gray-700 mb-3">シェア用URL:</label>
-                                            <div class="flex gap-3">
-                                                <input type="text" value="{{ session('share_url') }}" readonly class="flex-1 px-4 py-3 border border-gray-300 rounded-md text-base" id="share-url">
-                                                <button onclick="copyToClipboard('share-url')" class="px-5 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition text-base">
-                                                    コピー
-                                                </button>
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    <!-- QRコード生成ボタン -->
-                                    @if(session('share_url'))
-                                        <div class="mt-6">
-                                            <p class="text-base text-gray-600 mb-4">QRコード:</p>
-                                            <a href="{{ route('pets.qr-code', $pet) }}" target="_blank" 
-                                               class="inline-flex items-center gap-2 px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition text-base">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                                                </svg>
-                                                QRコード生成
-                                            </a>
-                                        </div>
-                                    @endif
-
-                                    <!-- SNS共有ボタン -->
-                                    @if(session('share_url'))
-                                        <div class="mt-4">
-                                            <p class="text-sm text-gray-600 mb-3">SNSで共有:</p>
-                                            <div class="flex gap-3">
-                                                <!-- X -->
-                                                <a href="https://x.com/intent/tweet?text={{ urlencode($pet->name . 'のプロフィールをチェック！') }}&url={{ urlencode(session('share_url')) }}" 
-                                                   target="_blank" rel="noopener noreferrer"
-                                                   class="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition text-sm">
-                                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                                                    </svg>
-                                                    X
-                                                </a>
-
-                                                <!-- Facebook -->
-                                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(session('share_url')) }}" 
-                                                   target="_blank" rel="noopener noreferrer"
-                                                   class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition text-sm">
-                                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                                    </svg>
-                                                    Facebook
-                                                </a>
-
-                                                <!-- Instagram -->
-                                                <a href="https://www.instagram.com/" 
-                                                   target="_blank" rel="noopener noreferrer"
-                                                   class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:from-purple-600 hover:to-pink-600 transition text-sm">
-                                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                                    </svg>
-                                                    Instagram
-                                                </a>
-
-                                                <!-- LINE -->
-                                                <a href="https://social-plugins.line.me/lineit/share?url={{ urlencode(session('share_url')) }}" 
-                                                   target="_blank" rel="noopener noreferrer"
-                                                   class="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition text-sm">
-                                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .346-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .63.285.63.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
-                                                    </svg>
-                                                    LINE
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            @else
-                                <p class="text-gray-500 text-sm">このペットのシェア用URLを発行するには、ペットの所有者である必要があります。</p>
-                            @endif
-                        @else
-                            <p class="text-gray-500 text-sm">
-                                <a href="{{ route('login') }}" class="text-amber-600 hover:text-amber-800">ログイン</a>してシェア用URLを発行できます。
-                            </p>
-                        @endauth
-                    </div>
 
                     <!-- 区切り線 -->
                     <div class="border-t border-gray-200 mb-8"></div>
@@ -815,5 +719,128 @@
         function viewPostDetail(postId) {
             window.location.href = `/posts/${postId}`;
         }
+
+        // シェアモーダル制御
+        function openShareModal() {
+            document.getElementById('shareModal').classList.remove('hidden');
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.add('hidden');
+        }
+
+        // シェア機能
+        function shareToCopy() {
+            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                alert('URLをクリップボードにコピーしました');
+                closeShareModal();
+            }).catch(err => {
+                console.error('Failed to copy URL:', err);
+                alert('コピーに失敗しました');
+            });
+        }
+
+        function shareToX() {
+            const petName = '{{ $pet->name }}';
+            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
+            const text = `#しっぽのわ 「${petName}」のプロフィールをチェック！\n\n${shareUrl}`;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+            window.open(twitterUrl, '_blank', 'width=600,height=400');
+            closeShareModal();
+        }
+
+        function shareToLine() {
+            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
+            const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`;
+            window.open(lineUrl, '_blank', 'width=600,height=400');
+            closeShareModal();
+        }
+
+        function shareToFacebook() {
+            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+            window.open(facebookUrl, '_blank', 'width=600,height=400');
+            closeShareModal();
+        }
+
+        function shareToInstagram() {
+            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
+            // Instagramストーリーズの共有はURLスキームを使用
+            const instagramUrl = `https://www.instagram.com/`;
+            // モバイルデバイスの場合はInstagramアプリを開く
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.open(instagramUrl, '_blank');
+            } else {
+                window.open(instagramUrl, '_blank', 'width=600,height=400');
+            }
+            closeShareModal();
+        }
     </script>
+
+    <!-- シェアモーダル -->
+    <div id="shareModal" class="fixed inset-0 z-[9999] hidden bg-black bg-opacity-50 flex items-center justify-center p-4" onclick="closeShareModal()">
+        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-bold text-gray-800">シェア</h3>
+                <button onclick="closeShareModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-5 gap-6">
+                <!-- リンクをコピー -->
+                <div class="text-center">
+                    <button onclick="shareToCopy()" class="w-12 h-12 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors mx-auto mb-2">
+                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </button>
+                    <span class="text-xs text-gray-600">リンクをコピー</span>
+                </div>
+
+                <!-- X -->
+                <div class="text-center">
+                    <button onclick="shareToX()" class="w-12 h-12 bg-black hover:bg-gray-800 rounded-full flex items-center justify-center transition-colors mx-auto mb-2">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </button>
+                    <span class="text-xs text-gray-600">X</span>
+                </div>
+
+                <!-- LINE -->
+                <div class="text-center">
+                    <button onclick="shareToLine()" class="w-12 h-12 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center transition-colors mx-auto mb-2">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .346-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .63.285.63.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                        </svg>
+                    </button>
+                    <span class="text-xs text-gray-600">LINE</span>
+                </div>
+
+                <!-- Facebook -->
+                <div class="text-center">
+                    <button onclick="shareToFacebook()" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-colors mx-auto mb-2">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </button>
+                    <span class="text-xs text-gray-600">Facebook</span>
+                </div>
+
+                <!-- Instagramストーリーズ -->
+                <div class="text-center">
+                    <button onclick="shareToInstagram()" class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-full flex items-center justify-center transition-colors mx-auto mb-2">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </button>
+                    <span class="text-xs text-gray-600">Instagram</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-guest-layout>

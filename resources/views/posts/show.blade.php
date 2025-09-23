@@ -110,19 +110,26 @@
 
         <!-- アクションボタン -->
         <div class="mt-8 flex flex-col sm:flex-row gap-4">
-            <!-- 保護団体へ -->
-            @if($post->pet && $post->pet->shelter)
-                <a href="{{ $post->pet->shelter->website_url ?? '#' }}" 
+            <!-- 保護団体サイトへ -->
+            @if($post->pet && $post->pet->shelter && $post->pet->shelter->website_url)
+                <a href="{{ $post->pet->shelter->website_url }}" 
                    target="_blank" 
                    rel="noopener noreferrer"
-                   class="flex-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-lg text-center font-medium hover:from-amber-600 hover:to-orange-600 transition-all duration-200 shadow-sm">
-                    保護団体へ
+                   class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                    保護団体サイトへ
                 </a>
+            @else
+                <button disabled class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed font-medium text-center">
+                    保護団体サイトへ
+                </button>
             @endif
 
             <!-- シェア -->
             <button onclick="sharePost()" 
-                    class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-lg text-center font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-sm">
+                    class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
                 シェア
             </button>
         </div>
@@ -237,20 +244,28 @@
 
         // シェア機能
         function sharePost() {
+            const postTitle = '{{ Str::limit(strip_tags(str_replace(['"', "'", "\n", "\r"], '', $post->title)), 50) }}';
+            const postContent = '{{ Str::limit(strip_tags(str_replace(['"', "'", "\n", "\r"], '', $post->content)), 100) }}';
+            const postUrl = window.location.href;
+            const petName = '{{ $post->pet ? $post->pet->name : "" }}';
+            
+            // X（旧Twitter）の共有URLを生成
+            const twitterText = `#しっぽのわ ${petName ? `「${petName}」` : ''}の幸せなストーリーを読んでみませんか？\n\n${postTitle}\n\n${postUrl}`;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}`;
+            
+            // モバイルデバイスでWeb Share APIが利用可能な場合
             if (navigator.share) {
                 navigator.share({
-                    title: '{{ Str::limit(strip_tags(str_replace(['"', "'", "\n", "\r"], '', $post->title)), 50) }}',
-                    text: '{{ Str::limit(strip_tags(str_replace(['"', "'", "\n", "\r"], '', $post->content)), 100) }}',
-                    url: window.location.href
-                }).catch(err => console.log('Error sharing:', err));
-            } else {
-                // フォールバック: URLをクリップボードにコピー
-                navigator.clipboard.writeText(window.location.href).then(() => {
-                    alert('URLをクリップボードにコピーしました');
+                    title: postTitle,
+                    text: `#しっぽのわ ${petName ? `「${petName}」` : ''}の幸せなストーリー`,
+                    url: postUrl
                 }).catch(err => {
-                    console.error('Failed to copy URL:', err);
-                    alert('シェアに失敗しました');
+                    console.log('Web Share API failed, falling back to Twitter:', err);
+                    window.open(twitterUrl, '_blank', 'width=600,height=400');
                 });
+            } else {
+                // デスクトップやWeb Share APIが利用できない場合はX（旧Twitter）を開く
+                window.open(twitterUrl, '_blank', 'width=600,height=400');
             }
         }
 

@@ -43,7 +43,8 @@
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20">
 
             <!-- 新着の保護動物一覧 -->
-            <section class="relative bg-white border-t border-b border-gray-200 py-12">
+            <section class="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-white border-t border-b border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
@@ -53,7 +54,7 @@
                     </h3>
                     <p class="text-sm text-gray-600">かわいい家族たちの生活を見てみよう</p>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 xl:gap-10">
                     @foreach($recentPets as $pet)
                         <div class="text-center group">
                             <!-- ペット画像（正円・大きく表示） -->
@@ -140,6 +141,7 @@
                         </div>
                     @endforeach
                 </div>
+                </div>
             </section>
 
             <!-- サービスコンセプト -->
@@ -188,7 +190,8 @@
             </section>
 
             <!-- 統計情報 -->
-            <section class="relative bg-white border-t border-b border-gray-200 py-12">
+            <section class="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-white border-t border-b border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
@@ -214,7 +217,7 @@
                         </div>
                     @endauth
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 xl:gap-8">
                     <div class="text-center group">
                         <div class="relative mb-4">
                             <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 group-hover:scale-110 transition-transform duration-300">
@@ -265,6 +268,7 @@
                         <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['likes']) }}</div>
                         <div class="text-sm text-gray-600">いいね数</div>
                     </div>
+                </div>
                 </div>
             </section>
 
