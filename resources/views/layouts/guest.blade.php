@@ -270,16 +270,6 @@
                             <p class="text-xs text-gray-500 mt-1" x-show="kind==='unknown'">※ 不明を選んだ場合は未選択のままで構いません。</p>
                         </div>
 
-                        <!-- ソート順 -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">並び順</label>
-                            <select name="sort" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                <option value="newest">新着順</option>
-                                <option value="oldest">登録順</option>
-                                <option value="updated">更新順</option>
-                            </select>
-                        </div>
-
                         
 
                         <div class="flex gap-3 pt-2">
