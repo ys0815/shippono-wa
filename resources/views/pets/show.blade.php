@@ -252,11 +252,8 @@
                         <div class="border-t border-gray-200 mb-8"></div>
                     @endif
 
-                    <!-- レスポンシブレイアウト: 大きな画面では横並び -->
-                    <div class="lg:grid lg:grid-cols-3 lg:gap-8">
-
-                        <!-- 投稿一覧（右側） -->
-                        <div class="lg:col-span-2">
+                    <!-- 投稿一覧 -->
+                    <div>
                         <div class="mb-8">
                             <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
                                 <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">今日の幸せ、シェアしよう</span>
@@ -313,14 +310,10 @@
                                 スクロールして、もっと見る
                             </div>
                         </div>
-                        </div>
                     </div>
                 </div>
             </section>
-
-
         </main>
-
 
     <script>
         function copyToClipboard(elementId) {
