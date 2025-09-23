@@ -43,7 +43,7 @@
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20">
 
             <!-- 新着の保護動物一覧 -->
-            <section class="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-white border-t border-b border-gray-200">
+            <section class="full-width-section bg-white border-t border-b border-gray-200">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
@@ -190,7 +190,7 @@
             </section>
 
             <!-- 統計情報 -->
-            <section class="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-white border-t border-b border-gray-200">
+            <section class="full-width-section bg-white border-t border-b border-gray-200">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
