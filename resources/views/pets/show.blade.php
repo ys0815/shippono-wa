@@ -252,58 +252,17 @@
                         <div class="border-t border-gray-200 mb-8"></div>
                     @endif
 
-
-                    <!-- 区切り線 -->
-                    <div class="border-t border-gray-200 mb-8"></div>
-
-
                     <!-- レスポンシブレイアウト: 大きな画面では横並び -->
                     <div class="lg:grid lg:grid-cols-3 lg:gap-8">
-                        <!-- プロフィール情報（左側） -->
-                        <div class="lg:col-span-1">
-                            <!-- 家族ペット -->
-                            @if($familyPets->count() > 0)
-                                <div class="mb-8">
-                                    <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
-                                        <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">一緒に暮らす家族</span>
-                                        <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
-                                    </h2>
-                                    <div class="grid grid-cols-2 gap-4">
-                                        @foreach($familyPets as $familyPet)
-                                            <a href="{{ route('pets.show', $familyPet->id) }}" class="group">
-                                                <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition">
-                                                    <div class="w-16 h-16 mx-auto rounded-full overflow-hidden border-2 border-amber-200 mb-3">
-                                                        @if($familyPet->profile_image_url)
-                                                            <img src="{{ $familyPet->profile_image_url }}" alt="{{ $familyPet->name }}" class="w-full h-full object-cover">
-                                                        @else
-                                                            <div class="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
-                                                                <span class="text-amber-600 text-sm font-bold">{{ mb_substr($familyPet->name, 0, 2) }}</span>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <h3 class="font-medium text-gray-800 group-hover:text-amber-600 transition text-sm">{{ $familyPet->name }}</h3>
-                                                        <p class="text-xs text-gray-500 leading-relaxed">
-                                                            {{ __('dog' === $familyPet->species ? '犬' : ('cat' === $familyPet->species ? '猫' : ('rabbit' === $familyPet->species ? 'うさぎ' : 'その他'))) }}
-                                                            <span class="{{ $familyPet->gender === 'male' ? 'text-blue-400' : ($familyPet->gender === 'female' ? 'text-pink-400' : 'text-gray-400') }}">
-                                                                {{ __(['male' => '♂', 'female' => '♀', 'unknown' => '?'][$familyPet->gender] ?? '?') }}
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
 
                         <!-- 投稿一覧（右側） -->
                         <div class="lg:col-span-2">
-                        <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
-                            <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">今日の幸せ、シェアしよう</span>
-                            <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
-                        </h2>
+                        <div class="mb-8">
+                            <h2 class="text-xl font-bold text-gray-800 mb-6 relative inline-block">
+                                <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">今日の幸せ、シェアしよう</span>
+                                <span class="absolute -bottom-1 left-0 w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
+                            </h2>
+                        </div>
                         
                         <!-- フィルター・ソート機能 -->
                         <div class="mb-6 bg-white rounded-lg border border-amber-100 p-4">
@@ -331,7 +290,7 @@
                             </div>
                         </div>
                         
-                        <div id="posts-container" class="space-y-6">
+                        <div id="posts-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             <!-- 投稿はJavaScriptで動的に読み込まれます -->
                         </div>
                         <div id="loading-indicator" class="text-center py-6 hidden">
