@@ -717,14 +717,38 @@
         }
 
         function shareToInstagram() {
-            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
-            // Instagramストーリーズの共有はURLスキームを使用
-            const instagramUrl = `https://www.instagram.com/`;
-            // モバイルデバイスの場合はInstagramアプリを開く
-            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                window.open(instagramUrl, '_blank');
+            const url = window.location.href;
+            const text = '{{ $pet->name }} - #しっぽのわ';
+            
+            // Instagramアプリがインストールされているかチェック
+            const isInstagramInstalled = /Instagram/i.test(navigator.userAgent) || 
+                (navigator.platform === 'iPhone' || navigator.platform === 'iPad') ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            
+            if (isInstagramInstalled) {
+                // Instagramアプリがインストールされている場合、アプリを開く
+                const instagramUrl = `instagram://story-camera`;
+                window.location.href = instagramUrl;
+                
+                // フォールバック: アプリが開かない場合はリンクをコピー
+                setTimeout(() => {
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+                            alert('Instagramアプリが開かない場合は、リンクをコピーしました。Instagramアプリ内で「リンクをコピー」してから投稿してください。');
+                        });
+                    } else {
+                        alert('Instagramアプリが開かない場合は、以下のリンクをコピーしてInstagramアプリ内で「リンクをコピー」してから投稿してください。\n\n' + text + '\n' + url);
+                    }
+                }, 1000);
             } else {
-                window.open(instagramUrl, '_blank', 'width=600,height=400');
+                // Instagramアプリがインストールされていない場合
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+                        alert('Instagramアプリをインストールしてから、コピーしたリンクをInstagramストーリーズでシェアしてください。');
+                    });
+                } else {
+                    alert('Instagramアプリをインストールしてから、以下のリンクをコピーしてInstagramストーリーズでシェアしてください。\n\n' + text + '\n' + url);
+                }
             }
             closeShareModal();
         }

@@ -367,7 +367,7 @@
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
                 <div class="text-center">
-                    <h3 class="text-xl font-bold text-gray-800 mb-6">今日の幸せ、シェアしよう</h3>
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">シェアしよう</h3>
                     
                     <div class="flex flex-wrap justify-center gap-6 mb-8">
                         <!-- リンクコピー -->
@@ -485,9 +485,40 @@
         }
 
         function shareToInstagram() {
-            // Instagram Stories用のURL（実際の投稿はアプリ内で行う）
-            alert('Instagram Storiesでシェアするには、アプリ内で「リンクをコピー」してから投稿してください。');
-            shareToCopy();
+            const url = window.location.href;
+            const text = '{{ $post->title }} - #しっぽのわ';
+            
+            // Instagramアプリがインストールされているかチェック
+            const isInstagramInstalled = /Instagram/i.test(navigator.userAgent) || 
+                (navigator.platform === 'iPhone' || navigator.platform === 'iPad') ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            
+            if (isInstagramInstalled) {
+                // Instagramアプリがインストールされている場合、アプリを開く
+                const instagramUrl = `instagram://story-camera`;
+                window.location.href = instagramUrl;
+                
+                // フォールバック: アプリが開かない場合はリンクをコピー
+                setTimeout(() => {
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+                            alert('Instagramアプリが開かない場合は、リンクをコピーしました。Instagramアプリ内で「リンクをコピー」してから投稿してください。');
+                        });
+                    } else {
+                        alert('Instagramアプリが開かない場合は、以下のリンクをコピーしてInstagramアプリ内で「リンクをコピー」してから投稿してください。\n\n' + text + '\n' + url);
+                    }
+                }, 1000);
+            } else {
+                // Instagramアプリがインストールされていない場合
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+                        alert('Instagramアプリをインストールしてから、コピーしたリンクをInstagramストーリーズでシェアしてください。');
+                    });
+                } else {
+                    alert('Instagramアプリをインストールしてから、以下のリンクをコピーしてInstagramストーリーズでシェアしてください。\n\n' + text + '\n' + url);
+                }
+            }
+            closeShareModal();
         }
 
         // モーダル外クリックで閉じる
