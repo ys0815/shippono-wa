@@ -12,13 +12,26 @@
     <div class="pt-16 pb-4 px-4 max-w-2xl mx-auto bg-gray-50 min-h-screen">
         <!-- ユーザー情報ヘッダー -->
         <div class="text-center mb-4">
-            <h1 class="text-lg font-bold text-gray-800">{{ Auth::user()->display_name ?? Auth::user()->name }}さんのマイページ</h1>
+            <h1 class="text-lg font-bold text-gray-800">ようこそ、{{ Auth::user()->display_name ?? Auth::user()->name }}さん</h1>
         </div>
 
-        <!-- 通知バナー（将来: 未読通知数に連動） -->
-        <div class="bg-gray-200 rounded-lg p-3 mb-6 text-center">
-            <p class="text-sm text-gray-700">新しい「いいね」が{{ $stats['likes_got'] ?? 0 }}件届いています！</p>
-        </div>
+        <!-- 通知バナー（ペット別いいね数表示） -->
+        @if($pets->isNotEmpty())
+            <div class="bg-amber-100 border border-amber-200 rounded-lg p-3 mb-6 text-center">
+                @foreach($pets as $pet)
+                    @if($pet->likes_count > 0)
+                        <p class="text-sm text-amber-800 font-medium">{{ $pet->name }}に新しい「いいね」が{{ $pet->likes_count }}件届いています！</p>
+                    @endif
+                @endforeach
+                @if($pets->where('likes_count', '>', 0)->isEmpty())
+                    <p class="text-sm text-amber-700">新しい「いいね」が{{ $stats['likes_got'] ?? 0 }}件届いています！</p>
+                @endif
+            </div>
+        @else
+            <div class="bg-gray-200 rounded-lg p-3 mb-6 text-center">
+                <p class="text-sm text-gray-700">新しい「いいね」が{{ $stats['likes_got'] ?? 0 }}件届いています！</p>
+            </div>
+        @endif
 
         <!-- 活動統計 -->
         <div class="mb-6">

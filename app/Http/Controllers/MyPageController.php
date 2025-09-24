@@ -32,9 +32,10 @@ class MyPageController extends Controller
         $petCount = Pet::where('user_id', $user->id)->count();
         $likesGiven = Like::where('user_id', $user->id)->count();
 
-        // ペット一覧（最新5件、保護団体情報も含む）
+        // ペット一覧（最新5件、保護団体情報と各ペットのいいね数も含む）
         $pets = Pet::where('user_id', $user->id)
             ->with('shelter:id,name,area,kind')
+            ->withCount('likes')
             ->latest()
             ->take(5)
             ->get();
