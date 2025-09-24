@@ -54,6 +54,9 @@ class InterviewController extends Controller
         // インタビュー投稿かつ公開済みのもののみ表示
         abort_unless($post->type === 'interview' && $post->status === 'published', 404);
 
+        // 閲覧数をカウント
+        $post->incrementViewCount();
+
         // 関連データを読み込み（ペット、ユーザー、メディア、インタビュー内容）
         $post->load(['pet.user', 'media', 'interviewContent']);
 

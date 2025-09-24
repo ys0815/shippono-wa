@@ -47,6 +47,10 @@
                                     </span>
                                 @endif
                                 <span>飼い主さん：{{ $post->pet->user->display_name ?? $post->pet->user->name }}</span>
+                                <span class="flex items-center">
+                                    <span class="mr-1">👀</span>
+                                    {{ $post->view_count ?? 0 }}
+                                </span>
                                 <span class="ml-auto">{{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y.m.d') }}</span>
                             </div>
                         </div>
