@@ -73,10 +73,6 @@
                     <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-medium">
                         {{ $post->created_at->format('Y年m月d日') }} 投稿
                     </span>
-                    <span class="flex items-center text-gray-500">
-                        <span class="mr-1">👀</span>
-                        {{ $post->view_count ?? 0 }} 回閲覧
-                    </span>
                 </div>
             </div>
 
