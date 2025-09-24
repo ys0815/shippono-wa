@@ -229,7 +229,7 @@
             <!-- 呼びかけ CTA -->
             <section class="py-12">
                 <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-8 md:p-12 text-center text-white">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">あなたの「覚悟」と「優しさ」が、次の命を守ります</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">あなたの「覚悟」と「優しさ」が、次の命を守ります</h2>
                     <p class="text-lg md:text-xl opacity-95 mb-6">最期の瞬間まで、家族として——その約束が、悲しい命をひとつ減らします。</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="{{ route('register') }}" class="bg-white text-amber-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-50 transition-colors duration-300 shadow-lg">参加してはじめる</a>

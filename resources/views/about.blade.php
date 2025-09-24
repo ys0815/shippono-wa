@@ -187,31 +187,18 @@
                     さあ、一緒にしっぽの輪を広げましょう。
                 </p>
             </section>
-            
-            <!-- 呼びかけ -->
-            <section class="py-12 md:py-16 lg:py-16">
-                <div class="bg-amber-100 rounded-2xl p-8 md:p-12 text-center">
-                    <div class="max-w-4xl mx-auto">
-                        <h2 class="text-3xl md:text-4xl font-bold text-amber-800 mb-6">
-                            あなたの幸せな日常をシェアして、<br class="hidden md:block">
-                            次の命をつなげましょう
-                        </h2>
-                        <p class="text-lg md:text-xl text-amber-700 mb-8 leading-relaxed">
-                            「#しっぽのわ」は、そんな温かい"幸せの循環"を生み出す場所でありたいと願っています。
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="/register" 
-                               class="bg-amber-500 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-amber-600 transition-colors duration-300 shadow-md">
-                                今すぐ始める
-                            </a>
-                            <a href="/" 
-                               class="border-2 border-amber-500 text-amber-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-amber-500 hover:text-white transition-colors duration-300">
-                                投稿を見る
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                        <!-- 呼びかけ CTA -->
+                        <section class="py-12">
+                            <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-8 md:p-12 text-center text-white">
+                                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white"> あなたの幸せな日常をシェアして、<br class="hidden md:block">
+                                    次の命をつなげましょう</h2>
+                                <p class="text-lg md:text-xl opacity-95 mb-6">「#しっぽのわ」は、そんな温かい"幸せの循環"を生み出す場所でありたいと願っています。</p>
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <a href="{{ route('register') }}" class="bg-white text-amber-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-50 transition-colors duration-300 shadow-lg">参加してはじめる</a>
+                                    <a href="{{ route('home') }}" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-amber-600 transition-colors duration-300">幸せな日常を見る</a>
+                                </div>
+                            </div>
+                        </section>
 
 
     </div>
