@@ -143,6 +143,72 @@
                         </div>
                     </div>
                 @endif
+
+                <!-- ペットプロフィール -->
+                @if($post->pet)
+                    <div class="border-t border-gray-200 pt-4 mt-6">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
+                                @if($post->pet->profile_image_url)
+                                    @php
+                                        $imageUrl = $post->pet->profile_image_url;
+                                        // /storage/で始まっていない場合は追加
+                                        if (!str_starts_with($imageUrl, '/storage/')) {
+                                            $imageUrl = '/storage/' . ltrim($imageUrl, '/');
+                                        }
+                                    @endphp
+                                    <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
+                                @else
+                                    <span class="text-gray-500 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
+                                @endif
+                            </a>
+                            <div>
+                                <div class="text-xl font-bold text-gray-800 leading-tight">
+                                    {{ e($post->pet->name) }} 
+                                    <span class="text-lg font-normal {{ $post->pet->gender === 'male' ? 'text-blue-500' : ($post->pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
+                                        {{ ['male' => '♂', 'female' => '♀', 'unknown' => '?'][$post->pet->gender] ?? '?' }}
+                                    </span>
+                                </div>
+                                @if($post->pet->user)
+                                    <div class="text-sm mt-1">
+                                        <span class="text-amber-600">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}
+                                    </div>
+                                @endif
+                                @if($post->pet->shelter)
+                                    <div class="text-sm mt-1">
+                                        <span class="text-amber-600">お迎え先の保護団体:</span> {{ e($post->pet->shelter->name) }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        
+                        <!-- アクションボタン -->
+                        <div class="flex flex-row gap-4">
+                            <!-- 保護団体サイトへ -->
+                            @if($post->pet->shelter && $post->pet->shelter->website_url)
+                                <a href="{{ $post->pet->shelter->website_url }}" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                                    保護団体サイトへ
+                                </a>
+                            @else
+                                <button disabled class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed font-medium text-center">
+                                    保護団体サイトへ
+                                </button>
+                            @endif
+
+                            <!-- シェア -->
+                            <button onclick="openShareModal()" 
+                                    class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                                </svg>
+                                シェア
+                            </button>
+                        </div>
+                    </div>
+                @endif
                 </div>
             @else
                 <!-- フォールバック: 従来のcontent表示 -->
@@ -163,78 +229,6 @@
             @endif
             </div>
 
-        <!-- ペットプロフィール -->
-        @if($post->pet)
-            <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-6 mt-6 shadow-lg">
-                <div class="flex flex-col lg:flex-row items-center gap-6">
-                    <!-- ペットアイコン（正円） - クリック可能 -->
-                    <a href="{{ route('pets.show', $post->pet) }}" class="flex-shrink-0 group">
-                        @if($post->pet->profile_image_url)
-                            <img src="{{ $post->pet->profile_image_url }}" alt="{{ $post->pet->name }}" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-white shadow-lg ring-2 ring-amber-200 group-hover:ring-amber-400 transition-all duration-300 group-hover:scale-105">
-                        @else
-                            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center border-4 border-white shadow-lg ring-2 ring-amber-200 group-hover:ring-amber-400 transition-all duration-300 group-hover:scale-105">
-                                <span class="text-amber-600 text-2xl sm:text-3xl font-bold">{{ mb_substr($post->pet->name, 0, 2) }}</span>
-                            </div>
-                        @endif
-                    </a>
-                    
-                    <!-- ペット情報 -->
-                    <div class="flex items-center space-x-3 mb-4">
-                        <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
-                            @if($post->pet->profile_image_url)
-                                @php
-                                    $imageUrl = $post->pet->profile_image_url;
-                                    // /storage/で始まっていない場合は追加
-                                    if (!str_starts_with($imageUrl, '/storage/')) {
-                                        $imageUrl = '/storage/' . ltrim($imageUrl, '/');
-                                    }
-                                @endphp
-                                <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
-                            @else
-                                <span class="text-gray-500 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
-                            @endif
-                        </a>
-                        <div>
-                            <div class="text-xl font-bold text-gray-800 leading-tight">
-                                {{ e($post->pet->name) }} 
-                                <span class="text-lg font-normal {{ $post->pet->gender === 'male' ? 'text-blue-500' : ($post->pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
-                                    {{ ['male' => '♂', 'female' => '♀', 'unknown' => '?'][$post->pet->gender] ?? '?' }}
-                                </span>
-                            </div>
-                            @if($post->pet->user)
-                                <div class="text-sm text-amber-600 mt-1">飼い主さん: {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}</div>
-                            @endif
-                        </div>
-                    </div>
-                    
-                    <!-- アクションボタン -->
-                    <div class="flex flex-row gap-4">
-                        <!-- 保護団体サイトへ -->
-                        @if($post->pet->shelter && $post->pet->shelter->website_url)
-                            <a href="{{ $post->pet->shelter->website_url }}" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
-                               class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
-                                保護団体サイトへ
-                            </a>
-                        @else
-                            <button disabled class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed font-medium text-center">
-                                保護団体サイトへ
-                            </button>
-                        @endif
-
-                        <!-- シェア -->
-                        <button onclick="openShareModal()" 
-                                class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
-                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
-                            </svg>
-                            シェア
-                        </button>
-                    </div>
-                </div>
-            </div>
-        @endif
 
         <!-- 関連投稿 -->
         @if($relatedPosts->count() > 0)
