@@ -179,91 +179,58 @@
                     </a>
                     
                     <!-- ペット情報 -->
-                    <div class="flex-1 text-center lg:text-left">
-                        <!-- ペット名 -->
-                        <h3 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-3">
-                            {{ $post->pet->name }}
-                            @if($post->pet->gender)
-                                <span class="text-xl ml-2 {{ $post->pet->gender === 'male' ? 'text-blue-500' : ($post->pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
-                                    {{ ['male'=>'♂','female'=>'♀','unknown'=>'?'][$post->pet->gender] ?? '?' }}
-                                </span>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
+                            @if($post->pet->profile_image_url)
+                                @php
+                                    $imageUrl = $post->pet->profile_image_url;
+                                    // /storage/で始まっていない場合は追加
+                                    if (!str_starts_with($imageUrl, '/storage/')) {
+                                        $imageUrl = '/storage/' . ltrim($imageUrl, '/');
+                                    }
+                                @endphp
+                                <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
+                            @else
+                                <span class="text-gray-500 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
                             @endif
-                        </h3>
-
-                        <!-- 情報カード（コンパクト化） -->
-                        <div class="space-y-3">
-                            <!-- 飼い主さん情報 -->
-                            <div class="bg-white rounded-lg p-3 shadow-sm border border-amber-100">
-                                <div class="flex items-center justify-center lg:justify-start gap-2">
-                                    <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                    </svg>
-                                    <span class="text-sm text-gray-600">飼い主さん：</span>
-                                    <span class="font-semibold text-gray-800">{{ $post->pet->user->display_name ?? $post->pet->user->name }}</span>
-                                </div>
+                        </a>
+                        <div>
+                            <div class="text-xl font-bold text-gray-800 leading-tight">
+                                {{ e($post->pet->name) }} 
+                                <span class="text-lg font-normal {{ $post->pet->gender === 'male' ? 'text-blue-500' : ($post->pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
+                                    {{ ['male' => '♂', 'female' => '♀', 'unknown' => '?'][$post->pet->gender] ?? '?' }}
+                                </span>
                             </div>
-
-                            <!-- お迎え先情報（リンク化） -->
-                            @if($post->pet->shelter)
-                                <div class="bg-white rounded-lg p-3 shadow-sm border border-amber-100">
-                                    <div class="flex items-center justify-center lg:justify-start gap-2">
-                                        <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                        </svg>
-                                        <span class="text-sm text-gray-600">お迎え先：</span>
-                                        @if($post->pet->shelter->website_url)
-                                            <a href="{{ $post->pet->shelter->website_url }}" target="_blank" class="font-semibold text-amber-600 hover:text-amber-700 hover:underline transition-colors">
-                                                {{ $post->pet->shelter->name }}
-                                            </a>
-                                        @else
-                                            <span class="font-semibold text-gray-600">
-                                                {{ $post->pet->shelter->name }}
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
+                            @if($post->pet->user)
+                                <div class="text-sm text-amber-600 mt-1">飼い主さん: {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}</div>
                             @endif
                         </div>
-                        
-                        <!-- SNSシェアボタン（コンパクト化） -->
-                        <div class="bg-white rounded-lg p-3 mt-4 shadow-sm border border-amber-100">
-                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
-                                <span class="text-xs font-medium text-gray-600 flex items-center">
-                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
-                                    </svg>
-                                    シェア
-                                </span>
-                                <div class="flex gap-2">
-                                    <!-- X（旧Twitter） -->
-                                    <a href="https://twitter.com/intent/tweet?text={{ urlencode($post->title . ' - #しっぽのわ') }}&url={{ urlencode(request()->url()) }}" 
-                                       target="_blank" 
-                                       class="w-10 h-10 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-300 transform hover:scale-110 shadow-md">
-                                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                                        </svg>
-                                    </a>
-                                    
-                                    <!-- Facebook -->
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" 
-                                       target="_blank" 
-                                       class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 shadow-md">
-                                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                        </svg>
-                                    </a>
-                                    
-                                    <!-- Instagram -->
-                                    <a href="https://www.instagram.com/" 
-                                       target="_blank" 
-                                       class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-110 shadow-md">
-                                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.014 5.367 18.647.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297zm7.83-9.281H7.83c-.807 0-1.418.611-1.418 1.418v7.83c0 .807.611 1.418 1.418 1.418h8.449c.807 0 1.418-.611 1.418-1.418v-7.83c0-.807-.611-1.418-1.418-1.418zM17.723 4.5c-.807 0-1.418.611-1.418 1.418s.611 1.418 1.418 1.418 1.418-.611 1.418-1.418-.611-1.418-1.418-1.418z"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    
+                    <!-- アクションボタン -->
+                    <div class="flex flex-row gap-4">
+                        <!-- 保護団体サイトへ -->
+                        @if($post->pet->shelter && $post->pet->shelter->website_url)
+                            <a href="{{ $post->pet->shelter->website_url }}" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                                保護団体サイトへ
+                            </a>
+                        @else
+                            <button disabled class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed font-medium text-center">
+                                保護団体サイトへ
+                            </button>
+                        @endif
+
+                        <!-- シェア -->
+                        <button onclick="openShareModal()" 
+                                class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                            </svg>
+                            シェア
+                        </button>
                     </div>
                 </div>
             </div>
@@ -397,6 +364,142 @@
                 } else if (e.key === 'ArrowRight') {
                     nextMedia();
                 }
+            }
+        });
+    </script>
+
+    <!-- シェアモーダル -->
+    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+                <div class="text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">今日の幸せ、シェアしよう</h3>
+                    
+                    <div class="flex flex-wrap justify-center gap-6 mb-8">
+                        <!-- リンクコピー -->
+                        <div class="flex flex-col items-center cursor-pointer" onclick="shareToCopy()">
+                            <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2 hover:bg-gray-200 transition-colors">
+                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs text-gray-600">リンクコピー</span>
+                        </div>
+                        
+                        <!-- X (旧Twitter) -->
+                        <div class="flex flex-col items-center cursor-pointer" onclick="shareToX()">
+                            <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center mb-2 hover:bg-gray-800 transition-colors">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs text-gray-600">X</span>
+                        </div>
+                        
+                        <!-- LINE -->
+                        <div class="flex flex-col items-center cursor-pointer" onclick="shareToLine()">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-2 hover:bg-green-600 transition-colors">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.626-.285-.626-.629V8.108c0-.345.281-.63.63-.63.346 0 .63.285.63.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs text-gray-600">LINE</span>
+                        </div>
+                        
+                        <!-- Facebook -->
+                        <div class="flex flex-col items-center cursor-pointer" onclick="shareToFacebook()">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mb-2 hover:bg-blue-700 transition-colors">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs text-gray-600">Facebook</span>
+                        </div>
+                        
+                        <!-- Instagram Stories -->
+                        <div class="flex flex-col items-center cursor-pointer" onclick="shareToInstagram()">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-2 hover:from-purple-600 hover:to-pink-600 transition-colors">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs text-gray-600">Instagram</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="closeShareModal()" class="w-full py-3 px-6 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                        閉じる
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // シェアモーダル制御
+        function openShareModal() {
+            document.getElementById('shareModal').classList.remove('hidden');
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.add('hidden');
+        }
+
+        // シェア機能
+        function shareToCopy() {
+            const url = window.location.href;
+            const text = '{{ $post->title }} - #しっぽのわ';
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+                    alert('リンクをコピーしました！');
+                });
+            } else {
+                // フォールバック
+                const textArea = document.createElement('textarea');
+                textArea.value = `${text}\n${url}`;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('リンクをコピーしました！');
+            }
+            closeShareModal();
+        }
+
+        function shareToX() {
+            const url = window.location.href;
+            const text = '{{ $post->title }} - #しっぽのわ';
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+            window.open(twitterUrl, '_blank');
+            closeShareModal();
+        }
+
+        function shareToLine() {
+            const url = window.location.href;
+            const text = '{{ $post->title }} - #しっぽのわ';
+            const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+            window.open(lineUrl, '_blank');
+            closeShareModal();
+        }
+
+        function shareToFacebook() {
+            const url = window.location.href;
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+            window.open(facebookUrl, '_blank');
+            closeShareModal();
+        }
+
+        function shareToInstagram() {
+            // Instagram Stories用のURL（実際の投稿はアプリ内で行う）
+            alert('Instagram Storiesでシェアするには、アプリ内で「リンクをコピー」してから投稿してください。');
+            shareToCopy();
+        }
+
+        // モーダル外クリックで閉じる
+        document.getElementById('shareModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeShareModal();
             }
         });
     </script>

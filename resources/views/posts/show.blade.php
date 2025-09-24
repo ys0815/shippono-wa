@@ -98,9 +98,21 @@
                             @endif
                         </a>
                         <div>
-                            <div class="font-medium" style="color: rgb(217 119 6);">名前: {{ e($post->pet->name) }}</div>
-                                @if($post->pet->user)
-                                    <div class="text-sm" style="color: rgb(217 119 6);">飼い主さん: {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}</div>
+                            <div class="text-xl font-bold text-gray-800 leading-tight">
+                                {{ e($post->pet->name) }} 
+                                <span class="text-lg font-normal {{ $post->pet->gender === 'male' ? 'text-blue-500' : ($post->pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
+                                    {{ ['male' => '♂', 'female' => '♀', 'unknown' => '?'][$post->pet->gender] ?? '?' }}
+                                </span>
+                            </div>
+                            @if($post->pet->user)
+                                <div class="text-sm mt-1">
+                                    <span class="text-amber-600">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}
+                                </div>
+                            @endif
+                            @if($post->pet->shelter)
+                                <div class="text-sm mt-1">
+                                    <span class="text-amber-600">お迎え先の保護団体:</span> {{ e($post->pet->shelter->name) }}
+                                </div>
                             @endif
                         </div>
                     </div>
