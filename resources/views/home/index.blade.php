@@ -4,7 +4,26 @@
             scroll-behavior: smooth;
         }
     </style>
-    <div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
+    <div x-data="{ 
+        sidebar:false, 
+        search:false,
+        init() {
+            // ページ読み込み時にハッシュフラグメントをチェック
+            this.$nextTick(() => {
+                if (window.location.hash === '#shelters') {
+                    setTimeout(() => {
+                        const element = document.getElementById('shelters');
+                        if (element) {
+                            element.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }, 100);
+                }
+            });
+        }
+    }" class="min-h-screen bg-gray-50">
 
 
         <!-- Hero Section - 全面画像版 -->

@@ -17,7 +17,31 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased bg-gray-50" style="font-family: 'Noto Sans JP', sans-serif;">
-        <div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
+        <div x-data="{ 
+            sidebar:false, 
+            search:false,
+            scrollToShelters() {
+                // サイドバーを閉じる
+                this.sidebar = false;
+                
+                // 現在のページがトップページかチェック
+                if (window.location.pathname === '/' || window.location.pathname === '') {
+                    // トップページの場合、直接スクロール
+                    setTimeout(() => {
+                        const element = document.getElementById('shelters');
+                        if (element) {
+                            element.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }, 100);
+                } else {
+                    // 他のページの場合、トップページに遷移してからスクロール
+                    window.location.href = '/#shelters';
+                }
+            }
+        }" class="min-h-screen bg-gray-50">
             <!-- Header -->
             <header class="sticky top-0 z-[900] bg-white/90 backdrop-blur border-b border-amber-100">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
