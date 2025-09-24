@@ -32,7 +32,7 @@
             </section>
 
             <!-- サービス概要 -->
-            <section class="py-16 md:py-20">
+            <section class="py-20 md:py-24 lg:py-28">
                 <div class="max-w-4xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-bold text-amber-800 mb-8 text-center">私たちの想い</h2>
                     
@@ -73,7 +73,7 @@
             </section>
 
             <!-- できること -->
-            <section class="py-16 md:py-20">
+            <section class="py-20 md:py-24 lg:py-28">
                 <div class="max-w-6xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-bold text-amber-800 mb-12 text-center">できること</h2>
                     
@@ -134,7 +134,7 @@
             </section>
 
             <!-- 参加の方法 -->
-            <section class="py-16 md:py-20">
+            <section class="py-20 md:py-24 lg:py-28">
                 <div class="max-w-4xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-bold text-amber-800 mb-12 text-center">参加の方法</h2>
                     
@@ -145,7 +145,7 @@
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-amber-800 mb-2">新規登録</h3>
-                                <p class="text-gray-700 leading-relaxed">
+                                <p class="text-gray-700 leading-relaxed"></p>
                                     メールアドレスとパスワードで簡単にユーザー登録。誰でも気軽に参加できます。
                                 </p>
                             </div>
@@ -179,7 +179,7 @@
             </section>
 
             <!-- フッター情報 -->
-            <section class="py-8 md:py-12 text-center text-gray-600">
+            <section class="py-16 md:py-20 lg:py-24 text-center text-gray-600">
                 <p class="text-base md:text-lg mb-3 md:mb-4">
                     あなたの小さな一歩が、社会全体の大きなうねりになります。
                 </p>
@@ -189,7 +189,7 @@
             </section>
             
             <!-- 呼びかけ -->
-            <section class="py-16 md:py-20">
+            <section class="py-20 md:py-24 lg:py-28">
                 <div class="bg-amber-100 rounded-2xl p-8 md:p-12 text-center">
                     <div class="max-w-4xl mx-auto">
                         <h2 class="text-3xl md:text-4xl font-bold text-amber-800 mb-6">
