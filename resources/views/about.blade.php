@@ -139,9 +139,9 @@
                     <h2 class="text-3xl md:text-4xl font-bold text-amber-800 mb-12 text-center">参加の方法</h2>
                     
                     <div class="space-y-8">
-                        <div class="flex items-start space-x-6">
-                            <div class="w-12 h-12 bg-amber-500 text-white rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-lg">
-                                1
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-amber-600 text-lg font-bold">1</span>
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-amber-800 mb-2">新規登録</h3>
@@ -151,9 +151,9 @@
                             </div>
                         </div>
                         
-                        <div class="flex items-start space-x-6">
-                            <div class="w-12 h-12 bg-amber-500 text-white rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-lg">
-                                2
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-amber-600 text-lg font-bold">2</span>
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-amber-800 mb-2">投稿・シェア</h3>
@@ -163,9 +163,9 @@
                             </div>
                         </div>
                         
-                        <div class="flex items-start space-x-6">
-                            <div class="w-12 h-12 bg-amber-500 text-white rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-lg">
-                                3
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-amber-600 text-lg font-bold">3</span>
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-amber-800 mb-2">コミュニティ参加</h3>
@@ -178,16 +178,16 @@
                 </div>
             </section>
 
-                        <!-- フッター情報 -->
-                        <section class="py-8 md:py-12 text-center text-gray-600">
-                            <p class="text-base md:text-lg mb-3 md:mb-4">
-                                あなたの小さな一歩が、社会全体の大きなうねりになります。
-                            </p>
-                            <p class="text-xl md:text-2xl font-bold text-amber-600">
-                                さあ、一緒にしっぽの輪を広げましょう。
-                            </p>
-                        </section>
-                        
+            <!-- フッター情報 -->
+            <section class="py-8 md:py-12 text-center text-gray-600">
+                <p class="text-base md:text-lg mb-3 md:mb-4">
+                    あなたの小さな一歩が、社会全体の大きなうねりになります。
+                </p>
+                <p class="text-xl md:text-2xl font-bold text-amber-600">
+                    さあ、一緒にしっぽの輪を広げましょう。
+                </p>
+            </section>
+            
             <!-- 呼びかけ -->
             <section class="py-16 md:py-20">
                 <div class="bg-amber-100 rounded-2xl p-8 md:p-12 text-center">
