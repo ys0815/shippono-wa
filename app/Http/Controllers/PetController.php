@@ -202,6 +202,20 @@ class PetController extends Controller
         $pets = $query->take(5)->get();
         $totalCount = $query->count();
 
+        // 各ペットにインタビューポストの情報を追加
+        $pets->each(function ($pet) {
+            $interviewPost = $pet->posts()
+                ->where('type', 'interview')
+                ->where('status', 'published')
+                ->latest()
+                ->first();
+
+            $pet->interview_post = $interviewPost ? [
+                'id' => $interviewPost->id,
+                'title' => $interviewPost->title,
+            ] : null;
+        });
+
         // 検索に使用した条件を保持
         $searchParams = $request->only(['species', 'gender', 'shelter_kind', 'shelter_area', 'shelter_id', 'sort']);
 

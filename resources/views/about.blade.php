@@ -1,6 +1,5 @@
-<x-app-layout>
-    <div class="bg-gray-50 min-h-screen">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<x-guest-layout>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
             <!-- ヒーローセクション -->
             <section class="text-center py-12 md:py-20">
@@ -215,6 +214,5 @@
             </section>
 
 
-        </div>
     </div>
-</x-app-layout>
+</x-guest-layout>
