@@ -200,11 +200,11 @@
                             「#しっぽのわ」は、そんな温かい"幸せの循環"を生み出す場所でありたいと願っています。
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="{{ route('register') }}" 
+                            <a href="/register" 
                                class="bg-amber-500 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-amber-600 transition-colors duration-300 shadow-md">
                                 今すぐ始める
                             </a>
-                            <a href="{{ route('home') }}" 
+                            <a href="/" 
                                class="border-2 border-amber-500 text-amber-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-amber-500 hover:text-white transition-colors duration-300">
                                 投稿を見る
                             </a>
