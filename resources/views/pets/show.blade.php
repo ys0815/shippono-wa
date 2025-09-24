@@ -710,9 +710,29 @@
         }
 
         function shareToFacebook() {
-            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
-            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-            window.open(facebookUrl, '_blank', 'width=600,height=400');
+            const url = window.location.href;
+            const text = '{{ $pet->name }} - #しっぽのわ';
+            
+            // Facebookアプリがインストールされているかチェック
+            const isFacebookInstalled = /FBAN|FBAV/i.test(navigator.userAgent) || 
+                (navigator.platform === 'iPhone' || navigator.platform === 'iPad') ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            
+            if (isFacebookInstalled) {
+                // Facebookアプリがインストールされている場合、アプリを開く
+                const facebookAppUrl = `fb://share?link=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+                window.location.href = facebookAppUrl;
+                
+                // フォールバック: アプリが開かない場合はブラウザで開く
+                setTimeout(() => {
+                    const facebookWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+                    window.open(facebookWebUrl, '_blank', 'width=600,height=400');
+                }, 1000);
+            } else {
+                // Facebookアプリがインストールされていない場合、ブラウザで開く
+                const facebookWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+                window.open(facebookWebUrl, '_blank', 'width=600,height=400');
+            }
             closeShareModal();
         }
 
