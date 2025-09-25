@@ -684,13 +684,51 @@
         // シェア機能
         function shareToCopy() {
             const shareUrl = window.location.href;
-            navigator.clipboard.writeText(shareUrl).then(() => {
-                alert('URLをクリップボードにコピーしました');
-                closeShareModal();
-            }).catch(err => {
-                console.error('Failed to copy URL:', err);
-                alert('コピーに失敗しました');
-            });
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                // モダンブラウザでHTTPS環境の場合
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert('URLをクリップボードにコピーしました');
+                    closeShareModal();
+                }).catch(err => {
+                    console.error('Failed to copy URL:', err);
+                    // フォールバック
+                    fallbackCopyTextToClipboard(shareUrl);
+                });
+            } else {
+                // フォールバック
+                fallbackCopyTextToClipboard(shareUrl);
+            }
+        }
+        
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            
+            // テキストエリアを画面外に配置
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    alert('URLをクリップボードにコピーしました');
+                    closeShareModal();
+                } else {
+                    alert('コピーに失敗しました。手動でコピーしてください。\n\n' + text);
+                }
+            } catch (err) {
+                console.error('Fallback: Failed to copy URL:', err);
+                alert('コピーに失敗しました。手動でコピーしてください。\n\n' + text);
+            }
+            
+            document.body.removeChild(textArea);
         }
 
         function shareToX() {
