@@ -740,37 +740,34 @@
             const url = window.location.href;
             const text = '{{ $pet->name }} - #しっぽのわ';
             
-            // Instagramアプリがインストールされているかチェック
-            const isInstagramInstalled = /Instagram/i.test(navigator.userAgent) || 
-                (navigator.platform === 'iPhone' || navigator.platform === 'iPad') ||
-                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            
-            if (isInstagramInstalled) {
-                // Instagramアプリがインストールされている場合、アプリを開く
-                const instagramUrl = `instagram://story-camera`;
-                window.location.href = instagramUrl;
-                
-                // フォールバック: アプリが開かない場合はリンクをコピー
-                setTimeout(() => {
-                    if (navigator.clipboard) {
-                        navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
-                            alert('Instagramアプリが開かない場合は、リンクをコピーしました。Instagramアプリ内で「リンクをコピー」してから投稿してください。');
-                        });
-                    } else {
-                        alert('Instagramアプリが開かない場合は、以下のリンクをコピーしてInstagramアプリ内で「リンクをコピー」してから投稿してください。\n\n' + text + '\n' + url);
-                    }
-                }, 1000);
+            // Web Share APIが利用可能かチェック
+            if (navigator.share) {
+                navigator.share({
+                    title: text,
+                    text: text,
+                    url: url
+                }).then(() => {
+                    console.log('Instagramシェアが成功しました');
+                }).catch((error) => {
+                    console.log('Instagramシェアがキャンセルされました:', error);
+                    // フォールバック: リンクをコピー
+                    copyToClipboard(text, url);
+                });
             } else {
-                // Instagramアプリがインストールされていない場合
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
-                        alert('Instagramアプリをインストールしてから、コピーしたリンクをInstagramストーリーズでシェアしてください。');
-                    });
-                } else {
-                    alert('Instagramアプリをインストールしてから、以下のリンクをコピーしてInstagramストーリーズでシェアしてください。\n\n' + text + '\n' + url);
-                }
+                // Web Share APIが利用できない場合、リンクをコピー
+                copyToClipboard(text, url);
             }
             closeShareModal();
+        }
+        
+        function copyToClipboard(text, url) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+                    alert('リンクをコピーしました。Instagramアプリで「リンクをシェア」して投稿してください。');
+                });
+            } else {
+                alert('以下のリンクをコピーしてInstagramアプリで「リンクをシェア」して投稿してください。\n\n' + text + '\n' + url);
+            }
         }
     </script>
 
@@ -827,7 +824,7 @@
                     <span class="text-xs text-gray-600">Facebook</span>
                 </div>
 
-                <!-- Instagramストーリーズ -->
+                <!-- Instagram -->
                 <div class="text-center flex-shrink-0">
                     <button onclick="shareToInstagram()" class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-full flex items-center justify-center transition-colors mx-auto mb-2">
                         <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
