@@ -512,8 +512,11 @@
             const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
             if (isMobile) {
-                // モバイルデバイスの場合、InstagramアプリのURLスキームを試行
-                const instagramAppUrl = `instagram://share?url=${encodeURIComponent(url)}&title=${encodeURIComponent(text)}`;
+                // モバイルデバイスの場合、複数の方法を試行
+                let appOpened = false;
+                
+                // 方法1: InstagramアプリのURLスキーム（直接リンクシェア）
+                const instagramAppUrl = `instagram://library?AssetPath=${encodeURIComponent(url)}`;
                 
                 // アプリを開く試行
                 const iframe = document.createElement('iframe');
@@ -521,11 +524,11 @@
                 iframe.src = instagramAppUrl;
                 document.body.appendChild(iframe);
                 
-                // アプリが開かない場合のフォールバック
+                // アプリが開いたかチェック
                 setTimeout(() => {
                     document.body.removeChild(iframe);
                     
-                    // Web Share APIが利用可能かチェック
+                    // 方法2: Web Share APIを試行
                     if (navigator.share) {
                         navigator.share({
                             title: text,
@@ -533,15 +536,28 @@
                             url: url
                         }).then(() => {
                             console.log('Instagramシェアが成功しました');
+                            appOpened = true;
                         }).catch(() => {
-                            // 最終フォールバック: リンクをコピー
-                            copyToClipboard(text, url);
+                            // 方法3: 直接window.locationでInstagramアプリを開く
+                            if (!appOpened) {
+                                window.location.href = instagramAppUrl;
+                                
+                                // 最終フォールバック: リンクをコピー
+                                setTimeout(() => {
+                                    copyToClipboard(text, url);
+                                }, 2000);
+                            }
                         });
                     } else {
+                        // 方法3: 直接window.locationでInstagramアプリを開く
+                        window.location.href = instagramAppUrl;
+                        
                         // 最終フォールバック: リンクをコピー
-                        copyToClipboard(text, url);
+                        setTimeout(() => {
+                            copyToClipboard(text, url);
+                        }, 2000);
                     }
-                }, 1000);
+                }, 500);
             } else {
                 // デスクトップの場合、Web Share APIまたはリンクコピー
                 if (navigator.share) {
