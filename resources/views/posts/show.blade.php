@@ -389,57 +389,21 @@
             const url = window.location.href;
             const text = '{{ $post->title }} - #しっぽのわ';
             
-            // モバイルデバイスかどうかをチェック
-            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            
-            if (isMobile) {
-                // モバイルデバイスの場合、Instagramアプリの通常のシェア機能を使用
-                
-                // 方法1: Web Share APIを優先（Instagramアプリが選択される可能性）
-                if (navigator.share) {
-                    navigator.share({
-                        title: text,
-                        text: text,
-                        url: url
-                    }).then(() => {
-                        console.log('Instagramシェアが成功しました');
-                    }).catch(() => {
-                        // 方法2: InstagramアプリのURLスキームでシェア機能を開く
-                        const instagramShareUrl = `instagram://share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-                        window.location.href = instagramShareUrl;
-                        
-                        // 最終フォールバック: リンクをコピー
-                        setTimeout(() => {
-                            copyToClipboard(text, url);
-                        }, 2000);
-                    });
-                } else {
-                    // 方法2: InstagramアプリのURLスキームでシェア機能を開く
-                    const instagramShareUrl = `instagram://share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-                    window.location.href = instagramShareUrl;
-                    
-                    // 最終フォールバック: リンクをコピー
-                    setTimeout(() => {
-                        copyToClipboard(text, url);
-                    }, 2000);
-                }
-            } else {
-                // デスクトップの場合、Web Share APIまたはリンクコピー
-                if (navigator.share) {
-                    navigator.share({
-                        title: text,
-                        text: text,
-                        url: url
-                    }).then(() => {
-                        console.log('Instagramシェアが成功しました');
-                    }).catch(() => {
-                        // フォールバック: リンクをコピー
-                        copyToClipboard(text, url);
-                    });
-                } else {
+            // Web Share APIを使用してInstagramの通常のシェア機能に遷移
+            if (navigator.share) {
+                navigator.share({
+                    title: text,
+                    text: text,
+                    url: url
+                }).then(() => {
+                    console.log('Instagramシェアが成功しました');
+                }).catch(() => {
                     // フォールバック: リンクをコピー
                     copyToClipboard(text, url);
-                }
+                });
+            } else {
+                // Web Share APIが利用できない場合、リンクをコピー
+                copyToClipboard(text, url);
             }
             closeShareModal();
         }
