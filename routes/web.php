@@ -109,7 +109,7 @@ Route::get('/interviews/{post}', [InterviewController::class, 'show'])->name('in
 // 投稿詳細ページ（公開）
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
-// 統計情報更新（認証必要）
+// 統計情報更新（管理者のみ、デバッグ用）
 Route::post('/stats/update', function () {
     Artisan::call('stats:update');
     return redirect()->back()->with('status', 'stats-updated');

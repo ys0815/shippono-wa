@@ -15,14 +15,7 @@ class Kernel extends ConsoleKernel
             ->dailyAt('08:00')
             ->timezone('Asia/Tokyo')
             ->withoutOverlapping()
-            ->runInBackground()
-            ->appendOutputTo(storage_path('logs/scheduler.log'))
-            ->onSuccess(function () {
-                Log::info('Site statistics updated successfully at ' . now()->toDateTimeString());
-            })
-            ->onFailure(function () {
-                Log::error('Site statistics update failed at ' . now()->toDateTimeString());
-            });
+            ->runInBackground();
     }
 
     protected function commands(): void

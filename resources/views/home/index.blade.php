@@ -223,19 +223,6 @@
                     @if(isset($stats['updated_at']))
                         <p class="text-xs text-gray-500 mt-2">最終更新: {{ \Carbon\Carbon::parse($stats['updated_at'])->format('Y年n月j日 H:i') }}</p>
                     @endif
-                    @auth
-                        <div class="mt-3">
-                            @if(session('status') === 'stats-updated')
-                                <div class="text-xs text-green-600 mb-2">統計情報が更新されました</div>
-                            @endif
-                            <form action="{{ route('stats.update') }}" method="POST" class="inline">
-                                @csrf
-                                <button type="submit" class="px-3 py-1 text-xs bg-amber-500 text-white rounded hover:bg-amber-600 transition">
-                                    統計情報を更新
-                                </button>
-                            </form>
-                        </div>
-                    @endauth
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 xl:gap-8">
                     <div class="text-center group">
