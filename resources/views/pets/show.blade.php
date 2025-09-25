@@ -683,7 +683,7 @@
 
         // シェア機能
         function shareToCopy() {
-            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
+            const shareUrl = window.location.href;
             navigator.clipboard.writeText(shareUrl).then(() => {
                 alert('URLをクリップボードにコピーしました');
                 closeShareModal();
@@ -695,7 +695,7 @@
 
         function shareToX() {
             const petName = '{{ $pet->name }}';
-            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
+            const shareUrl = window.location.href;
             const text = `#しっぽのわ 「${petName}」のプロフィールをチェック！\n\n${shareUrl}`;
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
             window.open(twitterUrl, '_blank', 'width=600,height=400');
@@ -703,7 +703,7 @@
         }
 
         function shareToLine() {
-            const shareUrl = '{{ route("pets.share", $pet->shareLinks()->where("is_active", true)->first()?->share_token ?? "temp") }}';
+            const shareUrl = window.location.href;
             const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`;
             window.open(lineUrl, '_blank', 'width=600,height=400');
             closeShareModal();

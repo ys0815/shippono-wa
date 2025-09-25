@@ -441,24 +441,14 @@
 
         // シェア機能
         function shareToCopy() {
-            const url = window.location.href;
-            const text = '{{ $post->title }} - #しっぽのわ';
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
-                    alert('リンクをコピーしました！');
-                });
-            } else {
-                // フォールバック
-                const textArea = document.createElement('textarea');
-                textArea.value = `${text}\n${url}`;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('リンクをコピーしました！');
-            }
-            closeShareModal();
+            const shareUrl = window.location.href;
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                alert('URLをクリップボードにコピーしました');
+                closeShareModal();
+            }).catch(err => {
+                console.error('Failed to copy URL:', err);
+                alert('コピーに失敗しました');
+            });
         }
 
         function shareToX() {
