@@ -393,48 +393,36 @@
             const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
             if (isMobile) {
-                // モバイルデバイスの場合、Instagramアプリの「リンクをシェア」機能を優先
+                // モバイルデバイスの場合、Instagramアプリの通常のシェア機能を使用
                 
-                // 方法1: Instagramアプリの「リンクをシェア」機能（フォロワーへの直接シェア）
-                const instagramShareUrl = `instagram://share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-                
-                // アプリを開く試行
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = instagramShareUrl;
-                document.body.appendChild(iframe);
-                
-                // アプリが開いたかチェック
-                setTimeout(() => {
-                    document.body.removeChild(iframe);
-                    
-                    // 方法2: Web Share APIを試行（Instagramアプリが選択される可能性）
-                    if (navigator.share) {
-                        navigator.share({
-                            title: text,
-                            text: text,
-                            url: url
-                        }).then(() => {
-                            console.log('Instagramシェアが成功しました');
-                        }).catch(() => {
-                            // 方法3: 直接window.locationでInstagramアプリを開く
-                            window.location.href = instagramShareUrl;
-                            
-                            // 最終フォールバック: リンクをコピー
-                            setTimeout(() => {
-                                copyToClipboard(text, url);
-                            }, 2000);
-                        });
-                    } else {
-                        // 方法3: 直接window.locationでInstagramアプリを開く
+                // 方法1: Web Share APIを優先（Instagramアプリが選択される可能性）
+                if (navigator.share) {
+                    navigator.share({
+                        title: text,
+                        text: text,
+                        url: url
+                    }).then(() => {
+                        console.log('Instagramシェアが成功しました');
+                    }).catch(() => {
+                        // 方法2: InstagramアプリのURLスキームでシェア機能を開く
+                        const instagramShareUrl = `instagram://share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
                         window.location.href = instagramShareUrl;
                         
                         // 最終フォールバック: リンクをコピー
                         setTimeout(() => {
                             copyToClipboard(text, url);
                         }, 2000);
-                    }
-                }, 500);
+                    });
+                } else {
+                    // 方法2: InstagramアプリのURLスキームでシェア機能を開く
+                    const instagramShareUrl = `instagram://share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+                    window.location.href = instagramShareUrl;
+                    
+                    // 最終フォールバック: リンクをコピー
+                    setTimeout(() => {
+                        copyToClipboard(text, url);
+                    }, 2000);
+                }
             } else {
                 // デスクトップの場合、Web Share APIまたはリンクコピー
                 if (navigator.share) {
