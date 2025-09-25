@@ -135,8 +135,6 @@ class PetController extends Controller
             'all' => 'すべて'
         ];
 
-        $speciesName = $speciesNames[$species];
-
         // 検索条件の取得
         $filters = [
             'species' => $request->get('species', $species === 'all' ? '' : $species),
@@ -146,6 +144,9 @@ class PetController extends Controller
             'shelter_id' => $request->get('shelter_id', ''),
             'sort' => $request->get('sort', 'newest')
         ];
+
+        // 動的な見出しを生成
+        $speciesName = $this->generateDynamicTitle($filters, $speciesNames);
 
         // ソート順の検証
         $validSorts = ['newest', 'oldest', 'updated'];
@@ -219,7 +220,29 @@ class PetController extends Controller
         // 検索に使用した条件を保持
         $searchParams = $request->only(['species', 'gender', 'shelter_kind', 'shelter_area', 'shelter_id', 'sort']);
 
-        return view('pets.search', compact('species', 'speciesName', 'pets', 'totalCount', 'filters', 'searchParams'));
+        // ビューで使用する名前の配列を準備
+        $genderNames = [
+            'male' => 'オス',
+            'female' => 'メス'
+        ];
+
+        $shelterKindNames = [
+            'facility' => '保護団体・施設',
+            'site' => '里親サイト',
+            'unknown' => '不明'
+        ];
+
+        $areaNames = [
+            'hokkaido_tohoku' => '北海道・東北',
+            'kanto' => '関東',
+            'chubu_tokai' => '中部・東海',
+            'kinki' => '近畿',
+            'chugoku_shikoku' => '中国・四国',
+            'kyushu_okinawa' => '九州・沖縄',
+            'national' => '全国'
+        ];
+
+        return view('pets.search', compact('species', 'speciesName', 'pets', 'totalCount', 'filters', 'searchParams', 'speciesNames', 'genderNames', 'shelterKindNames', 'areaNames'));
     }
 
     /**
@@ -848,5 +871,74 @@ class PetController extends Controller
                 }
             }
         }
+    }
+
+    /**
+     * 検索条件に基づいて動的な見出しを生成
+     * 
+     * @param array $filters 検索条件
+     * @param array $speciesNames 種別名の配列
+     * @return string 生成された見出し
+     */
+    private function generateDynamicTitle(array $filters, array $speciesNames): string
+    {
+        $titleParts = [];
+
+        // 優先度1: 種別の条件を追加
+        if (!empty($filters['species']) && $filters['species'] !== 'all') {
+            $titleParts[] = $speciesNames[$filters['species']];
+        }
+
+        // 優先度2: 性別の条件を追加
+        if (!empty($filters['gender'])) {
+            $genderNames = [
+                'male' => 'オス',
+                'female' => 'メス'
+            ];
+            $titleParts[] = $genderNames[$filters['gender']] ?? $filters['gender'];
+        }
+
+        // 優先度3: 保護施設の種別を追加
+        if (!empty($filters['shelter_kind'])) {
+            $shelterKindNames = [
+                'facility' => '保護団体・施設',
+                'site' => '里親サイト',
+                'unknown' => '不明'
+            ];
+            $titleParts[] = $shelterKindNames[$filters['shelter_kind']] ?? $filters['shelter_kind'];
+        }
+
+        // 優先度4: 保護施設の所在地を追加
+        if (!empty($filters['shelter_area'])) {
+            $areaNames = [
+                'hokkaido_tohoku' => '北海道・東北',
+                'kanto' => '関東',
+                'chubu_tokai' => '中部・東海',
+                'kinki' => '近畿',
+                'chugoku_shikoku' => '中国・四国',
+                'kyushu_okinawa' => '九州・沖縄',
+                'national' => '全国'
+            ];
+            $titleParts[] = $areaNames[$filters['shelter_area']] ?? $filters['shelter_area'];
+        }
+
+        // 優先度5: 特定の保護施設を追加（省略版）
+        if (!empty($filters['shelter_id'])) {
+            $shelter = \App\Models\Shelter::find($filters['shelter_id']);
+            if ($shelter) {
+                // 施設名を短縮（8文字以内に制限）
+                $shortName = mb_strlen($shelter->name) > 8
+                    ? mb_substr($shelter->name, 0, 8) . '...'
+                    : $shelter->name;
+                $titleParts[] = $shortName;
+            }
+        }
+
+        // 見出しを組み立て
+        if (empty($titleParts)) {
+            return 'すべての家族';
+        }
+
+        return implode('×', $titleParts) . 'の家族';
     }
 }
