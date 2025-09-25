@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,7 +16,13 @@ class Kernel extends ConsoleKernel
             ->timezone('Asia/Tokyo')
             ->withoutOverlapping()
             ->runInBackground()
-            ->appendOutputTo(storage_path('logs/scheduler.log'));
+            ->appendOutputTo(storage_path('logs/scheduler.log'))
+            ->onSuccess(function () {
+                Log::info('Site statistics updated successfully at ' . now()->toDateTimeString());
+            })
+            ->onFailure(function () {
+                Log::error('Site statistics update failed at ' . now()->toDateTimeString());
+            });
     }
 
     protected function commands(): void

@@ -29,8 +29,9 @@ class HomeController extends Controller
         // サイト統計情報をキャッシュから取得（なければ計算してキャッシュに保存）
         $stats = Cache::get(SiteStatsService::CACHE_KEY);
         if ($stats === null) {
+            // キャッシュがない場合は計算してキャッシュに保存（24時間の有効期限）
             $stats = SiteStatsService::compute();
-            Cache::forever(SiteStatsService::CACHE_KEY, $stats);
+            Cache::put(SiteStatsService::CACHE_KEY, $stats, now()->addDay());
         }
 
         // 新着ペット情報を取得（最新6件、ユーザー情報と保護団体情報も含む）
