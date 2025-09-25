@@ -268,7 +268,7 @@
                                 <div class="flex-1">
                                     <label class="block text-xs text-gray-700 mb-1">並び順</label>
                                     <select id="sort-order" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                        <option value="newest">新着順</option>
+                                        <option value="newest" selected>新着順</option>
                                         <option value="popular">人気順</option>
                                         <option value="oldest">古い順</option>
                                     </select>
@@ -341,7 +341,7 @@
         let currentPage = 1;
         let isLoading = false;
         let hasMorePosts = true;
-        let currentSort = 'popular';
+        let currentSort = 'newest';
         let currentTimeFilter = 'all';
         let allPosts = [];
         let totalPosts = 0;

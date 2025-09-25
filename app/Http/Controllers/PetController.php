@@ -83,7 +83,7 @@ class PetController extends Controller
         $pet->load(['user', 'shelter', 'posts' => function ($query) {
             $query->where('status', 'published')
                 ->where('type', 'gallery')
-                ->orderBy('view_count', 'desc')
+                ->orderBy('created_at', 'desc')
                 ->limit(5)
                 ->with('media');
         }, 'familyLinksAsPet1.pet2', 'familyLinksAsPet2.pet1']);
