@@ -740,22 +740,57 @@
             const url = window.location.href;
             const text = '{{ $pet->name }} - #しっぽのわ';
             
-            // Web Share APIが利用可能かチェック
-            if (navigator.share) {
-                navigator.share({
-                    title: text,
-                    text: text,
-                    url: url
-                }).then(() => {
-                    console.log('Instagramシェアが成功しました');
-                }).catch((error) => {
-                    console.log('Instagramシェアがキャンセルされました:', error);
+            // モバイルデバイスかどうかをチェック
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // モバイルデバイスの場合、InstagramアプリのURLスキームを試行
+                const instagramAppUrl = `instagram://share?url=${encodeURIComponent(url)}&title=${encodeURIComponent(text)}`;
+                
+                // アプリを開く試行
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = instagramAppUrl;
+                document.body.appendChild(iframe);
+                
+                // アプリが開かない場合のフォールバック
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                    
+                    // Web Share APIが利用可能かチェック
+                    if (navigator.share) {
+                        navigator.share({
+                            title: text,
+                            text: text,
+                            url: url
+                        }).then(() => {
+                            console.log('Instagramシェアが成功しました');
+                        }).catch(() => {
+                            // 最終フォールバック: リンクをコピー
+                            copyToClipboard(text, url);
+                        });
+                    } else {
+                        // 最終フォールバック: リンクをコピー
+                        copyToClipboard(text, url);
+                    }
+                }, 1000);
+            } else {
+                // デスクトップの場合、Web Share APIまたはリンクコピー
+                if (navigator.share) {
+                    navigator.share({
+                        title: text,
+                        text: text,
+                        url: url
+                    }).then(() => {
+                        console.log('Instagramシェアが成功しました');
+                    }).catch(() => {
+                        // フォールバック: リンクをコピー
+                        copyToClipboard(text, url);
+                    });
+                } else {
                     // フォールバック: リンクをコピー
                     copyToClipboard(text, url);
-                });
-            } else {
-                // Web Share APIが利用できない場合、リンクをコピー
-                copyToClipboard(text, url);
+                }
             }
             closeShareModal();
         }
