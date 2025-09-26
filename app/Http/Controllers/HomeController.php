@@ -39,9 +39,25 @@ class HomeController extends Controller
         }
 
         if ($shouldUpdate) {
-            // 統計情報を計算してキャッシュに保存（24時間の有効期限）
-            $stats = SiteStatsService::compute();
-            Cache::put(SiteStatsService::CACHE_KEY, $stats, now()->addDay());
+            try {
+                // 統計情報を計算してキャッシュに保存（24時間の有効期限）
+                $stats = SiteStatsService::compute();
+                Cache::put(SiteStatsService::CACHE_KEY, $stats, now()->addDay());
+            } catch (\Exception $e) {
+                // エラーが発生した場合は既存のキャッシュを使用（なければデフォルト値）
+                if ($stats === null) {
+                    $stats = [
+                        'posts_gallery' => 0,
+                        'posts_interview' => 0,
+                        'pets' => 0,
+                        'shelters' => 0,
+                        'likes' => 0,
+                        'updated_at' => now()->toDateTimeString(),
+                        'computed_at' => now()->toDateTimeString(),
+                        'error' => true,
+                    ];
+                }
+            }
         }
 
         // 新着ペット情報を取得（最新6件、ユーザー情報と保護団体情報も含む）

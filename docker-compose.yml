@@ -125,6 +125,7 @@ services:
         environment:
             WWWUSER: "${WWWUSER}"
             LARAVEL_SAIL: 1
+            TZ: "Asia/Tokyo"
         volumes:
             - ".:/var/www/html"
             - "./docker/cron.d/laravel-cron:/etc/cron.d/laravel-cron"
@@ -133,7 +134,7 @@ services:
         depends_on:
             - mysql
         command: >
-            sh -c "cron && tail -f /var/log/cron.log"
+            sh -c "mkdir -p /var/log && touch /var/log/cron.log && chmod 666 /var/log/cron.log && cron && tail -f /var/log/cron.log"
 
 networks:
     sail:
