@@ -52,7 +52,7 @@
             <section>
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12">
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 block">私たちの想い</h2>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">私たちの想い</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
@@ -113,7 +113,7 @@
             <section>
                 <div class="max-w-5xl mx-auto">
                     <div class="text-center mb-12">
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 block">できること</h2>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">できること</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
@@ -177,7 +177,7 @@
             <section>
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12">
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 block">参加の方法</h2>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">参加の方法</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
