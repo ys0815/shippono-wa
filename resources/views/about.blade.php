@@ -240,13 +240,13 @@
         </main>
 
         <!-- 呼びかけ CTA -->
-        <section class="py-12">
-            <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-8 md:p-12 text-center text-white">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">あなたの幸せな日常をシェアして、次の命につなげませんか？</h2>
-                <p class="text-lg md:text-xl opacity-95 mb-6">「#しっぽのわ」は、そんな温かい"幸せの循環"を生み出す場所でありたいと願っています。</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('register') }}" class="bg-white text-amber-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-50 transition-colors duration-300 shadow-lg">参加してはじめる</a>
-                    <a href="{{ route('home') }}" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-amber-600 transition-colors duration-300">幸せな日常を見る</a>
+        <section class="py-12 md:py-16 lg:py-20">
+            <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-8 md:p-12 lg:p-16 text-center text-white">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold mb-4 md:mb-6 text-white">あなたの幸せな日常をシェアして、次の命につなげませんか？</h2>
+                <p class="text-lg md:text-xl lg:text-xl opacity-95 mb-6 md:mb-8">「#しっぽのわ」は、そんな温かい"幸せの循環"を生み出す場所でありたいと願っています。</p>
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-6 lg:gap-8 justify-center items-center">
+                    <a href="{{ route('register') }}" class="bg-white text-amber-600 px-8 py-4 md:px-10 md:py-5 lg:px-12 lg:py-6 rounded-full font-bold text-lg md:text-xl lg:text-xl hover:bg-amber-50 transition-colors duration-300 shadow-lg w-full sm:w-auto text-center">参加してはじめる</a>
+                    <a href="{{ route('home') }}" class="border-2 border-white text-white px-8 py-4 md:px-10 md:py-5 lg:px-12 lg:py-6 rounded-full font-bold text-lg md:text-xl lg:text-xl hover:bg-white hover:text-amber-600 transition-colors duration-300 w-full sm:w-auto text-center">幸せな日常を見る</a>
                 </div>
             </div>
         </section>
