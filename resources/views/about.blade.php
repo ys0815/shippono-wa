@@ -1,13 +1,13 @@
 <x-guest-layout>
     <!-- 画像セクション（画面いっぱい） -->
-    <section class="w-full relative">
+    <section class="w-full relative overflow-hidden">
         <img src="/images/about-top.jpeg" alt="保護動物と新しい家族の幸せな日常" class="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover">
         <!-- 画像下部のグラデーションオーバーレイ（重なり順を明示） -->
         <div class="absolute inset-0 z-10 pointer-events-none" style="background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 75%);"></div>
         <!-- 画像下部のテキスト（グラデーションの上に重ねる） -->
-        <div class="absolute bottom-0 left-0 right-0 z-20 p-6 sm:p-8 pb-8 sm:pb-10">
+        <div class="absolute bottom-0 left-0 right-0 z-20 p-6 sm:p-8 pb-8 sm:pb-10 pointer-events-none">
             <div class="max-w-4xl mx-auto text-center">
-                <p class="text-white text-lg sm:text-xl md:text-2xl font-medium leading-relaxed drop-shadow-lg">
+                <p class="text-white text-lg sm:text-xl md:text-2xl font-medium leading-relaxed drop-shadow-lg select-none">
                     保護動物と家族の幸せを社会に広める共感型プラットフォーム
                 </p>
             </div>
@@ -53,8 +53,8 @@
             <section>
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12">
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">私たちの想い</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto"></div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 inline-block">私たちの想い</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
@@ -108,8 +108,8 @@
             <section>
                 <div class="max-w-5xl mx-auto">
                     <div class="text-center mb-12">
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">できること</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto"></div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 inline-block">できること</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
                     <div class="grid md:grid-cols-2 gap-8">
@@ -172,8 +172,8 @@
             <section>
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12">
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">参加の方法</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto"></div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 inline-block">参加の方法</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
                     <div class="space-y-6">
