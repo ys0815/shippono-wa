@@ -1,7 +1,7 @@
 <x-guest-layout>
     <!-- 画像セクション（画面いっぱい） -->
     <section class="w-full relative overflow-hidden" style="position: relative !important;">
-        <img src="/images/about-top.jpeg" alt="保護動物と新しい家族の幸せな日常" class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[450px] 2xl:h-[500px] object-cover">
+        <img src="/images/about-top.jpeg" alt="保護動物と新しい家族の幸せな日常" class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[450px] 2xl:h-[500px] object-cover about-hero-image" style="height: 256px !important;">
         <!-- 画像下部のグラデーションオーバーレイ（重なり順を明示） -->
         <div class="absolute inset-0 pointer-events-none" style="z-index: 10 !important; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 75%) !important;"></div>
         <!-- 画像下部のテキスト（グラデーションの上に重ねる） -->
