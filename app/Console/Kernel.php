@@ -8,14 +8,13 @@ use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
-    protected function schedule(Schedule $schedule): void
+    protected function schedule(Schedule $schedule)
     {
         // 日本時間の朝8時に統計情報を更新
         $schedule->command('stats:update')
             ->dailyAt('08:00')
             ->timezone('Asia/Tokyo')
-            ->withoutOverlapping()
-            ->runInBackground();
+            ->withoutOverlapping();
     }
 
     protected function commands(): void

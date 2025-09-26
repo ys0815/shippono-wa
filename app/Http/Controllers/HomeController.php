@@ -26,10 +26,20 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        // サイト統計情報をキャッシュから取得（なければ計算してキャッシュに保存）
+        // サイト統計情報をキャッシュから取得
         $stats = Cache::get(SiteStatsService::CACHE_KEY);
+
+        // キャッシュがない場合、または古いデータ（24時間以上前）の場合は更新
+        $shouldUpdate = false;
         if ($stats === null) {
-            // キャッシュがない場合は計算してキャッシュに保存（24時間の有効期限）
+            $shouldUpdate = true;
+        } else {
+            $lastUpdated = \Carbon\Carbon::parse($stats['updated_at']);
+            $shouldUpdate = $lastUpdated->diffInHours(now()) >= 24;
+        }
+
+        if ($shouldUpdate) {
+            // 統計情報を計算してキャッシュに保存（24時間の有効期限）
             $stats = SiteStatsService::compute();
             Cache::put(SiteStatsService::CACHE_KEY, $stats, now()->addDay());
         }
