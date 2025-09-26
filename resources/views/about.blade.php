@@ -2,10 +2,10 @@
     <!-- 画像セクション（画面いっぱい） -->
     <section class="w-full relative">
         <img src="/images/about-top.jpeg" alt="保護動物と新しい家族の幸せな日常" class="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover">
-        <!-- 画像下部のグラデーションオーバーレイ -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-        <!-- 画像下部のテキスト -->
-        <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+        <!-- 画像下部のグラデーションオーバーレイ（重なり順を明示） -->
+        <div class="absolute inset-0 z-10 pointer-events-none" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0) 75%);"></div>
+        <!-- 画像下部のテキスト（グラデーションの上に重ねる） -->
+        <div class="absolute bottom-0 left-0 right-0 z-20 p-6 sm:p-8 pb-8 sm:pb-10">
             <div class="max-w-4xl mx-auto text-center">
                 <p class="text-white text-lg sm:text-xl md:text-2xl font-medium leading-relaxed drop-shadow-lg">
                     保護動物と家族の幸せを社会に広める共感型プラットフォーム
