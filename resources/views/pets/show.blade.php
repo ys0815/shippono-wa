@@ -147,37 +147,35 @@
                         <div class="grid grid-cols-1 gap-x-8 gap-y-4 text-base text-gray-700">
                             @if($pet->breed)
                                 <div>
-                                    <dt class="text-gray-500">品種</dt>
+                                    <dt class="text-amber-600">品種</dt>
                                     <dd class="mt-1 font-medium">{{ $pet->breed }}</dd>
                                 </div>
                             @endif
                             @if($pet->birth_date)
                                 <div>
-                                    <dt class="text-gray-500">誕生日</dt>
+                                    <dt class="text-amber-600">誕生日</dt>
                                     <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->birth_date)->format('Y年n月j日') }}</dd>
                                 </div>
                             @endif
                             @if($pet->rescue_date)
                                 <div>
-                                    <dt class="text-gray-500">お迎え記念日</dt>
+                                    <dt class="text-amber-600">お迎え記念日</dt>
                                     <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->rescue_date)->format('Y年n月j日') }}</dd>
                                 </div>
                             @endif
                             @if($pet->area)
                                 <div>
-                                    <dt class="text-gray-500">地域</dt>
+                                    <dt class="text-amber-600">地域</dt>
                                     <dd class="mt-1 font-medium">{{ $pet->area }}</dd>
                                 </div>
                             @endif
+                            @if($pet->profile_description)
+                                <div>
+                                    <dt class="text-amber-600">プロフィール</dt>
+                                    <dd class="mt-1 font-medium">{{ $pet->profile_description }}</dd>
+                                </div>
+                            @endif
                         </div>
-                        
-                        <!-- プロフィール本文 -->
-                        @if($pet->profile_description)
-                            <div class="mt-6">
-                                <dt class="text-gray-500 mb-3 text-base">プロフィール</dt>
-                                <dd class="prose prose-base max-w-none text-gray-700 leading-relaxed">{{ $pet->profile_description }}</dd>
-                            </div>
-                        @endif
                     </div>
 
                     <!-- 区切り線 -->
@@ -202,7 +200,7 @@
                                 @endif
                                 @php $interviewPost = $pet->posts()->where('type','interview')->where('status','published')->latest()->first(); @endphp
                                 @if($interviewPost)
-                                    <a href="{{ route('interviews.show', $interviewPost) }}" class="px-5 py-3 text-base rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition font-medium">しっぽのわを読む</a>
+                                    <a href="{{ route('interviews.show', $interviewPost) }}" class="px-5 py-3 text-base rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm">しっぽのわを読む</a>
                                 @else
                                     <button disabled class="px-5 py-3 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">しっぽのわを読む</button>
                                 @endif
