@@ -1,13 +1,13 @@
 <x-guest-layout>
     <!-- 画像セクション（画面いっぱい） -->
     <section class="w-full relative overflow-hidden" style="position: relative !important;">
-        <img src="/images/about-top.jpeg" alt="保護動物と新しい家族の幸せな日常" class="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover">
+        <img src="/images/about-top.jpeg" alt="保護動物と新しい家族の幸せな日常" class="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] object-cover">
         <!-- 画像下部のグラデーションオーバーレイ（重なり順を明示） -->
         <div class="absolute inset-0 pointer-events-none" style="z-index: 10 !important; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 75%) !important;"></div>
         <!-- 画像下部のテキスト（グラデーションの上に重ねる） -->
         <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 pb-8 sm:pb-10 pointer-events-none" style="z-index: 9999 !important; position: absolute !important; top: auto !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;">
             <div class="max-w-4xl mx-auto text-center">
-                <p class="text-white text-lg sm:text-xl md:text-2xl font-medium leading-relaxed drop-shadow-lg select-none">
+                <p class="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium leading-relaxed drop-shadow-lg select-none">
                     保護動物と家族の幸せを社会に広める共感型プラットフォーム
                 </p>
             </div>
@@ -16,7 +16,7 @@
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- メインコンテンツ -->
-        <main class="pt-16 pb-16 space-y-20">
+        <main class="pt-8 sm:pt-12 md:pt-16 pb-16 space-y-12 sm:space-y-16 md:space-y-20">
             <!-- サイト紹介 -->
             <section class="text-center">
                 <div class="max-w-4xl mx-auto">
@@ -26,10 +26,10 @@
                         </svg>
                         <span>卒業後の幸せを可視化し、保護活動を応援する</span>
                     </div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
                         #しっぽのわとは？
                     </h1>
-                    <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                    <p class="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
                         保護動物と新しい家族が幸せに過ごす日常を、一緒に見て、感じて、分かち合えるプラットフォームです。
                     </p>
                     <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-8 max-w-2xl mx-auto shadow-sm">
@@ -52,7 +52,7 @@
             <section>
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center" style="margin-bottom: 3rem !important;">
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">私たちの想い</h2>
+                        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">私たちの想い</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
@@ -113,11 +113,11 @@
             <section>
                 <div class="max-w-5xl mx-auto">
                     <div class="text-center" style="margin-bottom: 3rem !important;">
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">できること</h2>
+                        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">できること</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
-                    <div class="grid md:grid-cols-2 gap-8">
+                    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8">
                         <div class="space-y-8">
                             <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                                 <div class="flex items-center mb-4">
@@ -177,18 +177,18 @@
             <section>
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center" style="margin-bottom: 3rem !important;">
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">参加の方法</h2>
+                        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">参加の方法</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
-                    <div class="space-y-6">
-                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-100">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 sm:p-8 border border-amber-100">
+                            <div class="flex items-start space-x-4 sm:space-x-6">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                                     <span class="text-white text-lg font-bold">1</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-xl font-semibold text-gray-900 mb-3">新規登録</h3>
+                                    <h3 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">新規登録</h3>
                                     <p class="text-gray-600 leading-relaxed">
                                         メールアドレスとパスワードで簡単登録。どなたでも気軽にご参加いただけます。
                                     </p>
@@ -196,13 +196,13 @@
                             </div>
                         </div>
                         
-                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-100">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 sm:p-8 border border-amber-100">
+                            <div class="flex items-start space-x-4 sm:space-x-6">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                                     <span class="text-white text-lg font-bold">2</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-xl font-semibold text-gray-900 mb-3">投稿・シェア</h3>
+                                    <h3 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">投稿・シェア</h3>
                                     <p class="text-gray-600 leading-relaxed">
                                         ペットとの幸せな日常を写真・写真付きで投稿して、同じ想いを持つ仲間と分かち合いましょう。
                                     </p>
@@ -210,13 +210,13 @@
                             </div>
                         </div>
                         
-                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-100">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 sm:p-8 border border-amber-100">
+                            <div class="flex items-start space-x-4 sm:space-x-6">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                                     <span class="text-white text-lg font-bold">3</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-xl font-semibold text-gray-900 mb-3">コミュニティ参加</h3>
+                                    <h3 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">コミュニティ参加</h3>
                                     <p class="text-gray-600 leading-relaxed">
                                         気になるペットに「いいね」で応援し、温かいコミュニティの一員になりましょう。
                                 </div>
@@ -232,7 +232,7 @@
                     <p class="text-lg text-gray-600 mb-4">
                         あなたの小さな一歩が、社会全体の大きなうねりになります。
                     </p>
-                    <p class="text-xl font-semibold text-amber-600">
+                    <p class="text-lg sm:text-xl font-semibold text-amber-600">
                         さあ、一緒にしっぽの輪を広げましょう。
                     </p>
                 </div>
