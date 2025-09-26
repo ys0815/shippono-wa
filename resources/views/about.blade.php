@@ -7,7 +7,7 @@
         <!-- 画像下部のテキスト（グラデーションの上に重ねる） -->
         <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 pb-8 sm:pb-10 pointer-events-none" style="z-index: 9999 !important; position: absolute !important; top: auto !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;">
             <div class="max-w-4xl mx-auto text-center">
-                <p class="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-medium leading-relaxed drop-shadow-lg select-none">
+                <p class="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-medium leading-relaxed drop-shadow-lg select-none">
                     保護動物と家族の幸せを社会に広める共感型プラットフォーム
                 </p>
             </div>
@@ -26,10 +26,10 @@
                         </svg>
                         <span>卒業後の幸せを可視化し、保護活動を応援する</span>
                     </div>
-                    <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-gray-900 mb-6">
                         #しっぽのわとは？
                     </h1>
-                    <p class="text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed mb-8">
+                    <p class="text-lg md:text-xl lg:text-xl text-gray-600 leading-relaxed mb-8">
                         保護動物と新しい家族が幸せに過ごす日常を、一緒に見て、感じて、分かち合えるプラットフォームです。
                     </p>
                     <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-8 max-w-2xl mx-auto shadow-sm">
@@ -52,22 +52,22 @@
             <section>
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center" style="margin-bottom: 3rem !important;">
-                        <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">私たちの想い</h2>
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">私たちの想い</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10 lg:p-12 mb-8">
                         <div class="prose prose-lg max-w-none">
-                            <p class="text-gray-700 leading-relaxed mb-6 text-lg md:text-xl lg:text-2xl">
+                            <p class="text-gray-700 leading-relaxed mb-6 text-lg md:text-xl lg:text-xl">
                                保護動物と新しい家族が紡ぐ“卒業後の物語”をみんなでシェアし、幸せの輪が広がることを願っています。
                             </p>
-                            <p class="text-gray-700 leading-relaxed text-lg md:text-xl lg:text-2xl">
+                            <p class="text-gray-700 leading-relaxed text-lg md:text-xl lg:text-xl">
                                 一匹でも多くの動物が安心して過ごせる家族とつながり、穏やかな毎日を過ごせますように。
                             </p>
-                            <p class="text-gray-700 leading-relaxed text-lg md:text-xl lg:text-2xl">
+                            <p class="text-gray-700 leading-relaxed text-lg md:text-xl lg:text-xl">
                                 その幸せの瞬間が、だれかの心に届いて、また新しいつながりや幸せを生んでいく…。
                             </p>
-                            <p class="text-gray-700 leading-relaxed text-lg md:text-xl lg:text-2xl">
+                            <p class="text-gray-700 leading-relaxed text-lg md:text-xl lg:text-xl">
                                 小さな一歩から、あたたかい連鎖が生まれることをわたしは大切に思っています。
                             </p>
                         </div>
@@ -113,7 +113,7 @@
             <section>
                 <div class="max-w-5xl mx-auto">
                     <div class="text-center" style="margin-bottom: 3rem !important;">
-                        <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">できること</h2>
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">できること</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
@@ -124,7 +124,7 @@
                                     <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                                         <span class="text-xl">📸</span>
                                     </div>
-                                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">今日の幸せ投稿</h3>
+                                    <h3 class="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">今日の幸せ投稿</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
                                     家族になったペットとの楽しい日常を写真・動画付きで投稿して、幸せな瞬間をみんなで分かち合えます。
@@ -136,7 +136,7 @@
                                     <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                                         <span class="text-xl">📝</span>
                                     </div>
-                                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">里親インタビュー</h3>
+                                    <h3 class="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">里親インタビュー</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
                                     里親さんのリアルな体験談を投稿・閲覧し、これから家族になる人への参考に。
@@ -150,7 +150,7 @@
                                     <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                                         <span class="text-xl">🔍</span>
                                     </div>
-                                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">ペット検索</h3>
+                                    <h3 class="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">ペット検索</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
                                     種別・性別・地域・保護団体で絞り込んで、気になる動物をすぐに見つけられます。
@@ -162,7 +162,7 @@
                                     <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                                         <span class="text-xl">💖</span>
                                     </div>
-                                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">いいね機能</h3>
+                                    <h3 class="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">いいね機能</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
                                     気になるペットに「いいね」で応援し、温かいコミュニティの一員になりましょう。
@@ -177,7 +177,7 @@
             <section>
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center" style="margin-bottom: 3rem !important;">
-                        <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">参加の方法</h2>
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">参加の方法</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                     </div>
                     
@@ -188,7 +188,7 @@
                                     <span class="text-white text-lg md:text-xl lg:text-2xl font-bold">1</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 mb-3">新規登録</h3>
+                                    <h3 class="text-xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-3">新規登録</h3>
                                     <p class="text-gray-600 leading-relaxed">
                                         メールアドレスとパスワードで簡単登録。どなたでも気軽にご参加いただけます。
                                     </p>
@@ -202,7 +202,7 @@
                                     <span class="text-white text-lg md:text-xl lg:text-2xl font-bold">2</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 mb-3">投稿・シェア</h3>
+                                    <h3 class="text-xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-3">投稿・シェア</h3>
                                     <p class="text-gray-600 leading-relaxed">
                                         ペットとの幸せな日常を写真・写真付きで投稿して、同じ想いを持つ仲間と分かち合いましょう。
                                     </p>
@@ -216,7 +216,7 @@
                                     <span class="text-white text-lg md:text-xl lg:text-2xl font-bold">3</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 mb-3">コミュニティ参加</h3>
+                                    <h3 class="text-xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-3">コミュニティ参加</h3>
                                     <p class="text-gray-600 leading-relaxed">
                                         気になるペットに「いいね」で応援し、温かいコミュニティの一員になりましょう。
                                 </div>
@@ -232,7 +232,7 @@
                     <p class="text-lg text-gray-600 mb-4">
                         あなたの小さな一歩が、社会全体の大きなうねりになります。
                     </p>
-                    <p class="text-xl md:text-2xl lg:text-3xl font-semibold text-amber-600">
+                    <p class="text-xl md:text-2xl lg:text-2xl font-semibold text-amber-600">
                         さあ、一緒にしっぽの輪を広げましょう。
                     </p>
                 </div>
