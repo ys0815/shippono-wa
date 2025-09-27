@@ -1,15 +1,6 @@
 <x-guest-layout>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-            <!-- パンくずリスト -->
-            <nav class="mb-6">
-                <ol class="flex items-center space-x-2 text-sm text-gray-600">
-                    <li><a href="{{ route('home') }}" class="hover:text-amber-600">ホーム</a></li>
-                    <li class="text-gray-400">/</li>
-                    <li class="text-gray-900 font-medium">家族をお迎えする前に読むこと</li>
-                </ol>
-            </nav>
-
             <!-- メインタイトル -->
             <header class="relative text-center mb-12 overflow-hidden rounded-2xl" style="height: 300px;">
                 <!-- 背景画像 -->
