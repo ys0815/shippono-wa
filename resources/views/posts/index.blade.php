@@ -26,15 +26,15 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <nav class="flex space-x-8">
                     <a href="{{ route('mypage.posts', ['type' => 'all']) }}" 
-                       class="py-4 px-1 border-b-2 font-medium text-sm {{ $type === 'all' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
+                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'all' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
                         すべて
                     </a>
                     <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" 
-                       class="py-4 px-1 border-b-2 font-medium text-sm {{ $type === 'gallery' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
+                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'gallery' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
                         今日の幸せ
                     </a>
                     <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" 
-                       class="py-4 px-1 border-b-2 font-medium text-sm {{ $type === 'interview' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
+                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'interview' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
                         しっぽのわ
                     </a>
                 </nav>
