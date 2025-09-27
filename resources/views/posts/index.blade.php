@@ -73,14 +73,14 @@
                     <div class="flex flex-col sm:flex-row gap-3">
                         <!-- キーワード検索 -->
                         <div class="flex-1">
-                            <label for="keyword" class="block text-xs font-medium text-gray-700 mb-1">検索:</label>
+                            <label for="keyword" class="block text-base md:text-lg font-medium text-gray-700 mb-1">検索:</label>
                             <div class="relative">
                                 <input type="text" 
                                        id="keyword" 
                                        name="keyword" 
                                        value="{{ $keyword }}"
                                        placeholder="キーワード" 
-                                       class="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                       class="w-full px-3 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                                 <div id="searchLoading" class="absolute right-2 top-1.5 hidden">
                                     <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-amber-600"></div>
                                 </div>
@@ -91,10 +91,10 @@
                         <div class="flex gap-3">
                             <!-- 期間フィルタ -->
                             <div class="flex-1">
-                                <label for="period" class="block text-xs font-medium text-gray-700 mb-1">期間:</label>
+                                <label for="period" class="block text-base md:text-lg font-medium text-gray-700 mb-1">期間:</label>
                                 <select id="period" 
                                         name="period" 
-                                        class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                        class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                                     <option value="all" {{ $period === 'all' ? 'selected' : '' }}>すべて</option>
                                     <option value="month" {{ $period === 'month' ? 'selected' : '' }}>今月</option>
                                     <option value="half_year" {{ $period === 'half_year' ? 'selected' : '' }}>半年</option>
@@ -104,10 +104,10 @@
                             
                             <!-- 状態フィルタ -->
                             <div class="flex-1">
-                                <label for="status" class="block text-xs font-medium text-gray-700 mb-1">状態:</label>
+                                <label for="status" class="block text-base md:text-lg font-medium text-gray-700 mb-1">状態:</label>
                                 <select id="status" 
                                         name="status" 
-                                        class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                        class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                                     <option value="all" {{ $status === 'all' ? 'selected' : '' }}>すべて</option>
                                     <option value="published" {{ $status === 'published' ? 'selected' : '' }}>公開</option>
                                     <option value="draft" {{ $status === 'draft' ? 'selected' : '' }}>下書き</option>
