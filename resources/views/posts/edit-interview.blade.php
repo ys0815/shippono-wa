@@ -14,7 +14,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </a>
-                        <h1 class="text-xl font-semibold text-gray-900">投稿を編集</h1>
+                        <h1 class="text-xl font-semibold text-gray-900">里親インタビュー投稿を編集</h1>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 
                 <!-- 対象ペット選択 -->
                 <div>
-                    <label for="pet_id" class="block text-sm font-medium text-gray-700 mb-2">対象ペット *</label>
+                    <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">対象ペット *</label>
                     <select id="pet_id" name="pet_id" required 
                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         <option value="">選択してください</option>
@@ -45,7 +45,7 @@
 
                 <!-- タイトル -->
                 <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">タイトル *</label>
+                    <label for="title" class="block text-base font-medium text-gray-700 mb-2">タイトル *</label>
                     <input type="text" 
                            id="title" 
                            name="title" 
@@ -63,7 +63,7 @@
 
                 <!-- メイン画像 -->
                 <div>
-                    <label for="main_image" class="block text-sm font-medium text-gray-700 mb-2">メイン画像 *</label>
+                    <label for="main_image" class="block text-base font-medium text-gray-700 mb-2">メイン画像 *</label>
                     
                     <!-- 現在の画像表示 -->
                     @if($post->media->count() > 0)
@@ -112,10 +112,10 @@
                 <div class="space-y-6">
                     <!-- 質問1 -->
                     <div>
-                        <label for="question1" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question1" class="block text-base font-medium text-gray-700 mb-2">
                             1. 新しい家族との出会い *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">どのようにして出会ったか、その時の気持ちなどを教えてください</p>
+                        <p class="text-sm text-gray-600 mb-2">あの子と目が合ったとき、心に浮かんだことをそのまま言葉にしてみてくださいね</p>
                         <textarea id="question1" 
                                   name="question1" 
                                   rows="4" 
@@ -132,10 +132,10 @@
 
                     <!-- 質問2-5 -->
                     <div>
-                        <label for="question2" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question2" class="block text-base font-medium text-gray-700 mb-2">
                             2. 迎える前の不安と準備 *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">迎える前に感じた不安や、どのような準備をしたかを教えてください</p>
+                        <p class="text-sm text-gray-600 mb-2">家族になる前に、ちょっぴり心配したことはありましたか？その気持ちや、準備したことを教えてください</p>
                         <textarea id="question2" 
                                   name="question2" 
                                   rows="4" 
@@ -151,10 +151,10 @@
                     </div>
 
                     <div>
-                        <label for="question3" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question3" class="block text-base font-medium text-gray-700 mb-2">
                             3. 迎えた後の変化と喜び *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">ペットを迎えてからの生活の変化や喜びを教えてください</p>
+                        <p class="text-sm text-gray-600 mb-2">一緒に暮らしはじめてから、どんなふうに毎日が変わりましたか？</p>
                         <textarea id="question3" 
                                   name="question3" 
                                   rows="4" 
@@ -170,10 +170,10 @@
                     </div>
 
                     <div>
-                        <label for="question4" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question4" class="block text-base font-medium text-gray-700 mb-2">
                             4. 未来の里親へのメッセージ *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">これから里親を考えている方へのメッセージをお願いします</p>
+                        <p class="text-sm text-gray-600 mb-2">これから新しい家族を迎える人に、やさしいエールやあたたかな言葉を届けてください</p>
                         <textarea id="question4" 
                                   name="question4" 
                                   rows="4" 
@@ -189,10 +189,10 @@
                     </div>
 
                     <div>
-                        <label for="question5" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question5" class="block text-base font-medium text-gray-700 mb-2">
                             5. 最後に一言 *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">最後に伝えたいことがあればお聞かせください</p>
+                        <p class="text-sm text-gray-600 mb-2">あなたと家族の物語を締めくくる、やさしい言葉があれば教えてください</p>
                         <textarea id="question5" 
                                   name="question5" 
                                   rows="4" 
@@ -210,7 +210,7 @@
 
                 <!-- 公開設定 -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">公開設定</label>
+                    <label class="block text-base font-medium text-gray-700 mb-2">公開設定</label>
                     <div class="space-y-2">
                         <label class="flex items-center">
                             <input type="radio" name="status" value="published" {{ old('status', $post->status) === 'published' ? 'checked' : '' }} class="mr-2">

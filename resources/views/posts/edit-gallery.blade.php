@@ -14,7 +14,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </a>
-                        <h1 class="text-xl font-semibold text-gray-900">投稿を編集</h1>
+                        <h1 class="text-xl font-semibold text-gray-900">今日の幸せ投稿を編集</h1>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
 
                 <!-- ペット選択 -->
                 <div>
-                    <label for="pet_id" class="block text-sm font-medium text-gray-700 mb-2">ペットを選択</label>
+                    <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">ペットを選択</label>
                     <select name="pet_id" id="pet_id" required 
                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         <option value="">ペットを選択してください</option>
@@ -63,7 +63,7 @@
 
                 <!-- タイトル -->
                 <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">タイトル</label>
+                    <label for="title" class="block text-base font-medium text-gray-700 mb-2">タイトル</label>
                     <input type="text" 
                            name="title" 
                            id="title" 
@@ -79,23 +79,23 @@
 
                 <!-- 本文 -->
                 <div>
-                    <label for="content" class="block text-sm font-medium text-gray-700 mb-2">本文</label>
+                    <label for="content" class="block text-base font-medium text-gray-700 mb-2">本文</label>
                     <textarea name="content" 
                               id="content" 
                               rows="6"
-                              maxlength="300"
+                              maxlength="140"
                               required
                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                              placeholder="今日の幸せな出来事を300文字以内で入力">{{ old('content', $post->content) }}</textarea>
+                              placeholder="今日の幸せな出来事を140文字以内で入力">{{ old('content', $post->content) }}</textarea>
                     <div class="mt-1 text-sm text-gray-500">
-                        <span id="content-count">{{ strlen(old('content', $post->content)) }}</span>/300文字
+                        <span id="content-count">{{ strlen(old('content', $post->content)) }}</span>/140文字
                     </div>
                 </div>
 
                 <!-- 現在のメディア -->
                 @if($post->media->count() > 0)
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">現在のメディア</label>
+                        <label class="block text-base font-medium text-gray-700 mb-2">現在のメディア</label>
                         <div class="grid grid-cols-2 gap-4">
                             @foreach($post->media as $media)
                                 <div class="relative">
@@ -122,7 +122,7 @@
 
                 <!-- メディアアップロード（画像・動画） -->
                 <div>
-                    <label for="media" class="block text-sm font-medium text-gray-700 mb-2">新しい写真・動画</label>
+                    <label for="media" class="block text-base font-medium text-gray-700 mb-2">新しい写真・動画</label>
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                         <input type="file" 
                                name="media[]" 
@@ -149,7 +149,7 @@
 
                 <!-- 公開設定 -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">公開設定</label>
+                    <label class="block text-base font-medium text-gray-700 mb-2">公開設定</label>
                     <div class="space-y-2">
                         <label class="flex items-center">
                             <input type="radio" 
@@ -172,16 +172,16 @@
 
                 <!-- ボタン -->
                 <div class="flex space-x-4">
-                    <button type="submit" 
-                            class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium" 
-                            style="background-color: #d97706; hover:background-color: #b45309;">
-                        更新する
-                    </button>
                     <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" 
                        class="flex-1 text-gray-800 py-3 px-4 rounded-lg transition duration-200 font-medium text-center" 
                        style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
                         キャンセル
                     </a>
+                    <button type="submit" 
+                    class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium" 
+                    style="background-color: #d97706; hover:background-color: #b45309;">
+                更新する
+            </button>
                 </div>
             </form>
         </div>

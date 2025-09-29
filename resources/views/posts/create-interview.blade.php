@@ -215,7 +215,7 @@
 
                 <!-- 公開設定 -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">公開設定</label>
+                    <label class="block text-base font-medium text-gray-700 mb-2">公開設定</label>
                     <div class="space-y-2">
                         <label class="flex items-center">
                             <input type="radio" name="status" value="published" {{ old('status', 'published') === 'published' ? 'checked' : '' }} class="mr-2">
@@ -231,19 +231,17 @@
                     @enderror
                 </div>
 
-                <!-- 送信ボタン -->
+                <!-- ボタン -->
                 <div class="flex space-x-4">
+                    <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" 
+                       class="flex-1 text-gray-800 py-3 px-4 rounded-lg transition duration-200 font-medium text-center" 
+                       style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
+                        キャンセル
+                    </a>
                     <button type="submit" 
-                            class="px-6 py-3 text-white rounded-lg transition duration-200" 
+                            class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium" 
                             style="background-color: #d97706; hover:background-color: #b45309;">
                         投稿する
-                    </button>
-                    <button type="submit" 
-                            name="status" 
-                            value="draft"
-                            class="px-6 py-3 text-gray-800 rounded-lg transition duration-200" 
-                            style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
-                        下書き保存
                     </button>
                 </div>
             </form>
