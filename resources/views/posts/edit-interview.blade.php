@@ -25,20 +25,20 @@
             <!-- 温かみのあるメッセージ -->
             <div class="rounded-lg p-6 mb-8" style="background: linear-gradient(to right, #fef3c7, #fed7aa); border: 1px solid #fbbf24;">
                 <div class="flex items-center mb-4">
-                    <svg class="w-7 h-7 mr-3" style="color: #d97706;" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-10 h-10 mr-3" style="color: #d97706;" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                     </svg>
-                    <h2 class="text-xl font-semibold" style="color: #92400e;">あなたの体験をより良く伝えましょう</h2>
+                    <h2 class="text-xl font-semibold" style="color: #92400e;">あなたの体験が希望を届けます</h2>
                 </div>
                 <p class="text-base leading-relaxed mb-3" style="color: #b45309;">
-                    編集することで、あなたの体験をより多くの人に伝えることができます。
-                    どんな小さな修正でも、きっと誰かの心に響く内容になります。
+                    里親としての体験をシェアすることで、新しい家族を待つ誰かの背中を優しく押します。
+                    里親になることを検討している方や興味をお持ちの方に、温かな希望と勇気を届けませんか？
                 </p>
                 <div class="flex items-center text-sm" style="color: #d97706;">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                     </svg>
-                    <span>安心して編集してくださいね。あなたの言葉が誰かの希望になります。</span>
+                    <span>安心して投稿してくださいね。あなたの体験が、きっと誰かの支えになります。</span>
                 </div>
             </div>
 
