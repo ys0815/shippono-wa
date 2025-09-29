@@ -101,7 +101,7 @@
                 <div class="space-y-6">
                     <!-- 質問1 -->
                     <div>
-                        <label for="question1" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question1" class="block text-base font-medium text-gray-700 mb-2">
                             1. 新しい家族との出会い *
                         </label>
                         <p class="text-sm text-gray-600 mb-2">あの子と目が合ったとき、心に浮かんだことをそのまま言葉にしてみてくださいね</p>
@@ -121,7 +121,7 @@
 
                     <!-- 質問2 -->
                     <div>
-                        <label for="question2" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question2" class="block text-base font-medium text-gray-700 mb-2">
                             2. 迎える前の不安と準備 *
                         </label>
                         <p class="text-sm text-gray-600 mb-2">家族になる前に、ちょっぴり心配したことはありましたか？その気持ちや、準備したことを教えてください</p>
@@ -141,7 +141,7 @@
 
                     <!-- 質問3 -->
                     <div>
-                        <label for="question3" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question3" class="block text-base font-medium text-gray-700 mb-2">
                             3. 迎えた後の変化と喜び *
                         </label>
                         <p class="text-sm text-gray-600 mb-2">一緒に暮らしはじめてから、どんなふうに毎日が変わりましたか？</p>
@@ -161,7 +161,7 @@
 
                     <!-- 質問4 -->
                     <div>
-                        <label for="question4" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question4" class="block text-base font-medium text-gray-700 mb-2">
                             4. 未来の里親へのメッセージ *
                         </label>
                         <p class="text-sm text-gray-600 mb-2">これから新しい家族を迎える人に、やさしいエールやあたたかな言葉を届けてください</p>
@@ -181,7 +181,7 @@
 
                     <!-- 質問5 -->
                     <div>
-                        <label for="question5" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="question5" class="block text-base font-medium text-gray-700 mb-2">
                             5. 最後に一言 *
                         </label>
                         <p class="text-sm text-gray-600 mb-2">あなたと家族の物語を締めくくる、やさしい言葉があれば教えてください</p>
