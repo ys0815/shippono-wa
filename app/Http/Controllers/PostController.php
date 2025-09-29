@@ -176,7 +176,13 @@ class PostController extends Controller
         // ユーザーのペット一覧を取得
         $pets = $user->pets;
 
-        return view('posts.create-interview', compact('pets'));
+        // 既にインタビューが投稿されているペットのIDを取得
+        $postedPetIds = Post::where('user_id', $user->id)
+            ->where('type', 'interview')
+            ->pluck('pet_id')
+            ->toArray();
+
+        return view('posts.create-interview', compact('pets', 'postedPetIds'));
     }
 
     /**
@@ -196,7 +202,21 @@ class PostController extends Controller
 
         // バリデーション（全質問は1000文字以内）
         $request->validate([
-            'pet_id' => 'required|exists:pets,id',
+            'pet_id' => [
+                'required',
+                'exists:pets,id',
+                function ($attribute, $value, $fail) use ($user) {
+                    // 同じペットで既にインタビューが投稿されているかチェック
+                    $existingInterview = Post::where('user_id', $user->id)
+                        ->where('pet_id', $value)
+                        ->where('type', 'interview')
+                        ->exists();
+
+                    if ($existingInterview) {
+                        $fail('このペットは既にインタビュー記事が投稿されています。');
+                    }
+                }
+            ],
             'title' => 'required|string|max:30',
             'main_image' => 'required|file|mimes:jpeg,png,jpg,gif|max:10240', // 10MBまで
             'question1' => 'required|string|max:1000',
