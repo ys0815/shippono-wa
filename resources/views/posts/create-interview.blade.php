@@ -27,7 +27,7 @@
                 
                 <!-- 対象ペット選択 -->
                 <div>
-                    <label for="pet_id" class="block text-sm font-medium text-gray-700 mb-2">対象ペット *</label>
+                    <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">対象ペット *</label>
                     <select id="pet_id" name="pet_id" required 
                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         <option value="">選択してください</option>
@@ -44,7 +44,7 @@
 
                 <!-- タイトル -->
                 <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">タイトル *</label>
+                    <label for="title" class="block text-base font-medium text-gray-700 mb-2">タイトル *</label>
                     <input type="text" 
                            id="title" 
                            name="title" 
@@ -62,7 +62,7 @@
 
                 <!-- メイン画像 -->
                 <div>
-                    <label for="main_image" class="block text-sm font-medium text-gray-700 mb-2">メイン画像 *</label>
+                    <label for="main_image" class="block text-base font-medium text-gray-700 mb-2">メイン画像 *</label>
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                         <div class="space-y-4">
                             <div>
