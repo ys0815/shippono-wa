@@ -104,8 +104,7 @@
                         <label for="question1" class="block text-sm font-medium text-gray-700 mb-2">
                             1. 新しい家族との出会い *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">どのようにして出会ったか、その時の気持ちなどを教えてください</p>
-                        {{-- <p class="text-sm text-red-600 mb-2">200文字以上でご記入ください</p> --}}
+                        <p class="text-sm text-gray-600 mb-2">あの子と目が合ったとき、心に浮かんだことをそのまま言葉にしてみてくださいね</p>
                         <textarea id="question1" 
                                   name="question1" 
                                   rows="4" 
@@ -125,7 +124,7 @@
                         <label for="question2" class="block text-sm font-medium text-gray-700 mb-2">
                             2. 迎える前の不安と準備 *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">迎える前に感じた不安や、どのような準備をしたかを教えてください</p>
+                        <p class="text-sm text-gray-600 mb-2">家族になる前に、ちょっぴり心配したことはありましたか？その気持ちや、準備したことを教えてください</p>
                         <textarea id="question2" 
                                   name="question2" 
                                   rows="4" 
@@ -145,7 +144,7 @@
                         <label for="question3" class="block text-sm font-medium text-gray-700 mb-2">
                             3. 迎えた後の変化と喜び *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">ペットを迎えてからの生活の変化や喜びを教えてください</p>
+                        <p class="text-sm text-gray-600 mb-2">一緒に暮らしはじめてから、どんなふうに毎日が変わりましたか？</p>
                         <textarea id="question3" 
                                   name="question3" 
                                   rows="4" 
@@ -165,7 +164,7 @@
                         <label for="question4" class="block text-sm font-medium text-gray-700 mb-2">
                             4. 未来の里親へのメッセージ *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">これから里親を考えている方へのメッセージをお願いします</p>
+                        <p class="text-sm text-gray-600 mb-2">これから新しい家族を迎える人に、やさしいエールやあたたかな言葉を届けてください</p>
                         <textarea id="question4" 
                                   name="question4" 
                                   rows="4" 
@@ -185,7 +184,7 @@
                         <label for="question5" class="block text-sm font-medium text-gray-700 mb-2">
                             5. 最後に一言 *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">最後に伝えたいことがあればお聞かせください</p>
+                        <p class="text-sm text-gray-600 mb-2">あなたと家族の物語を締めくくる、やさしい言葉があれば教えてください</p>
                         <textarea id="question5" 
                                   name="question5" 
                                   rows="4" 
