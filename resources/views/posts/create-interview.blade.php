@@ -47,10 +47,16 @@
                 
                 <!-- 対象ペット選択 -->
                 <div>
-                    <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">対象ペット *</label>
+                    <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">ペットを選択</label>
+                    <div class="p-3 mb-3" style="background-color: #fefce8;">
+                        <p class="text-sm" style="color: #a16207;">
+                            🐾 どのペットの里親インタビューをシェアしますか？家族の一員を選んでください。
+                        </p>
+                    </div>
+                    
                     <select id="pet_id" name="pet_id" required 
                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        <option value="">選択してください</option>
+                        <option value="">ペットを選択してください</option>
                         @foreach($pets as $pet)
                             <option value="{{ $pet->id }}" 
                                     {{ old('pet_id') == $pet->id ? 'selected' : '' }}
@@ -77,7 +83,12 @@
 
                 <!-- タイトル -->
                 <div>
-                    <label for="title" class="block text-base font-medium text-gray-700 mb-2">タイトル *</label>
+                    <label for="title" class="block text-base font-medium text-gray-700 mb-2">タイトル</label>
+                    <div class="p-3 mb-3" style="background-color: #fefce8;">
+                        <p class="text-sm" style="color: #a16207;">
+                            ✨ その瞬間の気持ちを一言で表現してください。シンプルで温かいタイトルが素敵です。
+                        </p>
+                    </div>
                     <input type="text" 
                            id="title" 
                            name="title" 
@@ -96,6 +107,11 @@
                 <!-- メイン画像 -->
                 <div>
                     <label for="main_image" class="block text-base font-medium text-gray-700 mb-2">メイン画像 *</label>
+                    <div class="p-3 mb-3" style="background-color: #fefce8;">
+                        <p class="text-sm" style="color: #a16207;">
+                            📸 その瞬間を切り取った写真や動画をアップロードしてください。思い出がより鮮明に伝わります。
+                        </p>
+                    </div>
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                         <div class="space-y-4">
                             <div>
@@ -135,11 +151,11 @@
                     <!-- 質問1 -->
                     <div>
                         <label for="question1" class="block text-base font-medium text-gray-700 mb-2">
-                            1. 新しい家族との出会い *
+                            1. 新しい家族との出会い
                         </label>
                        
-                        <div class="p-3 mb-3" style="background-color: #eff6ff; border-left: 4px solid #3b82f6;">
-                            <p class="text-sm" style="color: #1d4ed8;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
+                            <p class="text-sm" style="color: #a16207;">
                                 💝 どんな小さな瞬間でも大丈夫です。その時の気持ちを素直に書いてください。
                             </p>
                         </div>
@@ -160,11 +176,10 @@
                     <!-- 質問2 -->
                     <div>
                         <label for="question2" class="block text-base font-medium text-gray-700 mb-2">
-                            2. 迎える前の不安と準備 *
+                            2. 迎える前の不安と準備
                         </label>
-                      
-                        <div class="p-3 mb-3" style="background-color: #f0fdf4; border-left: 4px solid #22c55e;">
-                            <p class="text-sm" style="color: #15803d;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
+                            <p class="text-sm" style="color: #a16207;">
                                 🌱 不安な気持ちも含めて、等身大の体験を教えてください。きっと同じ気持ちの方がいます。
                             </p>
                         </div>
@@ -185,10 +200,10 @@
                     <!-- 質問3 -->
                     <div>
                         <label for="question3" class="block text-base font-medium text-gray-700 mb-2">
-                            3. 迎えた後の変化と喜び *
+                            3. 迎えた後の変化と喜び
                         </label>
     
-                        <div class="p-3 mb-3" style="background-color: #fefce8; border-left: 4px solid #eab308;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 ✨ 日常の小さな幸せや、心が温かくなった瞬間を教えてください。
                             </p>
@@ -210,11 +225,11 @@
                     <!-- 質問4 -->
                     <div>
                         <label for="question4" class="block text-base font-medium text-gray-700 mb-2">
-                            4. 未来の里親へのメッセージ *
+                            4. 未来の里親へのメッセージ
                         </label>
                       
-                        <div class="p-3 mb-3" style="background-color: #fdf2f8; border-left: 4px solid #ec4899;">
-                            <p class="text-sm" style="color: #be185d;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
+                            <p class="text-sm" style="color: #a16207;">
                                 💌 あなたの言葉が、新しい家族を待つ誰かの心に届きます。
                             </p>
                         </div>
@@ -235,11 +250,10 @@
                     <!-- 質問5 -->
                     <div>
                         <label for="question5" class="block text-base font-medium text-gray-700 mb-2">
-                            5. 最後に一言 *
+                            5. 最後に一言
                         </label>
-                      
-                        <div class="p-3 mb-3" style="background-color: #faf5ff; border-left: 4px solid #a855f7;">
-                            <p class="text-sm" style="color: #7c3aed;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
+                            <p class="text-sm" style="color: #a16207;">
                                 🌟 あなたの物語の最後に、心に残る言葉を添えてください。きっと誰かの心に響きます。
                             </p>
                         </div>

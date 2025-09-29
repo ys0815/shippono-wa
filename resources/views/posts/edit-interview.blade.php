@@ -135,8 +135,8 @@
                         <label for="question1" class="block text-base font-medium text-gray-700 mb-2">
                             1. 新しい家族との出会い *
                         </label>
-                        <div class="p-3 mb-3" style="background-color: #eff6ff; border-left: 4px solid #3b82f6;">
-                            <p class="text-sm" style="color: #1d4ed8;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
+                            <p class="text-sm" style="color: #a16207;">
                                 💝 どんな小さな瞬間でも大丈夫です。その時の気持ちを素直に書いてください。
                             </p>
                         </div>
@@ -159,8 +159,8 @@
                         <label for="question2" class="block text-base font-medium text-gray-700 mb-2">
                             2. 迎える前の不安と準備 *
                         </label>
-                        <div class="p-3 mb-3" style="background-color: #f0fdf4; border-left: 4px solid #22c55e;">
-                            <p class="text-sm" style="color: #15803d;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
+                            <p class="text-sm" style="color: #a16207;">
                                 🌱 不安な気持ちも含めて、等身大の体験を教えてください。きっと同じ気持ちの方がいます。
                             </p>
                         </div>
@@ -183,7 +183,7 @@
                         <label for="question3" class="block text-base font-medium text-gray-700 mb-2">
                             3. 迎えた後の変化と喜び *
                         </label>
-                        <div class="p-3 mb-3" style="background-color: #fefce8; border-left: 4px solid #eab308;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 ✨ 日常の小さな幸せや、心が温かくなった瞬間を教えてください。
                             </p>
@@ -207,8 +207,8 @@
                         <label for="question4" class="block text-base font-medium text-gray-700 mb-2">
                             4. 未来の里親へのメッセージ *
                         </label>
-                        <div class="p-3 mb-3" style="background-color: #fdf2f8; border-left: 4px solid #ec4899;">
-                            <p class="text-sm" style="color: #be185d;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
+                            <p class="text-sm" style="color: #a16207;">
                                 💌 あなたの言葉が、新しい家族を待つ誰かの心に届きます。
                             </p>
                         </div>
@@ -231,8 +231,8 @@
                         <label for="question5" class="block text-base font-medium text-gray-700 mb-2">
                             5. 最後に一言 *
                         </label>
-                        <div class="p-3 mb-3" style="background-color: #faf5ff; border-left: 4px solid #a855f7;">
-                            <p class="text-sm" style="color: #7c3aed;">
+                        <div class="p-3 mb-3" style="background-color: #fefce8;">
+                            <p class="text-sm" style="color: #a16207;">
                                 🌟 あなたの物語の最後に、心に残る言葉を添えてください。きっと誰かの心に響きます。
                             </p>
                         </div>
