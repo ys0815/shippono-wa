@@ -18,6 +18,26 @@
 
         <!-- メインコンテンツ -->
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <!-- 温かみのあるメッセージ -->
+            <div class="rounded-lg p-6 mb-8" style="background: linear-gradient(to right, #fef3c7, #fed7aa); border: 1px solid #fbbf24;">
+                <div class="flex items-center mb-4">
+                    <svg class="w-10 h-10 mr-3" style="color: #d97706;" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                    </svg>
+                    <h2 class="text-xl font-semibold" style="color: #92400e;">今日の幸せをシェアしましょう</h2>
+                </div>
+                <p class="text-base leading-relaxed mb-3" style="color: #b45309;">
+                    ペットとの日常の小さな幸せな瞬間を写真と一緒にシェアすることで、
+                    同じ気持ちの里親さんたちとつながることができます。
+                </p>
+                <div class="flex items-center text-sm" style="color: #d97706;">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>どんな小さな瞬間でも大丈夫です。あなたの幸せが誰かの心を温かくします。</span>
+                </div>
+            </div>
+
             <form action="{{ route('mypage.posts.gallery.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 
@@ -45,6 +65,11 @@
                 <!-- ペット選択 -->
                 <div>
                     <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">ペットを選択</label>
+                    <div class="p-3 mb-3" style="background-color: #fefce8;">
+                        <p class="text-sm" style="color: #a16207;">
+                            🐾 どのペットの幸せな瞬間をシェアしますか？家族の一員を選んでください。
+                        </p>
+                    </div>
                     <select name="pet_id" id="pet_id" required 
                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         <option value="">ペットを選択してください</option>
@@ -59,6 +84,11 @@
                 <!-- タイトル -->
                 <div>
                     <label for="title" class="block text-base font-medium text-gray-700 mb-2">タイトル</label>
+                    <div class="p-3 mb-3" style="background-color: #fefce8;">
+                        <p class="text-sm" style="color: #a16207;">
+                            ✨ その瞬間の気持ちを一言で表現してください。シンプルで温かいタイトルが素敵です。
+                        </p>
+                    </div>
                     <input type="text" 
                            name="title" 
                            id="title" 
@@ -75,6 +105,11 @@
                 <!-- 本文 -->
                 <div>
                     <label for="content" class="block text-base font-medium text-gray-700 mb-2">本文</label>
+                    <div class="p-3 mb-3" style="background-color: #fefce8;">
+                        <p class="text-sm" style="color: #a16207;">
+                            💝 その時の気持ちや状況を教えてください。どんな小さな幸せでも、きっと誰かの心に響きます。
+                        </p>
+                    </div>
                     <textarea name="content" 
                               id="content" 
                               rows="6"
@@ -90,6 +125,11 @@
                 <!-- メディアアップロード（画像・動画） -->
                 <div>
                     <label for="media" class="block text-base font-medium text-gray-700 mb-2">写真・動画</label>
+                    <div class="p-3 mb-3" style="background-color: #fefce8;">
+                        <p class="text-sm" style="color: #a16207;">
+                            📸 その瞬間を切り取った写真や動画をアップロードしてください。思い出がより鮮明に伝わります。
+                        </p>
+                    </div>
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                         <input type="file" 
                                name="media[]" 
@@ -118,6 +158,11 @@
                 <!-- 公開設定 -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-2">公開設定</label>
+                    <div class="p-3 mb-3" style="background-color: #fefce8;">
+                        <p class="text-sm" style="color: #a16207;">
+                            🌟 公開すると他の里親さんたちと幸せをシェアできます。下書き保存も可能です。
+                        </p>
+                    </div>
                     <div class="space-y-2">
                         <label class="flex items-center">
                             <input type="radio" 
@@ -139,17 +184,27 @@
                 </div>
 
                 <!-- ボタン -->
-                <div class="flex space-x-4">
-                    <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" 
-                       class="flex-1 text-gray-800 py-3 px-4 rounded-lg transition duration-200 font-medium text-center" 
-                       style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
-                        キャンセル
-                    </a>
-                    <button type="submit" 
-                    class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium" 
-                    style="background-color: #d97706; hover:background-color: #b45309;">
-                投稿する
-            </button>
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <div class="text-center mb-4">
+                        <p class="text-sm text-gray-600">
+                            💝 あなたの幸せな瞬間をシェアして、みんなで温かいコミュニティを作りませんか？
+                        </p>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" 
+                           class="flex-1 text-gray-800 py-3 px-4 rounded-lg transition duration-200 font-medium text-center" 
+                           style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
+                            キャンセル
+                        </a>
+                        <button type="submit" 
+                                class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium flex items-center justify-center" 
+                                style="background-color: #d97706; hover:background-color: #b45309;">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                            </svg>
+                            投稿する
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
