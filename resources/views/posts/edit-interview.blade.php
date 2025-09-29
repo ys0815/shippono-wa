@@ -22,6 +22,26 @@
 
         <!-- メインコンテンツ -->
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <!-- 温かみのあるメッセージ -->
+            <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-6 mb-8">
+                <div class="flex items-center mb-4">
+                    <svg class="w-7 h-7 text-amber-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                    </svg>
+                    <h2 class="text-xl font-semibold text-amber-800">あなたの体験をより良く伝えましょう</h2>
+                </div>
+                <p class="text-amber-700 text-base leading-relaxed mb-3">
+                    編集することで、あなたの体験をより多くの人に伝えることができます。
+                    どんな小さな修正でも、きっと誰かの心に響く内容になります。
+                </p>
+                <div class="flex items-center text-sm text-amber-600">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>安心して編集してくださいね。あなたの言葉が誰かの希望になります。</span>
+                </div>
+            </div>
+
             <form method="POST" action="{{ route('mypage.posts.update', $post) }}" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 @method('PUT')
@@ -115,7 +135,11 @@
                         <label for="question1" class="block text-base font-medium text-gray-700 mb-2">
                             1. 新しい家族との出会い *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">あの子と目が合ったとき、心に浮かんだことをそのまま言葉にしてみてくださいね</p>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mb-3">
+                            <p class="text-sm text-blue-700">
+                                💝 どんな小さな瞬間でも大丈夫です。その時の気持ちを素直に書いてください。
+                            </p>
+                        </div>
                         <textarea id="question1" 
                                   name="question1" 
                                   rows="4" 
@@ -130,12 +154,16 @@
                         @enderror
                     </div>
 
-                    <!-- 質問2-5 -->
+                    <!-- 質問2 -->
                     <div>
                         <label for="question2" class="block text-base font-medium text-gray-700 mb-2">
                             2. 迎える前の不安と準備 *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">家族になる前に、ちょっぴり心配したことはありましたか？その気持ちや、準備したことを教えてください</p>
+                        <div class="bg-green-50 border-l-4 border-green-400 p-3 mb-3">
+                            <p class="text-sm text-green-700">
+                                🌱 不安な気持ちも含めて、等身大の体験を教えてください。きっと同じ気持ちの方がいます。
+                            </p>
+                        </div>
                         <textarea id="question2" 
                                   name="question2" 
                                   rows="4" 
@@ -150,11 +178,16 @@
                         @enderror
                     </div>
 
+                    <!-- 質問3 -->
                     <div>
                         <label for="question3" class="block text-base font-medium text-gray-700 mb-2">
                             3. 迎えた後の変化と喜び *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">一緒に暮らしはじめてから、どんなふうに毎日が変わりましたか？</p>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-3">
+                            <p class="text-sm text-yellow-700">
+                                ✨ 日常の小さな幸せや、心が温かくなった瞬間を教えてください。
+                            </p>
+                        </div>
                         <textarea id="question3" 
                                   name="question3" 
                                   rows="4" 
@@ -169,11 +202,16 @@
                         @enderror
                     </div>
 
+                    <!-- 質問4 -->
                     <div>
                         <label for="question4" class="block text-base font-medium text-gray-700 mb-2">
                             4. 未来の里親へのメッセージ *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">これから新しい家族を迎える人に、やさしいエールやあたたかな言葉を届けてください</p>
+                        <div class="bg-pink-50 border-l-4 border-pink-400 p-3 mb-3">
+                            <p class="text-sm text-pink-700">
+                                💌 あなたの言葉が、新しい家族を待つ誰かの心に届きます。
+                            </p>
+                        </div>
                         <textarea id="question4" 
                                   name="question4" 
                                   rows="4" 
@@ -188,11 +226,16 @@
                         @enderror
                     </div>
 
+                    <!-- 質問5 -->
                     <div>
                         <label for="question5" class="block text-base font-medium text-gray-700 mb-2">
                             5. 最後に一言 *
                         </label>
-                        <p class="text-sm text-gray-600 mb-2">あなたと家族の物語を締めくくる、やさしい言葉があれば教えてください</p>
+                        <div class="bg-purple-50 border-l-4 border-purple-400 p-3 mb-3">
+                            <p class="text-sm text-purple-700">
+                                🌟 あなたの物語の最後に、心に残る言葉を添えてください。きっと誰かの心に響きます。
+                            </p>
+                        </div>
                         <textarea id="question5" 
                                   name="question5" 
                                   rows="4" 
@@ -227,17 +270,27 @@
                 </div>
 
                 <!-- ボタン -->
-                <div class="flex space-x-4">
-                    <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" 
-                       class="flex-1 text-gray-800 py-3 px-4 rounded-lg transition duration-200 font-medium text-center" 
-                       style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
-                        キャンセル
-                    </a>
-                    <button type="submit" 
-                            class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium" 
-                            style="background-color: #d97706; hover:background-color: #b45309;">
-                        更新する
-                    </button>
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <div class="text-center mb-4">
+                        <p class="text-sm text-gray-600">
+                            💝 編集した内容で、より多くの人にあなたの体験を伝えませんか？
+                        </p>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" 
+                           class="flex-1 text-gray-800 py-3 px-4 rounded-lg transition duration-200 font-medium text-center" 
+                           style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
+                            キャンセル
+                        </a>
+                        <button type="submit" 
+                                class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium flex items-center justify-center" 
+                                style="background-color: #d97706; hover:background-color: #b45309;">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                            </svg>
+                            更新する
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
