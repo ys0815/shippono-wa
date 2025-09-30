@@ -11,25 +11,33 @@
 
     <div class="pt-16 pb-4 px-4 max-w-2xl mx-auto bg-gray-50 min-h-screen">
         <!-- ユーザー情報ヘッダー -->
-        <div class="text-center mb-4">
-            <h1 class="text-lg font-bold text-gray-800">ようこそ、{{ Auth::user()->display_name ?? Auth::user()->name }}さん</h1>
+        <div class="text-center mb-6">
+            <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200">
+                <h1 class="text-xl font-bold text-amber-800 mb-2">
+                    🌟 おかえりなさい、{{ Auth::user()->display_name ?? Auth::user()->name }}さん
+                </h1>
+                <p class="text-amber-700 text-sm">
+                    今日も大切な家族との幸せな時間を過ごしていますね。<br>
+                    あなたの体験が、新しい家族を待つ誰かの希望になっています。
+                </p>
+            </div>
         </div>
 
-        <!-- 通知バナー（ペット別いいね数表示） -->
-        @if($pets->isNotEmpty())
+        <!-- 通知バナー（7日以内の新しいいいね数表示） -->
+        @if($stats['recent_likes_got'] > 0)
             <div class="bg-amber-100 border border-amber-200 rounded-lg p-3 mb-6 text-center">
-                @foreach($pets as $pet)
-                    @if($pet->likes_count > 0)
-                        <p class="text-sm text-amber-800 font-medium">{{ $pet->name }}に新しい「いいね」が{{ $pet->likes_count }}件届いています！</p>
+                @if($pets->isNotEmpty())
+                    @foreach($pets as $pet)
+                        @if($pet->recent_likes_count > 0)
+                            <p class="text-sm text-amber-800 font-medium">{{ $pet->name }}に新しい「いいね」が{{ $pet->recent_likes_count }}件届いています！</p>
+                        @endif
+                    @endforeach
+                    @if($pets->where('recent_likes_count', '>', 0)->isEmpty())
+                        <p class="text-sm text-amber-700">過去7日間で新しい「いいね」が{{ $stats['recent_likes_got'] }}件届いています！</p>
                     @endif
-                @endforeach
-                @if($pets->where('likes_count', '>', 0)->isEmpty())
-                    <p class="text-sm text-amber-700">新しい「いいね」が{{ $stats['likes_got'] ?? 0 }}件届いています！</p>
+                @else
+                    <p class="text-sm text-amber-700">過去7日間で新しい「いいね」が{{ $stats['recent_likes_got'] }}件届いています！</p>
                 @endif
-            </div>
-        @else
-            <div class="bg-gray-200 rounded-lg p-3 mb-6 text-center">
-                <p class="text-sm text-gray-700">新しい「いいね」が{{ $stats['likes_got'] ?? 0 }}件届いています！</p>
             </div>
         @endif
 
@@ -134,12 +142,21 @@
 
             <!-- アクションボタン -->
             <div class="space-y-3">
-                <a href="{{ route('mypage.posts.gallery.create') }}" class="block w-full text-center bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition duration-200">
-                    今日の幸せを投稿
-                </a>
-                <a href="{{ route('mypage.posts.interview.create') }}" class="block w-full text-center bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition duration-200">
-                    里親インタビューを投稿
-                </a>
+                <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg p-4 text-center">
+                    <p class="text-sm font-medium mb-2">💝 今日の幸せをシェアしませんか？</p>
+                    <a href="{{ route('mypage.posts.gallery.create') }}" 
+                       class="inline-block bg-white text-amber-600 px-6 py-2 rounded-lg font-medium hover:bg-amber-50 transition duration-200">
+                        投稿する
+                    </a>
+                </div>
+                
+                <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg p-4 text-center">
+                    <p class="text-sm font-medium mb-2">📖 体験談をシェアして希望を届けませんか？</p>
+                    <a href="{{ route('mypage.posts.interview.create') }}" 
+                       class="inline-block bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-blue-50 transition duration-200">
+                        インタビュー投稿
+                    </a>
+                </div>
                 <a href="{{ route('mypage.posts') }}" class="block w-full text-center bg-gray-200 text-gray-800 py-3 rounded-lg font-medium hover:bg-gray-300 transition duration-200">
                     すべての投稿を見る→
                 </a>

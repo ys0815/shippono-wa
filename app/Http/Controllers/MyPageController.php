@@ -32,10 +32,18 @@ class MyPageController extends Controller
         $petCount = Pet::where('user_id', $user->id)->count();
         $likesGiven = Like::where('user_id', $user->id)->count();
 
+        // 7日以内の新しいいいね数（通知用）
+        $recentLikesGot = Like::whereIn('pet_id', Pet::where('user_id', $user->id)->pluck('id'))
+            ->where('created_at', '>=', now()->subDays(7))
+            ->count();
+
         // ペット一覧（最新5件、保護団体情報と各ペットのいいね数も含む）
         $pets = Pet::where('user_id', $user->id)
             ->with('shelter:id,name,area,kind')
             ->withCount('likes')
+            ->withCount(['likes as recent_likes_count' => function ($query) {
+                $query->where('created_at', '>=', now()->subDays(7));
+            }])
             ->latest()
             ->take(5)
             ->get();
@@ -49,6 +57,7 @@ class MyPageController extends Controller
                 'likes_got' => $likesGot,
                 'pet_count' => $petCount,
                 'likes_given' => $likesGiven,
+                'recent_likes_got' => $recentLikesGot,
             ],
             'pets' => $pets,
             'recentPosts' => $recentPosts,
