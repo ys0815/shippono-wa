@@ -25,10 +25,23 @@ export default {
         "text-gray-400",
         "bg-amber-500",
         "bg-gray-300",
-        // スペーシング関連のクラス
         "space-y-10",
         "space-y-8",
         "space-y-6",
+        // 温かみメッセージ用のクラス
+        "bg-gradient-to-r",
+        "from-amber-100",
+        "to-orange-200",
+        "border-amber-300",
+        "text-amber-800",
+        "text-amber-700",
+        "text-amber-600",
+        "bg-yellow-50",
+        "text-yellow-800",
+        "bg-gray-100",
+        "hover:bg-gray-200",
+        "bg-amber-600",
+        "hover:bg-amber-700",
         // その他の動的クラスも必要に応じて追加
     ],
 
