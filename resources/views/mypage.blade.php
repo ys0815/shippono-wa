@@ -99,11 +99,9 @@
                             <p class="text-xs text-gray-600">いいね：{{ $pet->likes()->count() }}｜投稿：{{ $pet->posts()->count() }}</p>
                             <div class="flex space-x-2 mt-2">
                                 <a href="{{ route('mypage.pets.edit', ['pet_id' => $pet->id]) }}" 
-                                   class="px-3 py-1 text-white text-xs rounded transition duration-200" 
-                                   style="background-color: #f59e0b; hover:background-color: #d97706;">編集</a>
-                                <a href="#" 
-                                   class="px-3 py-1 text-white text-xs rounded transition duration-200" 
-                                   style="background-color: #3b82f6; hover:background-color: #2563eb;">投稿</a>
+                                   class="px-3 py-1 text-white text-xs rounded transition duration-200 bg-amber-500 hover:bg-amber-600">編集</a>
+                                <a href="{{ route('pets.show', $pet->id) }}" 
+                                   class="px-3 py-1 text-white text-xs rounded transition duration-200 bg-blue-500 hover:bg-blue-600">詳細を見る</a>
                             </div>
                         </div>
                     </div>
