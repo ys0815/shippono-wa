@@ -142,18 +142,22 @@
 
             <!-- アクションボタン -->
             <div class="space-y-3">
-                <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg p-4 text-center">
-                    <p class="text-base font-medium mb-2">今日の幸せをシェアしませんか？</p>
+                <div style="background: linear-gradient(to right, #f59e0b, #f97316); color: white; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+                    <p style="font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem;">今日の幸せをシェアしませんか？</p>
                     <a href="{{ route('mypage.posts.gallery.create') }}" 
-                       class="inline-block bg-white text-amber-600 px-6 py-2 rounded-lg font-medium hover:bg-amber-50 transition duration-200">
+                       style="display: inline-block; background-color: white; color: #d97706; padding: 0.5rem 1.5rem; border-radius: 0.5rem; font-weight: 500; transition: background-color 0.2s;"
+                       onmouseover="this.style.backgroundColor='#fef3c7'" 
+                       onmouseout="this.style.backgroundColor='white'">
                         今日の幸せを投稿する
                     </a>
                 </div>
                 
-                <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg p-4 text-center">
-                    <p class="text-base font-medium mb-2">体験談をシェアして希望を届けませんか？</p>
+                <div style="background: linear-gradient(to right, #3b82f6, #8b5cf6); color: white; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+                    <p style="font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem;">体験談をシェアして希望を届けませんか？</p>
                     <a href="{{ route('mypage.posts.interview.create') }}" 
-                       class="inline-block bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-blue-50 transition duration-200">
+                       style="display: inline-block; background-color: white; color: #2563eb; padding: 0.5rem 1.5rem; border-radius: 0.5rem; font-weight: 500; transition: background-color 0.2s;"
+                       onmouseover="this.style.backgroundColor='#eff6ff'" 
+                       onmouseout="this.style.backgroundColor='white'">
                         里親インタビューを投稿する
                     </a>
                 </div>
