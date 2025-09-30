@@ -31,14 +31,14 @@
                     <h2 class="text-xl font-semibold" style="color: #92400e;">幸せな投稿をより良くしましょう</h2>
                 </div>
                 <p class="text-base leading-relaxed mb-3" style="color: #b45309;">
-                    投稿を編集することで、あなたの幸せな瞬間をより多くの人に伝えることができます。
-                    どんな小さな修正でも、きっと誰かの心に響く内容になります。
+                    ペットとの日常にある小さな幸せを、写真や動画と一緒に残してみませんか？<br>
+                    そのひとときの温かさは、きっと同じ気持ちを分かち合う誰かに届きます。
                 </p>
                 <div class="flex items-center text-sm" style="color: #d97706;">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                     </svg>
-                    <span>安心して編集してくださいね。あなたの幸せが誰かの希望になります。</span>
+                    <span>どんなささやかな瞬間も大切です。あなたの日常が、誰かの心をそっと和ませます。</span>
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                     <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">ペットを選択</label>
                     <div class="p-3 mb-3" style="background-color: #fefce8;">
                         <p class="text-sm" style="color: #a16207;">
-                            🐾 どのペットの幸せな瞬間をシェアしますか？家族の一員を選んでください。
+                            🐾 今日はどの子の幸せを分かち合いますか？かけがえのない家族を選んでくださいね。
                         </p>
                     </div>
                     <select name="pet_id" id="pet_id" required 
@@ -91,7 +91,7 @@
                     <label for="title" class="block text-base font-medium text-gray-700 mb-2">タイトル</label>
                     <div class="p-3 mb-3" style="background-color: #fefce8;">
                         <p class="text-sm" style="color: #a16207;">
-                            ✨ その瞬間の気持ちを一言で表現してください。シンプルで温かいタイトルが素敵です。
+                            ✨ その瞬間の気持ちを素直にひとこと。短くても、想いはきっと伝わります。
                         </p>
                     </div>
                     <input type="text" 
@@ -112,7 +112,7 @@
                     <label for="content" class="block text-base font-medium text-gray-700 mb-2">本文</label>
                     <div class="p-3 mb-3" style="background-color: #fefce8;">
                         <p class="text-sm" style="color: #a16207;">
-                            💝 その時の気持ちや状況を教えてください。どんな小さな幸せでも、きっと誰かの心に響きます。
+                            💝 その時に感じた喜びや愛しさを、自由に書いてください。小さな出来事が、大きな温もりとなって広がります。
                         </p>
                     </div>
                     <textarea name="content" 
@@ -160,7 +160,7 @@
                     <label for="media" class="block text-base font-medium text-gray-700 mb-2">新しい写真・動画</label>
                     <div class="p-3 mb-3" style="background-color: #fefce8;">
                         <p class="text-sm" style="color: #a16207;">
-                            📸 その瞬間を切り取った写真や動画をアップロードしてください。思い出がより鮮明に伝わります。
+                            📸 写真や動画で幸せを形にしましょう。見る人も一緒に、その空気を感じられます。
                         </p>
                     </div>
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
@@ -192,7 +192,7 @@
                     <label class="block text-base font-medium text-gray-700 mb-2">公開設定</label>
                     <div class="p-3 mb-3" style="background-color: #fefce8;">
                         <p class="text-sm" style="color: #a16207;">
-                            🌟 公開すると他の里親さんたちと幸せをシェアできます。下書き保存も可能です。
+                            🌟 公開すれば仲間と幸せを分け合えます。もちろん下書きにして、あなたのペースで大切に残すこともできます。
                         </p>
                     </div>
                     <div class="space-y-2">
@@ -219,7 +219,7 @@
                 <div class="bg-gray-50 rounded-lg p-4 mb-6">
                     <div class="text-center mb-4">
                         <p class="text-sm text-gray-600">
-                            💝 編集した内容で、より多くの人にあなたの幸せを伝えませんか？
+                            💝 あなたの「幸せな瞬間」が、「#しっぽのわ」をもっとやさしく彩ります。
                         </p>
                     </div>
                     <div class="flex space-x-4">

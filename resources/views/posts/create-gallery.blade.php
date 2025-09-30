@@ -187,7 +187,7 @@
                 <div class="bg-gray-50 rounded-lg p-4 mb-6">
                     <div class="text-center mb-4">
                         <p class="text-sm text-gray-600">
-                            💝 あなたの「幸せな瞬間」が、この場所をもっとやさしく彩ります。
+                            💝 あなたの「幸せな瞬間」が、「#しっぽのわ」をもっとやさしく彩ります。
                         </p>
                     </div>
                     <div class="flex space-x-4">
