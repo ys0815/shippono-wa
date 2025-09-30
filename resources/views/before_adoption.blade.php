@@ -1,48 +1,62 @@
 <x-guest-layout>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- 画像セクション（画面いっぱい） -->
+    <section class="w-full relative overflow-hidden" style="position: relative !important;">
+        <img src="{{ asset('images/hero-01.jpeg') }}" 
+             alt="保護動物と家族の幸せ" 
+             class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover about-hero-image" 
+             style="height: 256px !important; max-height: 400px; object-position: center;">
+        <!-- 画像下部のグラデーションオーバーレイ（重なり順を明示） -->
+        <div class="absolute inset-0 pointer-events-none" style="z-index: 10 !important; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 75%) !important;"></div>
+        <!-- 画像下部のテキスト（グラデーションの上に重ねる） -->
+        <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 pb-8 sm:pb-10 pointer-events-none" style="z-index: 20 !important; position: absolute !important; top: auto !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;">
+            <div class="max-w-4xl mx-auto text-center">
+                <p class="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-medium leading-relaxed drop-shadow-lg select-none">
+                    家族を迎える前に知っておきたいこと
+                </p>
+            </div>
+        </div>
+    </section>
 
-            <!-- メインタイトル -->
-            <header class="relative text-center mb-12 overflow-hidden rounded-2xl" style="height: 300px;">
-                <!-- 背景画像 -->
-                <div class="absolute inset-0">
-                    <img src="{{ asset('images/hero-01.jpeg') }}" 
-                         alt="保護動物と家族の幸せ" 
-                         class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/40"></div>
-                </div>
-                
-                <!-- コンテンツ -->
-                <div class="relative z-10 h-full flex items-center justify-center">
-                    <div class="text-center text-white px-4">
-                        <h1 class="text-3xl md:text-4xl font-bold mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
-                            家族を迎える前に知っておきたいこと
-                        </h1>
-                        <div class="w-16 h-1 bg-amber-400 mx-auto"></div>
-                        <p class="mt-4 text-lg opacity-90" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
-                            命を迎えるその瞬間に、必要なのは準備とやさしさです。
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- メインコンテンツ -->
+        <main class="pt-16 pb-16 space-y-20 md:space-y-24 lg:space-y-28 xl:space-y-32">
+
+            <!-- サイト紹介 -->
+            <section class="text-center">
+                <div class="max-w-4xl mx-auto">
+                    <div class="inline-flex items-center space-x-2 bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>家族をお迎えする前に知っておきたいこと</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-gray-900 mb-6">
+                        命を迎えるその瞬間に
+                    </h1>
+                    <p class="text-lg md:text-xl lg:text-xl text-gray-600 leading-relaxed mb-8">
+                        近年、保護犬や保護猫に関心が集まり、里親募集サイトや保護シェルターを通じて新しい家族を迎える方が増えてきました。けれども、ペットを幸せにするためには、迎える前に考えておきたい大切なことがあります。
+                    </p>
+                    <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-8 max-w-2xl mx-auto shadow-sm">
+                        <div class="flex items-center justify-center mb-4">
+                            <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
+                                <span class="text-2xl">💝</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-3">
+                            ここでは、安心して一歩を踏み出すためのヒントをお届けします。
+                        </p>
+                        <p class="text-amber-700 text-sm font-medium">
+                            必要なのは準備とやさしさです。
                         </p>
                     </div>
-                </div>
-            </header>
-
-            <!-- 導入文 -->
-            <section class="mb-12">
-                <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-100 p-6 md:p-8">
-                    <p class="text-gray-700 leading-relaxed text-lg md:text-xl">
-                        近年、保護犬や保護猫に関心が集まり、里親募集サイトや保護シェルターを通じて新しい家族を迎える方が増えてきました。
-                    </p>
-                    <p class="text-gray-700 leading-relaxed text-lg md:text-xl mt-4">
-                        けれども、ペットを幸せにするためには、迎える前に考えておきたい大切なことがあります。<br>
-                        ここでは、安心して一歩を踏み出すためのヒントをお届けします。
-                    </p>
                 </div>
             </section>
 
             <!-- 数字が語る日本の現状 -->
-            <section class="mb-12">
-                <div class="text-center mb-8">
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">数字が語る日本の現状</h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto"></div>
+            <section>
+                <div class="text-center" style="margin-bottom: 3rem !important;">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">数字が語る日本の現状</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                 </div>
                 
                 <!-- 改善された数字を前面に -->
@@ -91,10 +105,10 @@
             </section>
 
             <!-- ペットを飼いたいあなたへ贈る5つの心得 -->
-            <section class="mb-12">
-                <div class="text-center mb-8">
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">ペットを飼いたいあなたへ贈る5つの心得</h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto"></div>
+            <section>
+                <div class="text-center" style="margin-bottom: 3rem !important;">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">ペットを飼いたいあなたへ贈る5つの心得</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                 </div>
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8">
                     <div class="space-y-12">
@@ -251,10 +265,10 @@
             </section>
 
             <!-- ペットは大きな幸せを与えてくれる存在 -->
-            <section class="mb-12">
-                <div class="text-center mb-8">
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">ペットは大きな幸せを与えてくれる存在</h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto"></div>
+            <section>
+                <div class="text-center" style="margin-bottom: 3rem !important;">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">ペットは大きな幸せを与えてくれる存在</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                 </div>
                 <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-lg border border-amber-200 p-8">
                     <div class="flex flex-col md:flex-row gap-8 items-center">
@@ -302,5 +316,6 @@
                 </div>
             </section>
 
+        </main>
     </div>
 </x-guest-layout>
