@@ -27,23 +27,18 @@
 
 
         <!-- Hero Section - 全面画像版 -->
-        <section class="relative w-full overflow-hidden" style="max-height: 400px;">
-            <!-- 背景画像 -->
-            <div class="absolute inset-0">
-                <img src="{{ asset('images/' . $heroImage) }}" 
-                     alt="保護動物と家族の幸せ" 
-                     class="w-full h-full object-cover"
-                     style="max-height: 400px; object-position: center;">
-                <!-- オーバーレイ（薄い白のオーバーレイ） -->
-                <div class="absolute inset-0 bg-white/10"></div>
-            </div>
-            
-            <!-- コンテンツ（画像の上に重ねて表示） -->
-            <div class="relative z-10 h-full flex items-center justify-center" style="min-height: 400px;">
-                <div class="text-center text-gray-800 px-4 max-w-4xl">
-                    <p class="text-base sm:text-xl lg:text-2xl font-medium mb-10 opacity-90 max-w-3xl mx-auto leading-relaxed tracking-wide"
-                       style="text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">
-                        <span class="block sm:inline">保護動物と家族の幸せな毎日を</span><span class="block sm:inline">みんなで分かち合う場所</span>
+        <section class="w-full relative overflow-hidden" style="position: relative !important;">
+            <img src="{{ asset('images/' . $heroImage) }}" 
+                 alt="保護動物と家族の幸せ" 
+                 class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover about-hero-image" 
+                 style="height: 256px !important; max-height: 400px; object-position: center;">
+            <!-- 画像下部のグラデーションオーバーレイ（重なり順を明示） -->
+            <div class="absolute inset-0 pointer-events-none" style="z-index: 10 !important; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 75%) !important;"></div>
+            <!-- 画像下部のテキスト（グラデーションの上に重ねる） -->
+            <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 pb-8 sm:pb-10 pointer-events-none" style="z-index: 9999 !important; position: absolute !important; top: auto !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;">
+                <div class="max-w-4xl mx-auto text-center">
+                    <p class="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-medium leading-relaxed drop-shadow-lg select-none mb-6">
+                        保護動物と家族の幸せな毎日をみんなで分かち合う場所
                     </p>
                     <div class="flex flex-row flex-wrap gap-4 justify-center">
                         <a href="{{ route('login') }}" 
