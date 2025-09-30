@@ -23,18 +23,18 @@
         <!-- メインコンテンツ -->
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <!-- 温かみのあるメッセージ -->
-            <div class="rounded-lg p-6 mb-8" style="background: linear-gradient(to right, #fef3c7, #fed7aa); border: 1px solid #fbbf24;">
+            <div class="rounded-lg p-6 mb-8 bg-gradient-to-r from-amber-100 to-orange-200 border border-amber-300">
                 <div class="flex items-center mb-4">
-                    <svg class="w-10 h-10 mr-3" style="color: #d97706;" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-10 h-10 mr-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                     </svg>
-                    <h2 class="text-xl font-semibold" style="color: #92400e;">あなたの体験が希望を届けます</h2>
+                    <h2 class="text-xl font-semibold text-amber-800">あなたの体験が希望を届けます</h2>
                 </div>
-                <p class="text-base leading-relaxed mb-3" style="color: #b45309;">
+                <p class="text-base leading-relaxed mb-3 text-amber-700">
                     里親としての体験をシェアすることで、新しい家族を待つ誰かの背中を優しく押します。
                     里親になることを検討している方や興味をお持ちの方に、温かな希望と勇気を届けませんか？
                 </p>
-                <div class="flex items-center text-sm" style="color: #d97706;">
+                <div class="flex items-center text-sm text-amber-600">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                     </svg>
@@ -48,9 +48,9 @@
                 <!-- 対象ペット選択 -->
                 <div>
                     <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">ペットを選択</label>
-                    <div class="p-3 mb-3" style="background-color: #fefce8;">
-                        <p class="text-sm" style="color: #a16207;">
-                            🐾 どのペットの里親インタビューをシェアしますか？家族の一員を選んでください。
+                    <div class="p-3 mb-3 bg-yellow-50">
+                        <p class="text-sm text-yellow-800">
+                            🐾 どのペットの里親インタビューをシェアしますか？かけがえのない家族を選んでくださいね。
                         </p>
                     </div>
                     
@@ -84,8 +84,8 @@
                 <!-- タイトル -->
                 <div>
                     <label for="title" class="block text-base font-medium text-gray-700 mb-2">タイトル</label>
-                    <div class="p-3 mb-3" style="background-color: #fefce8;">
-                        <p class="text-sm" style="color: #a16207;">
+                    <div class="p-3 mb-3 bg-yellow-50">
+                        <p class="text-sm text-yellow-800">
                             ✨ その瞬間の気持ちを一言で表現してください。シンプルで温かいタイトルが素敵です。
                         </p>
                     </div>
@@ -107,8 +107,8 @@
                 <!-- メイン画像 -->
                 <div>
                     <label for="main_image" class="block text-base font-medium text-gray-700 mb-2">メイン画像 *</label>
-                    <div class="p-3 mb-3" style="background-color: #fefce8;">
-                        <p class="text-sm" style="color: #a16207;">
+                    <div class="p-3 mb-3 bg-yellow-50">
+                        <p class="text-sm text-yellow-800">
                             📸 その瞬間を切り取った写真や動画をアップロードしてください。思い出がより鮮明に伝わります。
                         </p>
                     </div>
@@ -300,12 +300,12 @@
                     <div class="flex space-x-4">
                         <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" 
                            class="flex-1 text-gray-800 py-3 px-4 rounded-lg transition duration-200 font-medium text-center" 
-                           style="background-color: #f3f4f6; hover:background-color: #e5e7eb;">
+                           class="bg-gray-100 hover:bg-gray-200">
                             キャンセル
                         </a>
                         <button type="submit" 
                                 class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium flex items-center justify-center" 
-                                style="background-color: #d97706; hover:background-color: #b45309;">
+                                class="bg-amber-600 hover:bg-amber-700">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                             </svg>
