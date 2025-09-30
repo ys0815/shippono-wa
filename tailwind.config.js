@@ -42,6 +42,22 @@ export default {
         "hover:bg-gray-200",
         "bg-amber-600",
         "hover:bg-amber-700",
+        // ペットアイコン用のクラス
+        "absolute",
+        "-bottom-4",
+        "left-1/2",
+        "transform",
+        "-translate-x-1/2",
+        "z-20",
+        "w-24",
+        "h-24",
+        "rounded-full",
+        "border-4",
+        "border-white",
+        "shadow-xl",
+        "pt-16",
+        "pt-14",
+        "pt-12",
         // その他の動的クラスも必要に応じて追加
     ],
 
