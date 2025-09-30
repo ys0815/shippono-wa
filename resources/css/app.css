@@ -441,3 +441,61 @@
 .pet-info-tight {
     padding-top: 2rem; /* 32px - pt-8相当 */
 }
+
+/* ========== Pets page helpers ========== */
+.pet-card {
+    position: relative;
+    overflow: visible;
+}
+
+.pet-hero {
+    position: relative;
+}
+
+.pet-hero img {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 0.75rem; /* ~ rounded-t-lg */
+    border-top-right-radius: 0.75rem;
+}
+
+@media (min-width: 640px) {
+    .pet-hero img {
+        height: 200px;
+    }
+}
+
+.pet-avatar {
+    position: absolute;
+    bottom: -1rem; /* -bottom-4 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6rem; /* w-24 */
+    height: 6rem; /* h-24 */
+    border-radius: 9999px; /* rounded-full */
+    border: 4px solid #fff; /* border-4 border-white */
+    background-color: #fff;
+    object-fit: cover;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05); /* shadow-xl 相当 */
+    z-index: 20; /* z-20 */
+}
+
+.pet-avatar--xl {
+    width: 7rem;
+    height: 7rem;
+}
+
+.allow-overflow {
+    overflow: visible !important;
+}
+
+/* ペット情報のパディングを用途別に切替できるように準備 */
+.pet-info {
+    padding-top: 3rem; /* 48px - pt-12相当 */
+}
+
+.pet-info-loose {
+    padding-top: 4rem; /* 64px - pt-16相当 */
+}
