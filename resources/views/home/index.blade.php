@@ -35,18 +35,18 @@
             <!-- 画像下部のグラデーションオーバーレイ（重なり順を明示） -->
             <div class="absolute inset-0 pointer-events-none" style="z-index: 10 !important; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 75%) !important;"></div>
             <!-- 画像下部のテキスト（グラデーションの上に重ねる） -->
-            <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 pb-8 sm:pb-10 pointer-events-none" style="z-index: 20 !important; position: absolute !important; top: auto !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;">
-                <div class="max-w-4xl mx-auto text-center">
-                    <p class="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-medium leading-relaxed drop-shadow-lg select-none mb-6">
+            <div class="absolute bottom-0 left-0 right-0 p-8 sm:p-10 pb-10 sm:pb-12 pointer-events-none" style="z-index: 20 !important; position: absolute !important; top: auto !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;">
+                <div class="max-w-5xl mx-auto text-center">
+                    <p class="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-5xl font-medium leading-relaxed drop-shadow-lg select-none mb-8">
                         保護動物と家族の幸せな毎日をみんなで分かち合う場所
                     </p>
-                    <div class="flex flex-row flex-wrap gap-4 justify-center">
+                    <div class="flex flex-row flex-wrap gap-5 justify-center">
                         <a href="{{ route('login') }}" 
-                           class="px-6 py-2 bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 rounded-full text-white hover:bg-gray-700/80 transition-all duration-300 font-semibold text-sm">
+                           class="px-8 py-3 bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 rounded-full text-white hover:bg-gray-700/80 transition-all duration-300 font-semibold text-base">
                            ログイン
                         </a>
                         <a href="{{ route('register') }}" 
-                           class="px-6 py-2 bg-amber-500 hover:bg-amber-600 rounded-full text-white transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl">
+                           class="px-8 py-3 bg-amber-500 hover:bg-amber-600 rounded-full text-white transition-all duration-300 font-semibold text-base shadow-lg hover:shadow-xl">
                            新規登録
                         </a>
                     </div>
@@ -56,15 +56,15 @@
 
         <!-- 新着の保護動物一覧 -->
         <section class="w-full bg-white border-t border-b border-gray-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div class="text-center mb-10">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold text-gray-800 mb-4 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             家族になった子たち新着
                         </span>
-                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                        <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
-                    <p class="text-sm text-gray-600">かわいい家族たちの生活を見てみよう</p>
+                    <p class="text-base text-gray-600">かわいい家族たちの生活を見てみよう</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 xl:gap-10">
                     @foreach($recentPets as $pet)
@@ -85,22 +85,22 @@
                             </div>
                             
                             <!-- ペット情報 -->
-                            <div class="space-y-2">
+                            <div class="space-y-3">
                                 <!-- 品種 -->
                                 @if($pet->breed)
-                                    <div class="text-sm text-amber-600 font-medium">
+                                    <div class="text-base text-amber-600 font-medium">
                                         {{ $pet->breed }}
                                     </div>
                                 @endif
                                 
                                 <!-- 名前・性別・推定年齢 -->
-                                <div class="text-xl font-bold text-gray-800">
+                                <div class="text-2xl font-bold text-gray-800">
                                     {{ $pet->name }} 
-                                    <span class="text-lg font-normal {{ $pet->gender === 'male' ? 'text-blue-500' : ($pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
+                                    <span class="text-xl font-normal {{ $pet->gender === 'male' ? 'text-blue-500' : ($pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
                                         {{ __(['male' => '♂', 'female' => '♀', 'unknown' => '?'][$pet->gender] ?? '?') }}
                                     </span>
                                     @if($pet->age_years !== null || $pet->age_months !== null)
-                                        <span class="text-sm text-gray-500 ml-1">
+                                        <span class="text-base text-gray-500 ml-1">
                                             @if($pet->age_years > 0 && $pet->age_months > 0)
                                                 (推定{{ $pet->age_years }}歳{{ $pet->age_months }}ヶ月)
                                             @elseif($pet->age_years > 0)
@@ -114,23 +114,23 @@
                                 
                                 <!-- プロフィール説明 -->
                                 @if($pet->profile_description)
-                                    <div class="text-sm text-gray-600 leading-relaxed max-w-xs mx-auto">
+                                    <div class="text-base text-gray-600 leading-relaxed max-w-xs mx-auto">
                                         {{ Str::limit($pet->profile_description, 60) }}
                                     </div>
                                 @endif
                             </div>
                             
                             <!-- ボタンエリア -->
-                            <div class="flex gap-2 mt-6 justify-center">
+                            <div class="flex gap-3 mt-8 justify-center">
                                 @if($pet->shelter && $pet->shelter->website_url)
                                     <a href="{{ $pet->shelter->website_url }}" 
                                        target="_blank" 
                                        rel="noopener noreferrer"
-                                       class="px-4 py-2 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm">
+                                       class="px-5 py-2.5 text-base rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm">
                                         保護団体サイトへ
                                     </a>
                                 @else
-                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
+                                    <button disabled class="px-5 py-2.5 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
                                         保護団体サイトへ
                                     </button>
                                 @endif
@@ -141,11 +141,11 @@
 
                                 @if($interviewPost)
                                     <a href="{{ route('interviews.show', $interviewPost) }}" 
-                                       class="px-4 py-2 text-sm rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm">
+                                       class="px-5 py-2.5 text-base rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm">
                                         しっぽのわを読む
                                     </a>
                                 @else
-                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
+                                    <button disabled class="px-5 py-2.5 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
                                         しっぽのわを読む
                                     </button>
                                 @endif
@@ -156,48 +156,48 @@
             </div>
         </section>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
             <!-- サービスコンセプト -->
-            <section class="relative bg-gray-50 border-gray-200 py-12">
-                <div class="text-center mb-10">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
+            <section class="relative bg-gray-50 border-gray-200 py-16">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold text-gray-800 mb-4 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             サービスコンセプト
                         </span>
-                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                        <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
-                    <p class="text-sm text-gray-600">私たちが大切にしている想い</p>
+                    <p class="text-base text-gray-600">私たちが大切にしている想い</p>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
                     <div class="text-center group">
-                        <div class="relative mb-6">
-                            <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 text-3xl group-hover:scale-110 transition-transform duration-300">
+                        <div class="relative mb-8">
+                            <div class="w-24 h-24 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 text-4xl group-hover:scale-110 transition-transform duration-300">
                                 ❤
                             </div>
-                            <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-3 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">幸せの可視化</h4>
-                        <p class="text-gray-600 leading-relaxed">保護動物と家族の温かいストーリーを、写真と文章で心に届けます。</p>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4">幸せの可視化</h4>
+                        <p class="text-base text-gray-600 leading-relaxed">保護動物と家族の温かいストーリーを、写真と文章で心に届けます。</p>
                     </div>
                     <div class="text-center group">
-                        <div class="relative mb-6">
-                            <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 text-3xl group-hover:scale-110 transition-transform duration-300">
+                        <div class="relative mb-8">
+                            <div class="w-24 h-24 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 text-4xl group-hover:scale-110 transition-transform duration-300">
                                 🤝
                             </div>
-                            <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-3 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">共感の輪</h4>
-                        <p class="text-gray-600 leading-relaxed">一人ひとりの想いに触れて、優しさが広がる支援の循環を生み出します。</p>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4">共感の輪</h4>
+                        <p class="text-base text-gray-600 leading-relaxed">一人ひとりの想いに触れて、優しさが広がる支援の循環を生み出します。</p>
                     </div>
                     <div class="text-center group">
-                        <div class="relative mb-6">
-                            <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 text-3xl group-hover:scale-110 transition-transform duration-300">
+                        <div class="relative mb-8">
+                            <div class="w-24 h-24 mx-auto flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 text-4xl group-hover:scale-110 transition-transform duration-300">
                                 🔗
                             </div>
-                            <div class="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+                            <div class="absolute -inset-3 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">命をつなぐ</h4>
-                        <p class="text-gray-600 leading-relaxed">施設や里親さんとの出会いを、温かく分かりやすくお手伝いします。</p>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4">命をつなぐ</h4>
+                        <p class="text-base text-gray-600 leading-relaxed">施設や里親さんとの出会いを、温かく分かりやすくお手伝いします。</p>
                     </div>
                 </div>
             </section>
@@ -206,17 +206,17 @@
 
         <!-- 統計情報 -->
         <section class="w-full bg-white border-t border-b border-gray-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div class="text-center mb-10">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold text-gray-800 mb-4 relative inline-block">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             統計情報
                         </span>
-                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                        <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
-                    <p class="text-sm text-gray-600">みんなの活動を数字で見てみよう</p>
+                    <p class="text-base text-gray-600">みんなの活動を数字で見てみよう</p>
                     @if(isset($stats['updated_at']))
-                        <p class="text-xs text-gray-500 mt-2">最終更新: {{ \Carbon\Carbon::parse($stats['updated_at'])->format('Y年n月j日 H:i') }}</p>
+                        <p class="text-sm text-gray-500 mt-2">最終更新: {{ \Carbon\Carbon::parse($stats['updated_at'])->format('Y年n月j日 H:i') }}</p>
                     @endif
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 xl:gap-8">
@@ -274,7 +274,7 @@
             </div>
         </section>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
             <!-- 保護団体リンク集 -->
             <section id="shelters" class="relative bg-gray-50 border-gray-200 py-12" x-data="shelterFilter()">
                 <div class="text-center mb-10">
