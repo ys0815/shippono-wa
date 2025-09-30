@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('mypage.posts.gallery.store') }}" method="POST" enctype="multipart/form-data" class="space-y-10"></form>
+            <form action="{{ route('mypage.posts.gallery.store') }}" method="POST" enctype="multipart/form-data" class="space-y-10">
                 @csrf
                 
                 <!-- エラーメッセージ -->
