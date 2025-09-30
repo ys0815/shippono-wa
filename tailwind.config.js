@@ -25,6 +25,10 @@ export default {
         "text-gray-400",
         "bg-amber-500",
         "bg-gray-300",
+        // スペーシング関連のクラス
+        "space-y-10",
+        "space-y-8",
+        "space-y-6",
         // その他の動的クラスも必要に応じて追加
     ],
 
