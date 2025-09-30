@@ -17,62 +17,144 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse ($pets as $pet)
-                        <div class="border rounded-lg overflow-hidden h-full flex flex-col">
+                        <div class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-amber-200 h-full flex flex-col transform hover:-translate-y-1">
                             <!-- プロフィール画像（背景画像） -->
-                            <div class="relative h-32 bg-gray-200 flex items-center justify-center">
+                            <div class="relative h-40 bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center overflow-hidden">
                                 @if($pet->header_image_url)
-                                    <img src="{{ $pet->header_image_url }}" alt="プロフィール画像" class="w-full h-full object-cover">
+                                    <img src="{{ $pet->header_image_url }}" alt="プロフィール画像" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 @else
-                                    <div class="text-gray-400 text-sm">プロフィール画像</div>
+                                    <div class="text-amber-300 text-sm flex items-center">
+                                        <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        プロフィール画像
+                                    </div>
                                 @endif
                                 
                                 <!-- アイコン画像（正円） -->
-                                <div class="absolute -bottom-6 left-4">
-                                    <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden border-2 border-white">
+                                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-10">
+                                    <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white shadow-xl">
                                         @if($pet->profile_image_url)
                                             <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
                                         @else
-                                            <span class="text-gray-600 text-xs font-bold">{{ mb_substr($pet->name,0,2) }}</span>
+                                            <div class="w-full h-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
+                                                <span class="text-white text-xl font-bold">{{ mb_substr($pet->name,0,2) }}</span>
+                                            </div>
                                         @endif
+                                    </div>
+                                </div>
+                                
+                                <!-- いいね・投稿数バッジ -->
+                                <div class="absolute top-3 right-3 flex space-x-2">
+                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-700 flex items-center">
+                                        <svg class="w-3 h-3 mr-1 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        {{ $pet->likes->count() }}
+                                    </div>
+                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-700 flex items-center">
+                                        <svg class="w-3 h-3 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        {{ $pet->posts->count() }}
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- ペット情報 -->
-                            <div class="pt-8 px-4 pb-4">
-                                <div class="font-semibold text-lg">{{ $pet->name }} ({{ __([ 'dog' => '犬', 'cat' => '猫', 'rabbit' => 'うさぎ', 'other' => 'その他'][$pet->species] ?? $pet->species) }}{{ $pet->breed ? '・' . $pet->breed : '' }})</div>
-                                
-                                <div class="text-sm text-gray-600 mt-1">
-                                    {{ __([ 'male' => 'オス', 'female' => 'メス', 'unknown' => '不明'][$pet->gender] ?? $pet->gender) }}
-                                    @if($pet->age_years !== null || $pet->age_months !== null)
-                                        @if($pet->age_years > 0 && $pet->age_months > 0)
-                                            ・{{ $pet->age_years }}歳{{ $pet->age_months }}ヶ月
-                                        @elseif($pet->age_years > 0)
-                                            ・{{ $pet->age_years }}歳
-                                        @elseif($pet->age_months > 0)
-                                            ・{{ $pet->age_months }}ヶ月
+                            <div class="pt-12 px-6 pb-6 flex-1 flex flex-col">
+                                <div class="text-center mb-4">
+                                    <h3 class="font-bold text-xl text-gray-800 mb-1">{{ $pet->name }}</h3>
+                                    <div class="text-sm text-amber-600 font-medium">
+                                        {{ __([ 'dog' => '犬', 'cat' => '猫', 'rabbit' => 'うさぎ', 'other' => 'その他'][$pet->species] ?? $pet->species) }}
+                                        @if($pet->breed)
+                                            <span class="text-gray-500">・{{ $pet->breed }}</span>
                                         @endif
-                                    @endif
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        {{ __([ 'male' => 'オス', 'female' => 'メス', 'unknown' => '不明'][$pet->gender] ?? $pet->gender) }}
+                                        @if($pet->age_years !== null || $pet->age_months !== null)
+                                            @if($pet->age_years > 0 && $pet->age_months > 0)
+                                                ・{{ $pet->age_years }}歳{{ $pet->age_months }}ヶ月
+                                            @elseif($pet->age_years > 0)
+                                                ・{{ $pet->age_years }}歳
+                                            @elseif($pet->age_months > 0)
+                                                ・{{ $pet->age_months }}ヶ月
+                                            @endif
+                                        @endif
+                                    </div>
+                                    
                                     @if($pet->rescue_date)
-                                        ・お迎え日: {{ \Illuminate\Support\Carbon::parse($pet->rescue_date)->format('Y/m/d') }}
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        お迎え日: {{ \Illuminate\Support\Carbon::parse($pet->rescue_date)->format('Y/m/d') }}
+                                    </div>
+                                    @endif
+                                    
+                                    @if($pet->shelter)
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        {{ $pet->shelter->name }}
+                                    </div>
                                     @endif
                                 </div>
                                 
-                                @if($pet->shelter)
-                                <div class="text-sm text-gray-600 mt-1">保護施設: {{ $pet->shelter->name }}</div>
-                                @endif
-                                
-                                <div class="text-sm text-gray-600 mt-1">いいね: {{ $pet->likes->count() }} | 投稿: {{ $pet->posts->count() }}</div>
-                                
-                                <div class="mt-auto flex gap-2">
-                                    <a href="{{ route('pets.show', $pet->id) }}" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">プロフィールを見る</a>
-                                    <a href="{{ route('mypage.pets.edit', ['pet_id' => $pet->id]) }}" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">プロフィール編集</a>
-                                    <a href="#" class="px-3 py-2 rounded border text-gray-700 text-sm hover:bg-gray-50">投稿を見る</a>
+                                <!-- アクションボタン -->
+                                <div class="mt-auto space-y-2">
+                                    <div class="flex space-x-2">
+                                        <a href="{{ route('pets.show', $pet->id) }}" 
+                                           class="flex-1 bg-amber-50 text-amber-700 py-2 px-3 rounded-lg text-sm font-medium text-center hover:bg-amber-100 transition-colors duration-200 flex items-center justify-center">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                            見る
+                                        </a>
+                                        <a href="{{ route('mypage.pets.edit', ['pet_id' => $pet->id]) }}" 
+                                           class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm font-medium text-center hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                            編集
+                                        </a>
+                                    </div>
+                                    <a href="#" 
+                                       class="block w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-2 px-3 rounded-lg text-sm font-medium text-center hover:from-amber-600 hover:to-orange-600 transition-all duration-200 flex items-center justify-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                        投稿を見る
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     @empty
-                        <div class="text-gray-500 text-center py-8">まだ登録がありません。新しいペットを登録してください。</div>
+                        <div class="col-span-full flex flex-col items-center justify-center py-16 text-center">
+                            <div class="w-24 h-24 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full flex items-center justify-center mb-4">
+                                <svg class="w-12 h-12 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-2">まだペットが登録されていません</h3>
+                            <p class="text-gray-500 mb-6">大切な家族の一員を登録して、<br>みんなでシェアしましょう</p>
+                            <a href="{{ route('mypage.pets.create') }}" 
+                               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                新しいペットを登録
+                            </a>
+                        </div>
                     @endforelse
                 </div>
 
@@ -106,8 +188,14 @@
                     </a>
                 </div>
 
-                <div class="mt-6">
-                    <a href="{{ route('mypage.pets.create') }}" class="block w-full text-center bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition duration-200">＋新しいペットを登録</a>
+                <div class="mt-8">
+                    <a href="{{ route('mypage.pets.create') }}" 
+                       class="block w-full text-center bg-gradient-to-r from-amber-500 to-orange-500 text-white py-4 rounded-xl font-medium hover:from-amber-600 hover:to-orange-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        新しいペットを登録
+                    </a>
                 </div>
             </div>
         </div>
