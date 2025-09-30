@@ -121,16 +121,16 @@
                             </div>
                             
                             <!-- ボタンエリア -->
-                            <div class="flex gap-3 mt-8 justify-center">
+                            <div class="flex gap-2 mt-6 justify-center">
                                 @if($pet->shelter && $pet->shelter->website_url)
                                     <a href="{{ $pet->shelter->website_url }}" 
                                        target="_blank" 
                                        rel="noopener noreferrer"
-                                       class="px-5 py-2.5 text-base rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm">
+                                       class="px-4 py-2 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm">
                                         保護団体サイトへ
                                     </a>
                                 @else
-                                    <button disabled class="px-5 py-2.5 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
+                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
                                         保護団体サイトへ
                                     </button>
                                 @endif
@@ -141,11 +141,11 @@
 
                                 @if($interviewPost)
                                     <a href="{{ route('interviews.show', $interviewPost) }}" 
-                                       class="px-5 py-2.5 text-base rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm">
+                                       class="px-4 py-2 text-sm rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm">
                                         しっぽのわを読む
                                     </a>
                                 @else
-                                    <button disabled class="px-5 py-2.5 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
+                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
                                         しっぽのわを読む
                                     </button>
                                 @endif
