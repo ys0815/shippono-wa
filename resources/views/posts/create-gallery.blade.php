@@ -13,6 +13,7 @@
                         <h1 class="text-xl font-semibold text-gray-900">今日の幸せを投稿</h1>
                     </div>
                 </div>
+                
             </div>
         </div>
 
