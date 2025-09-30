@@ -11,7 +11,8 @@
                     @endif
                     
                     <!-- アイコンを背景バナー内に配置 -->
-                    <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-white shadow-lg bg-amber-100">
+                    <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-white shadow-lg bg-amber-100 cursor-pointer hover:shadow-xl transition-shadow duration-300" 
+                         onclick="openPetImageModal()">
                         @if($pet->profile_image_url)
                             <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
                         @else
@@ -872,4 +873,58 @@
             </div>
         </div>
     </div>
+
+    <!-- ペット画像表示用モーダル -->
+    <div id="pet-image-modal" class="fixed inset-0 z-[9999] hidden bg-black bg-opacity-95 flex items-center justify-center p-2 sm:p-4" onclick="closePetImageModal(event)">
+        <div class="relative w-full h-full max-w-screen-2xl max-h-screen flex items-center justify-center" onclick="event.stopPropagation()">
+            <!-- 閉じるボタン -->
+            <button onclick="closePetImageModal()" class="absolute top-2 right-2 sm:top-4 sm:right-4 text-white text-3xl sm:text-4xl z-10 bg-black bg-opacity-50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center hover:bg-opacity-70 transition-all">
+                &times;
+            </button>
+            
+            <!-- 画像コンテナ -->
+            <div class="relative w-full h-full flex items-center justify-center overflow-hidden">
+                @if($pet->profile_image_url)
+                    <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="max-w-full max-h-full object-contain" style="max-height: 90vh;">
+                @else
+                    <div class="w-96 h-96 bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center rounded-full">
+                        <span class="text-amber-600 text-8xl font-bold">{{ mb_substr($pet->name, 0, 2) }}</span>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ペット画像モーダル関数
+        function openPetImageModal() {
+            const modal = document.getElementById('pet-image-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                // スクロールを無効化
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closePetImageModal(event) {
+            // モーダル背景をクリックした場合のみ閉じる
+            if (event && event.target !== event.currentTarget) {
+                return;
+            }
+            
+            const modal = document.getElementById('pet-image-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                // スクロールを有効化
+                document.body.style.overflow = '';
+            }
+        }
+
+        // キーボード操作（ESCキーで閉じる）
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closePetImageModal();
+            }
+        });
+    </script>
 </x-guest-layout>
