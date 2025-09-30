@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('mypage.posts.interview.store') }}" enctype="multipart/form-data" class="space-y-6">
+            <form method="POST" action="{{ route('mypage.posts.interview.store') }}" enctype="multipart/form-data" class="space-y-10">
                 @csrf
                 
                 <!-- 対象ペット選択 -->
