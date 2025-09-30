@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('mypage.posts.update', $post) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <form action="{{ route('mypage.posts.update', $post) }}" method="POST" enctype="multipart/form-data" class="space-y-10">
                 @csrf
                 @method('PUT')
                 
