@@ -11,7 +11,7 @@
         </div>
     </x-slot>
 
-    <div class="pt-16 pb-8">
+    <div class="pt-12 pb-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
         <!-- フィルター（投稿管理画面と統一） -->
         <div class="bg-white rounded-lg shadow-sm border p-4 mb-6">
