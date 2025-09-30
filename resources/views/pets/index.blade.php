@@ -19,9 +19,11 @@
                     @forelse ($pets as $pet)
                         <div class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-amber-200 h-full flex flex-col transform hover:-translate-y-1">
                             <!-- プロフィール画像（背景画像） -->
-                            <div class="relative h-40 bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center overflow-hidden">
+                            <div class="relative h-40 bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center">
                                 @if($pet->header_image_url)
-                                    <img src="{{ $pet->header_image_url }}" alt="プロフィール画像" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                    <div class="w-full h-full overflow-hidden">
+                                        <img src="{{ $pet->header_image_url }}" alt="プロフィール画像" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                    </div>
                                 @else
                                     <div class="text-amber-300 text-sm flex items-center">
                                         <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -31,9 +33,9 @@
                                     </div>
                                 @endif
                                 
-                                <!-- アイコン画像（正円） -->
-                                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-10">
-                                    <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white shadow-xl">
+                        <!-- アイコン画像（正円） -->
+                        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 z-20">
+                            <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white shadow-xl">
                                         @if($pet->profile_image_url)
                                             <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
                                         @else
@@ -61,8 +63,8 @@
                                 </div>
                             </div>
                             
-                            <!-- ペット情報 -->
-                            <div class="pt-12 px-6 pb-6 flex-1 flex flex-col">
+                    <!-- ペット情報 -->
+                    <div class="pt-16 px-6 pb-6 flex-1 flex flex-col">
                                 <div class="text-center mb-4">
                                     <h3 class="font-bold text-xl text-gray-800 mb-1">{{ $pet->name }}</h3>
                                     <div class="text-sm text-amber-600 font-medium">
