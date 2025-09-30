@@ -33,9 +33,9 @@
                                     </div>
                                 @endif
                                 
-                        <!-- アイコン画像（正円） -->
-                        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 z-20">
-                            <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white shadow-xl">
+                                <!-- アイコン画像（正円） -->
+                                <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 z-20">
+                                    <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white shadow-xl">
                                         @if($pet->profile_image_url)
                                             <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
                                         @else
