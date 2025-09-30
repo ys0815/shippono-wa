@@ -143,18 +143,18 @@
             <!-- アクションボタン -->
             <div class="space-y-3">
                 <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg p-4 text-center">
-                    <p class="text-sm font-medium mb-2">💝 今日の幸せをシェアしませんか？</p>
+                    <p class="text-base font-medium mb-2">今日の幸せをシェアしませんか？</p>
                     <a href="{{ route('mypage.posts.gallery.create') }}" 
                        class="inline-block bg-white text-amber-600 px-6 py-2 rounded-lg font-medium hover:bg-amber-50 transition duration-200">
-                        投稿する
+                        今日の幸せを投稿する
                     </a>
                 </div>
                 
                 <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg p-4 text-center">
-                    <p class="text-sm font-medium mb-2">📖 体験談をシェアして希望を届けませんか？</p>
+                    <p class="text-base font-medium mb-2">体験談をシェアして希望を届けませんか？</p>
                     <a href="{{ route('mypage.posts.interview.create') }}" 
                        class="inline-block bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-blue-50 transition duration-200">
-                        インタビュー投稿
+                        里親インタビューを投稿する
                     </a>
                 </div>
                 <a href="{{ route('mypage.posts') }}" class="block w-full text-center bg-gray-200 text-gray-800 py-3 rounded-lg font-medium hover:bg-gray-300 transition duration-200">
