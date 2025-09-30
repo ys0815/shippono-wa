@@ -64,7 +64,7 @@
                             </div>
                             
                     <!-- ペット情報 -->
-                    <div class="pt-16 px-6 pb-6 flex-1 flex flex-col">
+                    <div class="pt-12 px-6 pb-6 flex-1 flex flex-col">
                                 <div class="text-center mb-4">
                                     <h3 class="font-bold text-xl text-gray-800 mb-1">{{ $pet->name }}</h3>
                                     <div class="text-sm text-amber-600 font-medium">
