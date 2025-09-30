@@ -10,10 +10,11 @@
                 <!-- Hamburger Menu Button (mobile only) -->
                 <div class="flex items-center mr-4 sm:hidden">
                     <button @click="sidebarOpen = ! sidebarOpen" aria-label="Open menu" 
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-50 focus:outline-none focus:bg-amber-50 focus:text-amber-700 transition duration-150 ease-in-out">
+                        class="flex flex-col items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-50 focus:outline-none focus:bg-amber-50 focus:text-amber-700 transition duration-150 ease-in-out">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
+                        <span class="text-xs mt-1">menu</span>
                     </button>
                 </div>
 
@@ -23,7 +24,7 @@
                     <a href="{{ route('home') }}">
                         <img src="{{ asset('images/icon.png') }}" 
                              alt="# しっぽのわ" 
-                             class="h-10 sm:h-12 w-auto">
+                             class="h-12 sm:h-14 w-auto">
                     </a>
                 </div>
 

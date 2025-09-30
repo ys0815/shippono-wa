@@ -50,16 +50,18 @@
             <!-- Header -->
             <header class="sticky top-0 z-[900] bg-white/90 backdrop-blur border-b border-amber-100">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-                    <button type="button" @click="sidebar=true" class="p-2 rounded hover:bg-amber-50 text-gray-700">
+                    <button type="button" @click="sidebar=true" class="flex flex-col items-center p-2 rounded hover:bg-amber-50 text-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                        <span class="text-xs mt-1">menu</span>
                     </button>
                     <a href="{{ route('home') }}" class="flex items-center">
                         <img src="{{ asset('images/icon.png') }}" 
                              alt="# しっぽのわ" 
-                             class="h-10 sm:h-14 md:h-16 w-auto">
+                             class="h-12 sm:h-16 md:h-18 w-auto">
                     </a>
-                    <button type="button" @click="search=true" class="p-2 rounded hover:bg-amber-50 text-gray-700">
+                    <button type="button" @click="search=true" class="flex flex-col items-center p-2 rounded hover:bg-amber-50 text-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z" clip-rule="evenodd"/></svg>
+                        <span class="text-xs mt-1">search</span>
                     </button>
                 </div>
             </header>
@@ -78,7 +80,7 @@
                     <!-- Header -->
                     <div class="p-4 border-b bg-amber-50 border-amber-200 flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <img src="{{ asset('images/icon.png') }}" alt="# しっぽのわ" class="w-14 h-14">
+                            <img src="{{ asset('images/icon.png') }}" alt="# しっぽのわ" class="w-16 h-16">
                             <div>
                                 <div class="text-lg font-bold text-gray-800"># しっぽのわ</div>
                                 <div class="text-sm text-gray-600">保護動物と家族の幸せを共有</div>
