@@ -7,7 +7,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
             </a>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">いいね一覧</h2>
+            <h2 class="font-semibold text-lg text-gray-800 leading-tight">いいね一覧</h2>
         </div>
     </x-slot>
 

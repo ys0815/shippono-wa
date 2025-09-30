@@ -15,7 +15,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </a>
-                        <h1 class="text-xl font-semibold text-gray-900">投稿管理画面</h1>
+                        <h1 class="text-lg font-semibold text-gray-900">投稿管理画面</h1>
                     </div>
                 </div>
             </div>

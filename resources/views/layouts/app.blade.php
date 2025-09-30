@@ -297,7 +297,7 @@
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-30">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>

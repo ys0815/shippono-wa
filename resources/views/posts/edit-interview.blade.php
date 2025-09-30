@@ -14,7 +14,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </a>
-                        <h1 class="text-xl font-semibold text-gray-900">里親インタビュー投稿を編集</h1>
+                        <h1 class="text-lg font-semibold text-gray-900">里親インタビュー投稿を編集</h1>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <svg class="w-10 h-10 mr-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                     </svg>
-                    <h2 class="text-xl font-semibold text-amber-800">あなたの体験が希望を届けます</h2>
+                    <h2 class="text-lg font-semibold text-amber-800">あなたの体験が希望を届けます</h2>
                 </div>
                 <p class="text-base leading-relaxed mb-3 text-amber-700">
                     里親としての体験をシェアすることで、新しい家族を待つ誰かの背中を優しく押します。

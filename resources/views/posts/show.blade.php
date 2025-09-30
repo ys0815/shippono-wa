@@ -98,7 +98,7 @@
                             @endif
                         </a>
                         <div>
-                            <div class="text-xl font-bold text-gray-800 leading-tight">
+                            <div class="text-lg font-bold text-gray-800 leading-tight">
                                 {{ e($post->pet->name) }} 
                                 <span class="text-lg font-normal {{ $post->pet->gender === 'male' ? 'text-blue-500' : ($post->pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
                                     {{ ['male' => '♂', 'female' => '♀', 'unknown' => '?'][$post->pet->gender] ?? '?' }}
@@ -207,7 +207,7 @@
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
                 <div class="text-center">
-                    <h3 class="text-xl font-bold text-gray-800 mb-6">シェアしよう</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mb-6">シェアしよう</h3>
             
                     <div class="flex flex-wrap justify-center gap-6 mb-8">
                         <!-- リンクコピー -->
