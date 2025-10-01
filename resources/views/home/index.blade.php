@@ -41,14 +41,28 @@
                         保護動物と家族の幸せな毎日をみんなで分かち合う場所
                     </p>
                     <div class="flex flex-row flex-wrap gap-5 justify-center">
-                        <a href="{{ route('login') }}" 
-                           class="px-8 py-3 bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 rounded-full text-white hover:bg-gray-700/80 transition-all duration-300 font-semibold text-base">
-                           ログイン
-                        </a>
-                        <a href="{{ route('register') }}" 
-                           class="px-8 py-3 bg-amber-500 hover:bg-amber-600 rounded-full text-white transition-all duration-300 font-semibold text-base shadow-lg hover:shadow-xl">
-                           新規登録
-                        </a>
+                        @guest
+                            <a href="{{ route('login') }}" 
+                               class="px-8 py-3 bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 rounded-full text-white hover:bg-gray-700/80 transition-all duration-300 font-semibold text-base">
+                               ログイン
+                            </a>
+                            <a href="{{ route('register') }}" 
+                               class="px-8 py-3 bg-amber-500 hover:bg-amber-600 rounded-full text-white transition-all duration-300 font-semibold text-base shadow-lg hover:shadow-xl">
+                               新規登録
+                            </a>
+                        @else
+                            <a href="{{ route('mypage') }}" 
+                               class="px-8 py-3 bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 rounded-full text-white hover:bg-gray-700/80 transition-all duration-300 font-semibold text-base">
+                               マイページ
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}" class="inline">
+                                @csrf
+                                <button type="submit" 
+                                        class="px-8 py-3 bg-amber-500 hover:bg-amber-600 rounded-full text-white transition-all duration-300 font-semibold text-base shadow-lg hover:shadow-xl">
+                                    ログアウト
+                                </button>
+                            </form>
+                        @endguest
                     </div>
                 </div>
             </div>
