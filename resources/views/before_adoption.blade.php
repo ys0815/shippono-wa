@@ -106,161 +106,109 @@
 
             <!-- ペットを飼いたいあなたへ贈る5つの心得 -->
             <section>
-                <div class="text-center" style="margin-bottom: 3rem !important;">
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">ペットを飼いたいあなたへ贈る5つの心得</h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
+                <div class="text-center mb-12">
+                    <p class="text-amber-700 text-sm md:text-base tracking-wide mb-2">これから家族を迎えるみなさまへ</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">ペットを飼いたいあなたへ贈る5つの心得</h2>
                 </div>
-                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8">
-                    <div class="space-y-12">
-                        <!-- 心得1 -->
-                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border-l-4 border-amber-500">
-                            <div class="flex flex-col md:flex-row gap-6 items-start">
-                                <div class="flex-1">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">1</div>
-                                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">何があっても最後まで共に生きる</h3>
-                                    </div>
-                                    <p class="text-gray-700 leading-relaxed mb-4 text-lg md:text-xl">
-                                        ペットを迎えるときに最も大切なのは、最期まで一緒に生きるという覚悟です。<br>
-                                       
-                                    </p>
-                                    <p class="text-gray-700 leading-relaxed mb-4 text-lg md:text-xl">
-                                        結婚や出産、転職など、私たちの暮らしは変化していきます。その中で、もしもの時に備えて考えておくことが、悲しい選択を避ける第一歩になります。
-                                    </p>
-                                    <p class="text-gray-700 leading-relaxed text-lg md:text-xl">
-                                        アレルギーの有無や家族の理解など、事前に想像しておくことで「もしもの時の対策」を描くことができます。 <br> 
-                                その備えが、共に生きるためのやさしい力になります。
-                                    </p>
-                    
-                                </div>
-                                <div class="w-full md:w-72 flex-shrink-0">
-                                    <div class="relative overflow-visible">
-                                        <img src="{{ asset('images/hero-02.jpeg') }}" 
-                                             alt="家族とペットの絆" 
-                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- 心得2 -->
-                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border-l-4 border-amber-500">
-                            <div class="flex flex-col md:flex-row gap-6 items-start">
-                                <div class="w-full md:w-72 flex-shrink-0 order-2 md:order-1">
-                                    <div class="relative overflow-visible">
-                                        <img src="{{ asset('images/hero-09.jpeg') }}" 
-                                             alt="家族の理解と協力" 
-                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-lg shadow-md">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                    </div>
+                <div class="space-y-8">
+                    <!-- 心得1 -->
+                    <article class="group bg-white border border-amber-100 rounded-2xl shadow-sm overflow-hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-5">
+                            <figure class="md:col-span-2">
+                                <img src="{{ asset('images/hero-02.jpeg') }}" alt="家族とペットの絆" class="w-full h-56 md:h-full object-cover">
+                            </figure>
+                            <div class="md:col-span-3 p-6 md:p-8">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">1</span>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">何があっても最後まで共に生きる</h3>
                                 </div>
-                                <div class="flex-1 order-1 md:order-2">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">2</div>
-                                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">家族や周りの人の理解を得よう</h3>
-                                    </div>
-                                    <p class="text-gray-700 leading-relaxed mb-4 text-lg md:text-xl">
-                                        ペットを育てるには、家族や周囲の理解が欠かせません。 <br>
-                                        パートナーや子どもにきちんと相談し、同じ気持ちで迎えられるようにしましょう。 
-                                    </p>
-                                    <p class="text-gray-700 leading-relaxed mb-4 text-lg md:text-xl">
-                                        ひとり暮らしの場合は、信頼できる友人や親族など、いざというときに助けてくれる人を見つけておくことが大切です。 
-                                    </p>
-                                    <p class="text-gray-700 leading-relaxed text-lg md:text-xl">
-周囲に頼れる人を作っておけば、万が一、あなたの身に何かがあったときや家を留守にしなければいけないときでも、ペットに悲しい思いをさせずに済みます。
-                                    </p>
+                                <div class="space-y-4 text-gray-700 leading-relaxed text-lg md:text-xl">
+                                    <p>ペットを迎えるときに最も大切なのは、最期まで一緒に生きるという覚悟です。</p>
+                                    <p>結婚や出産、転職など、私たちの暮らしは変化していきます。その中で、もしもの時に備えて考えておくことが、悲しい選択を避ける第一歩になります。</p>
+                                    <p>アレルギーの有無や家族の理解など、事前に想像しておくことで「もしもの時の対策」を描くことができます。その備えが、共に生きるためのやさしい力になります。</p>
                                 </div>
                             </div>
                         </div>
+                    </article>
 
-                        <!-- 心得3 -->
-                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border-l-4 border-amber-500">
-                            <div class="flex flex-col md:flex-row gap-6 items-start">
-                                <div class="flex-1">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">3</div>
-                                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">金銭面もチェック</h3>
-                                    </div>
-                                    <p class="text-gray-700 leading-relaxed mb-4 text-lg md:text-xl">
-                                        ペットと暮らしていくには、思っている以上にお金がかかります。<br>
-                                        フードやペットシーツ、猫砂など、日々の生活に必要なものは一つひとつは小さな出費に見えても、積み重ねると大きな負担になることもあります。
-                                    </p>
-                                    <p class="text-gray-700 leading-relaxed mb-4 text-lg md:text-xl">
-                                        さらに、人間とは違ってペットの医療費には保険が効かないため、病気やけがのときには治療費が高額になる場合もあります。特に子どもの時期やシニア期は体調を崩しやすく、「想像していたよりも費用がかかる」と感じる方も少なくありません。
-                                    <p class="text-gray-700 leading-relaxed text-lg md:text-xl">
-                                        だからこそ、金銭面に不安がある方は、飼い始める前に少しずつ貯金をしたり、ペット保険に加入することを検討したりするのがおすすめです。必要なときにしっかりと治療を受けさせてあげられるように備えておくことで、大切な家族を安心して守っていけますよ。
-                                    </p>
+                    <!-- 心得2 -->
+                    <article class="group bg-white border border-amber-100 rounded-2xl shadow-sm overflow-hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-5">
+                            <div class="md:col-span-3 p-6 md:p-8 order-2 md:order-1">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">2</span>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">家族や周りの人の理解を得よう</h3>
                                 </div>
-                                <div class="w-full md:w-72 flex-shrink-0">
-                                    <div class="relative overflow-visible">
-                                        <img src="{{ asset('images/hero-08.jpeg') }}" 
-                                             alt="ペットの健康管理" 
-                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                    </div>
+                                <div class="space-y-4 text-gray-700 leading-relaxed text-lg md:text-xl">
+                                    <p>ペットを育てるには、家族や周囲の理解が欠かせません。パートナーや子どもにきちんと相談し、同じ気持ちで迎えられるようにしましょう。</p>
+                                    <p>ひとり暮らしの場合は、信頼できる友人や親族など、いざというときに助けてくれる人を見つけておくことが大切です。</p>
+                                    <p>周囲に頼れる人を作っておけば、万が一、あなたの身に何かがあったときや家を留守にしなければいけないときでも、ペットに悲しい思いをさせずに済みます。</p>
                                 </div>
                             </div>
+                            <figure class="md:col-span-2 order-1 md:order-2">
+                                <img src="{{ asset('images/hero-09.jpeg') }}" alt="家族の理解と協力" class="w-full h-56 md:h-full object-cover">
+                            </figure>
                         </div>
+                    </article>
 
-                        <!-- 心得4 -->
-                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border-l-4 border-amber-500">
-                            <div class="flex flex-col md:flex-row gap-6 items-start">
-                                <div class="w-full md:w-72 flex-shrink-0 order-2 md:order-1">
-                                    <div class="relative overflow-visible">
-                                        <img src="{{ asset('images/hero-05.jpeg') }}" 
-                                             alt="責任ある飼い主" 
-                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-lg shadow-md">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                    </div>
+                    <!-- 心得3 -->
+                    <article class="group bg-white border border-amber-100 rounded-2xl shadow-sm overflow-hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-5">
+                            <figure class="md:col-span-2">
+                                <img src="{{ asset('images/hero-08.jpeg') }}" alt="ペットの健康管理" class="w-full h-56 md:h-full object-cover">
+                            </figure>
+                            <div class="md:col-span-3 p-6 md:p-8">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">3</span>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">金銭面もチェック</h3>
                                 </div>
-                                <div class="flex-1 order-1 md:order-2">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">4</div>
-                                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">二度と悲しい思いをさせない</h3>
-                                    </div>
-                                    <p class="text-gray-700 leading-relaxed mb-4 text-lg md:text-xl">
-                                        悲しいことに、日本はまだ動物福祉の面で後進国と言われており、動物の命を守る法律には多くの課題が残されています。<br>
-                                        その結果、人間の身勝手な理由で捨てられてしまうペットも少なくありません。現に、当サイトに登場する子たちの中には、悲しい経験を経て、動物愛護団体や保護活動家、ボランティアの方々に救われた子もたくさんいます。
-                                    </p>
-                                    <p class="text-gray-700 leading-relaxed text-lg md:text-xl">
-                                        だからこそ、ペットをお迎えするときには「二度と悲しい思いをさせない」という強い気持ちを持つことが大切です。「人間の都合で命を振り回してはいけない」という思いを胸に、最後まで責任を持って共に歩んでいきましょう。
-                                    </p>
+                                <div class="space-y-4 text-gray-700 leading-relaxed text-lg md:text-xl">
+                                    <p>ペットと暮らしていくには、思っている以上にお金がかかります。フードやペットシーツ、猫砂など、日々の生活に必要なものは積み重ねると大きな負担になることもあります。</p>
+                                    <p>さらに、人間とは違ってペットの医療費には保険が効かないため、病気やけがのときには治療費が高額になる場合もあります。特に子どもの時期やシニア期は体調を崩しやすく、「想像していたよりも費用がかかる」と感じる方も少なくありません。</p>
+                                    <p>だからこそ、金銭面に不安がある方は、飼い始める前に少しずつ貯金をしたり、ペット保険に加入することを検討したりするのがおすすめです。</p>
                                 </div>
                             </div>
                         </div>
+                    </article>
 
-                        <!-- 心得5 -->
-                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border-l-4 border-amber-500">
-                            <div class="flex flex-col md:flex-row gap-6 items-start">
-                                <div class="flex-1">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">5</div>
-                                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">飼育するペットの習性を理解する</h3>
-                                    </div>
-                                    <p class="text-gray-700 leading-relaxed mb-4 text-lg md:text-xl">
-                                        ペットによって、しつけ方や性格、生活のリズムが大きく異なります。ペットを迎える前に、その動物の習性や特性をしっかり学んでおくことで、「思い通りにいかない」と悩むことが減り、より良い関係を築けるようになります。
-                                    </p>
-                                    <p class="text-gray-700 leading-relaxed text-lg md:text-xl">
-                                        私たち一人ひとりに個性があるように、動物たちにもそれぞれの個性があります。その違いを尊重しながら、安心して快適に過ごせる環境を整えてあげましょう。
-                                    </p>
+                    <!-- 心得4 -->
+                    <article class="group bg-white border border-amber-100 rounded-2xl shadow-sm overflow-hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-5">
+                            <div class="md:col-span-3 p-6 md:p-8 order-2 md:order-1">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">4</span>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">二度と悲しい思いをさせない</h3>
                                 </div>
-                                <div class="w-full md:w-72 flex-shrink-0">
-                                    <div class="relative overflow-visible">
-                                        <img src="{{ asset('images/hero-06.jpeg') }}" 
-                                             alt="ペットの習性理解" 
-                                             class="relative z-10 w-full aspect-[4/3] object-cover rounded-md shadow">
-                                        <div class="absolute -bottom-2 left-0 right-0 z-0 h-4 md:h-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                        <div class="absolute top-0 -right-2 bottom-0 z-0 w-4 md:w-5" style="background: radial-gradient(circle, rgb(251 191 36) 0.8px, transparent 0.8px); background-size: 4px 4px;"></div>
-                                    </div>
+                                <div class="space-y-4 text-gray-700 leading-relaxed text-lg md:text-xl">
+                                    <p>悲しいことに、日本はまだ動物福祉の面で後進国と言われており、動物の命を守る法律には多くの課題が残されています。その結果、人間の身勝手な理由で捨てられてしまうペットも少なくありません。</p>
+                                    <p>だからこそ、ペットをお迎えするときには「二度と悲しい思いをさせない」という強い気持ちを持つことが大切です。</p>
+                                </div>
+                            </div>
+                            <figure class="md:col-span-2 order-1 md:order-2">
+                                <img src="{{ asset('images/hero-05.jpeg') }}" alt="責任ある飼い主" class="w-full h-56 md:h-full object-cover">
+                            </figure>
+                        </div>
+                    </article>
+
+                    <!-- 心得5 -->
+                    <article class="group bg-white border border-amber-100 rounded-2xl shadow-sm overflow-hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-5">
+                            <figure class="md:col-span-2">
+                                <img src="{{ asset('images/hero-06.jpeg') }}" alt="ペットの習性理解" class="w-full h-56 md:h-full object-cover">
+                            </figure>
+                            <div class="md:col-span-3 p-6 md:p-8">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">5</span>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">飼育するペットの習性を理解する</h3>
+                                </div>
+                                <div class="space-y-4 text-gray-700 leading-relaxed text-lg md:text-xl">
+                                    <p>ペットによって、しつけ方や性格、生活のリズムが大きく異なります。迎える前に、その動物の習性や特性をしっかり学んでおくことで、より良い関係を築けるようになります。</p>
+                                    <p>違いを尊重しながら、安心して快適に過ごせる環境を整えてあげましょう。</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </section>
 
