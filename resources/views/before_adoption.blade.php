@@ -56,9 +56,7 @@
             <section>
                 <div class="text-center mb-12">
                     <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">数字が語る日本の現状</h2>
-                    <div class="relative inline-block">
-                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
-                    </div>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                 </div>
                 
                 <!-- 改善された数字を前面に -->
@@ -111,10 +109,8 @@
             <section>
                 <div class="text-center mb-12">
                     <p class="text-amber-700 text-sm md:text-base tracking-wide mb-2">これから家族を迎えるみなさまへ</p>
-                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">ペットを飼いたい<br>あなたへ贕る5つの心得</h2>
-                    <div class="relative inline-block">
-                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
-                    </div>
+                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">ペットを飼いたい<br>あなたへ贈る5つの心得</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                 </div>
 
                 <div class="space-y-8">
@@ -222,9 +218,7 @@
             <section>
                 <div class="text-center mb-12">
                     <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">ペットは大きな幸せを<br>与えてくれる存在</h2>
-                    <div class="relative inline-block">
-                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
-                    </div>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                 </div>
                 <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-lg border border-amber-200 p-8">
                     <div class="flex flex-col md:flex-row gap-8 items-center">
