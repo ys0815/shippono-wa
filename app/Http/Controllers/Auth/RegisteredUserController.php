@@ -25,10 +25,16 @@ class RegisteredUserController extends Controller
     /**
      * 登録フォーム表示
      * 
-     * @return View 登録フォーム
+     * @return View|RedirectResponse 登録フォームまたはマイページへのリダイレクト
      */
-    public function create(): View
+    public function create()
     {
+        // ログイン済みユーザーはマイページにリダイレクト
+        if (Auth::check()) {
+            return redirect()->route('mypage')
+                ->with('info', '既にログイン済みです。マイページに移動しました。');
+        }
+
         return view('auth.register');
     }
 
