@@ -26,37 +26,26 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        // サイト統計情報をキャッシュから取得
+        // サイト統計情報をキャッシュから取得（原則スケジューラで更新）
         $stats = Cache::get(SiteStatsService::CACHE_KEY);
 
-        // キャッシュがない場合、または古いデータ（24時間以上前）の場合は更新
-        $shouldUpdate = false;
+        // キャッシュが存在しない場合のみフォールバックで計算
         if ($stats === null) {
-            $shouldUpdate = true;
-        } else {
-            $lastUpdated = \Carbon\Carbon::parse($stats['updated_at']);
-            $shouldUpdate = $lastUpdated->diffInHours(now()) >= 24;
-        }
-
-        if ($shouldUpdate) {
             try {
-                // 統計情報を計算してキャッシュに保存（24時間の有効期限）
                 $stats = SiteStatsService::compute();
                 Cache::put(SiteStatsService::CACHE_KEY, $stats, now()->addDay());
             } catch (\Exception $e) {
-                // エラーが発生した場合は既存のキャッシュを使用（なければデフォルト値）
-                if ($stats === null) {
-                    $stats = [
-                        'posts_gallery' => 0,
-                        'posts_interview' => 0,
-                        'pets' => 0,
-                        'shelters' => 0,
-                        'likes' => 0,
-                        'updated_at' => now()->toDateTimeString(),
-                        'computed_at' => now()->toDateTimeString(),
-                        'error' => true,
-                    ];
-                }
+                // エラー時はデフォルト値を表示
+                $stats = [
+                    'posts_gallery' => 0,
+                    'posts_interview' => 0,
+                    'pets' => 0,
+                    'shelters' => 0,
+                    'likes' => 0,
+                    'updated_at' => now('Asia/Tokyo')->toDateTimeString(),
+                    'computed_at' => now('Asia/Tokyo')->toDateTimeString(),
+                    'error' => true,
+                ];
             }
         }
 
