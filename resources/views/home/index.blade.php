@@ -58,13 +58,16 @@
         <section class="w-full bg-white border-t border-b border-gray-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
-                    <h3 class="text-4xl font-bold text-gray-800 mb-4 relative inline-block">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">
+                        <p class="text-base text-gray-600 mb-2">かわいい家族たちの生活を見てみよう</p>
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             家族になった子たち新着
                         </span>
-                        <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
-                    <p class="text-base text-gray-600">かわいい家族たちの生活を見てみよう</p>
+                    <div class="relative inline-block">
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    </div>
+          
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 xl:gap-10">
                     @foreach($recentPets as $pet)
@@ -160,13 +163,16 @@
             <!-- サービスコンセプト -->
             <section class="relative bg-gray-50 border-gray-200 py-16">
                 <div class="text-center mb-12">
-                    <h3 class="text-4xl font-bold text-gray-800 mb-4 relative inline-block">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">
+                        <p class="text-base text-gray-600 mb-2">私たちが大切にしている想い</p>
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             サービスコンセプト
                         </span>
-                        <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
-                    <p class="text-base text-gray-600">私たちが大切にしている想い</p>
+                    <div class="relative inline-block">
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    </div>
+
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
                     <div class="text-center group">
@@ -208,13 +214,16 @@
         <section class="w-full bg-white border-t border-b border-gray-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
-                    <h3 class="text-4xl font-bold text-gray-800 mb-4 relative inline-block">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">
+                        <p class="text-base text-gray-600 mb-2">みんなの活動を数字で見てみよう</p>
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             統計情報
                         </span>
-                        <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
-                    <p class="text-base text-gray-600">みんなの活動を数字で見てみよう</p>
+                    <div class="relative inline-block">
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    </div>
+                  
                     @if(isset($stats['updated_at']))
                         <p class="text-sm text-gray-500 mt-2">最終更新: {{ \Carbon\Carbon::parse($stats['updated_at'])->format('Y年n月j日 H:i') }}</p>
                     @endif
@@ -278,13 +287,16 @@
             <!-- 保護団体リンク集 -->
             <section id="shelters" class="relative bg-gray-50 border-gray-200 py-12" x-data="shelterFilter()">
                 <div class="text-center mb-10">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">
+                        <p class="text-sm text-gray-600 mb-2">協力いただいている保護団体の皆様</p>
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             保護団体リンク集
                         </span>
-                        <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </h3>
-                    <p class="text-sm text-gray-600">協力いただいている保護団体の皆様</p>
+                    <div class="relative inline-block">
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    </div>
+            
                 </div>
                 
                 <!-- 地域選択フィルター -->
