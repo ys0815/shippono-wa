@@ -126,7 +126,7 @@
                             </figure>
                             <div class="md:col-span-3 p-6 md:p-8">
                                 <div class="flex items-center gap-3 mb-4">
-                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">1</span>
+                                    <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">1</span>
                                     <h3 class="text-2xl md:text-3xl font-bold text-gray-900">何があっても最後まで共に生きる</h3>
                                 </div>
                                 <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
@@ -143,7 +143,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-5">
                             <div class="md:col-span-3 p-6 md:p-8 order-2 md:order-1">
                                 <div class="flex items-center gap-3 mb-4">
-                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">2</span>
+                                    <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">2</span>
                                     <h3 class="text-2xl md:text-3xl font-bold text-gray-900">家族や周りの人の理解を得よう</h3>
                                 </div>
                                 <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
@@ -166,7 +166,7 @@
                             </figure>
                             <div class="md:col-span-3 p-6 md:p-8">
                                 <div class="flex items-center gap-3 mb-4">
-                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">3</span>
+                                    <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">3</span>
                                     <h3 class="text-2xl md:text-3xl font-bold text-gray-900">金銭面もチェック</h3>
                                 </div>
                                 <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
@@ -183,7 +183,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-5">
                             <div class="md:col-span-3 p-6 md:p-8 order-2 md:order-1">
                                 <div class="flex items-center gap-3 mb-4">
-                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">4</span>
+                                    <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">4</span>
                                     <h3 class="text-2xl md:text-3xl font-bold text-gray-900">二度と悲しい思いをさせない</h3>
                                 </div>
                                 <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
@@ -205,7 +205,7 @@
                             </figure>
                             <div class="md:col-span-3 p-6 md:p-8">
                                 <div class="flex items-center gap-3 mb-4">
-                                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full border-2 border-amber-400 text-amber-700 font-bold">5</span>
+                                    <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">5</span>
                                     <h3 class="text-2xl md:text-3xl font-bold text-gray-900">飼育するペットの習性を理解する</h3>
                                 </div>
                                 <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
