@@ -22,10 +22,16 @@ class AuthenticatedSessionController extends Controller
     /**
      * ログインフォーム表示
      * 
-     * @return View ログインフォーム
+     * @return View|RedirectResponse ログインフォームまたはマイページへのリダイレクト
      */
-    public function create(): View
+    public function create()
     {
+        // ログイン済みユーザーはマイページにリダイレクト
+        if (Auth::check()) {
+            return redirect()->route('mypage')
+                ->with('info', '既にログイン済みです。マイページに移動しました。');
+        }
+
         return view('auth.login');
     }
 
