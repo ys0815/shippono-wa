@@ -65,7 +65,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                // 全面を Noto Sans JP に統一（英数字含む）
+                sans: ["Noto Sans JP", ...defaultTheme.fontFamily.sans],
             },
         },
     },
