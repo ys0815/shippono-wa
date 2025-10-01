@@ -54,9 +54,11 @@
 
             <!-- 数字が語る日本の現状 -->
             <section>
-                <div class="text-center" style="margin-bottom: 3rem !important;">
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">数字が語る日本の現状</h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">数字が語る日本の現状</h2>
+                    <div class="relative inline-block">
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    </div>
                 </div>
                 
                 <!-- 改善された数字を前面に -->
@@ -96,9 +98,10 @@
                         </div>
                     </div>
 
-                    <div class="bg-amber-50 rounded-lg p-6">
-                        <p class="text-gray-700 leading-relaxed text-lg md:text-xl text-center">
-                            この流れをさらに前へ進めるために——これから家族を迎えるあなたの「優しい選択」が、大きな力になります。
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">あなたの「優しい選択」が、大きな力になります</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg md:text-xl">
+                            この流れをさらに前へ進めるために——これから家族を迎えるあなたの選択が、次の命を守る力になります。
                         </p>
                     </div>
                 </div>
@@ -108,7 +111,10 @@
             <section>
                 <div class="text-center mb-12">
                     <p class="text-amber-700 text-sm md:text-base tracking-wide mb-2">これから家族を迎えるみなさまへ</p>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">ペットを飼いたいあなたへ贈る5つの心得</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">ペットを飼いたいあなたへ贈る5つの心得</h2>
+                    <div class="relative inline-block">
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    </div>
                 </div>
 
                 <div class="space-y-8">
@@ -214,9 +220,11 @@
 
             <!-- ペットは大きな幸せを与えてくれる存在 -->
             <section>
-                <div class="text-center" style="margin-bottom: 3rem !important;">
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 block" style="margin-bottom: 1rem !important;">ペットは大きな幸せを与えてくれる存在</h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">ペットは大きな幸せを与えてくれる存在</h2>
+                    <div class="relative inline-block">
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    </div>
                 </div>
                 <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-lg border border-amber-200 p-8">
                     <div class="flex flex-col md:flex-row gap-8 items-center">
