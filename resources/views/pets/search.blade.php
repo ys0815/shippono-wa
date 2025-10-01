@@ -12,7 +12,7 @@
                 <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                     {{ $speciesName }}の家族
                 </span>
-                <div class="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
             </h1>
             <p class="text-sm text-gray-600">新しい家族のもとで、今日も元気に暮らしています！</p>
         </div>
