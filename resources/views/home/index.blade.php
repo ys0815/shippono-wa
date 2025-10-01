@@ -35,7 +35,7 @@
             <!-- 画像下部のグラデーションオーバーレイ（重なり順を明示） -->
             <div class="absolute inset-0 pointer-events-none" style="z-index: 10 !important; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 75%) !important;"></div>
             <!-- 画像下部のテキスト（グラデーションの上に重ねる） -->
-            <div class="absolute bottom-0 left-0 right-0 p-8 sm:p-10 pb-10 sm:pb-12 pointer-events-none" style="z-index: 20 !important; position: absolute !important; top: auto !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;">
+            <div class="absolute bottom-0 left-0 right-0 p-8 sm:p-10 pb-10 sm:pb-12" style="z-index: 20 !important; position: absolute !important; top: auto !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;">
                 <div class="max-w-5xl mx-auto text-center">
                     <p class="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-5xl font-medium leading-relaxed drop-shadow-lg select-none mb-8">
                         保護動物と家族の幸せな毎日をみんなで分かち合う場所
