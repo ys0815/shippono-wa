@@ -29,7 +29,7 @@
                     <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-gray-900 mb-6">
                         #しっぽのわとは？
                     </h1>
-                    <p class="text-lg md:text-xl lg:text-xl text-gray-600 leading-relaxed mb-8">
+                    <p class="text-base md:text-xl lg:text-xl text-gray-600 leading-relaxed mb-8">
                         保護動物と新しい家族が幸せに過ごす日常を、一緒に見て、感じて、分かち合えるプラットフォームです。
                     </p>
                     <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-8 max-w-2xl mx-auto shadow-sm">
@@ -58,16 +58,16 @@
                     
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10 lg:p-12 mb-8">
                         <div class="prose prose-lg max-w-none">
-                            <p class="text-gray-700 leading-relaxed mb-6 text-lg md:text-xl lg:text-xl">
+                            <p class="text-gray-700 leading-relaxed mb-6 text-base md:text-xl lg:text-xl">
                                保護動物と新しい家族が紡ぐ“卒業後の物語”をみんなでシェアし、幸せの輪が広がることを願っています。
                             </p>
-                            <p class="text-gray-700 leading-relaxed text-lg md:text-xl lg:text-xl">
+                            <p class="text-gray-700 leading-relaxed text-base md:text-xl lg:text-xl">
                                 一匹でも多くの動物が安心して過ごせる家族とつながり、穏やかな毎日を過ごせますように。
                             </p>
-                            <p class="text-gray-700 leading-relaxed text-lg md:text-xl lg:text-xl">
+                            <p class="text-gray-700 leading-relaxed text-base md:text-xl lg:text-xl">
                                 その幸せの瞬間が、だれかの心に届いて、また新しいつながりや幸せを生んでいく…。
                             </p>
-                            <p class="text-gray-700 leading-relaxed text-lg md:text-xl lg:text-xl">
+                            <p class="text-gray-700 leading-relaxed text-base md:text-xl lg:text-xl">
                                 小さな一歩から、あたたかい連鎖が生まれることをわたしは大切に思っています。
                             </p>
                         </div>
@@ -124,7 +124,7 @@
                                     <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                                         <span class="text-xl">📸</span>
                                     </div>
-                                    <h3 class="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">今日の幸せ投稿</h3>
+                                    <h3 class="text-base md:text-xl lg:text-xl font-semibold text-gray-900">今日の幸せ投稿</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
                                     家族になったペットとの楽しい日常を写真・動画付きで投稿して、幸せな瞬間をみんなで分かち合えます。
@@ -136,7 +136,7 @@
                                     <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                                         <span class="text-xl">📝</span>
                                     </div>
-                                    <h3 class="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">里親インタビュー</h3>
+                                    <h3 class="text-base md:text-xl lg:text-xl font-semibold text-gray-900">里親インタビュー</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
                                     里親さんのリアルな体験談を投稿・閲覧し、これから家族になる人への参考に。
@@ -150,7 +150,7 @@
                                     <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                                         <span class="text-xl">🔍</span>
                                     </div>
-                                    <h3 class="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">ペット検索</h3>
+                                    <h3 class="text-base md:text-xl lg:text-xl font-semibold text-gray-900">ペット検索</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
                                     種別・性別・地域・保護団体で絞り込んで、気になる動物をすぐに見つけられます。
@@ -162,7 +162,7 @@
                                     <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                                         <span class="text-xl">💖</span>
                                     </div>
-                                    <h3 class="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">いいね機能</h3>
+                                    <h3 class="text-base md:text-xl lg:text-xl font-semibold text-gray-900">いいね機能</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
                                     気になるペットに「いいね」で応援し、温かいコミュニティの一員になりましょう。
@@ -185,7 +185,7 @@
                         <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 md:p-10 lg:p-12 border border-amber-100">
                             <div class="flex items-start space-x-6 md:space-x-8 lg:space-x-10">
                                 <div class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <span class="text-white text-lg md:text-xl lg:text-2xl font-bold">1</span>
+                                    <span class="text-white text-base md:text-xl lg:text-2xl font-bold">1</span>
                                 </div>
                                 <div class="flex-1">
                                     <h3 class="text-xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-3">新規登録</h3>
@@ -199,7 +199,7 @@
                         <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 md:p-10 lg:p-12 border border-amber-100">
                             <div class="flex items-start space-x-6 md:space-x-8 lg:space-x-10">
                                 <div class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <span class="text-white text-lg md:text-xl lg:text-2xl font-bold">2</span>
+                                    <span class="text-white text-base md:text-xl lg:text-2xl font-bold">2</span>
                                 </div>
                                 <div class="flex-1">
                                     <h3 class="text-xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-3">投稿・シェア</h3>
@@ -213,7 +213,7 @@
                         <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 md:p-10 lg:p-12 border border-amber-100">
                             <div class="flex items-start space-x-6 md:space-x-8 lg:space-x-10">
                                 <div class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <span class="text-white text-lg md:text-xl lg:text-2xl font-bold">3</span>
+                                    <span class="text-white text-base md:text-xl lg:text-2xl font-bold">3</span>
                                 </div>
                                 <div class="flex-1">
                                     <h3 class="text-xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-3">コミュニティ参加</h3>
@@ -229,7 +229,7 @@
             <!-- メッセージ -->
             <section class="text-center">
                 <div class="max-w-3xl mx-auto">
-                    <p class="text-lg text-gray-600 mb-4">
+                    <p class="text-base text-gray-600 mb-4">
                         あなたの小さな一歩が、社会全体の大きなうねりになります。
                     </p>
                     <p class="text-xl md:text-2xl lg:text-2xl font-semibold text-amber-600">
@@ -243,10 +243,10 @@
         <section class="py-12 md:py-16 lg:py-20">
             <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-8 md:p-12 lg:p-16 text-center text-white">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold mb-4 md:mb-6 text-white">あなたの幸せな日常をシェアして、次の命につなげませんか？</h2>
-                <p class="text-lg md:text-xl lg:text-xl opacity-95 mb-6 md:mb-8">「#しっぽのわ」は、そんな温かい"幸せの循環"を生み出す場所でありたいと願っています。</p>
+                <p class="text-base md:text-xl lg:text-xl opacity-95 mb-6 md:mb-8">「#しっぽのわ」は、そんな温かい"幸せの循環"を生み出す場所でありたいと願っています。</p>
                 <div class="flex flex-col sm:flex-row gap-4 md:gap-6 lg:gap-8 justify-center items-center">
-                    <a href="{{ route('register') }}" class="bg-white text-amber-600 px-8 py-4 md:px-12 md:py-5 lg:px-16 lg:py-6 rounded-full font-bold text-lg md:text-xl lg:text-xl hover:bg-amber-50 transition-colors duration-300 shadow-lg w-full sm:w-auto sm:min-w-[200px] md:min-w-[240px] lg:min-w-[280px] text-center whitespace-nowrap">参加してはじめる</a>
-                    <a href="{{ route('home') }}" class="border-2 border-white text-white px-8 py-4 md:px-12 md:py-5 lg:px-16 lg:py-6 rounded-full font-bold text-lg md:text-xl lg:text-xl hover:bg-white hover:text-amber-600 transition-colors duration-300 w-full sm:w-auto sm:min-w-[200px] md:min-w-[240px] lg:min-w-[280px] text-center whitespace-nowrap">幸せな日常を見る</a>
+                    <a href="{{ route('register') }}" class="bg-white text-amber-600 px-8 py-4 md:px-12 md:py-5 lg:px-16 lg:py-6 rounded-full font-bold text-base md:text-xl lg:text-xl hover:bg-amber-50 transition-colors duration-300 shadow-lg w-full sm:w-auto sm:min-w-[200px] md:min-w-[240px] lg:min-w-[280px] text-center whitespace-nowrap">参加してはじめる</a>
+                    <a href="{{ route('home') }}" class="border-2 border-white text-white px-8 py-4 md:px-12 md:py-5 lg:px-16 lg:py-6 rounded-full font-bold text-base md:text-xl lg:text-xl hover:bg-white hover:text-amber-600 transition-colors duration-300 w-full sm:w-auto sm:min-w-[200px] md:min-w-[240px] lg:min-w-[280px] text-center whitespace-nowrap">幸せな日常を見る</a>
                 </div>
             </div>
         </section>
