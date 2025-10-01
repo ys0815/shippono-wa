@@ -55,7 +55,7 @@
             <!-- 数字が語る日本の現状 -->
             <section>
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">数字が語る日本の現状</h2>
+                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">数字が語る日本の現状</h2>
                     <div class="relative inline-block">
                         <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </div>
@@ -111,7 +111,7 @@
             <section>
                 <div class="text-center mb-12">
                     <p class="text-amber-700 text-sm md:text-base tracking-wide mb-2">これから家族を迎えるみなさまへ</p>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">ペットを飼いたいあなたへ贈る5つの心得</h2>
+                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">ペットを飼いたい<br>あなたへ贕る5つの心得</h2>
                     <div class="relative inline-block">
                         <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </div>
@@ -221,7 +221,7 @@
             <!-- ペットは大きな幸せを与えてくれる存在 -->
             <section>
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">ペットは大きな幸せを与えてくれる存在</h2>
+                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">ペットは大きな幸せを<br>与えてくれる存在</h2>
                     <div class="relative inline-block">
                         <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
                     </div>
