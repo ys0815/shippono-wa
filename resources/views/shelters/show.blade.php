@@ -25,7 +25,7 @@
                 <!-- 保護団体アイコン -->
                 <div class="flex-shrink-0">
                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center border-4 border-white shadow-lg">
-                        <svg class="w-12 h-12 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-12 h-12 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                         </svg>
                     </div>
@@ -76,7 +76,7 @@
                             <a href="{{ route('pets.show', $pet) }}" class="block">
                                 @if($pet->profile_image_url)
                                     <div class="h-48 overflow-hidden">
-                                        <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
+                                        <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
                                     </div>
                                 @else
                                     <div class="h-48 bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
@@ -105,7 +105,7 @@
         @else
             <div class="text-center py-12">
                 <div class="text-gray-500 mb-4">
-                    <svg class="w-16 h-16 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-16 h-16 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                     </svg>
                 </div>

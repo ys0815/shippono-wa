@@ -5,7 +5,7 @@
                 <!-- 背景画像エリア -->
                 <div class="relative h-36 sm:h-40 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 mb-8 -mx-5 sm:-mx-8 -mt-5 sm:-mt-8">
                     @if($pet->header_image_url)
-                        <img src="{{ $pet->header_image_url }}" alt="header" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="{{ $pet->header_image_url }}" alt="header" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
                         <!-- オーバーレイ -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
                     @endif
@@ -14,7 +14,7 @@
                     <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-white shadow-lg bg-amber-100 cursor-pointer hover:shadow-xl transition-shadow duration-300" 
                          onclick="openPetImageModal()">
                         @if($pet->profile_image_url)
-                            <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
+                            <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
                                 <span class="text-amber-600 text-4xl sm:text-5xl font-bold">{{ mb_substr($pet->name, 0, 2) }}</span>
@@ -875,7 +875,7 @@
     </div>
 
     <!-- ペット画像表示用モーダル -->
-    <div id="pet-image-modal" class="fixed inset-0 z-[9999] hidden bg-black bg-opacity-95 flex items-center justify-center p-2 sm:p-4" onclick="closePetImageModal(event)">
+    <div id="pet-image-modal" class="fixed inset-0 z-[9999] hidden bg-black bg-opacity-95 flex items-center justify-center p-2 sm:p-4 overflow-y-auto" onclick="closePetImageModal(event)">
         <div class="relative w-full h-full max-w-screen-2xl max-h-screen flex items-center justify-center" onclick="event.stopPropagation()">
             <!-- 閉じるボタン -->
             <button onclick="closePetImageModal()" class="absolute top-2 right-2 sm:top-4 sm:right-4 text-white text-3xl sm:text-4xl z-10 bg-black bg-opacity-50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center hover:bg-opacity-70 transition-all">

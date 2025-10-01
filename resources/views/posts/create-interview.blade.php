@@ -10,7 +10,7 @@
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center">
                         <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" class="mr-4">
-                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </a>
@@ -25,7 +25,7 @@
             <!-- 温かみのあるメッセージ -->
             <div class="rounded-lg p-6 mb-8 bg-gradient-to-r from-amber-100 to-orange-200 border border-amber-300">
                 <div class="flex items-center mb-4">
-                    <svg class="w-10 h-10 mr-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-10 h-10 mr-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                     </svg>
                     <h2 class="text-lg font-semibold text-amber-800">あなたの体験が希望を届けます</h2>
@@ -73,7 +73,7 @@
                     @enderror
                     @if(count($postedPetIds) > 0)
                         <p class="mt-2 text-sm text-amber-600">
-                            <svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                 <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                             </svg>
                             1ペットにつきインタビュー記事は1投稿までです。
@@ -115,7 +115,7 @@
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                         <div class="space-y-4">
                             <div>
-                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
                                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <p class="mt-2 text-sm text-gray-600">ペットの写真をアップロード</p>
@@ -138,7 +138,7 @@
                     <!-- プレビュー表示エリア -->
                     <div id="image-preview" class="mt-4 border-2 border-dashed border-gray-300 rounded-lg p-4 hidden">
                         <p class="text-sm text-gray-600 mb-2">プレビュー表示エリア</p>
-                        <img id="preview-img" src="" alt="プレビュー" class="max-w-full h-48 object-cover rounded-lg">
+                        <img id="preview-img" src="" alt="プレビュー" loading="lazy" decoding="async" class="max-w-full h-48 object-cover rounded-lg">
                     </div>
                     
                     @error('main_image')

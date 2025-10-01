@@ -25,7 +25,7 @@
                         <a href="{{ route('interviews.show', $post) }}" class="shrink-0">
                             <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-4 border-white shadow bg-amber-100">
                                 @if($post->pet && $post->pet->profile_image_url)
-                                    <img src="{{ $post->pet->profile_image_url }}" alt="{{ $post->pet->name }}" class="w-full h-full object-cover">
+                                    <img src="{{ $post->pet->profile_image_url }}" alt="{{ $post->pet->name }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
                                 @else
                                     <div class="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
                                         <span class="text-amber-600 text-lg font-bold">{{ mb_substr($post->pet->name ?? 'Pet', 0, 2) }}</span>

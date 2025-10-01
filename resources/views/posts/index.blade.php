@@ -46,10 +46,10 @@
             <!-- 新規投稿ボタン -->
             <div class="mb-6">
                 <div class="flex space-x-4">
-                    <a href="{{ route('mypage.posts.gallery.create') }}" 
+                        <a href="{{ route('mypage.posts.gallery.create') }}" 
                        class="inline-flex items-center px-4 py-2 text-white text-sm rounded-lg transition duration-200" 
                        style="background-color: #d97706; hover:background-color: #b45309;">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
                         今日の幸せを投稿
@@ -57,7 +57,7 @@
                     <a href="{{ route('mypage.posts.interview.create') }}" 
                        class="inline-flex items-center px-4 py-2 text-white text-sm rounded-lg transition duration-200" 
                        style="background-color: #d97706; hover:background-color: #b45309;">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
                         里親インタビューを投稿
@@ -147,6 +147,7 @@
                                         @if($media->type === 'image')
                                             <img src="{{ Storage::url($media->url) }}" 
                                                  alt="投稿画像" 
+                                                 loading="lazy" decoding="async"
                                                  class="w-20 h-20 object-cover rounded-lg max-h-[80px]">
                                         @elseif($media->type === 'video')
                                             <video src="{{ Storage::url($media->url) }}" 

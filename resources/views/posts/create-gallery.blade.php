@@ -6,7 +6,7 @@
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center">
                         <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" class="mr-4">
-                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </a>
@@ -22,7 +22,7 @@
             <!-- 温かみのあるメッセージ -->
             <div class="rounded-lg p-6 mb-8 bg-gradient-to-r from-amber-100 to-orange-200 border border-amber-300">
                 <div class="flex items-center mb-4">
-                    <svg class="w-10 h-10 mr-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-10 h-10 mr-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                     </svg>
                     <h2 class="text-lg font-semibold text-amber-800">今日の幸せをシェアしましょう</h2>
@@ -32,7 +32,7 @@
                     そのひとときの温かさは、きっと同じ気持ちを分かち合う誰かに届きます。
                 </p>
                 <div class="flex items-center text-sm text-amber-600">
-                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                     </svg>
                     <span>どんなささやかな瞬間も大切です。あなたの日常が、誰かの心をそっと和ませます。</span>
@@ -46,7 +46,7 @@
                 @if ($errors->any())
                     <div class="bg-red-50 border border-red-200 rounded-lg p-4">
                         <div class="flex">
-                            <svg class="w-5 h-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             <div>
@@ -141,7 +141,7 @@
                                class="hidden"
                                onchange="previewMedia(this)">
                         <label for="media" class="cursor-pointer">
-                            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
                             <p class="mt-2 text-sm text-gray-600">写真・動画を選択（最大2ファイル）</p>
@@ -198,7 +198,7 @@
                         </a>
                         <button type="submit" 
                                 class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium flex items-center justify-center bg-amber-600 hover:bg-amber-700">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                 <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                             </svg>
                             投稿する
@@ -249,7 +249,7 @@
                             `;
                         } else {
                             div.innerHTML = `
-                                <img src="${e.target.result}" alt="プレビュー${index + 1}" class="w-full h-32 object-cover rounded-lg">
+                                <img src="${e.target.result}" alt="プレビュー${index + 1}" loading="lazy" decoding="async" class="w-full h-32 object-cover rounded-lg">
                                 <button type="button" onclick="removeMedia(this)" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">×</button>
                             `;
                         }

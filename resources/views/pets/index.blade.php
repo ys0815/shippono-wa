@@ -22,7 +22,7 @@
                             <div class="relative h-40 bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center">
                                 @if($pet->header_image_url)
                                     <div class="w-full h-full overflow-hidden">
-                                        <img src="{{ $pet->header_image_url }}" alt="プロフィール画像" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                        <img src="{{ $pet->header_image_url }}" alt="プロフィール画像" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                     </div>
                                 @else
                                     <div class="text-amber-300 text-sm flex items-center">
@@ -37,7 +37,7 @@
                                 <div style="position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); z-index: 20;">
                                     <div style="width: 96px; height: 96px; border-radius: 50%; background-color: white; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 4px solid white; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
                                         @if($pet->profile_image_url)
-                                            <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                            <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
                                         @else
                                             <div style="width: 100%; height: 100%; background: linear-gradient(to bottom right, #fbbf24, #f97316); display: flex; align-items: center; justify-content: center;">
                                                 <span style="color: white; font-size: 1.25rem; font-weight: bold;">{{ mb_substr($pet->name,0,2) }}</span>
@@ -48,14 +48,14 @@
                                 
                                 <!-- いいね・投稿数バッジ -->
                                 <div class="absolute top-3 right-3 flex space-x-2">
-                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-700 flex items-center">
-                                        <svg class="w-3 h-3 mr-1 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-800 flex items-center">
+                                        <svg class="w-3 h-3 mr-1 text-red-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                                         </svg>
                                         {{ $pet->likes->count() }}
                                     </div>
-                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-700 flex items-center">
-                                        <svg class="w-3 h-3 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-800 flex items-center">
+                                        <svg class="w-3 h-3 mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                                         </svg>
                                         {{ $pet->posts->count() }}
@@ -94,7 +94,7 @@
                                     
                                     @if($pet->rescue_date)
                                     <div class="flex items-center text-sm text-gray-600">
-                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                         </svg>
                                         お迎え日: {{ \Illuminate\Support\Carbon::parse($pet->rescue_date)->format('Y/m/d') }}

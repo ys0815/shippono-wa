@@ -10,7 +10,7 @@
                     <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
                         <div class="w-full h-80 sm:h-96 overflow-hidden">
                             @if($media->type === 'image')
-                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover ">
+                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover ">
                             @elseif($media->type === 'video')
                                 <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover " muted>
                                     お使いのブラウザは動画をサポートしていません。
@@ -26,7 +26,7 @@
                                 <div class="media-item w-full flex-shrink-0 cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
                                     <div class="w-full h-80 sm:h-96 overflow-hidden">
                                         @if($media->type === 'image')
-                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover ">
+                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover ">
                                         @elseif($media->type === 'video')
                                             <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover " muted>
                                                 お使いのブラウザは動画をサポートしていません。
@@ -92,7 +92,7 @@
                                         $imageUrl = '/storage/' . ltrim($imageUrl, '/');
                                     }
                                 @endphp
-                                <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
+                                <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
                             @else
                                 <span class="text-gray-500 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
                             @endif

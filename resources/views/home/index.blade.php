@@ -28,7 +28,16 @@
 
         <!-- Hero Section - 全面画像版 -->
         <section class="w-full relative overflow-hidden" style="position: relative !important;">
-            <img src="{{ asset('images/' . $heroImage) }}" 
+            <img 
+                 src="{{ asset('images/' . $heroImage) }}" 
+                 srcset="
+                    {{ asset('images/' . $heroImage) }} 640w,
+                    {{ asset('images/' . $heroImage) }} 1024w,
+                    {{ asset('images/' . $heroImage) }} 1600w
+                 "
+                 sizes="(min-width: 1024px) 100vw, 100vw"
+                 loading="lazy"
+                 decoding="async"
                  alt="保護動物と家族の幸せ" 
                  class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover about-hero-image" 
                  style="height: 256px !important; max-height: 400px; object-position: center;">
@@ -72,14 +81,13 @@
         <section class="w-full bg-white border-t border-b border-gray-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
+                    <p class="text-base text-gray-600 mb-2">かわいい家族たちの生活を見てみよう</p>
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">
-                        <p class="text-base text-gray-600 mb-2">かわいい家族たちの生活を見てみよう</p>
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             家族になった子たち新着
                         </span>
                     </h3>
-                    <div class="relative inline-block">
-                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2">
                     </div>
           
                 </div>
@@ -177,14 +185,13 @@
             <!-- サービスコンセプト -->
             <section class="relative bg-gray-50 border-gray-200 py-16">
                 <div class="text-center mb-12">
+                    <p class="text-base text-gray-600 mb-2">私たちが大切にしている想い</p>
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">
-                        <p class="text-base text-gray-600 mb-2">私たちが大切にしている想い</p>
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             サービスコンセプト
                         </span>
                     </h3>
-                    <div class="relative inline-block">
-                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2">
                     </div>
 
                 </div>
@@ -228,14 +235,13 @@
         <section class="w-full bg-white border-t border-b border-gray-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
+                    <p class="text-base text-gray-600 mb-2">みんなの活動を数字で見てみよう</p>
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">
-                        <p class="text-base text-gray-600 mb-2">みんなの活動を数字で見てみよう</p>
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             統計情報
                         </span>
                     </h3>
-                    <div class="relative inline-block">
-                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2">
                     </div>
                   
                     @if(isset($stats['updated_at']))
@@ -301,14 +307,13 @@
             <!-- 保護団体リンク集 -->
             <section id="shelters" class="relative bg-gray-50 border-gray-200 py-12" x-data="shelterFilter()">
                 <div class="text-center mb-10">
+                    <p class="text-sm text-gray-600 mb-2">協力いただいている保護団体の皆様</p>
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">
-                        <p class="text-sm text-gray-600 mb-2">協力いただいている保護団体の皆様</p>
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             保護団体リンク集
                         </span>
                     </h3>
-                    <div class="relative inline-block">
-                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-28 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+                    <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2">
                     </div>
             
                 </div>

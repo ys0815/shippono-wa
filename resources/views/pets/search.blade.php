@@ -78,10 +78,12 @@
             <!-- JavaScriptで動的に生成されるペットカード -->
         </div>
 
+        
+
         <!-- ローディングインジケーター -->
         <div id="loading-indicator" class="text-center py-6 hidden">
             <div class="inline-flex items-center px-5 py-3 text-base text-gray-600">
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -96,8 +98,8 @@
 
         <!-- スクロールヒント -->
         <div id="scroll-hint" class="text-center py-4 hidden">
-            <div class="inline-flex items-center px-4 py-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-700 text-sm">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="inline-flex items-center px-4 py-2 bg-amber-50 border border-amber-300 rounded-lg text-amber-800 text-sm">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                 </svg>
                 スクロールして、もっと見る
@@ -147,20 +149,31 @@
                 ...searchParams
             });
             
-            fetch(`/pets/search/{{ $species }}?${params}`)
-                .then(response => response.json())
+            fetch(`/pets/search/{{ $species }}?${params}`, { headers: { 'Accept': 'application/json' } })
+                .then(async response => {
+                    const contentType = response.headers.get('content-type') || '';
+                    if (!response.ok || !contentType.includes('application/json')) {
+                        throw new Error(`Unexpected response (${response.status})`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
+                    // 件数の更新（可能ならサーバ値を採用）
+                    if (typeof data.totalCount === 'number') {
+                        totalCount = data.totalCount;
+                    } else if (typeof data.total === 'number') {
+                        totalCount = data.total;
+                    }
+
                     if (data.pets && data.pets.length > 0) {
                         data.pets.forEach(pet => {
                             addPetToContainer(pet);
                         });
                         currentPage++;
                         
-                        // 全てのペットを読み込んだ場合の判定を改善
-                        // 1. 返されたペット数が期待されるページサイズより少ない場合
-                        // 2. または、現在表示されているペット数が総件数に達した場合
-                        const expectedPageSize = 5; // 1ページあたりの表示件数
-                        if (data.pets.length < expectedPageSize || allPets.length >= totalCount) {
+                        // ページサイズの推定（サーバが返す値があれば優先）
+                        const pageSize = typeof data.per_page === 'number' ? data.per_page : (typeof data.pageSize === 'number' ? data.pageSize : 8);
+                        if (data.pets.length < pageSize || (typeof totalCount === 'number' && allPets.length >= totalCount)) {
                             hasMorePets = false;
                             document.getElementById('no-more-pets').classList.remove('hidden');
                         }
@@ -173,6 +186,11 @@
                 })
                 .catch(error => {
                     console.error('Error loading pets:', error);
+                    // 非表示にならないよう最低限の復旧
+                    hasMorePets = false;
+                    if (allPets.length === 0) {
+                        document.getElementById('no-more-pets').classList.remove('hidden');
+                    }
                 })
                 .finally(() => {
                     isLoading = false;
@@ -215,7 +233,7 @@
                 <div class="relative mb-4">
                     <a href="/pets/${pet.id}" class="block w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-amber-200 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                         ${pet.profile_image_url ? 
-                            `<img src="${pet.profile_image_url}" alt="${pet.name}" class="w-full h-full object-cover">` :
+                            `<img src="${pet.profile_image_url}" alt="${pet.name}" loading="lazy" decoding="async" class="w-full h-full object-cover">` :
                             `<div class="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
                                 <span class="text-amber-600 text-xl font-bold">${pet.name.substring(0, 2)}</span>
                             </div>`
@@ -316,5 +334,7 @@
             // 初期表示件数が総件数より少ない場合のみスクロールヒントを表示
             updateScrollHint();
         });
+
+        
     </script>
 </x-guest-layout>

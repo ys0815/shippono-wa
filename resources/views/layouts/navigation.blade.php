@@ -10,8 +10,8 @@
                 <!-- Hamburger Menu Button (mobile only) -->
                 <div class="flex items-center mr-4 sm:hidden">
                     <button @click="sidebarOpen = ! sidebarOpen" aria-label="Open menu" 
-                        class="flex flex-col items-center justify-center p-2 rounded-md text-amber-900 hover:text-amber-700 hover:bg-amber-50 focus:outline-none focus:bg-amber-50 focus:text-amber-700 transition duration-150 ease-in-out">
-                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        class="flex flex-col items-center justify-center p-3 rounded-md text-amber-900 hover:text-amber-700 hover:bg-amber-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition duration-150 ease-in-out">
+                        <svg class="h-7 w-7" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                         <span class="text-xs mt-1">menu</span>

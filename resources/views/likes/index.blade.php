@@ -3,7 +3,7 @@
     <x-slot name="header">
         <div class="flex items-center">
             <a href="{{ route('mypage') }}" class="mr-3 text-gray-600 hover:text-gray-800">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
             </a>
@@ -56,11 +56,11 @@
                             <div class="relative h-40 bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center">
                                 @if($like->pet->header_image_url)
                                     <div class="w-full h-full overflow-hidden">
-                                        <img src="{{ $like->pet->header_image_url }}" alt="プロフィール画像" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                        <img src="{{ $like->pet->header_image_url }}" alt="プロフィール画像" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                     </div>
                                 @else
                                     <div class="text-amber-300 text-sm flex items-center">
-                                        <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                                         </svg>
                                         プロフィール画像
@@ -71,7 +71,7 @@
                                 <div style="position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); z-index: 20;">
                                     <div style="width: 96px; height: 96px; border-radius: 50%; background-color: white; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 4px solid white; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
                                         @if($like->pet->profile_image_url)
-                                            <img src="{{ $like->pet->profile_image_url }}" alt="{{ $like->pet->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                            <img src="{{ $like->pet->profile_image_url }}" alt="{{ $like->pet->name }}" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
                                         @else
                                             <div style="width: 100%; height: 100%; background: linear-gradient(to bottom right, #fbbf24, #f97316); display: flex; align-items: center; justify-content: center;">
                                                 <span style="color: white; font-size: 1.25rem; font-weight: bold;">{{ mb_substr($like->pet->name,0,2) }}</span>
@@ -82,14 +82,14 @@
                                 
                                 <!-- いいね・投稿数バッジ -->
                                 <div class="absolute top-3 right-3 flex space-x-2">
-                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-700 flex items-center">
-                                        <svg class="w-3 h-3 mr-1 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-800 flex items-center">
+                                        <svg class="w-3 h-3 mr-1 text-red-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                                         </svg>
                                         {{ $like->pet->likes->count() }}
                                     </div>
-                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-700 flex items-center">
-                                        <svg class="w-3 h-3 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-800 flex items-center">
+                                        <svg class="w-3 h-3 mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                                         </svg>
                                         {{ $like->pet->posts->count() }}
@@ -111,7 +111,7 @@
                                 
                                 <div class="space-y-2 mb-4">
                                     <div class="flex items-center text-sm text-gray-600">
-                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
                                         </svg>
                                         {{ __([ 'male' => 'オス', 'female' => 'メス', 'unknown' => '不明'][$like->pet->gender] ?? $like->pet->gender) }}
@@ -128,7 +128,7 @@
                                     
                                     @if($like->pet->rescue_date)
                                     <div class="flex items-center text-sm text-gray-600">
-                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                         </svg>
                                         お迎え日: {{ \Illuminate\Support\Carbon::parse($like->pet->rescue_date)->format('Y/m/d') }}
@@ -137,7 +137,7 @@
                                     
                                     @if($like->pet->shelter)
                                     <div class="flex items-center text-sm text-gray-600">
-                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                                         </svg>
                                         {{ $like->pet->shelter->name }}
@@ -157,7 +157,7 @@
                                     <div class="flex space-x-2">
                                         <a href="{{ route('pets.show', $like->pet->id) }}" 
                                            class="flex-1 bg-amber-50 text-amber-700 py-2 px-3 rounded-lg text-sm font-medium text-center hover:bg-amber-100 transition-colors duration-200 flex items-center justify-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                             </svg>
@@ -177,7 +177,7 @@
                                                     }
                                                 }))"
                                                 class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm font-medium text-center hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                             </svg>
                                             お気に入り
@@ -203,7 +203,7 @@
             @else
                 <div class="col-span-full flex flex-col items-center justify-center py-16 text-center">
                     <div class="w-24 h-24 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-12 h-12 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-12 h-12 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
                     </div>
@@ -211,7 +211,7 @@
                     <p class="text-gray-500 mb-6">他のペットプロフィールにいいねをしてみましょう！</p>
                     <a href="{{ route('pets.index') }}" 
                        class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
                         ペットを探す

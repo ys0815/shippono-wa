@@ -12,7 +12,7 @@
                     <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
                         <div class="w-full h-80 sm:h-96 overflow-hidden">
                             @if($media->type === 'image')
-                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover ">
+                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover ">
                             @elseif($media->type === 'video')
                                 <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover " muted>
                                     お使いのブラウザは動画をサポートしていません。
@@ -30,7 +30,7 @@
                                      data-media-url="{{ e(Storage::url($media->url)) }}" 
                                      data-media-index="{{ $index }}">
                                     @if($media->type === 'image')
-                                        <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="w-full h-full object-cover">
+                                        <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
                                     @elseif($media->type === 'video')
                                         <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover" muted>
                                             お使いのブラウザは動画をサポートしていません。
@@ -157,7 +157,7 @@
                                             $imageUrl = '/storage/' . ltrim($imageUrl, '/');
                                         }
                                     @endphp
-                                    <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
+                                    <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
                                 @else
                                     <span class="text-gray-500 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
                                 @endif
@@ -239,8 +239,9 @@
                         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                             @if($relatedPost->media->count() > 0)
                                 <div class="h-48 overflow-hidden">
-                                    <img src="{{ Storage::url($relatedPost->media->first()->url) }}" 
+                                <img src="{{ Storage::url($relatedPost->media->first()->url) }}" 
                                          alt="{{ $relatedPost->title }}" 
+                                         loading="lazy" decoding="async"
                                          class="w-full h-full object-cover">
                     </div>
                             @endif
@@ -250,7 +251,7 @@
                                 <a href="{{ route('interviews.show', $relatedPost) }}" 
                                    class="inline-flex items-center text-amber-600 hover:text-amber-700 font-medium">
                                     続きを読む
-                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
                                 </a>
