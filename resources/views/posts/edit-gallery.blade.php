@@ -21,7 +21,7 @@
         </div>
 
         <!-- メインコンテンツ -->
-        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6"></div>
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <!-- 温かみのあるメッセージ -->
             <div class="rounded-lg p-6 mb-8 bg-gradient-to-r from-amber-100 to-orange-200 border border-amber-300">
                 <div class="flex items-center mb-4">
