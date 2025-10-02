@@ -106,8 +106,23 @@
                         </div>
                     </div>
                 </div>
-            @empty
-                <div class="text-sm text-gray-600">登録されたペットはいません。</div>
+                @empty
+                <div class="flex flex-col items-center justify-center py-16 text-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-12 h-12 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">まだ家族の一員を登録していませんね</h3>
+                    <p class="text-gray-500 mb-6">大切な家族の情報を登録して、みんなでシェアしましょう！</p>
+                    <a href="{{ route('mypage.pets.create') }}" 
+                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        家族の一員を登録する
+                    </a>
+                </div>
             @endforelse
 
             <!-- 詳細を見るボタン（ペットプロフィール管理＝一覧ページへ遷移） -->

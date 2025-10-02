@@ -52,7 +52,7 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
-                        今日の幸せを投稿
+                        幸せをシェアする
                     </a>
                     <a href="{{ route('mypage.posts.interview.create') }}" 
                        class="inline-flex items-center px-4 py-2 text-white text-sm rounded-lg transition duration-200" 
@@ -60,7 +60,7 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
-                        里親インタビューを投稿
+                        体験をシェアする
                     </a>
                 </div>
             </div>
@@ -254,29 +254,55 @@
                     {{ $posts->links() }}
                 </div>
             @else
-                <div class="text-center py-12">
-                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    <h3 class="mt-2 text-sm font-medium text-gray-900">投稿がありません</h3>
-                    <p class="mt-1 text-sm text-gray-500">
+                <div class="col-span-full flex flex-col items-center justify-center py-16 text-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-12 h-12 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">
                         @if($type === 'gallery')
-                            今日の幸せを投稿してみましょう。
+                            まだ今日の幸せを投稿していませんね
                         @elseif($type === 'interview')
-                            里親インタビューを投稿してみましょう。
+                            まだインタビューを投稿していませんね
                         @else
-                            まだ投稿がありません。
+                            まだ投稿をしていませんね
+                        @endif
+                    </h3>
+                    <p class="text-gray-500 mb-6">
+                        @if($type === 'gallery')
+                        小さな幸せをシェアしてみませんか？
+                        @elseif($type === 'interview')
+                        あなたの体験が誰かの心に届きます。
+                        @else
+                            最初の一歩を踏み出してみませんか？
                         @endif
                     </p>
-                    <div class="mt-4">
+                    @if($type === 'gallery')
                         <a href="{{ route('mypage.posts.gallery.create') }}" 
-                           class="inline-flex items-center px-4 py-2 bg-amber-600 text-white text-sm rounded-lg hover:bg-amber-700 transition duration-200">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
-                            投稿してみる
+                            幸せをシェアする
                         </a>
-                    </div>
+                    @elseif($type === 'interview')
+                        <a href="{{ route('mypage.posts.interview.create') }}" 
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            体験をシェアする
+                        </a>
+                    @else
+                        <a href="{{ route('mypage.posts.gallery.create') }}" 
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            幸せをシェアする
+                        </a>
+                    @endif
                 </div>
             @endif
         </div>
