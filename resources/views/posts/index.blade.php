@@ -73,7 +73,7 @@
                     <div class="flex flex-col sm:flex-row gap-3">
                         <!-- キーワード検索 -->
                         <div class="flex-1">
-                            <label for="keyword" class="block text-base md:text-lg font-medium text-gray-700 mb-1">検索:</label>
+                            <label for="keyword" class="block text-sm md:text-lg font-medium text-gray-700 mb-1">検索:</label>
                             <div class="relative">
                                 <input type="text" 
                                        id="keyword" 
@@ -91,7 +91,7 @@
                         <div class="flex gap-3">
                             <!-- 期間フィルタ -->
                             <div class="flex-1">
-                                <label for="period" class="block text-base md:text-lg font-medium text-gray-700 mb-1">期間:</label>
+                                <label for="period" class="block text-sm md:text-lg font-medium text-gray-700 mb-1">期間:</label>
                                 <select id="period" 
                                         name="period" 
                                         class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
@@ -104,7 +104,7 @@
                             
                             <!-- 状態フィルタ -->
                             <div class="flex-1">
-                                <label for="status" class="block text-base md:text-lg font-medium text-gray-700 mb-1">状態:</label>
+                                <label for="status" class="block text-sm md:text-lg font-medium text-gray-700 mb-1">状態:</label>
                                 <select id="status" 
                                         name="status" 
                                         class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">

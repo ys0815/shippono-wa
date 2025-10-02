@@ -1,26 +1,34 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <div class="flex items-center">
-            <a href="{{ route('mypage') }}" class="mr-3 text-gray-600 hover:text-gray-800">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-            </a>
-            <h2 class="font-semibold text-lg text-gray-800 leading-tight">いいね一覧</h2>
+    <div class="min-h-screen bg-gray-50">
+        <!-- ヘッダー（固定） -->
+        <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <a href="{{ route('mypage') }}" class="mr-4">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </a>
+                        <h1 class="text-lg font-semibold text-gray-900">いいね一覧</h1>
+                    </div>
+                </div>
+            </div>
         </div>
-    </x-slot>
 
-    <div class="pt-12 pb-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-        <!-- フィルター（投稿管理画面と統一） -->
+        <!-- メインコンテンツ -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- 検索機能 -->
         <div class="bg-white rounded-lg shadow-sm border p-4 mb-6">
             <form method="GET" id="likesFilterForm" class="space-y-3">
                 <div class="flex flex-col sm:flex-row gap-3">
+                    <!-- ペットの種類フィルタ -->
                     <div class="flex-1">
-                        <label class="block text-xs font-medium text-gray-700 mb-1">ペットの種類:</label>
-                        <select name="species" 
-                                class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        <label for="species" class="block text-sm md:text-lg font-medium text-gray-700 mb-1">ペットの種類:</label>
+                        <select id="species" 
+                                name="species" 
+                                class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                                 onchange="this.form.submit()">
                             <option value="all" {{ $species === 'all' ? 'selected' : '' }}>すべて</option>
                             <option value="dog" {{ $species === 'dog' ? 'selected' : '' }}>犬</option>
@@ -29,10 +37,13 @@
                             <option value="other" {{ $species === 'other' ? 'selected' : '' }}>その他</option>
                         </select>
                     </div>
+                    
+                    <!-- 期間フィルタ -->
                     <div class="flex-1">
-                        <label class="block text-xs font-medium text-gray-700 mb-1">期間:</label>
-                        <select name="period" 
-                                class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        <label for="period" class="block text-sm md:text-lg font-medium text-gray-700 mb-1">期間:</label>
+                        <select id="period" 
+                                name="period" 
+                                class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                                 onchange="this.form.submit()">
                             <option value="all" {{ $period === 'all' ? 'selected' : '' }}>すべて</option>
                             <option value="week" {{ $period === 'week' ? 'selected' : '' }}>1週間</option>
@@ -44,14 +55,12 @@
             </form>
         </div>
 
-        <!-- いいねした動物プロフィール -->
-        <div class="bg-white p-6 shadow sm:rounded-lg">
-            <h3 class="text-base font-semibold text-gray-800 mb-3">いいねした動物プロフィール</h3>
-            
+            <!-- いいねした動物プロフィール -->
             @if($likes->count() > 0)
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="space-y-4">
+            
                     @foreach($likes as $like)
-                        <div class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-amber-200 h-full flex flex-col transform hover:-translate-y-1">
+                        <div class="bg-white rounded-lg shadow-sm border p-6">
                             <!-- プロフィール画像（背景画像） -->
                             <div class="relative h-40 bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center">
                                 @if($like->pet->header_image_url)
@@ -195,13 +204,8 @@
                         </div>
                     @endforeach
                 </div>
-                
-                <!-- ページネーション -->
-                <div class="mt-6">
-                    {{ $likes->links() }}
-                </div>
             @else
-                <div class="col-span-full flex flex-col items-center justify-center py-16 text-center">
+                <div class="flex flex-col items-center justify-center py-16 text-center">
                     <div class="w-24 h-24 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full flex items-center justify-center mb-4">
                         <svg class="w-12 h-12 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
@@ -218,7 +222,6 @@
                     </a>
                 </div>
             @endif
-        </div>
         </div>
     </div>
 </x-app-layout>
