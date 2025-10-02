@@ -142,7 +142,7 @@
                     </div>
 
                     <div>
-                        <label for="species" class="block text-base font-medium text-gray-700 mb-2">ペットの種類</label>
+                        <label for="species" class="block text-base font-medium text-gray-700 mb-2 mt-6" >ペットの種類</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🐕 どのような動物でしょうか？犬、猫、うさぎなど、その子の種類を選んでください。
@@ -158,7 +158,7 @@
                     </div>
 
                     <div>
-                        <label for="breed" class="block text-base font-medium text-gray-700 mb-2">品種</label>
+                        <label for="breed" class="block text-base font-medium text-gray-700 mb-2 mt-6">品種</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🎨 品種がわかる場合は教えてください。ミックスや雑種でも、その子らしさが一番大切です。
@@ -176,7 +176,7 @@
                     </div>
 
                     <div>
-                        <label for="gender" class="block text-base font-medium text-gray-700 mb-2">性別</label>
+                        <label for="gender" class="block text-base font-medium text-gray-700 mb-2 mt-6">性別</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 ♂♀ 性別がわかる場合は教えてください。わからない場合は「不明」で大丈夫です。
@@ -191,7 +191,7 @@
                     </div>
 
                     <div>
-                        <label for="birth_date" class="block text-base font-medium text-gray-700 mb-2">誕生日</label>
+                        <label for="birth_date" class="block text-base font-medium text-gray-700 mb-2 mt-6">誕生日</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🎂 誕生日がわかる場合は教えてください。わからない場合は空欄のままで大丈夫です。
@@ -205,7 +205,7 @@
                     </div>
 
                     <div>
-                        <label for="estimated_age" class="block text-base font-medium text-gray-700 mb-2">推定年齢</label>
+                        <label for="estimated_age" class="block text-base font-medium text-gray-700 mb-2 mt-6">推定年齢</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 📅 年齢がわかる場合は教えてください。わからない場合は空欄のままで大丈夫です。
@@ -232,7 +232,7 @@
 
                     <!-- 1. 種別選択（セレクト） -->
                     <div>
-                        <label for="shelter_kind" class="block text-base font-medium text-gray-700 mb-2">保護施設の種別</label>
+                        <label for="shelter_kind" class="block text-base font-medium text-gray-700 mb-2 mt-6">保護施設の種別</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🏠 お迎えした場所の種別を教えてください。わからない場合は「不明」で大丈夫です。
@@ -248,7 +248,7 @@
 
                     <!-- 2. 所在地カテゴリ選択（セレクト） -->
                     <div>
-                        <label for="shelter_area" class="block text-base font-medium text-gray-700 mb-2">保護施設の所在地</label>
+                        <label for="shelter_area" class="block text-base font-medium text-gray-700 mb-2 mt-6">保護施設の所在地</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 📍 お迎えした場所の地域を教えてください。わからない場合は空欄のままで大丈夫です。
@@ -264,7 +264,7 @@
 
                     <!-- 3. 施設名選択（セレクト） -->
                     <div>
-                        <label for="shelter_id" class="block text-base font-medium text-gray-700 mb-2">保護施設名</label>
+                        <label for="shelter_id" class="block text-base font-medium text-gray-700 mb-2 mt-6">保護施設名</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🏢 お迎えした団体・施設・サイト名を教えてください。わからない場合は空欄のままで大丈夫です。
@@ -281,7 +281,7 @@
                     </div>
 
                     <div>
-                        <label for="rescue_date" class="block text-base font-medium text-gray-700 mb-2">お迎え記念日</label>
+                        <label for="rescue_date" class="block text-base font-medium text-gray-700 mb-2 mt-6">お迎え記念日</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 💝 お迎えした日を教えてください。特別な記念日として大切に記録しましょう。
@@ -301,7 +301,7 @@
                     <div class="grid grid-cols-2 gap-6">
                         <div>
                             <label for="profile_image" class="block text-base font-medium text-gray-700 mb-2">アイコン画像</label>
-                            <div class="p-3 mb-3" style="background-color: #fefce8;">
+                            <div class="p-3 mb-3" style="backzzground-color: #fefce8;">
                                 <p class="text-sm" style="color: #a16207;">
                                     📸 その子の顔がよく見える写真を選んでください。正方形の画像がおすすめです。
                                 </p>
