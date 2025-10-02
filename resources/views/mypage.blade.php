@@ -126,7 +126,7 @@
             @endforelse
 
             <!-- 詳細を見るボタン（ペットプロフィール管理＝一覧ページへ遷移） -->
-            <a href="{{ route('mypage.pets') }}" class="block w-full text-center bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition duration-200">
+            <a href="{{ route('mypage.pets') }}" class="btn btn-brand w-full py-3">
                 詳細を見る→
             </a>
         </div>

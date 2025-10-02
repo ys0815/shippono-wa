@@ -210,7 +210,7 @@
                     <h3 class="text-lg font-semibold text-gray-700 mb-2">まだいいねがありません</h3>
                     <p class="text-gray-500 mb-6">素敵な家族を探してみませんか？</p>
                     <a href="{{ route('home') }}" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
+                       class="btn btn-brand px-6 py-3">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>

@@ -222,14 +222,12 @@
                             💝 あなたの「幸せな瞬間」が、「#しっぽのわ」をもっとやさしく彩ります。
                         </p>
                     </div>
-                    <div class="flex space-x-4">
-                        <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" 
-                            class="flex-1 text-gray-800 py-3 px-4 rounded-lg transition duration-200 font-medium text-center bg-gray-100 hover:bg-gray-200">
+                    <div class="flex justify-center space-x-3">
+                        <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" class="btn btn-outline">
                             キャンセル
                         </a>
-                        <button type="submit" 
-                                class="flex-1 text-white py-3 px-4 rounded-lg transition duration-200 font-medium flex items-center justify-center bg-amber-600 hover:bg-amber-700">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <button type="submit" class="btn btn-brand">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                 <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                             </svg>
                             更新する
