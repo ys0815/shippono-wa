@@ -301,7 +301,7 @@
                     <div class="grid grid-cols-2 gap-6">
                         <div>
                             <label for="profile_image" class="block text-base font-medium text-gray-700 mb-2">アイコン画像</label>
-                            <div class="p-3 mb-3" style="backzzground-color: #fefce8;">
+                            <div class="p-3 mb-3" style="background-color: #fefce8;">
                                 <p class="text-sm" style="color: #a16207;">
                                     📸 その子の顔がよく見える写真を選んでください。正方形の画像がおすすめです。
                                 </p>
