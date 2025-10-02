@@ -21,7 +21,7 @@
         </div>
 
         <!-- メインコンテンツ -->
-        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6"></div>
             <!-- 温かみのあるメッセージ -->
             <div class="rounded-lg p-6 mb-8 bg-gradient-to-r from-amber-100 to-orange-200 border border-amber-300">
                 <div class="flex items-center mb-4">
@@ -222,11 +222,11 @@
                             💝 あなたの「幸せな瞬間」が、「#しっぽのわ」をもっとやさしく彩ります。
                         </p>
                     </div>
-                    <div class="flex justify-center space-x-3">
-                        <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" class="btn btn-outline">
+                    <div class="flex space-x-3">
+                        <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" class="btn btn-outline flex-1 justify-center">
                             キャンセル
                         </a>
-                        <button type="submit" class="btn btn-brand">
+                        <button type="submit" class="btn btn-brand flex-1 justify-center">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                 <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                             </svg>
