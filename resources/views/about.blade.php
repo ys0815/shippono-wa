@@ -30,7 +30,7 @@
                         #しっぽのわとは？
                     </h1>
                     <p class="text-base md:text-xl lg:text-xl text-gray-600 leading-relaxed mb-8">
-                        保護動物と新しい家族が幸せに過ごす日常を、一緒に見て、感じて、分かち合えるプラットフォームです。
+                        保護動物と新しい家族が幸せに過ごす日常を、みんなで見て、感じて、分かち合うためのプラットフォームです。
                     </p>
                     <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-8 max-w-2xl mx-auto shadow-sm">
                         <div class="flex items-center justify-center mb-4">
@@ -39,11 +39,10 @@
                             </div>
                         </div>
                         <p class="text-gray-700 leading-relaxed mb-3">
-                            このサイトは、閲覧だけなら会員登録なしでもご利用いただけます。
+                            会員登録をしなくても、どなたでもご覧いただけます。
                         </p>
                         <p class="text-amber-700 text-sm font-medium">
-                            まずは、保護動物たちの温かい日常や里親さんの体験談を気軽にのぞいてみてください。
-                        </p>
+                            まずは、保護動物たちの温かい日常や、里親さんの体験談を気軽にのぞいてみてください。
                     </div>
                 </div>
             </section>
@@ -59,16 +58,16 @@
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10 lg:p-12 mb-8">
                         <div class="prose prose-lg max-w-none">
                             <p class="text-gray-700 leading-relaxed mb-6 text-base md:text-xl lg:text-xl">
-                               保護動物と新しい家族が紡ぐ“卒業後の物語”をみんなでシェアし、幸せの輪が広がることを願っています。
+                                保護動物と新しい家族が紡ぐ “卒業後の物語” をシェアすることで、幸せの輪が広がることを願っています。
                             </p>
                             <p class="text-gray-700 leading-relaxed text-base md:text-xl lg:text-xl">
-                                一匹でも多くの動物が安心して過ごせる家族とつながり、穏やかな毎日を過ごせますように。
+                                一匹でも多くの動物が安心できる家族と出会い、穏やかな毎日を過ごせますように。
                             </p>
                             <p class="text-gray-700 leading-relaxed text-base md:text-xl lg:text-xl">
-                                その幸せの瞬間が、だれかの心に届いて、また新しいつながりや幸せを生んでいく…。
+                                その小さな幸せの瞬間が、だれかの心に届き、また新しいつながりや命を育むきっかけになりますように。
                             </p>
                             <p class="text-gray-700 leading-relaxed text-base md:text-xl lg:text-xl">
-                                小さな一歩から、あたたかい連鎖が生まれることをわたしは大切に思っています。
+                                小さな一歩から生まれる、あたたかな連鎖を大切にしています。
                             </p>
                         </div>
                     </div>
@@ -81,28 +80,28 @@
                                     <span class="text-2xl">✨</span>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-2">人と動物のつながりを大切にする</h4>
-                                <p class="text-sm text-gray-600">互いを尊重し、思いやりのある関係を築きます</p>
+                                <p class="text-sm text-gray-600">互いを尊重し、思いやりのある関係を築きます。</p>
                             </div>
                             <div class="text-center group">
                                 <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:shadow-md transition-shadow">
                                     <span class="text-2xl">💝</span>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-2">幸せな日常を分かち合う</h4>
-                                <p class="text-sm text-gray-600">小さな喜びも一緒に感じて寄り添っていきたい</p>
+                                <p class="text-sm text-gray-600">小さな喜びを一緒に感じ、寄り添っていきます。</p>
                             </div>
                             <div class="text-center group">
                                 <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:shadow-md transition-shadow">
                                     <span class="text-2xl">🌱</span>
                                 </div>
-                                <h4 class="font-semibold text-gray-900 mb-2">保護活動を応援し、広める</h4>
-                                <p class="text-sm text-gray-600">社会全体で支え合う仕組みづくりを目指します</p>
+                                <h4 class="font-semibold text-gray-900 mb-2">保護活動を応援し広める</h4>
+                                <p class="text-sm text-gray-600">社会全体で支え合える仕組みづくりを目指します。</p>
                             </div>
                             <div class="text-center group">
                                 <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:shadow-md transition-shadow">
                                     <span class="text-2xl">🤝</span>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-2">温かいコミュニティを築く</h4>
-                                <p class="text-sm text-gray-600">誰もが安心して参加できる居場所を作ります</p>
+                                <p class="text-sm text-gray-600">誰もが安心して参加できる居場所をつくります。</p>
                             </div>
                         </div>
                     </div>
@@ -127,7 +126,7 @@
                                     <h3 class="text-base md:text-xl lg:text-xl font-semibold text-gray-900">今日の幸せ投稿</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
-                                    家族になったペットとの楽しい日常を写真・動画付きで投稿して、幸せな瞬間をみんなで分かち合えます。
+                                    家族になったペットとの日常を写真・動画で投稿し、幸せな瞬間をみんなで分かち合えます。
                                 </p>
                             </div>
                             
@@ -139,7 +138,7 @@
                                     <h3 class="text-base md:text-xl lg:text-xl font-semibold text-gray-900">里親インタビュー</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
-                                    里親さんのリアルな体験談を投稿・閲覧し、これから家族になる人への参考に。
+                                    里親さんのリアルな体験談を投稿・閲覧し、これから家族を迎える方への参考に。
                                 </p>
                             </div>
                         </div>
@@ -153,7 +152,7 @@
                                     <h3 class="text-base md:text-xl lg:text-xl font-semibold text-gray-900">ペット検索</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
-                                    種別・性別・地域・保護団体で絞り込んで、気になる動物をすぐに見つけられます。
+                                    種別・性別・地域・保護団体などで絞り込み、気になる動物を見つけられます。
                                 </p>
                             </div>
                             
@@ -165,7 +164,7 @@
                                     <h3 class="text-base md:text-xl lg:text-xl font-semibold text-gray-900">いいね機能</h3>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed">
-                                    気になるペットに「いいね」で応援し、温かいコミュニティの一員になりましょう。
+                                    気になるペットに「いいね」で気持ちを届け、コミュニティの一員として応援できます。
                                 </p>
                             </div>
                         </div>
@@ -190,7 +189,7 @@
                                 <div class="flex-1">
                                     <h3 class="text-xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-3">新規登録</h3>
                                     <p class="text-gray-600 leading-relaxed">
-                                        メールアドレスとパスワードで簡単登録。どなたでも気軽にご参加いただけます。
+                                        メールアドレスとパスワードで簡単に登録。どなたでも気軽にご参加いただけます。
                                     </p>
                                 </div>
                             </div>
@@ -204,7 +203,7 @@
                                 <div class="flex-1">
                                     <h3 class="text-xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-3">投稿・シェア</h3>
                                     <p class="text-gray-600 leading-relaxed">
-                                        ペットとの幸せな日常を写真・写真付きで投稿して、同じ想いを持つ仲間と分かち合いましょう。
+                                        ペットとの幸せな日常を写真や動画で投稿して、同じ想いを持つ仲間と分かち合いましょう。
                                     </p>
                                 </div>
                             </div>
@@ -218,7 +217,7 @@
                                 <div class="flex-1">
                                     <h3 class="text-xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-3">コミュニティ参加</h3>
                                     <p class="text-gray-600 leading-relaxed">
-                                        気になるペットに「いいね」で応援し、温かいコミュニティの一員になりましょう。
+                                        気になるペットに「いいね」で応援し、温かいコミュニティの輪を広げましょう。
                                 </div>
                             </div>
                         </div>
@@ -230,10 +229,10 @@
             <section class="text-center">
                 <div class="max-w-3xl mx-auto">
                     <p class="text-base text-gray-600 mb-4">
-                        あなたの小さな一歩が、社会全体の大きなうねりになります。
+                        あなたの小さな一歩が、やがて社会全体の大きなうねりになります。
                     </p>
                     <p class="text-xl md:text-2xl lg:text-2xl font-semibold text-amber-600">
-                        さあ、一緒にしっぽの輪を広げましょう。
+                        さあ、一緒に しっぽのわ を広げていきましょう。
                     </p>
                 </div>
             </section>
@@ -242,8 +241,8 @@
         <!-- 呼びかけ CTA -->
         <section class="py-12 md:py-16 lg:py-20">
             <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-8 md:p-12 lg:p-16 text-center text-white">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold mb-4 md:mb-6 text-white">あなたの幸せな日常をシェアして、次の命につなげませんか？</h2>
-                <p class="text-base md:text-xl lg:text-xl opacity-95 mb-6 md:mb-8">「#しっぽのわ」は、そんな温かい"幸せの循環"を生み出す場所でありたいと願っています。</p>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold mb-4 md:mb-6 text-white">あなたの日常の幸せをシェアして、次の命につなげてみませんか？</h2>
+                <p class="text-base md:text-xl lg:text-xl opacity-95 mb-6 md:mb-8">「#しっぽのわ」は、そんな温かい“幸せの循環”を育む場所でありたいと願っています。</p>
                 <div class="flex flex-col sm:flex-row gap-4 md:gap-6 lg:gap-8 justify-center items-center">
                     <a href="{{ route('register') }}" class="bg-white text-amber-600 px-8 py-4 md:px-12 md:py-5 lg:px-16 lg:py-6 rounded-full font-bold text-base md:text-xl lg:text-xl hover:bg-amber-50 transition-colors duration-300 shadow-lg w-full sm:w-auto sm:min-w-[200px] md:min-w-[240px] lg:min-w-[280px] text-center whitespace-nowrap">参加してはじめる</a>
                     <a href="{{ route('home') }}" class="border-2 border-white text-white px-8 py-4 md:px-12 md:py-5 lg:px-16 lg:py-6 rounded-full font-bold text-base md:text-xl lg:text-xl hover:bg-white hover:text-amber-600 transition-colors duration-300 w-full sm:w-auto sm:min-w-[200px] md:min-w-[240px] lg:min-w-[280px] text-center whitespace-nowrap">幸せな日常を見る</a>
