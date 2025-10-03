@@ -9,7 +9,7 @@
         </h2>
     </x-slot>
 
-    <div class="pt-12 pb-4 px-4 max-w-2xl mx-auto bg-gray-50 min-h-screen">
+    <div class="py-6 px-4 max-w-2xl mx-auto bg-gray-50 min-h-screen">
         <!-- ユーザー情報ヘッダー -->
         <div class="text-center mb-6">
             <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200">

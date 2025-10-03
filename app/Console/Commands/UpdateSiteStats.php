@@ -31,6 +31,9 @@ class UpdateSiteStats extends Command
         $this->info('Updating site statistics...');
         $startTime = now();
 
+        // 実行開始をログに記録
+        Log::info('UpdateSiteStats command started at ' . $startTime->toDateTimeString());
+
         try {
             // 統計情報を計算
             $stats = SiteStatsService::compute();
@@ -38,6 +41,7 @@ class UpdateSiteStats extends Command
             // エラーが発生した場合は警告を表示
             if (isset($stats['error']) && $stats['error']) {
                 $this->warn('Statistics computed with errors. Check logs for details.');
+                Log::warning('Statistics computed with errors');
             }
 
             // キャッシュに保存（24時間の有効期限を設定）
@@ -61,10 +65,17 @@ class UpdateSiteStats extends Command
             $this->info('Computed at: ' . $stats['computed_at']);
             $this->info('Execution time: ' . $startTime->diffForHumans(now(), true));
 
+            // 成功をログに記録
+            Log::info('UpdateSiteStats command completed successfully at ' . now()->toDateTimeString() .
+                ' - Updated at: ' . $stats['updated_at']);
+
             return 0;
         } catch (\Exception $e) {
             $this->error('Failed to update site statistics: ' . $e->getMessage());
-            Log::error('UpdateSiteStats command failed: ' . $e->getMessage());
+            Log::error('UpdateSiteStats command failed: ' . $e->getMessage(), [
+                'exception' => $e->getTraceAsString(),
+                'start_time' => $startTime->toDateTimeString()
+            ]);
             return 1;
         }
     }

@@ -245,7 +245,10 @@
                     </div>
                   
                     @if(isset($stats['updated_at']))
-                        <p class="text-sm text-gray-500 mt-2">最終更新: {{ \Carbon\Carbon::parse($stats['updated_at'])->format('Y年n月j日 H:i') }}</p>
+                        <p class="text-sm text-gray-500 mt-2">
+                            最終更新: {{ \Carbon\Carbon::parse($stats['updated_at'])->format('Y年n月j日 H:i') }}<br>
+                            <span class="text-xs text-gray-400 ml-2">（8:00・18:00に自動更新）</span>
+                        </p>
                     @endif
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 xl:gap-8">
