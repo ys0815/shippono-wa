@@ -1,18 +1,24 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <div class="flex items-center">
-            <a href="{{ route('mypage.pets') }}" class="mr-3 text-gray-600 hover:text-gray-800">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-            </a>
-            <h2 class="font-semibold text-lg text-gray-800 leading-tight">ペットプロフィール管理</h2>
+    <div class="min-h-screen bg-gray-50">
+        <!-- ヘッダー（固定） -->
+        <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <a href="{{ route('mypage.pets') }}" class="mr-4">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </a>
+                        <h1 class="text-lg font-semibold text-gray-900">家族リンク設定</h1>
+                    </div>
+                </div>
+            </div>
         </div>
-    </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <!-- メインコンテンツ -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <!-- 成功メッセージ -->
             @if (session('status') === 'family-links-created')
                 <div class="bg-green-50 border border-green-200 rounded-lg p-4">
@@ -44,12 +50,12 @@
                 </div>
             @endif
             <!-- 現在の家族リンク -->
-            <div class="bg-white p-6 shadow sm:rounded-lg">
+            <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
                 <h3 class="text-base font-semibold text-gray-800 mb-3">現在の家族リンク</h3>
                 
                 @if($familyGroups->isNotEmpty())
                     @foreach($familyGroups as $group)
-                        <div class="bg-white border rounded-lg p-4 mb-3">
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-3">
                             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                                 <!-- ペット表示エリア -->
                                 <div class="flex-1 mb-3 sm:mb-0">
@@ -133,7 +139,7 @@
             </div>
 
             <!-- 新しい家族リンクを作成 -->
-            <div class="bg-white p-6 shadow sm:rounded-lg">
+            <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
                 <h3 class="text-base font-semibold text-gray-800 mb-3">新しい家族リンクを作成</h3>
                 <p class="text-sm text-gray-600 mb-4">一緒に暮らしている動物を選択してください (複数選択可能)</p>
                 
@@ -169,8 +175,7 @@
                             @endforeach
                         </div>
                         
-                        <button type="submit" class="w-full text-white py-3 rounded-lg font-medium transition duration-200" 
-                                style="background-color: #d97706; hover:background-color: #b45309;">
+                        <button type="submit" class="btn btn-brand w-full py-3">
                             家族リンクを作成
                         </button>
                     </form>
@@ -178,8 +183,7 @@
                     <div class="text-center py-8 text-gray-500">
                         <p>家族リンクを作成するには、2匹以上のペットを登録してください</p>
                         <div class="mt-4">
-                            <a href="{{ route('mypage.pets.create') }}" class="inline-flex items-center px-4 py-2 text-white text-sm rounded-lg transition duration-200" 
-                               style="background-color: #d97706; hover:background-color: #b45309;">
+                            <a href="{{ route('mypage.pets.create') }}" class="btn btn-brand px-6 py-3">
                                 新しいペットを登録する
                             </a>
                         </div>
@@ -188,7 +192,7 @@
             </div>
 
             <!-- 家族リンクについて -->
-            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
                 <h4 class="text-base font-semibold text-gray-800 mb-3">家族リンクについて</h4>
                 <ul class="text-sm text-gray-700 space-y-1">
                     <li>• 一緒に暮らしている動物同士をリンクできます</li>
