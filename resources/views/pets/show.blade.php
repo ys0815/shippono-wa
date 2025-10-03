@@ -230,26 +230,25 @@
                 
                 <!-- テキストコンテンツ -->
                 <div class="min-w-0 flex-1">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-2 leading-tight">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-3 leading-tight">
                         <span class="bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
                             里親インタビューを読む
                         </span>
                     </h2>
-                    <p class="text-gray-600 leading-relaxed mb-3">
-                        この子との出会いの物語を読んでみませんか？<br>
-                        <span class="text-sm text-gray-500">里親さんの体験談から、新しい家族との出会いの温かさを感じてください。</span>
-                    </p>
                     
-                    <!-- ステータス表示 -->
-                    @if($interviewPost)
-                        <div class="flex items-center text-sm text-green-600 font-medium">
-                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            インタビュー記事が公開されています
-                        </div>
-                    @else
-                        <div class="flex items-center text-sm text-gray-500">
+                    <!-- メインメッセージ -->
+                    <div class="mb-4">
+                        <p class="text-lg font-medium text-gray-700 mb-2">
+                            『{{ $pet->name }}』と家族になった物語をのぞいてみませんか？
+                        </p>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            里親さんの体験談から、出会いのあたたかさを感じてください。
+                        </p>
+                    </div>
+                    
+                    <!-- ステータス表示（未入力の場合のみ） -->
+                    @if(!$interviewPost)
+                        <div class="flex items-center text-sm text-gray-500 bg-gray-50 px-3 py-2 rounded-lg">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                             </svg>
