@@ -1,19 +1,25 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex items-center">
-            <a href="{{ route('mypage') }}" class="mr-3 text-gray-600 hover:text-gray-800">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-            </a>
-            <h2 class="font-semibold text-lg text-gray-800 leading-tight">ペットプロフィール管理</h2>
-        </div>
-    </x-slot>
 
-    <div class="pt-12 pb-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="bg-white p-6 shadow sm:rounded-lg">
-                <h3 class="text-base font-semibold text-gray-800 mb-3">登録済みペット</h3>
+    <div class="min-h-screen bg-gray-50">
+        <!-- ヘッダー（固定） -->
+        <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <a href="{{ route('mypage') }}" class="mr-4">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </a>
+                        <h1 class="text-lg font-semibold text-gray-900">ペットプロフィール管理</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <h3 class="text-base font-semibold text-gray-800 mb-3">登録済みペット</h3>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse ($pets as $pet)
@@ -153,8 +159,9 @@
                     @endforelse
                 </div>
 
-                <!-- 家族リンク設定セクション -->
-                <div class="mt-8">
+            <!-- 家族リンク設定セクション -->
+            <div class="mt-8">
+                <div class="bg-white rounded-lg shadow-sm border p-6">
                     <h3 class="text-base font-semibold text-gray-800 mb-3">家族リンク設定</h3>
 
                     <div class="text-sm text-gray-700 mb-4">
@@ -182,13 +189,13 @@
                         <span class="mr-1">+</span> 家族リンクを追加
                     </a>
                 </div>
+            </div>
 
-                <div class="mt-8">
-                    <a href="{{ route('mypage.pets.create') }}" 
-                       class="btn btn-brand w-full py-3">
-                        家族の一員を登録する
-                    </a>
-                </div>
+            <div class="mt-8">
+                <a href="{{ route('mypage.pets.create') }}" 
+                   class="btn btn-brand w-full py-3">
+                    家族の一員を登録する
+                </a>
             </div>
         </div>
     </div>
