@@ -1,3 +1,5 @@
+@php $interviewPost = $pet->posts()->where('type','interview')->where('status','published')->latest()->first(); @endphp
+
 <x-guest-layout>
     <main class="w-full max-w-6xl mx-auto">
             <!-- 統合プロフィールヘッダー -->
@@ -190,20 +192,27 @@
                         </h2>
                         
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-                            <div class="text-gray-700">
+                            <div class="text-gray-700 flex-1">
                                 <div class="font-semibold text-lg">{{ $pet->shelter->name ?? '情報なし' }}</div>
-                            </div>
-                            <div class="flex gap-3">
-                                @if($pet->shelter && $pet->shelter->website_url)
-                                    <a href="{{ $pet->shelter->website_url }}" target="_blank" rel="noopener noreferrer" class="px-5 py-3 text-base rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition font-medium">保護団体サイトへ</a>
-                                @else
-                                    <button disabled class="px-5 py-3 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">保護団体サイトへ</button>
+                                @if($pet->shelter && $pet->shelter->description)
+                                    <p class="text-sm text-gray-600 mt-2">{{ $pet->shelter->description }}</p>
                                 @endif
-                                @php $interviewPost = $pet->posts()->where('type','interview')->where('status','published')->latest()->first(); @endphp
-                                @if($interviewPost)
-                                    <a href="{{ route('interviews.show', $interviewPost) }}" class="px-5 py-3 text-base rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm">しっぽのわを読む</a>
+                            </div>
+                            <div class="flex-shrink-0 flex justify-end sm:justify-start">
+                                @if($pet->shelter && $pet->shelter->website_url)
+                                    <a href="{{ $pet->shelter->website_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 text-base rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        保護団体サイトへ
+                                    </a>
                                 @else
-                                    <button disabled class="px-5 py-3 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">しっぽのわを読む</button>
+                                    <button disabled class="inline-flex items-center px-6 py-3 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        保護団体サイトへ
+                                    </button>
                                 @endif
                             </div>
                         </div>
