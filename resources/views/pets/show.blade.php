@@ -211,7 +211,82 @@
 
                     <!-- 区切り線 -->
                     <div class="border-t border-gray-200 mb-8"></div>
+<!-- 里親インタビュー専用セクション -->
+<section class="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 border border-pink-200 rounded-3xl p-8 mb-8 shadow-lg">
+    <!-- 装飾的な背景要素 -->
+    <div class="absolute top-0 right-0 w-32 h-32 bg-pink-200 rounded-full -translate-y-16 translate-x-16 opacity-20"></div>
+    <div class="absolute bottom-0 left-0 w-24 h-24 bg-rose-200 rounded-full translate-y-12 -translate-x-12 opacity-30"></div>
+    
+    <div class="relative z-10">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            <!-- 左側：コンテンツ -->
+            <div class="flex items-start lg:items-center gap-4 flex-1">
+                <!-- アイコン -->
+                <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                
+                <!-- テキストコンテンツ -->
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2 leading-tight">
+                        <span class="bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+                            里親インタビューを読む
+                        </span>
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed mb-3">
+                        この子との出会いの物語を読んでみませんか？<br>
+                        <span class="text-sm text-gray-500">里親さんの体験談から、新しい家族との出会いの温かさを感じてください。</span>
+                    </p>
+                    
+                    <!-- ステータス表示 -->
+                    @if($interviewPost)
+                        <div class="flex items-center text-sm text-green-600 font-medium">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            インタビュー記事が公開されています
+                        </div>
+                    @else
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                            </svg>
+                            まだインタビュー記事はありません
+                        </div>
+                    @endif
+                </div>
+            </div>
+            
+            <!-- 右側：ボタン -->
+            <div class="flex-shrink-0 flex justify-end lg:justify-start">
+                @if($interviewPost)
+                    <a href="{{ route('interviews.show', $interviewPost) }}" 
+                       class="group inline-flex items-center px-8 py-4 text-lg font-semibold rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 text-white hover:from-pink-600 hover:to-rose-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <svg class="w-5 h-5 mr-3 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        物語を読む
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                @else
+                    <button disabled class="inline-flex items-center px-8 py-4 text-lg font-semibold rounded-2xl bg-gray-100 text-gray-400 cursor-not-allowed">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        物語を読む
+                    </button>
+                @endif
+            </div>
+        </div>
+    </div>
+</section>
 
+                    <!-- 区切り線 -->
+                    <div class="border-t border-gray-200 mb-8"></div>
                     <!-- 一緒に暮らす家族 -->
                     @if($familyPets->count() > 0)
                         <div class="mb-8">

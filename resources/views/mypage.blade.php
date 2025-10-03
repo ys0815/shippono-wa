@@ -127,7 +127,7 @@
 
             <!-- 詳細を見るボタン（ペットプロフィール管理＝一覧ページへ遷移） -->
             <a href="{{ route('mypage.pets') }}" class="btn btn-brand w-full py-3">
-                詳細を見る→
+                ペット一覧を見る→
             </a>
         </div>
 
