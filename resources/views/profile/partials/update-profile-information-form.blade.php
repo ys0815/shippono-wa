@@ -87,8 +87,10 @@
             <x-input-error class="mt-2" :messages="$errors->get('sns_facebook')" />
         </div>
 
-        <div class="pt-2">
-            <x-primary-button class="w-full justify-center">プロフィールを更新する</x-primary-button>
+        <div class="pt-2 pb-4">
+            <button type="submit" class="btn btn-brand w-full py-3">
+                プロフィールを更新する
+            </button>
         </div>
     </form>
 </section>

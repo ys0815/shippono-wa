@@ -1,11 +1,24 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-lg text-gray-800 leading-tight">パスワード変更</h2>
-    </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white p-6 shadow sm:rounded-lg">
+    <div class="min-h-screen bg-gray-50">
+        <!-- ヘッダー（固定） -->
+        <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <a href="{{ route('mypage') }}" class="mr-4">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </a>
+                        <h1 class="text-lg font-semibold text-gray-900">パスワード変更</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 @if ($errors->updatePassword->any())
                     <div
                         x-data="{ show: true }"
@@ -65,9 +78,10 @@
                         </ul>
                     </div>
 
-                    <x-primary-button class="w-full justify-center">パスワードを変更する</x-primary-button>
+                    <button type="submit" class="btn btn-brand w-full py-3">
+                        パスワードを変更する
+                    </button>
                 </form>
-            </div>
         </div>
     </div>
 </x-app-layout>
