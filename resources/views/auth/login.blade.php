@@ -38,7 +38,7 @@
                     <div>
                         <x-input-label for="email" :value="__('メールアドレス')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="email" 
-                                      class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
+                                      class="block w-full px-4 py-3 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
                                       type="email" 
                                       name="email" 
                                       :value="old('email')" 
@@ -53,7 +53,7 @@
                     <div>
                         <x-input-label for="password" :value="__('パスワード')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="password" 
-                                      class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
+                                      class="block w-full px-4 py-3 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
                                       type="password"
                                       name="password"
                                       required 
@@ -67,7 +67,7 @@
                         <label for="remember_me" class="inline-flex items-center">
                             <input id="remember_me" 
                                    type="checkbox" 
-                                   class="rounded border-gray-300 text-amber-600 shadow-sm focus:ring-amber-500" 
+                                   class="rounded border-sub-border text-amber-600 shadow-sm focus:ring-amber-500" 
                                    name="remember">
                             <span class="ml-2 text-sm text-main-text">{{ __('ログイン状態を保持する') }}</span>
                         </label>

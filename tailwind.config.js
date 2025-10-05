@@ -73,6 +73,8 @@ export default {
                 "main-text": "#3A2E25",
                 "sub-text": "#80746b",
                 "main-bg": "#fbfaf9",
+                "main-border": "#ebe8e5",
+                "sub-border": "#dbd7d1",
             },
         },
     },

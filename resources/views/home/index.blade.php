@@ -78,7 +78,7 @@
         </section>
 
         <!-- 新着の保護動物一覧 -->
-        <section class="w-full bg-white border-t border-b border-gray-200">
+        <section class="w-full bg-white border-t border-b border-main-border">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
                     <p class="text-base text-main-text mb-2">かわいい家族たちの生活を見てみよう</p>
@@ -155,7 +155,7 @@
                                         保護団体サイトへ
                                     </a>
                                 @else
-                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed">
+                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-main-border text-gray-400 bg-main-bg cursor-not-allowed">
                                         保護団体サイトへ
                                     </button>
                                 @endif
@@ -170,7 +170,7 @@
                                         お迎え体験を読む
                                     </a>
                                 @else
-                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed">
+                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-main-border text-gray-400 bg-main-bg cursor-not-allowed">
                                         お迎え体験を読む
                                     </button>
                                 @endif
@@ -183,7 +183,7 @@
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
             <!-- サービスコンセプト -->
-            <section class="relative bg-main-bg border-gray-200 py-16">
+            <section class="relative bg-main-bg border-main-border py-16">
                 <div class="text-center mb-12">
                     <p class="text-base text-main-text mb-2">私たちが大切にしている想い</p>
                     <h3 class="text-3xl font-bold text-main-text mb-2">
@@ -232,7 +232,7 @@
         </main>
 
         <!-- 統計情報 -->
-        <section class="w-full bg-white border-t border-b border-gray-200">
+        <section class="w-full bg-white border-t border-b border-main-border">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
                     <p class="text-base text-main-text mb-2">みんなの活動を数字で見てみよう</p>
@@ -307,7 +307,7 @@
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
             <!-- 保護団体リンク集 -->
-            <section id="shelters" class="relative bg-main-bg border-gray-200 py-12" x-data="shelterFilter()">
+            <section id="shelters" class="relative bg-main-bg border-main-border py-12" x-data="shelterFilter()">
                 <div class="text-center mb-10">
                     <p class="text-sm text-main-text mb-2">協力いただいている保護団体の皆様</p>
                     <h3 class="text-3xl font-bold text-main-text mb-2">
@@ -327,7 +327,7 @@
                         <select id="region-filter" 
                                 x-model="selectedRegion" 
                                 @change="filterShelters()"
-                                class="px-4 py-2 border border-gray-300 rounded-lg bg-white text-main-text focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors duration-200 w-full sm:w-auto sm:min-w-[200px]">
+                                class="px-4 py-2 border border-sub-border rounded-lg bg-white text-main-text focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors duration-200 w-full sm:w-auto sm:min-w-[200px]">
                             <option value="all">全国</option>
                             <option value="hokkaido-tohoku">北海道・東北</option>
                             <option value="kanto">関東</option>
@@ -353,7 +353,7 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse($shelters as $index => $shelter)
-                        <div class="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 group shelter-card"
+                        <div class="bg-white rounded-lg border border-main-border p-6 hover:shadow-lg transition-shadow duration-300 group shelter-card"
                              x-show="isVisible('{{ $shelter->prefecture ? $shelter->prefecture->name : '' }}', '{{ $shelter->kind }}') && isInCurrentPage({{ $index }})"
                              x-transition:enter="transition ease-out duration-300"
                              x-transition:enter-start="opacity-0 transform scale-95"

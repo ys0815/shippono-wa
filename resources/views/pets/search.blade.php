@@ -64,7 +64,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <label class="text-sm text-main-text whitespace-nowrap">並び順:</label>
-                    <select id="sort-order" class="px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 min-w-[120px]">
+                    <select id="sort-order" class="px-3 py-2 text-sm border border-sub-border rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 min-w-[120px]">
                         <option value="newest" {{ $filters['sort'] === 'newest' ? 'selected' : '' }}>新着順</option>
                         <option value="updated" {{ $filters['sort'] === 'updated' ? 'selected' : '' }}>更新順</option>
                         <option value="oldest" {{ $filters['sort'] === 'oldest' ? 'selected' : '' }}>古い順</option>
@@ -212,7 +212,7 @@
             
             const container = document.getElementById('pets-container');
             const petElement = document.createElement('div');
-            petElement.className = 'text-center group bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-300';
+            petElement.className = 'text-center group bg-white rounded-xl shadow-sm border border-main-border p-6 hover:shadow-md transition-shadow duration-300';
             
             const genderIcon = pet.gender === 'male' ? '♂' : (pet.gender === 'female' ? '♀' : '?');
             const genderColor = pet.gender === 'male' ? 'text-blue-500' : (pet.gender === 'female' ? 'text-pink-500' : 'text-sub-text');
@@ -274,7 +274,7 @@
                            class="px-4 py-2 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
                             保護団体サイトへ
                         </a>` :
-                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed text-center">
+                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-main-border text-gray-400 bg-main-bg cursor-not-allowed text-center">
                             保護団体サイトへ
                         </button>`
                     }
@@ -284,7 +284,7 @@
                            class="px-4 py-2 text-sm rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm text-center">
                              お迎え体験を読む
                         </a>` :
-                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed text-center">
+                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-main-border text-gray-400 bg-main-bg cursor-not-allowed text-center">
                             お迎え体験を読む
                         </button>`
                     }

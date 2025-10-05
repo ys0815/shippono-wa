@@ -174,18 +174,18 @@
                             <div class="text-main-text font-medium">
                                 {{ $pair[0]->name }} ↔ {{ $pair[1]->name }}
                             </div>
-                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-gray-300 text-main-text hover:bg-gray-100">編集</a>
+                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-sub-border text-main-text hover:bg-gray-100">編集</a>
                         </div>
                     @else
-                        <div class="flex items-center justify-between rounded-lg bg-main-bg border border-gray-200 px-4 py-3 mb-4">
+                        <div class="flex items-center justify-between rounded-lg bg-main-bg border border-main-border px-4 py-3 mb-4">
                             <div class="text-sub-text">
                                 家族リンクは未設定です
                             </div>
-                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-gray-300 text-main-text hover:bg-gray-100">編集</a>
+                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-sub-border text-main-text hover:bg-gray-100">編集</a>
                         </div>
                     @endif
 
-                    <a href="{{ route('mypage.pets.links') }}" class="w-full inline-flex justify-center items-center px-4 py-2 rounded-lg border border-gray-300 text-main-text hover:bg-main-bg transition duration-200">
+                    <a href="{{ route('mypage.pets.links') }}" class="w-full inline-flex justify-center items-center px-4 py-2 rounded-lg border border-sub-border text-main-text hover:bg-main-bg transition duration-200">
                         <span class="mr-1">+</span> 家族リンクを追加
                     </a>
                 </div>

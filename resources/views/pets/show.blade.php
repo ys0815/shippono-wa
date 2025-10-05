@@ -3,7 +3,7 @@
 <x-guest-layout>
     <main class="w-full max-w-6xl mx-auto">
             <!-- 統合プロフィールヘッダー -->
-            <section class="bg-white border border-gray-200 p-5 sm:p-8">
+            <section class="bg-white border border-main-border p-5 sm:p-8">
                 <!-- 背景画像エリア -->
                 <div class="relative h-36 sm:h-40 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 mb-8 -mx-5 sm:-mx-8 -mt-5 sm:-mt-8">
                     @if($pet->header_image_url)
@@ -152,7 +152,7 @@
                     </div>
 
                     <!-- 区切り線 -->
-                    <div class="border-t border-gray-200 mb-8"></div>
+                    <div class="border-t border-main-border mb-8"></div>
 
                     <!-- 基本情報 -->
                     <div class="mb-8">
@@ -196,7 +196,7 @@
                     </div>
 
                     <!-- 区切り線 -->
-                    <div class="border-t border-gray-200 mb-8"></div>
+                    <div class="border-t border-main-border mb-8"></div>
 
                     <!-- お迎え先団体情報 -->
                     <div class="mb-8">
@@ -221,7 +221,7 @@
                                         保護団体サイトへ
                                     </a>
                                 @else
-                                    <button disabled class="inline-flex items-center px-6 py-3 text-base rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed">
+                                    <button disabled class="inline-flex items-center px-6 py-3 text-base rounded-full border-2 border-main-border text-gray-400 bg-main-bg cursor-not-allowed">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                         </svg>
@@ -233,7 +233,7 @@
                     </div>
 
                     <!-- 区切り線 -->
-                    <div class="border-t border-gray-200 mb-8"></div>
+                    <div class="border-t border-main-border mb-8"></div>
 <!-- 里親インタビュー専用セクション -->
 <section class="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 border border-pink-200 rounded-3xl p-8 mb-8 shadow-lg">
     <!-- 装飾的な背景要素 -->
@@ -308,7 +308,7 @@
 </section>
 
                     <!-- 区切り線 -->
-                    <div class="border-t border-gray-200 mb-8"></div>
+                    <div class="border-t border-main-border mb-8"></div>
                     <!-- 一緒に暮らす家族 -->
                     @if($familyPets->count() > 0)
                         <div class="mb-8">
@@ -345,7 +345,7 @@
                         </div>
 
                         <!-- 区切り線 -->
-                        <div class="border-t border-gray-200 mb-8"></div>
+                        <div class="border-t border-main-border mb-8"></div>
                     @endif
 
                     <!-- 投稿一覧 -->
@@ -363,7 +363,7 @@
                                 <!-- 並び順 -->
                                 <div class="flex-1">
                                     <label class="block text-xs text-main-text mb-1">並び順</label>
-                                    <select id="sort-order" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                    <select id="sort-order" class="w-full px-3 py-2 text-sm border border-sub-border rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                         <option value="newest" selected>新着順</option>
                                         <option value="popular">人気順</option>
                                         <option value="oldest">古い順</option>
@@ -373,7 +373,7 @@
                                 <!-- 期間 -->
                                 <div class="flex-1">
                                     <label class="block text-xs text-main-text mb-1">期間</label>
-                                    <select id="time-filter" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                    <select id="time-filter" class="w-full px-3 py-2 text-sm border border-sub-border rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                         <option value="all">すべて</option>
                                         <option value="today">今日</option>
                                         <option value="week">今週</option>

@@ -81,7 +81,7 @@
 
             <!-- ペット情報 -->
             @if($post->pet)
-                <div class="border-t border-gray-200 pt-4">
+                <div class="border-t border-main-border pt-4">
                     <div class="flex items-center space-x-3 mb-4">
                         <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden border-2 border-amber-400 bg-amber-100 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
                             @if($post->pet->profile_image_url)
@@ -128,7 +128,7 @@
                                 保護団体サイトへ
                             </a>
                         @else
-                            <button disabled class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed font-medium text-center">
+                            <button disabled class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-main-border text-gray-400 bg-main-bg cursor-not-allowed font-medium text-center">
                                 保護団体サイトへ
                             </button>
                         @endif
@@ -205,7 +205,7 @@
     <!-- シェアモーダル -->
     <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 border border-gray-200">
+            <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 border border-main-border">
                 <div class="text-center">
                     <h3 class="text-lg font-bold text-main-text mb-6">シェアしよう</h3>
             

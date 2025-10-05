@@ -28,7 +28,7 @@
                         <label for="species" class="block text-sm md:text-lg font-medium text-main-text mb-1">ペットの種類:</label>
                         <select id="species" 
                                 name="species" 
-                                class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                class="w-full px-2 py-1.5 text-base md:text-lg border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                                 onchange="this.form.submit()">
                             <option value="all" {{ $species === 'all' ? 'selected' : '' }}>すべて</option>
                             <option value="dog" {{ $species === 'dog' ? 'selected' : '' }}>犬</option>
@@ -43,7 +43,7 @@
                         <label for="period" class="block text-sm md:text-lg font-medium text-main-text mb-1">期間:</label>
                         <select id="period" 
                                 name="period" 
-                                class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                class="w-full px-2 py-1.5 text-base md:text-lg border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                                 onchange="this.form.submit()">
                             <option value="all" {{ $period === 'all' ? 'selected' : '' }}>すべて</option>
                             <option value="week" {{ $period === 'week' ? 'selected' : '' }}>1週間</option>

@@ -102,7 +102,7 @@
                 </div>
                 
                 <div class="flex gap-2">
-                    <button type="button" @click="search=false" class="flex-1 px-4 py-2 border border-gray-300 text-main-text rounded-md hover:bg-main-bg transition">閉じる</button>
+                    <button type="button" @click="search=false" class="flex-1 px-4 py-2 border border-sub-border text-main-text rounded-md hover:bg-main-bg transition">閉じる</button>
                 </div>
             </div>
         </div>

@@ -55,7 +55,7 @@
                     <div>
                         <x-input-label for="email" :value="__('メールアドレス')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="email" 
-                                      class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
+                                      class="block w-full px-4 py-3 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
                                       type="email" 
                                       name="email" 
                                       :value="old('email')" 

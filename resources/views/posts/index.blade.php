@@ -26,15 +26,15 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <nav class="flex justify-center space-x-6 sm:space-x-8 md:space-x-12">
                     <a href="{{ route('mypage.posts', ['type' => 'all']) }}" 
-                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'all' ? 'border-amber-500 text-amber-600' : 'border-transparent text-sub-text hover:text-main-text hover:border-gray-300' }}">
+                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'all' ? 'border-amber-500 text-amber-600' : 'border-transparent text-sub-text hover:text-main-text hover:border-sub-border' }}">
                         すべて
                     </a>
                     <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" 
-                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'gallery' ? 'border-amber-500 text-amber-600' : 'border-transparent text-sub-text hover:text-main-text hover:border-gray-300' }}">
+                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'gallery' ? 'border-amber-500 text-amber-600' : 'border-transparent text-sub-text hover:text-main-text hover:border-sub-border' }}">
                         今日の幸せ
                     </a>
                     <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" 
-                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'interview' ? 'border-amber-500 text-amber-600' : 'border-transparent text-sub-text hover:text-main-text hover:border-gray-300' }}">
+                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'interview' ? 'border-amber-500 text-amber-600' : 'border-transparent text-sub-text hover:text-main-text hover:border-sub-border' }}">
                         里親インタビュー
                     </a>
                 </nav>
@@ -78,7 +78,7 @@
                                        name="keyword" 
                                        value="{{ $keyword }}"
                                        placeholder="キーワード" 
-                                       class="w-full px-3 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                       class="w-full px-3 py-1.5 text-base md:text-lg border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                                 <div id="searchLoading" class="absolute right-2 top-1.5 hidden">
                                     <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-amber-600"></div>
                                 </div>
@@ -92,7 +92,7 @@
                                 <label for="period" class="block text-sm md:text-lg font-medium text-main-text mb-1">期間:</label>
                                 <select id="period" 
                                         name="period" 
-                                        class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                        class="w-full px-2 py-1.5 text-base md:text-lg border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                                     <option value="all" {{ $period === 'all' ? 'selected' : '' }}>すべて</option>
                                     <option value="month" {{ $period === 'month' ? 'selected' : '' }}>今月</option>
                                     <option value="half_year" {{ $period === 'half_year' ? 'selected' : '' }}>半年</option>
@@ -105,7 +105,7 @@
                                 <label for="status" class="block text-sm md:text-lg font-medium text-main-text mb-1">状態:</label>
                                 <select id="status" 
                                         name="status" 
-                                        class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                        class="w-full px-2 py-1.5 text-base md:text-lg border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                                     <option value="all" {{ $status === 'all' ? 'selected' : '' }}>すべて</option>
                                     <option value="published" {{ $status === 'published' ? 'selected' : '' }}>公開</option>
                                     <option value="draft" {{ $status === 'draft' ? 'selected' : '' }}>下書き</option>

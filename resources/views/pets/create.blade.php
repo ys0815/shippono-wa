@@ -134,7 +134,7 @@
                                id="name" 
                                value="{{ old('name', $pet->name ?? '') }}"
                                required
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                               class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                                placeholder="ペットの名前を入力">
                         @error('name')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -148,7 +148,7 @@
                                 🐕 どのような動物でしょうか？犬、猫、うさぎなど、その子の種類を選んでください。
                             </p>
                         </div>
-                        <select id="species" name="species" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <select id="species" name="species" class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                             <option value="">種類を選択</option>
                             <option value="dog" {{ old('species', $pet->species ?? '') == 'dog' ? 'selected' : '' }}>犬</option>
                             <option value="cat" {{ old('species', $pet->species ?? '') == 'cat' ? 'selected' : '' }}>猫</option>
@@ -168,7 +168,7 @@
                                name="breed" 
                                id="breed" 
                                value="{{ old('breed', $pet->breed ?? '') }}"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                               class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                                placeholder="例：ミックス、三毛猫、ハムスター">
                         @error('breed')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -182,7 +182,7 @@
                                 ♂♀ 性別がわかる場合は教えてください。わからない場合は「不明」で大丈夫です。
                             </p>
                         </div>
-                        <select id="gender" name="gender" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <select id="gender" name="gender" class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                             <option value="">性別を選択</option>
                             <option value="male" {{ old('gender', $pet->gender ?? '') == 'male' ? 'selected' : '' }}>オス</option>
                             <option value="female" {{ old('gender', $pet->gender ?? '') == 'female' ? 'selected' : '' }}>メス</option>
@@ -201,7 +201,7 @@
                                name="birth_date" 
                                id="birth_date" 
                                value="{{ old('birth_date', $pet->birth_date ?? '') }}"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                               class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                     </div>
 
                     <div>
@@ -213,9 +213,9 @@
                         </div>
                         <div class="space-y-2">
                             <div class="flex items-center gap-2">
-                                <input id="age_years" name="age_years" type="number" min="0" max="40" step="1" placeholder="0" class="w-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" value="{{ old('age_years', $pet->age_years ?? '') }}" @input="updateTotalMonths()" />
+                                <input id="age_years" name="age_years" type="number" min="0" max="40" step="1" placeholder="0" class="w-20 px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" value="{{ old('age_years', $pet->age_years ?? '') }}" @input="updateTotalMonths()" />
                                 <span class="text-main-text text-sm">歳</span>
-                                <input id="age_months" name="age_months" type="number" min="0" max="11" step="1" placeholder="0" class="w-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" value="{{ old('age_months', $pet->age_months ?? '') }}" @input="updateTotalMonths()" />
+                                <input id="age_months" name="age_months" type="number" min="0" max="11" step="1" placeholder="0" class="w-20 px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" value="{{ old('age_months', $pet->age_months ?? '') }}" @input="updateTotalMonths()" />
                                 <span class="text-main-text text-sm">ヶ月</span>
                             </div>
                             <p class="text-xs text-sub-text">例: 1歳3ヶ月の場合は「1歳」「3ヶ月」、6ヶ月の場合は「0歳」「6ヶ月」</p>
@@ -238,7 +238,7 @@
                                 🏠 お迎えした場所の種別を教えてください。わからない場合は「不明」で大丈夫です。
                             </p>
                         </div>
-                        <select id="shelter_kind" name="shelter_kind" x-model="kind" @change="handleKindChange()" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <select id="shelter_kind" name="shelter_kind" x-model="kind" @change="handleKindChange()" class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                             <option value="">種別を選択</option>
                             <option value="facility" {{ old('shelter_kind', $pet->shelter->kind ?? '') == 'facility' ? 'selected' : '' }}>保護団体・施設</option>
                             <option value="site" {{ old('shelter_kind', $pet->shelter->kind ?? '') == 'site' ? 'selected' : '' }}>里親サイト</option>
@@ -254,7 +254,7 @@
                                 📍 お迎えした場所の地域を教えてください。わからない場合は空欄のままで大丈夫です。
                             </p>
                         </div>
-                        <select id="shelter_area" name="shelter_area" x-model="area" @change="handleAreaChange()" :disabled="kind==='unknown'" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <select id="shelter_area" name="shelter_area" x-model="area" @change="handleAreaChange()" :disabled="kind==='unknown'" class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                             <option value="">所在地を選択</option>
                             <template x-for="a in filteredAreas" :key="a">
                                 <option :value="a" x-text="labels[a]" :selected="a === '{{ old('shelter_area', $pet->shelter->area ?? '') }}'"></option>
@@ -270,7 +270,7 @@
                                 🏢 お迎えした団体・施設・サイト名を教えてください。わからない場合は空欄のままで大丈夫です。
                             </p>
                         </div>
-                        <select id="shelter_id" name="shelter_id" x-model="shelterId" :disabled="kind==='unknown' || list.length===0" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <select id="shelter_id" name="shelter_id" x-model="shelterId" :disabled="kind==='unknown' || list.length===0" class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                             <option value="">団体・施設・サイト名を選択</option>
                             <option value="" x-show="loading">読み込み中...</option>
                             <template x-for="s in list" :key="s.id">
@@ -291,7 +291,7 @@
                                name="rescue_date" 
                                id="rescue_date" 
                                value="{{ old('rescue_date', $pet->rescue_date ?? '') }}"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                               class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                     </div>
                 </div>
 
@@ -312,7 +312,7 @@
                                     <p class="text-xs text-sub-text">現在の画像</p>
                                 </div>
                             @endif
-                            <input id="profile_image" name="profile_image" type="file" accept="image/*" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" onchange="previewProfileImage(this)" />
+                            <input id="profile_image" name="profile_image" type="file" accept="image/*" class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" onchange="previewProfileImage(this)" />
                             <p class="text-xs text-sub-text mt-1">正方形推奨</p>
                             
                             <!-- プロフィール画像プレビュー -->
@@ -336,7 +336,7 @@
                                     <p class="text-xs text-sub-text">現在の画像</p>
                                 </div>
                             @endif
-                            <input id="header_image" name="header_image" type="file" accept="image/*" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" onchange="previewHeaderImage(this)" />
+                            <input id="header_image" name="header_image" type="file" accept="image/*" class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" onchange="previewHeaderImage(this)" />
                             <p class="text-xs text-sub-text mt-1">横長推奨</p>
                             
                             <!-- 背景画像プレビュー -->
@@ -363,7 +363,7 @@
                         <textarea id="profile_description" 
                                   name="profile_description" 
                                   rows="4" 
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" 
+                                  class="w-full px-3 py-2 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" 
                                   placeholder="この子の性格や好きなものなどを自由に書いてください">{{ old('profile_description', $pet->profile_description ?? '') }}</textarea>
                     </div>
                 </div>

@@ -55,7 +55,7 @@
                 
                 @if($familyGroups->isNotEmpty())
                     @foreach($familyGroups as $group)
-                        <div class="bg-main-bg border border-gray-200 rounded-lg p-4 mb-3">
+                        <div class="bg-main-bg border border-main-border rounded-lg p-4 mb-3">
                             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                                 <!-- ペット表示エリア -->
                                 <div class="flex-1 mb-3 sm:mb-0">
@@ -150,7 +150,7 @@
                             @foreach($pets as $pet)
                                 <label class="relative cursor-pointer">
                                     <input type="checkbox" name="selected_pets[]" value="{{ $pet->id }}" 
-                                           class="absolute top-3 right-3 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                                           class="absolute top-3 right-3 w-4 h-4 text-blue-600 bg-gray-100 border-sub-border rounded focus:ring-blue-500">
                                     <div class="border rounded-lg p-4 hover:bg-main-bg transition duration-200">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-sm font-bold overflow-hidden flex-shrink-0">

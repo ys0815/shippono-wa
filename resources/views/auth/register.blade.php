@@ -35,7 +35,7 @@
                     <div>
                         <x-input-label for="display_name" :value="__('ハンドルネーム')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="display_name" 
-                                      class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
+                                      class="block w-full px-4 py-3 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
                                       type="text" 
                                       name="display_name" 
                                       :value="old('display_name')" 
@@ -51,7 +51,7 @@
                     <div>
                         <x-input-label for="email" :value="__('メールアドレス')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="email" 
-                                      class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
+                                      class="block w-full px-4 py-3 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
                                       type="email" 
                                       name="email" 
                                       :value="old('email')" 
@@ -65,7 +65,7 @@
                     <div>
                         <x-input-label for="password" :value="__('パスワード')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="password" 
-                                      class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
+                                      class="block w-full px-4 py-3 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
                                       type="password"
                                       name="password"
                                       required 
@@ -78,7 +78,7 @@
                     <div>
                         <x-input-label for="password_confirmation" :value="__('パスワード確認')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="password_confirmation" 
-                                      class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
+                                      class="block w-full px-4 py-3 border border-sub-border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
                                       type="password"
                                       name="password_confirmation" 
                                       required 

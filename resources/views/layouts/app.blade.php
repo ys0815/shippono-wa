@@ -219,19 +219,19 @@
                         <div>
                             <label class="block text-sm font-medium text-main-text mb-2">動物の種類</label>
                             <div class="grid grid-cols-2 gap-2">
-                                <label class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-amber-50 cursor-pointer">
+                                <label class="flex items-center p-2 border border-sub-border rounded-md hover:bg-amber-50 cursor-pointer">
                                     <input type="radio" name="species" value="dog" class="mr-2 text-amber-600 focus:ring-amber-500">
                                     <span class="text-sm">犬</span>
                                 </label>
-                                <label class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-amber-50 cursor-pointer">
+                                <label class="flex items-center p-2 border border-sub-border rounded-md hover:bg-amber-50 cursor-pointer">
                                     <input type="radio" name="species" value="cat" class="mr-2 text-amber-600 focus:ring-amber-500">
                                     <span class="text-sm">猫</span>
                                 </label>
-                                <label class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-amber-50 cursor-pointer">
+                                <label class="flex items-center p-2 border border-sub-border rounded-md hover:bg-amber-50 cursor-pointer">
                                     <input type="radio" name="species" value="rabbit" class="mr-2 text-amber-600 focus:ring-amber-500">
                                     <span class="text-sm">うさぎ</span>
                                 </label>
-                                <label class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-amber-50 cursor-pointer">
+                                <label class="flex items-center p-2 border border-sub-border rounded-md hover:bg-amber-50 cursor-pointer">
                                     <input type="radio" name="species" value="other" class="mr-2 text-amber-600 focus:ring-amber-500">
                                     <span class="text-sm">その他</span>
                                 </label>
@@ -241,7 +241,7 @@
                         <!-- 性別 -->
                         <div>
                             <label class="block text-sm font-medium text-main-text mb-2">性別</label>
-                            <select name="gender" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <select name="gender" class="w-full px-3 py-2 text-sm border border-sub-border rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">すべて</option>
                                 <option value="male">オス</option>
                                 <option value="female">メス</option>
@@ -252,7 +252,7 @@
                         <!-- 保護施設の種別 -->
                         <div>
                             <label class="block text-sm font-medium text-main-text mb-2">保護施設の種別</label>
-                            <select name="shelter_kind" x-model="kind" @change="handleKindChange()" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <select name="shelter_kind" x-model="kind" @change="handleKindChange()" class="w-full px-3 py-2 text-sm border border-sub-border rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">すべて</option>
                                 <option value="facility">保護団体・施設</option>
                                 <option value="site">里親サイト</option>
@@ -263,7 +263,7 @@
                         <!-- 保護施設の所在地 -->
                         <div>
                             <label class="block text-sm font-medium text-main-text mb-2">保護施設の所在地</label>
-                            <select name="shelter_area" x-model="area" @change="handleAreaChange()" :disabled="kind==='unknown'" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <select name="shelter_area" x-model="area" @change="handleAreaChange()" :disabled="kind==='unknown'" class="w-full px-3 py-2 text-sm border border-sub-border rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">すべて</option>
                                 <template x-for="a in filteredAreas" :key="a">
                                     <option :value="a" x-text="labels[a]"></option>
@@ -274,7 +274,7 @@
                         <!-- 保護施設名 -->
                         <div>
                             <label class="block text-sm font-medium text-main-text mb-2">保護施設名</label>
-                            <select name="shelter_id" x-model="shelterId" :disabled="kind==='unknown'" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <select name="shelter_id" x-model="shelterId" :disabled="kind==='unknown'" class="w-full px-3 py-2 text-sm border border-sub-border rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">すべて</option>
                                 <option value="" x-show="loading">読み込み中...</option>
                                 <template x-for="s in list" :key="s.id">
@@ -288,7 +288,7 @@
                             <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white text-sm rounded-md hover:bg-amber-600 transition font-medium">
                                 検索する
                             </button>
-                            <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-gray-300 rounded-md text-main-text hover:bg-main-bg transition">
+                            <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-sub-border rounded-md text-main-text hover:bg-main-bg transition">
                                 閉じる
                             </button>
                         </div>
