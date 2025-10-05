@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Pet;
 use App\Models\Media;
 use App\Models\User;
+use App\Services\ImageOptimizationService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -141,17 +142,28 @@ class PostController extends Controller
 
         // メディアアップロード処理（画像・動画）
         if ($request->hasFile('media')) {
-            foreach ($request->file('media') as $file) {
-                $path = $file->store('posts', 'public');
+            $imageService = new ImageOptimizationService();
 
+            foreach ($request->file('media') as $file) {
                 // ファイルタイプを判定
                 $type = $this->getMediaType($file);
 
-                Media::create([
-                    'post_id' => $post->id,
-                    'url' => $path,
-                    'type' => $type,
-                ]);
+                if ($type === 'image') {
+                    // 画像の場合は最適化して保存
+                    $optimizedImages = $imageService->optimizeAndSave($file, 'posts');
+                    $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                } else {
+                    // 動画の場合はそのまま保存
+                    $path = $file->store('posts', 'public');
+                }
+
+                if ($path) {
+                    Media::create([
+                        'post_id' => $post->id,
+                        'url' => $path,
+                        'type' => $type,
+                    ]);
+                }
             }
         }
 
@@ -242,14 +254,21 @@ class PostController extends Controller
             'status' => $request->status,
         ]);
 
-        // メイン画像をアップロード
+        // メイン画像をアップロード（最適化）
         if ($request->hasFile('main_image')) {
-            $path = $request->file('main_image')->store('posts', 'public');
-            Media::create([
-                'post_id' => $post->id,
-                'url' => $path,
-                'type' => 'image'
-            ]);
+            $imageService = new ImageOptimizationService();
+            $optimizedImages = $imageService->optimizeAndSave($request->file('main_image'), 'posts');
+
+            // メイン画像としてlargeサイズを使用
+            $mainImagePath = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+
+            if ($mainImagePath) {
+                Media::create([
+                    'post_id' => $post->id,
+                    'url' => $mainImagePath,
+                    'type' => 'image'
+                ]);
+            }
         }
 
         // インタビュー内容を保存（最初の質問をメインコンテンツとして保存）
@@ -375,13 +394,19 @@ class PostController extends Controller
                     $media->delete();
                 }
 
-                // 新しいメイン画像をアップロード
-                $path = $request->file('main_image')->store('posts', 'public');
-                Media::create([
-                    'post_id' => $post->id,
-                    'url' => $path,
-                    'type' => 'image'
-                ]);
+                // 新しいメイン画像をアップロード（最適化）
+                $imageService = new ImageOptimizationService();
+                $optimizedImages = $imageService->optimizeAndSave($request->file('main_image'), 'posts');
+
+                $mainImagePath = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+
+                if ($mainImagePath) {
+                    Media::create([
+                        'post_id' => $post->id,
+                        'url' => $mainImagePath,
+                        'type' => 'image'
+                    ]);
+                }
             }
         } else {
             // 今日の幸せ投稿の更新
@@ -410,15 +435,28 @@ class PostController extends Controller
                     $media->delete();
                 }
 
-                // 新しいメディアをアップロード
+                // 新しいメディアをアップロード（最適化）
+                $imageService = new ImageOptimizationService();
+
                 foreach ($request->file('media') as $file) {
-                    $path = $file->store('posts', 'public');
                     $type = $this->getMediaType($file);
-                    Media::create([
-                        'post_id' => $post->id,
-                        'url' => $path,
-                        'type' => $type,
-                    ]);
+
+                    if ($type === 'image') {
+                        // 画像の場合は最適化して保存
+                        $optimizedImages = $imageService->optimizeAndSave($file, 'posts');
+                        $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                    } else {
+                        // 動画の場合はそのまま保存
+                        $path = $file->store('posts', 'public');
+                    }
+
+                    if ($path) {
+                        Media::create([
+                            'post_id' => $post->id,
+                            'url' => $path,
+                            'type' => $type,
+                        ]);
+                    }
                 }
             }
         }

@@ -6,11 +6,13 @@ use App\Models\Pet;
 use App\Models\PetFamilyLink;
 use App\Models\Like;
 use App\Models\PetShareLink;
+use App\Services\ImageOptimizationService;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 /**
@@ -618,16 +620,20 @@ class PetController extends Controller
         $pet->shelter_id = $validated['shelter_id'] ?? null;
         $pet->profile_description = $validated['profile_description'] ?? null;
 
-        // 画像アップロード（とりあえずローカルstorage/app/publicに保存）
+        // 画像アップロード（最適化）
         if ($request->hasFile('profile_image')) {
-            $path = $request->file('profile_image')->store('pets/profile', 'public');
+            $imageService = new ImageOptimizationService();
+            $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
+            $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
             $pet->profile_image_url = '/storage/' . $path;
         } else {
             $pet->profile_image_url = '/images/icon.png';
         }
 
         if ($request->hasFile('header_image')) {
-            $path = $request->file('header_image')->store('pets/header', 'public');
+            $imageService = new ImageOptimizationService();
+            $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
+            $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
             $pet->header_image_url = '/storage/' . $path;
         } else {
             $pet->header_image_url = '/images/icon.png';
@@ -682,15 +688,19 @@ class PetController extends Controller
         $pet->shelter_id = $validated['shelter_id'] ?? null;
         $pet->profile_description = $validated['profile_description'] ?? null;
 
-        // 画像アップロード処理（新しい画像がアップロードされた場合のみ更新）
+        // 画像アップロード処理（新しい画像がアップロードされた場合のみ更新・最適化）
         if ($request->hasFile('profile_image')) {
-            $path = $request->file('profile_image')->store('pets/profile', 'public');
+            $imageService = new ImageOptimizationService();
+            $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
+            $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
             $pet->profile_image_url = '/storage/' . $path;
         }
         // 新しい画像がアップロードされない場合は既存の画像を保持
 
         if ($request->hasFile('header_image')) {
-            $path = $request->file('header_image')->store('pets/header', 'public');
+            $imageService = new ImageOptimizationService();
+            $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
+            $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
             $pet->header_image_url = '/storage/' . $path;
         }
         // 新しい画像がアップロードされない場合は既存の画像を保持
