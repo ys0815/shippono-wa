@@ -8,11 +8,11 @@
                     <!-- 単一メディア -->
                     @php $media = $post->media->first(); @endphp
                     <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
-                        <div class="w-full">
+                        <div class="w-full h-80 sm:h-96 overflow-hidden">
                             @if($media->type === 'image')
-                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-auto object-contain">
+                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover ">
                             @elseif($media->type === 'video')
-                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-auto object-contain" muted playsinline>
+                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover " muted>
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
                             @endif
@@ -24,11 +24,11 @@
                         <div id="media-carousel" class="flex transition-transform duration-300 ease-in-out">
                             @foreach($post->media as $index => $media)
                                 <div class="media-item w-full flex-shrink-0 cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
-                                    <div class="w-full">
+                                    <div class="w-full h-80 sm:h-96 overflow-hidden">
                                         @if($media->type === 'image')
-                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-auto object-contain">
+                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover ">
                                         @elseif($media->type === 'video')
-                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-auto object-contain" muted playsinline>
+                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover " muted>
                                                 お使いのブラウザは動画をサポートしていません。
                                             </video>
                                         @endif
