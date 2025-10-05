@@ -69,21 +69,21 @@
         <!-- 投稿情報（メディアの下に配置） -->
         <div class="bg-white px-4 sm:px-6 lg:px-8 py-6">
             <!-- 日時 -->
-            <div class="text-sm text-gray-500 mb-4">
+            <div class="text-sm text-amber-600 mb-4 font-medium">
                 {{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y年n月j日 H:i') }}
             </div>
 
             <!-- タイトル -->
-            <h1 class="text-2xl font-bold text-gray-900 mb-4">{{ e($post->title) }}</h1>
+            <h1 class="text-2xl font-bold text-gray-800 mb-4">{{ e($post->title) }}</h1>
 
             <!-- 内容 -->
-            <div class="text-gray-700 mb-6 whitespace-pre-wrap">{!! nl2br(e($post->content)) !!}</div>
+            <div class="text-gray-700 mb-6 whitespace-pre-wrap leading-relaxed">{!! nl2br(e($post->content)) !!}</div>
 
             <!-- ペット情報 -->
             @if($post->pet)
                 <div class="border-t border-gray-200 pt-4">
                     <div class="flex items-center space-x-3 mb-4">
-                        <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
+                        <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden bg-amber-100 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
                             @if($post->pet->profile_image_url)
                                 @php
                                     $imageUrl = $post->pet->profile_image_url;
@@ -94,7 +94,7 @@
                                 @endphp
                                 <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
                             @else
-                                <span class="text-gray-500 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
+                                <span class="text-amber-600 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
                             @endif
                         </a>
                         <div>
@@ -106,12 +106,12 @@
                             </div>
                             @if($post->pet->user)
                                 <div class="text-sm mt-1">
-                                    <span class="text-amber-600">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}さん
+                                    <span class="text-amber-700 font-medium">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}さん
                                 </div>
                             @endif
                             @if($post->pet->shelter)
                                 <div class="text-sm mt-1">
-                                    <span class="text-amber-600">お迎え先の保護団体:</span> {{ e($post->pet->shelter->name) }}
+                                    <span class="text-amber-700 font-medium">お迎え先の保護団体:</span> {{ e($post->pet->shelter->name) }}
                                 </div>
                             @endif
                         </div>
@@ -124,7 +124,7 @@
                             <a href="{{ $post->pet->shelter->website_url }}" 
                                target="_blank" 
                                rel="noopener noreferrer"
-                               class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                               class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 hover:shadow-lg transition-all duration-200 font-semibold text-center">
                                 保護団体サイトへ
                             </a>
                         @else
@@ -135,7 +135,7 @@
 
                         <!-- シェア -->
                         <button onclick="openShareModal()" 
-                                class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                                class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 hover:shadow-lg transition-all duration-200 font-semibold text-center">
                             <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
                             </svg>
@@ -205,7 +205,7 @@
     <!-- シェアモーダル -->
     <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 border border-gray-200">
                 <div class="text-center">
                     <h3 class="text-lg font-bold text-gray-800 mb-6">シェアしよう</h3>
             

@@ -61,14 +61,14 @@
                     @endif
 
         <!-- 投稿内容 -->
-        <div class="bg-white shadow-lg rounded-lg p-6">
+        <div class="bg-white p-6">
             <!-- タイトル -->
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 text-center lg:text-left">
                 {{ $post->title }}
             </h1>
 
             <!-- メタ情報 -->
-            <div class="flex flex-col sm:flex-row items-center justify-between mb-6 text-sm text-gray-600 gap-2">
+            <div class="flex flex-col sm:flex-row items-center justify-between mb-6 text-sm text-amber-600 gap-2">
                 <div class="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-4">
                     <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-medium">
                         {{ $post->created_at->format('Y年m月d日') }} 投稿
@@ -96,7 +96,7 @@
                 @if($post->interviewContent->question2)
                         <div class="px-2">
                             <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center">
-                                <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">②</span>
+                                <span class="bg-amber-100 text-amber-800 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">②</span>
                                 <span class="break-words">迎える前の不安と準備</span>
                             </h3>
                             <div class="prose max-w-none text-gray-700 text-base sm:text-lg leading-[2.4em] bg-gradient-to-b from-[#e5e7eb] to-transparent bg-[length:100%_2.4em] bg-[position:0_1.2em] p-6 rounded-lg" style="background-image: linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);">
@@ -109,7 +109,7 @@
                 @if($post->interviewContent->question3)
                         <div class="px-2">
                             <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center">
-                                <span class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">③</span>
+                                <span class="bg-amber-100 text-amber-800 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">③</span>
                                 <span class="break-words">迎えた後の変化と喜び</span>
                             </h3>
                             <div class="prose max-w-none text-gray-700 text-base sm:text-lg leading-[2.4em] bg-gradient-to-b from-[#e5e7eb] to-transparent bg-[length:100%_2.4em] bg-[position:0_1.2em] p-6 rounded-lg" style="background-image: linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);">
@@ -122,7 +122,7 @@
                 @if($post->interviewContent->question4)
                         <div class="px-2">
                             <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center">
-                                <span class="bg-purple-100 text-purple-800 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">④</span>
+                                <span class="bg-amber-100 text-amber-800 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">④</span>
                                 <span class="break-words">未来の里親へのメッセージ</span>
                             </h3>
                             <div class="prose max-w-none text-gray-700 text-base sm:text-lg leading-[2.4em] bg-gradient-to-b from-[#e5e7eb] to-transparent bg-[length:100%_2.4em] bg-[position:0_1.2em] p-6 rounded-lg" style="background-image: linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);">
@@ -135,7 +135,7 @@
                 @if($post->interviewContent->question5)
                         <div class="px-2">
                             <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center">
-                                <span class="bg-pink-100 text-pink-800 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">⑤</span>
+                                <span class="bg-amber-100 text-amber-800 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">⑤</span>
                                 <span class="break-words">最後に一言</span>
                             </h3>
                             <div class="prose max-w-none text-gray-700 text-base sm:text-lg leading-[2.4em] bg-gradient-to-b from-[#e5e7eb] to-transparent bg-[length:100%_2.4em] bg-[position:0_1.2em] p-6 rounded-lg" style="background-image: linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);">
@@ -148,7 +148,7 @@
                 @if($post->pet)
                     <div class="border-t border-gray-200 pt-4 mt-6">
                         <div class="flex items-center space-x-3 mb-4">
-                            <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
+                            <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden bg-amber-100 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
                                 @if($post->pet->profile_image_url)
                                     @php
                                         $imageUrl = $post->pet->profile_image_url;
@@ -159,7 +159,7 @@
                                     @endphp
                                     <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
                                 @else
-                                    <span class="text-gray-500 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
+                                    <span class="text-amber-600 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
                                 @endif
                             </a>
                             <div>
@@ -171,12 +171,12 @@
                                 </div>
                                 @if($post->pet->user)
                                     <div class="text-sm mt-1">
-                                        <span class="text-amber-600">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}さん
+                                        <span class="text-amber-700 font-medium">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}さん
                                     </div>
                                 @endif
                                 @if($post->pet->shelter)
                                     <div class="text-sm mt-1">
-                                        <span class="text-amber-600">お迎え先の保護団体:</span> {{ e($post->pet->shelter->name) }}
+                                        <span class="text-amber-700 font-medium">お迎え先の保護団体:</span> {{ e($post->pet->shelter->name) }}
                                     </div>
                                 @endif
                             </div>
@@ -189,7 +189,7 @@
                                 <a href="{{ $post->pet->shelter->website_url }}" 
                                    target="_blank" 
                                    rel="noopener noreferrer"
-                                   class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                                   class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 hover:shadow-lg transition-all duration-200 font-semibold text-center">
                                     保護団体サイトへ
                                 </a>
                             @else
@@ -200,7 +200,7 @@
     
                             <!-- シェア -->
                             <button onclick="openShareModal()" 
-                                    class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                                    class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 hover:shadow-lg transition-all duration-200 font-semibold text-center">
                                 <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
                                 </svg>
@@ -222,7 +222,7 @@
                 <div class="mt-6">
                     <div class="flex flex-wrap gap-2">
                         @foreach(explode(',', $post->tags) as $tag)
-                            <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm">{{ trim($tag) }}</span>
+                            <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">{{ trim($tag) }}</span>
                         @endforeach
                     </div>
                 </div>
@@ -249,7 +249,7 @@
                                 <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">{{ $relatedPost->title }}</h3>
                                 <p class="text-sm text-gray-600 mb-3 line-clamp-3">{{ Str::limit($relatedPost->content, 100) }}</p>
                                 <a href="{{ route('interviews.show', $relatedPost) }}" 
-                                   class="inline-flex items-center text-amber-600 hover:text-amber-700 font-medium">
+                                   class="inline-flex items-center text-amber-600 hover:text-amber-700 font-semibold">
                                     続きを読む
                                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -366,7 +366,7 @@
     <!-- シェアモーダル -->
     <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 border border-gray-200">
                 <div class="text-center">
                     <h3 class="text-xl font-bold text-gray-800 mb-6">シェアしよう</h3>
                     
