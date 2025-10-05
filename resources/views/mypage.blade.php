@@ -11,7 +11,7 @@
 
     <div class="py-6 px-4 max-w-2xl mx-auto bg-gray-50 min-h-screen">
         <!-- ユーザー情報ヘッダー -->
-        <div class="text-center mb-6">
+        <div class="text-center mb-7">
             <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200">
                 <h1 class="text-xl font-bold text-amber-800 mb-2">
                     🌟 おかえりなさい、{{ Auth::user()->display_name ?? Auth::user()->name }}さん
@@ -42,7 +42,7 @@
         @endif
 
         <!-- 活動統計 -->
-        <div class="mb-6">
+        <div class="mb-7">
             <h2 class="text-base font-semibold text-gray-800 mb-3">活動統計</h2>
             <div class="grid grid-cols-2 gap-4 sm:gap-6">
                 <!-- 1行目 -->
@@ -67,7 +67,7 @@
         </div>
 
         <!-- 登録ペット一覧 -->
-        <div class="mb-6">
+        <div class="mb-7">
             <h2 class="text-base font-semibold text-gray-800 mb-3">登録ペット一覧</h2>
             @forelse ($pets as $pet)
                 <div class="bg-white rounded-lg p-4 mb-3 border">
@@ -134,7 +134,7 @@
         </div>
 
         <!-- 最近の投稿 -->
-        <div class="mb-6">
+        <div class="mb-7">
             <h2 class="text-base font-semibold text-gray-800 mb-3">最近の投稿</h2>
             @forelse ($recentPosts as $post)
                 <div class="bg-white rounded-lg p-3 mb-3 border">
