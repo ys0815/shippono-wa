@@ -72,7 +72,7 @@
                         </p>
                     </div>
                     <select name="pet_id" id="pet_id" required 
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                         <option value="">ペットを選択してください</option>
                         @foreach($pets as $pet)
                             <option value="{{ $pet->id }}" {{ old('pet_id') == $pet->id ? 'selected' : '' }}>
@@ -96,7 +96,7 @@
                            value="{{ old('title') }}"
                            maxlength="30"
                            required
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                            placeholder="今日の幸せを30文字以内で入力">
                     <div class="mt-1 text-sm text-gray-500">
                         <span id="title-count">0</span>/30文字
@@ -116,7 +116,7 @@
                               rows="6"
                               maxlength="140"
                               required
-                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                               placeholder="今日の幸せな出来事を140文字以内で入力">{{ old('content') }}</textarea>
                     <div class="mt-1 text-sm text-gray-500">
                         <span id="content-count">0</span>/140文字

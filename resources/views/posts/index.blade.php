@@ -124,8 +124,7 @@
                             <!-- 投稿タイプタグと日付 -->
                             <div class="flex justify-between items-start mb-3">
                                 <div class="flex items-center">
-                                    <span class="text-sm md:text-base text-white px-2 py-1 rounded" 
-                                          style="background-color: #f59e0b;">
+                                    <span class="text-sm md:text-base text-white px-2 py-1 rounded bg-amber-500">
                                         {{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}
                                     </span>
                                 </div>

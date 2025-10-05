@@ -61,7 +61,7 @@
                                         {{ $pet->likes->count() }}
                                     </div>
                                     <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-800 flex items-center">
-                                        <svg class="w-3 h-3 mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                                        <svg class="w-3 h-3 mr-1 text-amber-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                                         </svg>
                                         {{ $pet->posts->count() }}
@@ -170,7 +170,7 @@
 
                     @php($pair = $pets->take(2))
                     @if($pair->count() === 2)
-                        <div class="flex items-center justify-between rounded-lg bg-blue-50 border border-blue-200 px-4 py-3 mb-4">
+                        <div class="flex items-center justify-between rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 mb-4">
                             <div class="text-gray-800 font-medium">
                                 {{ $pair[0]->name }} ← {{ $pair[1]->name }}
                             </div>
@@ -197,7 +197,7 @@
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
-                    ＋家族の一員を登録する
+                    家族の一員を登録する
                 </a>
             </div>
         </div>

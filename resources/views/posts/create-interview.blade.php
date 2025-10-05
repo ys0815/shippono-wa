@@ -55,7 +55,7 @@
                     </div>
                     
                     <select id="pet_id" name="pet_id" required 
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                         <option value="">ペットを選択してください</option>
                         @foreach($pets as $pet)
                             <option value="{{ $pet->id }}" 
@@ -95,7 +95,7 @@
                            value="{{ old('title') }}"
                            maxlength="30"
                            required
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                     <div class="mt-1 text-sm text-gray-500">
                         <span id="title-count">0</span>/30文字
                     </div>
@@ -164,7 +164,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question1') }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question1') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question1-count">0</span>/1000文字
                         </div>
@@ -188,7 +188,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question2') }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question2') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question2-count">0</span>/1000文字
                         </div>
@@ -213,7 +213,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question3') }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question3') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question3-count">0</span>/1000文字
                         </div>
@@ -238,7 +238,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question4') }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question4') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question4-count">0</span>/1000文字
                         </div>
@@ -262,7 +262,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question5') }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question5') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question5-count">0</span>/1000文字
                         </div>

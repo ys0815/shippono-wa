@@ -50,7 +50,7 @@
                 <div>
                     <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">対象ペット *</label>
                     <select id="pet_id" name="pet_id" required 
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                         <option value="">選択してください</option>
                         @foreach($pets as $pet)
                             <option value="{{ $pet->id }}" {{ old('pet_id', $post->pet_id) == $pet->id ? 'selected' : '' }}>
@@ -72,7 +72,7 @@
                            value="{{ old('title', $post->title) }}"
                            maxlength="30"
                            required
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
                     <div class="mt-1 text-sm text-gray-500">
                         <span id="title-count">{{ strlen(old('title', $post->title)) }}</span>/30文字
                     </div>
@@ -145,7 +145,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question1', $post->content) }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question1', $post->content) }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question1-count">{{ strlen(old('question1', $post->content)) }}</span>/1000文字
                         </div>
@@ -169,7 +169,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question2', $post->interviewContent?->question2 ?? '') }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question2', $post->interviewContent?->question2 ?? '') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question2-count">{{ strlen(old('question2', $post->interviewContent?->question2 ?? '')) }}</span>/1000文字
                         </div>
@@ -193,7 +193,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question3', $post->interviewContent?->question3 ?? '') }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question3', $post->interviewContent?->question3 ?? '') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question3-count">{{ strlen(old('question3', $post->interviewContent?->question3 ?? '')) }}</span>/1000文字
                         </div>
@@ -217,7 +217,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question4', $post->interviewContent?->question4 ?? '') }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question4', $post->interviewContent?->question4 ?? '') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question4-count">{{ strlen(old('question4', $post->interviewContent?->question4 ?? '')) }}</span>/1000文字
                         </div>
@@ -241,7 +241,7 @@
                                   rows="4" 
                                   required
                                   maxlength="1000"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('question5', $post->interviewContent?->question5 ?? '') }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">{{ old('question5', $post->interviewContent?->question5 ?? '') }}</textarea>
                         <div class="mt-1 text-sm text-gray-500">
                             <span id="question5-count">{{ strlen(old('question5', $post->interviewContent?->question5 ?? '')) }}</span>/1000文字
                         </div>

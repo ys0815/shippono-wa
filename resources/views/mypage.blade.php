@@ -99,9 +99,9 @@
                             <p class="text-xs text-gray-600">いいね：{{ $pet->likes()->count() }}｜投稿：{{ $pet->posts()->count() }}</p>
                             <div class="flex space-x-2 mt-2">
                                 <a href="{{ route('mypage.pets.edit', ['pet_id' => $pet->id]) }}" 
-                                   class="px-3 py-1 text-white text-sm rounded transition duration-200 bg-blue-500 hover:bg-blue-600">編集</a>
+                                   class="px-3 py-1 text-white text-sm rounded transition duration-200 bg-amber-500 hover:bg-amber-600">編集</a>
                                 <a href="{{ route('pets.show', $pet->id) }}" 
-                                   class="px-3 py-1 text-white text-sm rounded transition duration-200 bg-amber-500 hover:bg-amber-600">詳細を見る</a>
+                                   class="px-3 py-1 text-white text-sm rounded transition duration-200 bg-orange-500 hover:bg-orange-600">詳細を見る</a>
                             </div>
                         </div>
                     </div>
@@ -139,8 +139,7 @@
             @forelse ($recentPosts as $post)
                 <div class="bg-white rounded-lg p-3 mb-3 border">
                     <div class="flex justify-between items-start mb-1">
-                        <span class="text-xs text-white px-2 py-1 rounded" 
-                              style="background-color: #f59e0b;">{{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}</span>
+                        <span class="text-xs text-white px-2 py-1 rounded bg-amber-500">{{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}</span>
                         <span class="text-xs text-gray-500">{{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y/m/d') }}</span>
                     </div>
                     <h3 class="font-medium text-gray-800 text-sm">{{ $post->title }}</h3>
@@ -160,22 +159,6 @@
                     </div>
                     <h3 class="text-lg font-semibold text-gray-700 mb-2">まだ投稿はありません</h3>
                     <p class="text-gray-500 mb-6">大切な家族との幸せな瞬間をシェアしてみませんか？</p>
-                    {{-- <div class="flex space-x-3">
-                        <a href="{{ route('mypage.posts.gallery.create') }}" 
-                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                            幸せをシェアする
-                        </a>
-                        <a href="{{ route('mypage.posts.interview.create') }}" 
-                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                            体験をシェアする
-                        </a>
-                    </div> --}}
                 </div>
             @endforelse
             
@@ -186,27 +169,24 @@
         @endif
 
             <!-- アクションボタン -->
-            <div class="space-y-3">
-                <div style="background: linear-gradient(to right, #f59e0b, #f97316); color: white; border-radius: 0.5rem; padding: 1rem; text-align: center;">
-                    <p style="font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem;">今日の幸せをシェアしませんか？</p>
+            <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-200 p-6 text-center">
+                <p class="text-amber-800 mb-4 text-sm font-medium">今日の幸せ・お迎え体験を投稿しませんか？</p>
+                <div class="space-y-3">
                     <a href="{{ route('mypage.posts.gallery.create') }}" 
-                       style="display: inline-block; background-color: white; color: #d97706; padding: 0.5rem 1.5rem; border-radius: 0.5rem; font-weight: 500; transition: background-color 0.2s;"
-                       onmouseover="this.style.backgroundColor='#fef3c7'" 
-                       onmouseout="this.style.backgroundColor='white'">
+                       class="block w-full inline-flex items-center justify-center px-4 py-3 text-sm bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium shadow-sm">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
                         今日の幸せを投稿する
                     </a>
-                </div>
-                
-                <div style="background: linear-gradient(to right, #3b82f6, #8b5cf6); color: white; border-radius: 0.5rem; padding: 1rem; text-align: center;">
-                    <p style="font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem;">体験談をシェアして希望を届けませんか？</p>
                     <a href="{{ route('mypage.posts.interview.create') }}" 
-                       style="display: inline-block; background-color: white; color: #2563eb; padding: 0.5rem 1.5rem; border-radius: 0.5rem; font-weight: 500; transition: background-color 0.2s;"
-                       onmouseover="this.style.backgroundColor='#eff6ff'" 
-                       onmouseout="this.style.backgroundColor='white'">
+                       class="block w-full inline-flex items-center justify-center px-4 py-3 text-sm bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200 font-medium shadow-sm">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
                         里親インタビューを投稿する
                     </a>
                 </div>
- 
             </div>
         </div>
     </div>
