@@ -165,31 +165,31 @@
                             @if($pet->breed)
                                 <div>
                                     <dt class="text-amber-600">品種</dt>
-                                    <dd class="mt-1 font-medium">{{ $pet->breed }}</dd>
+                                    <dd class="mt-1 font-normal">{{ $pet->breed }}</dd>
                                 </div>
                             @endif
                             @if($pet->birth_date)
                                 <div>
                                     <dt class="text-amber-600">誕生日</dt>
-                                    <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->birth_date)->format('Y年n月j日') }}</dd>
+                                    <dd class="mt-1 font-normal">{{ \Carbon\Carbon::parse($pet->birth_date)->format('Y年n月j日') }}</dd>
                                 </div>
                             @endif
                             @if($pet->rescue_date)
                                 <div>
                                     <dt class="text-amber-600">お迎え記念日</dt>
-                                    <dd class="mt-1 font-medium">{{ \Carbon\Carbon::parse($pet->rescue_date)->format('Y年n月j日') }}</dd>
+                                    <dd class="mt-1 font-normal">{{ \Carbon\Carbon::parse($pet->rescue_date)->format('Y年n月j日') }}</dd>
                                 </div>
                             @endif
                             @if($pet->area)
                                 <div>
                                     <dt class="text-amber-600">地域</dt>
-                                    <dd class="mt-1 font-medium">{{ $pet->area }}</dd>
+                                    <dd class="mt-1 font-normal">{{ $pet->area }}</dd>
                                 </div>
                             @endif
                             @if($pet->profile_description)
                                 <div>
                                     <dt class="text-amber-600">プロフィール</dt>
-                                    <dd class="mt-1 font-medium">{{ $pet->profile_description }}</dd>
+                                    <dd class="mt-1 font-normal">{{ $pet->profile_description }}</dd>
                                 </div>
                             @endif
                         </div>
