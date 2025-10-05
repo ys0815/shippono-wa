@@ -30,10 +30,11 @@ class ImageOptimizationService
         $savedPaths = [];
 
         // デフォルトサイズ設定
+        // 高さは指定せず、幅基準でアスペクト比を維持
         $defaultSizes = [
-            'thumbnail' => ['width' => 300, 'height' => 300, 'quality' => 80],
-            'medium' => ['width' => 800, 'height' => 600, 'quality' => 85],
-            'large' => ['width' => 1200, 'height' => 900, 'quality' => 90],
+            'thumbnail' => ['width' => 300, 'quality' => 80],
+            'medium' => ['width' => 800, 'quality' => 85],
+            'large' => ['width' => 1200, 'quality' => 90],
         ];
 
         $sizes = array_merge($defaultSizes, $sizes);
@@ -67,8 +68,21 @@ class ImageOptimizationService
         try {
             $image = $this->imageManager->read($file->getPathname());
 
-            // アスペクト比を保持してリサイズ
-            $image->resize($config['width'], $config['height'], function ($constraint) {
+            // 可能ならEXIFの向きを自動補正
+            try {
+                if (method_exists($image, 'orient')) {
+                    $image->orient();
+                } elseif (method_exists($image, 'orientate')) {
+                    $image->orientate();
+                }
+            } catch (\Throwable $t) {
+                // 失敗しても処理継続
+            }
+
+            // アスペクト比を保持してリサイズ（高さ未指定時は幅ベース）
+            $targetWidth = $config['width'] ?? null;
+            $targetHeight = $config['height'] ?? null;
+            $image->resize($targetWidth, $targetHeight, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize(); // 元画像より大きくしない
             });
@@ -99,10 +113,11 @@ class ImageOptimizationService
     {
         $savedPaths = [];
 
+        // 高さは指定せず、幅基準でアスペクト比を維持
         $defaultSizes = [
-            'thumbnail' => ['width' => 300, 'height' => 300, 'quality' => 80],
-            'medium' => ['width' => 800, 'height' => 600, 'quality' => 85],
-            'large' => ['width' => 1200, 'height' => 900, 'quality' => 90],
+            'thumbnail' => ['width' => 300, 'quality' => 80],
+            'medium' => ['width' => 800, 'quality' => 85],
+            'large' => ['width' => 1200, 'quality' => 90],
         ];
 
         $sizes = array_merge($defaultSizes, $sizes);
@@ -131,7 +146,20 @@ class ImageOptimizationService
         try {
             $image = $this->imageManager->read($file->getPathname());
 
-            $image->resize($config['width'], $config['height'], function ($constraint) {
+            // 可能ならEXIFの向きを自動補正
+            try {
+                if (method_exists($image, 'orient')) {
+                    $image->orient();
+                } elseif (method_exists($image, 'orientate')) {
+                    $image->orientate();
+                }
+            } catch (\Throwable $t) {
+            }
+
+            // アスペクト比を保持してリサイズ（高さ未指定時は幅ベース）
+            $targetWidth = $config['width'] ?? null;
+            $targetHeight = $config['height'] ?? null;
+            $image->resize($targetWidth, $targetHeight, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -176,10 +204,11 @@ class ImageOptimizationService
     {
         $savedPaths = [];
 
+        // 高さは指定せず、幅基準でアスペクト比を維持
         $defaultSizes = [
-            'thumbnail' => ['width' => 300, 'height' => 300, 'quality' => 80],
-            'medium' => ['width' => 800, 'height' => 600, 'quality' => 85],
-            'large' => ['width' => 1200, 'height' => 900, 'quality' => 90],
+            'thumbnail' => ['width' => 300, 'quality' => 80],
+            'medium' => ['width' => 800, 'quality' => 85],
+            'large' => ['width' => 1200, 'quality' => 90],
         ];
 
         $sizes = array_merge($defaultSizes, $sizes);
@@ -194,7 +223,20 @@ class ImageOptimizationService
             try {
                 $image = $this->imageManager->read($fullPath);
 
-                $image->resize($config['width'], $config['height'], function ($constraint) {
+                // 可能ならEXIFの向きを自動補正
+                try {
+                    if (method_exists($image, 'orient')) {
+                        $image->orient();
+                    } elseif (method_exists($image, 'orientate')) {
+                        $image->orientate();
+                    }
+                } catch (\Throwable $t) {
+                }
+
+                // アスペクト比を保持してリサイズ（高さ未指定時は幅ベース）
+                $targetWidth = $config['width'] ?? null;
+                $targetHeight = $config['height'] ?? null;
+                $image->resize($targetWidth, $targetHeight, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
