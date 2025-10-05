@@ -90,7 +90,7 @@
     <div class="fixed inset-0 bg-black/50 z-[1100]" @click="search=false"></div>
     <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[1200] w-full max-w-md mx-4">
         <div class="bg-white rounded-lg shadow-xl p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">検索</h3>
+            <h3 class="text-lg font-semibold text-amber-900 mb-4">検索</h3>
             <div class="space-y-4">
                 
                 <!-- ペット検索 -->

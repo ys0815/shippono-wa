@@ -206,7 +206,7 @@
                      x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
                      x-transition:leave="transition ease-in duration-150"
                      x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">絞り込み検索</h3>
+                    <h3 class="text-lg font-semibold text-amber-900 mb-4">絞り込み検索</h3>
                     <form action="{{ route('pets.search', 'all') }}" method="GET" x-data="ShelterPicker.create({
                         init() {
                             this.kind = '';

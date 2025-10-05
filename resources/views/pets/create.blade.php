@@ -6,11 +6,11 @@
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center">
                         <a href="{{ route('mypage') }}" class="mr-4">
-                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </a>
-                        <h1 class="text-lg font-semibold text-gray-900">
+                        <h1 class="text-lg font-semibold text-amber-900">
                             @if(isset($pet))
                                 ペットプロフィール編集
                             @else

@@ -11,11 +11,11 @@
                 <div class="flex justify-between items-center h-16">
                     <div class="flex items-center">
                         <a href="{{ route('mypage') }}" class="mr-4">
-                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </a>
-                        <h1 class="text-lg font-semibold text-gray-900">投稿管理画面</h1>
+                        <h1 class="text-lg font-semibold text-amber-900">投稿管理画面</h1>
                     </div>
                 </div>
             </div>
@@ -127,9 +127,6 @@
                                     <span class="text-sm md:text-base text-white px-2 py-1 rounded bg-amber-500">
                                         {{ $post->type === 'gallery' ? '今日の幸せ' : '里親インタビュー' }}
                                     </span>
-                                </div>
-                                <div class="text-sm text-gray-500">
-                                    {{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y/m/d') }}
                                 </div>
                             </div>
                             
