@@ -9,11 +9,7 @@ class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule)
     {
-        // 日本時間の 8:00 / 18:00 に統計情報を更新
-        $schedule->command('stats:update')
-            ->twiceDaily(8, 18)
-            ->timezone('Asia/Tokyo')
-            ->withoutOverlapping();
+        // Laravel 12では routes/console.php でスケジューラーを定義
     }
 
     protected function commands(): void

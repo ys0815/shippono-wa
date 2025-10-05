@@ -42,12 +42,12 @@ class CheckStatsCache
                 return;
             }
 
-            // キャッシュが古い場合（2時間以上経過）
+            // キャッシュが古い場合（1.5時間以上経過）
             $lastUpdated = \Carbon\Carbon::parse($stats['updated_at']);
-            if ($lastUpdated->diffInHours(now()) >= 2) {
+            if ($lastUpdated->diffInMinutes(now()) >= 90) {
                 Log::info('CheckStatsCache: Cached stats are stale, dispatching update job', [
                     'last_updated' => $stats['updated_at'],
-                    'hours_ago' => $lastUpdated->diffInHours(now())
+                    'minutes_ago' => $lastUpdated->diffInMinutes(now())
                 ]);
                 dispatch(new UpdateSiteStatsJob());
                 return;
@@ -55,7 +55,7 @@ class CheckStatsCache
 
             Log::debug('CheckStatsCache: Cached stats are fresh, no update needed', [
                 'last_updated' => $stats['updated_at'],
-                'hours_ago' => $lastUpdated->diffInHours(now())
+                'minutes_ago' => $lastUpdated->diffInMinutes(now())
             ]);
         } catch (\Exception $e) {
             Log::error('CheckStatsCache: Error checking stats cache', [
