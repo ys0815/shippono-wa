@@ -61,7 +61,7 @@
                     @endif
 
         <!-- 投稿内容 -->
-        <div class="bg-white p-6">
+        <div class="bg-white px-4 py-6">
             <!-- タイトル -->
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 text-center lg:text-left">
                 {{ $post->title }}

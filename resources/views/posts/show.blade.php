@@ -67,7 +67,7 @@
         @endif
 
         <!-- 投稿情報（メディアの下に配置） -->
-        <div class="bg-white px-4 sm:px-6 lg:px-8 py-6">
+        <div class="bg-white px-4 py-6">
             <!-- 日時 -->
             <div class="text-sm text-amber-600 mb-4 font-medium">
                 {{ $post->created_at->setTimezone('Asia/Tokyo')->format('Y年n月j日 H:i') }}

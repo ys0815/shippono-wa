@@ -78,7 +78,6 @@
                 <div class="text-xs font-semibold text-amber-700 mb-2">コンテンツ</div>
                 <div class="space-y-2">
                     <a href="{{ route('home') }}" class="block px-3 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md transition">トップページ</a>
-                    <a href="{{ route('interviews.index') }}" class="block px-3 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md transition">里親インタビュー</a>
                     <a href="{{ route('pets.search', 'all') }}" class="block px-3 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md transition">ペット検索</a>
                 </div>
             </div>
@@ -93,17 +92,6 @@
         <div class="bg-white rounded-lg shadow-xl p-6">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">検索</h3>
             <div class="space-y-4">
-                <!-- インタビュー検索 -->
-                <div>
-                    <h4 class="text-sm font-medium text-gray-700 mb-2">里親インタビュー</h4>
-                    <form method="GET" action="{{ route('interviews.index') }}" class="space-y-2">
-                        <div>
-                            <input type="text" name="q" placeholder="キーワードで検索..." 
-                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-amber-500 focus:border-amber-500">
-                        </div>
-                        <button type="submit" class="w-full px-4 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600 transition">検索</button>
-                    </form>
-                </div>
                 
                 <!-- ペット検索 -->
                 <div>

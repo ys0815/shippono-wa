@@ -15,33 +15,6 @@ use Illuminate\Http\Request;
  */
 class InterviewController extends Controller
 {
-    /**
-     * 里親インタビュー一覧（公開）
-     * 
-     * @param Request $request 検索条件を含むリクエスト
-     * @return \Illuminate\View\View インタビュー一覧ページ
-     */
-    public function index(Request $request)
-    {
-        // 公開済みのインタビューのみを取得
-        $query = Post::with(['pet.user'])
-            ->where('type', 'interview')
-            ->where('status', 'published')
-            ->latest();
-
-        // ペット種別やキーワードなど、将来の拡張に備えた簡易フィルタ
-        if ($keyword = $request->get('q')) {
-            $query->where(function ($q) use ($keyword) {
-                $q->where('title', 'like', "%{$keyword}%")
-                    ->orWhere('content', 'like', "%{$keyword}%");
-            });
-        }
-
-        // ページネーション（9件ずつ表示）
-        $interviews = $query->paginate(9)->withQueryString();
-
-        return view('interviews.index', compact('interviews'));
-    }
 
     /**
      * 里親インタビュー詳細（公開）

@@ -39,12 +39,6 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('interviews.index') }}" 
-                               class="text-amber-800 hover:text-amber-900 transition-colors duration-200 text-sm">
-                                里親インタビュー
-                            </a>
-                        </li>
-                        <li>
                             <a href="{{ route('pets.search', 'dog') }}" 
                                class="text-amber-800 hover:text-amber-900 transition-colors duration-200 text-sm">
                                 犬の家族を見る
