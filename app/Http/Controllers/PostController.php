@@ -59,18 +59,18 @@ class PostController extends Controller
             });
         }
 
-        // 期間でフィルタ
+        // 期間でフィルタ（今月は月初〜現在の範囲、それ以外は開始日を日頭に丸め）
         if ($period !== 'all') {
-            $now = now();
             switch ($period) {
                 case 'month':
-                    $query->where('created_at', '>=', $now->subMonth());
+                    $startOfMonth = now()->startOfMonth();
+                    $query->whereBetween('created_at', [$startOfMonth, now()]);
                     break;
                 case 'half_year':
-                    $query->where('created_at', '>=', $now->subMonths(6));
+                    $query->where('created_at', '>=', now()->subMonths(6)->startOfDay());
                     break;
                 case 'year':
-                    $query->where('created_at', '>=', $now->subYear());
+                    $query->where('created_at', '>=', now()->subYear()->startOfDay());
                     break;
             }
         }
@@ -80,7 +80,7 @@ class PostController extends Controller
             $query->where('status', $status);
         }
 
-        $posts = $query->orderBy('created_at', 'desc')->paginate(10);
+        $posts = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
 
         return view('posts.index', compact('posts', 'type', 'keyword', 'period', 'status'));
     }

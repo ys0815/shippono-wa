@@ -131,8 +131,10 @@
             currentPage = 1;
             allPets = [];
             hasMorePets = true;
+            // totalCountはリセットしない（サーバから最新の値を取得するため）
             document.getElementById('pets-container').innerHTML = '';
             document.getElementById('no-more-pets').classList.add('hidden');
+            document.getElementById('scroll-hint').classList.add('hidden');
             loadPets();
         }
 
@@ -143,13 +145,24 @@
             isLoading = true;
             document.getElementById('loading-indicator').classList.remove('hidden');
             
+            // searchParamsからspeciesを除外（URLパスに既に含まれているため）
+            const { species, ...filteredSearchParams } = searchParams;
+            // null/空/文字列 'null' 'undefined' を除外
+            const cleanedParams = {};
+            Object.entries(filteredSearchParams).forEach(([key, value]) => {
+                if (value !== null && value !== undefined && value !== '' && value !== 'null' && value !== 'undefined') {
+                    cleanedParams[key] = value;
+                }
+            });
             const params = new URLSearchParams({
                 page: currentPage,
                 sort: currentSort,
-                ...searchParams
+                ...cleanedParams
             });
             
-            fetch(`/pets/search/{{ $species }}?${params}`, { headers: { 'Accept': 'application/json' } })
+            // 正しいspeciesを取得（filtersから取得）
+            const apiSpecies = '{{ $filters['species'] }}' || '{{ $species }}';
+            fetch(`/api/pets/search/${apiSpecies}?${params}`, { headers: { 'Accept': 'application/json' } })
                 .then(async response => {
                     const contentType = response.headers.get('content-type') || '';
                     if (!response.ok || !contentType.includes('application/json')) {
@@ -158,11 +171,27 @@
                     return response.json();
                 })
                 .then(data => {
+                    // 一時的なデバッグログ
+                    console.log('API Response:', data);
+                    console.log('Current sort:', currentSort);
+                    console.log('API Species:', apiSpecies);
+                    console.log('URL:', `/api/pets/search/${apiSpecies}?${params}`);
+                    
                     // 件数の更新（可能ならサーバ値を採用）
                     if (typeof data.totalCount === 'number') {
                         totalCount = data.totalCount;
+                        // 検索結果件数の表示を更新
+                        const countElement = document.querySelector('.text-amber-600');
+                        if (countElement) {
+                            countElement.textContent = totalCount.toLocaleString();
+                        }
                     } else if (typeof data.total === 'number') {
                         totalCount = data.total;
+                        // 検索結果件数の表示を更新
+                        const countElement = document.querySelector('.text-amber-600');
+                        if (countElement) {
+                            countElement.textContent = totalCount.toLocaleString();
+                        }
                     }
 
                     if (data.pets && data.pets.length > 0) {
@@ -171,15 +200,29 @@
                         });
                         currentPage++;
                         
-                        // ページサイズの推定（サーバが返す値があれば優先）
-                        const pageSize = typeof data.per_page === 'number' ? data.per_page : (typeof data.pageSize === 'number' ? data.pageSize : 8);
-                        if (data.pets.length < pageSize || (typeof totalCount === 'number' && allPets.length >= totalCount)) {
+                        // サーバから返されるhasMoreフラグを優先使用
+                        if (typeof data.hasMore === 'boolean') {
+                            hasMorePets = data.hasMore;
+                        } else {
+                            // フォールバック：ページサイズの推定
+                            const pageSize = typeof data.per_page === 'number' ? data.per_page : (typeof data.pageSize === 'number' ? data.pageSize : 5);
+                            hasMorePets = data.pets.length >= pageSize;
+                        }
+                        
+                        // 総数に達した場合のチェック（より厳密な条件）
+                        if (typeof totalCount === 'number' && allPets.length >= totalCount) {
                             hasMorePets = false;
+                        }
+                        
+                        // これ以上ペットがない場合のメッセージ表示
+                        if (!hasMorePets) {
                             document.getElementById('no-more-pets').classList.remove('hidden');
                         }
                     } else {
+                        // ペットが返されなかった場合
                         hasMorePets = false;
                         if (allPets.length === 0) {
+                            // 最初のページでペットが0件の場合のみ「これ以上ペットはいません」を表示
                             document.getElementById('no-more-pets').classList.remove('hidden');
                         }
                     }

@@ -146,6 +146,12 @@ class PetController extends Controller
             'shelter_id' => $request->get('shelter_id', ''),
             'sort' => $request->get('sort', 'newest')
         ];
+        // 'null' や 'undefined' の文字列を空として正規化
+        foreach ($filters as $k => $v) {
+            if ($v === 'null' || $v === 'undefined') {
+                $filters[$k] = '';
+            }
+        }
 
         // 動的な見出しを生成
         $speciesName = $this->generateDynamicTitle($filters, $speciesNames);
@@ -274,6 +280,12 @@ class PetController extends Controller
             'shelter_id' => $request->get('shelter_id', ''),
             'sort' => $request->get('sort', 'newest')
         ];
+        // 'null' や 'undefined' の文字列を空として正規化
+        foreach ($filters as $k => $v) {
+            if ($v === 'null' || $v === 'undefined') {
+                $filters[$k] = '';
+            }
+        }
 
         // ソート順の検証
         $validSorts = ['newest', 'oldest', 'updated'];
@@ -326,11 +338,15 @@ class PetController extends Controller
                 break;
         }
 
+        // 総数を先に取得
+        $totalCount = $query->count();
+
         $pets = $query->skip(($page - 1) * $perPage)
             ->take($perPage)
             ->get();
 
-        $totalCount = $query->count();
+        // hasMoreの正しい計算：現在のページ以降にまだペットがあるかどうか
+        $hasMore = (($page - 1) * $perPage + $pets->count()) < $totalCount;
 
         return response()->json([
             'pets' => $pets->map(function ($pet) {
@@ -368,7 +384,7 @@ class PetController extends Controller
                     'updated_at' => $pet->updated_at->setTimezone('Asia/Tokyo')->format('Y年n月j日'),
                 ];
             }),
-            'hasMore' => $pets->count() === $perPage,
+            'hasMore' => $hasMore,
             'totalCount' => $totalCount,
         ]);
     }
