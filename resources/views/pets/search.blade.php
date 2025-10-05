@@ -62,9 +62,9 @@
                 <div class="text-sm text-gray-700">
                     検索結果一覧 <span class="font-semibold text-amber-600">{{ number_format($totalCount) }}</span> 件
                 </div>
-                <div class="flex items-center gap-4">
-                    <label class="text-sm text-gray-700">並び順:</label>
-                    <select id="sort-order" class="px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
+                <div class="flex items-center gap-2">
+                    <label class="text-sm text-gray-700 whitespace-nowrap">並び順:</label>
+                    <select id="sort-order" class="px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 min-w-[120px]">
                         <option value="newest" {{ $filters['sort'] === 'newest' ? 'selected' : '' }}>新着順</option>
                         <option value="updated" {{ $filters['sort'] === 'updated' ? 'selected' : '' }}>更新順</option>
                         <option value="oldest" {{ $filters['sort'] === 'oldest' ? 'selected' : '' }}>古い順</option>
