@@ -151,7 +151,7 @@
                                     <a href="{{ $pet->shelter->website_url }}" 
                                        target="_blank" 
                                        rel="noopener noreferrer"
-                                       class="px-4 py-2 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm">
+                                       class="px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 hover:shadow-xl transition-all duration-300 font-semibold shadow-lg">
                                         保護団体サイトへ
                                     </a>
                                 @else
@@ -166,12 +166,12 @@
 
                                 @if($interviewPost)
                                     <a href="{{ route('interviews.show', $interviewPost) }}" 
-                                       class="px-4 py-2 text-sm rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm">
-                                        しっぽのわを読む
+                                       class="px-6 py-3 text-sm rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 hover:shadow-xl transition-all duration-300 font-semibold shadow-lg">
+                                        お迎え体験を読む
                                     </a>
                                 @else
                                     <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
-                                        しっぽのわを読む
+                                        お迎え体験を読む
                                     </button>
                                 @endif
                             </div>
@@ -427,7 +427,7 @@
                     
                     <!-- フィルター結果が空の場合 -->
                     <div class="col-span-full text-center py-12" x-show="selectedRegion !== 'all' && filteredShelters.length === 0">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-400 text-2xl">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center text-amber-500 text-2xl">
                             🔍
                         </div>
                         <p class="text-gray-500" x-text="getRegionName(selectedRegion) + 'には保護団体が登録されていません'"></p>
