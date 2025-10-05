@@ -204,7 +204,7 @@
                             <div class="absolute -inset-3 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <h4 class="text-2xl font-bold text-gray-800 mb-4">幸せの可視化</h4>
-                        <p class="text-base text-gray-600 leading-relaxed">保護動物と家族の温かいストーリーを、写真と文章で心に届けます。</p>
+                        <p class="text-base text-gray-600 leading-relaxed">保護動物と家族の温かいストーリーを<br>写真と文章で心に届けます。</p>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-8">
@@ -214,7 +214,7 @@
                             <div class="absolute -inset-3 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <h4 class="text-2xl font-bold text-gray-800 mb-4">共感の輪</h4>
-                        <p class="text-base text-gray-600 leading-relaxed">一人ひとりの想いに触れて、優しさが広がる支援の循環を生み出します。</p>
+                        <p class="text-base text-gray-600 leading-relaxed">一人ひとりの想いに触れて<br>優しさが広がる支援の循環を生み出します。</p>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-8">
@@ -224,7 +224,7 @@
                             <div class="absolute -inset-3 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
                         <h4 class="text-2xl font-bold text-gray-800 mb-4">命をつなぐ</h4>
-                        <p class="text-base text-gray-600 leading-relaxed">施設や里親さんとの出会いを、温かく分かりやすくお手伝いします。</p>
+                        <p class="text-base text-gray-600 leading-relaxed">施設や里親さんとの出会いを<br>温かく分かりやすくお手伝いします。</p>
                     </div>
                 </div>
             </section>

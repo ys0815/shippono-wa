@@ -172,7 +172,7 @@
                     @if($pair->count() === 2)
                         <div class="flex items-center justify-between rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 mb-4">
                             <div class="text-gray-800 font-medium">
-                                {{ $pair[0]->name }} ← {{ $pair[1]->name }}
+                                {{ $pair[0]->name }} ↔ {{ $pair[1]->name }}
                             </div>
                             <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-gray-300 text-gray-700 hover:bg-gray-100">編集</a>
                         </div>
