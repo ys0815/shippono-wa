@@ -43,6 +43,11 @@ class ImageOptimizationService
             if ($path) {
                 $savedPaths[$sizeName] = $path;
             }
+
+            // メモリを解放
+            if (function_exists('gc_collect_cycles')) {
+                gc_collect_cycles();
+            }
         }
 
         return $savedPaths;
@@ -199,6 +204,12 @@ class ImageOptimizationService
 
                 $image->toJpeg($config['quality'])->save(storage_path('app/public/' . $path));
                 $savedPaths[$sizeName] = $path;
+
+                // メモリを解放
+                unset($image);
+                if (function_exists('gc_collect_cycles')) {
+                    gc_collect_cycles();
+                }
             } catch (\Exception $e) {
                 \Log::error('Existing image optimization failed: ' . $e->getMessage());
             }

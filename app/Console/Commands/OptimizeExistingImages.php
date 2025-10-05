@@ -119,6 +119,9 @@ class OptimizeExistingImages extends Command
                 return;
             }
 
+            // メモリ制限を一時的に増やす
+            ini_set('memory_limit', '512M');
+
             // 最適化実行
             $optimizedImages = $imageService->optimizeExistingImage($path, $directory);
 
@@ -126,6 +129,11 @@ class OptimizeExistingImages extends Command
                 $this->line("Optimized: {$path} -> " . count($optimizedImages) . " sizes");
             } else {
                 $this->warn("Failed to optimize: {$path}");
+            }
+
+            // メモリを強制的に解放
+            if (function_exists('gc_collect_cycles')) {
+                gc_collect_cycles();
             }
         } catch (\Exception $e) {
             $this->error("Error optimizing {$path}: " . $e->getMessage());
