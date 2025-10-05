@@ -163,7 +163,7 @@
             @endforelse
             
             @if($recentPosts->isNotEmpty())
-            <a href="{{ route('mypage.posts') }}" class="block w-full text-center bg-gray-200 text-gray-800 py-3 rounded-lg font-medium hover:bg-gray-300 transition duration-200">
+            <a href="{{ route('mypage.posts') }}" class="block w-full text-center bg-gray-200 text-gray-800 mb-4 py-3 rounded-lg font-medium hover:bg-gray-300 transition duration-200">
                 すべての投稿を見る→
             </a>
         @endif
