@@ -126,9 +126,11 @@
             @endforelse
 
             <!-- 詳細を見るボタン（ペットプロフィール管理＝一覧ページへ遷移） -->
-            <a href="{{ route('mypage.pets') }}" class="btn btn-brand w-full py-3">
-                ペット一覧を見る→
-            </a>
+            @if($pets->isNotEmpty())
+                <a href="{{ route('mypage.pets') }}" class="btn btn-brand w-full py-3">
+                    ペット一覧を見る→
+                </a>
+            @endif
         </div>
 
         <!-- 最近の投稿 -->
@@ -152,6 +154,12 @@
             @empty
                 <div class="text-sm text-gray-600">まだ投稿はありません。</div>
             @endforelse
+            
+            @if($recentPosts->isNotEmpty())
+            <a href="{{ route('mypage.posts') }}" class="block w-full text-center bg-gray-200 text-gray-800 py-3 rounded-lg font-medium hover:bg-gray-300 transition duration-200">
+                すべての投稿を見る→
+            </a>
+        @endif
 
             <!-- アクションボタン -->
             <div class="space-y-3">
@@ -174,9 +182,7 @@
                         里親インタビューを投稿する
                     </a>
                 </div>
-                <a href="{{ route('mypage.posts') }}" class="block w-full text-center bg-gray-200 text-gray-800 py-3 rounded-lg font-medium hover:bg-gray-300 transition duration-200">
-                    すべての投稿を見る→
-                </a>
+ 
             </div>
         </div>
     </div>

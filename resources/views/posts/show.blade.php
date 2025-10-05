@@ -106,7 +106,7 @@
                             </div>
                             @if($post->pet->user)
                                 <div class="text-sm mt-1">
-                                    <span class="text-amber-600">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}
+                                    <span class="text-amber-600">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}さん
                                 </div>
                             @endif
                             @if($post->pet->shelter)

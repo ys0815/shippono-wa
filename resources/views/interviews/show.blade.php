@@ -171,7 +171,7 @@
                                 </div>
                                 @if($post->pet->user)
                                     <div class="text-sm mt-1">
-                                        <span class="text-amber-600">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}
+                                        <span class="text-amber-600">飼い主さん:</span> {{ e($post->pet->user->display_name ?? $post->pet->user->name) }}さん
                                     </div>
                                 @endif
                                 @if($post->pet->shelter)
@@ -197,7 +197,7 @@
                                     保護団体サイトへ
                                 </button>
                             @endif
-
+    
                             <!-- シェア -->
                             <button onclick="openShareModal()" 
                                     class="flex-1 px-6 py-3 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
