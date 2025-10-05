@@ -13,7 +13,7 @@
                     @endif
                     
                     <!-- アイコンを背景バナー内に配置 -->
-                    <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-white shadow-lg bg-amber-100 cursor-pointer hover:shadow-xl transition-shadow duration-300" 
+                    <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-amber-400 shadow-lg bg-amber-100 cursor-pointer hover:shadow-xl transition-shadow duration-300" 
                          onclick="openPetImageModal()">
                         @if($pet->profile_image_url)
                             <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
@@ -320,7 +320,7 @@
                                 @foreach($familyPets as $familyPet)
                                     <a href="{{ route('pets.show', $familyPet->id) }}" class="group">
                                         <div class="bg-gray-50 rounded-lg p-5 hover:bg-gray-100 transition">
-                                            <div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-amber-200 mb-4">
+                                            <div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-amber-400 mb-4">
                                                 @if($familyPet->profile_image_url)
                                                     <img src="{{ $familyPet->profile_image_url }}" alt="{{ $familyPet->name }}" class="w-full h-full object-cover">
                                                 @else

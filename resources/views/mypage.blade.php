@@ -72,7 +72,7 @@
             @forelse ($pets as $pet)
                 <div class="bg-white rounded-lg p-4 mb-3 border">
                     <div class="flex items-start space-x-3">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        <div class="w-12 h-12 bg-amber-100 border-2 border-amber-400 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
                             @if($pet->profile_image_url)
                                 <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
                             @else

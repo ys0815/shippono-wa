@@ -231,7 +231,7 @@
             petElement.innerHTML = `
                 <!-- ペット画像 -->
                 <div class="relative mb-4">
-                    <a href="/pets/${pet.id}" class="block w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-amber-200 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <a href="/pets/${pet.id}" class="block w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-amber-400 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                         ${pet.profile_image_url ? 
                             `<img src="${pet.profile_image_url}" alt="${pet.name}" loading="lazy" decoding="async" class="w-full h-full object-cover">` :
                             `<div class="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
@@ -271,21 +271,21 @@
                 <div class="flex gap-2 mt-6 justify-center">
                     ${pet.shelter && pet.shelter.website_url ? 
                         `<a href="${pet.shelter.website_url}" target="_blank" rel="noopener noreferrer" 
-                           class="px-3 py-2 text-xs rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
+                           class="px-4 py-2 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
                             保護団体サイトへ
                         </a>` :
-                        `<button disabled class="px-3 py-2 text-xs rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed text-center">
+                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed text-center">
                             保護団体サイトへ
                         </button>`
                     }
                     
                     ${(pet.interview_post && pet.interview_post.id && pet.interview_post.id !== null) ? 
                         `<a href="/interviews/${pet.interview_post.id}" 
-                           class="px-3 py-2 text-xs rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm text-center">
-                            しっぽのわを読む
+                           class="px-4 py-2 text-sm rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm text-center">
+                             お迎え体験を読む
                         </a>` :
-                        `<button disabled class="px-3 py-2 text-xs rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed text-center">
-                            しっぽのわを読む
+                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed text-center">
+                            お迎え体験を読む
                         </button>`
                     }
                 </div>

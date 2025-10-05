@@ -96,7 +96,7 @@
                         <div class="text-center group">
                             <!-- ペット画像（正円・大きく表示） -->
                             <div class="relative mb-4">
-                                <a href="{{ route('pets.show', $pet->id) }}" class="block w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
+                                <a href="{{ route('pets.show', $pet->id) }}" class="block w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-amber-400 shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
                                     @if($pet->profile_image_url)
                                         <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
                                     @else

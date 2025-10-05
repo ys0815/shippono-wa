@@ -83,7 +83,7 @@
             @if($post->pet)
                 <div class="border-t border-gray-200 pt-4">
                     <div class="flex items-center space-x-3 mb-4">
-                        <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden bg-amber-100 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
+                        <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden border-2 border-amber-400 bg-amber-100 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
                             @if($post->pet->profile_image_url)
                                 @php
                                     $imageUrl = $post->pet->profile_image_url;

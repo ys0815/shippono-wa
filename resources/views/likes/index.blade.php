@@ -57,10 +57,10 @@
 
             <!-- いいねした動物プロフィール -->
             @if($likes->count() > 0)
-                <div class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             
                     @foreach($likes as $like)
-                        <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <div class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border hover:border-amber-200 h-full flex flex-col transform hover:-translate-y-1">
                             <!-- プロフィール画像（背景画像） -->
                             <div class="relative h-40 bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center">
                                 @if($like->pet->header_image_url)
@@ -78,7 +78,7 @@
                                 
                                 <!-- アイコン画像（正円） -->
                                 <div style="position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); z-index: 20;">
-                                    <div style="width: 96px; height: 96px; border-radius: 50%; background-color: white; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 4px solid white; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
+                                    <div style="width: 96px; height: 96px; border-radius: 50%; background-color: white; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid #fbbf24; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
                                         @if($like->pet->profile_image_url)
                                             <img src="{{ $like->pet->profile_image_url }}" alt="{{ $like->pet->name }}" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
                                         @else

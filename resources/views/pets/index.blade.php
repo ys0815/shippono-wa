@@ -41,7 +41,7 @@
                                 
                                 <!-- アイコン画像（正円） -->
                                 <div style="position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); z-index: 20;">
-                                    <div style="width: 96px; height: 96px; border-radius: 50%; background-color: white; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 4px solid white; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
+                                    <div style="width: 96px; height: 96px; border-radius: 50%; background-color: white; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid #fbbf24; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
                                         @if($pet->profile_image_url)
                                             <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
                                         @else
