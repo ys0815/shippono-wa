@@ -8,19 +8,19 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- ページヘッダー -->
         <div class="text-center mb-10">
-            <h1 class="text-3xl font-bold text-gray-800 mb-3 relative inline-block">
+            <h1 class="text-3xl font-bold text-main-text mb-3 relative inline-block">
                 <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                     {{ $speciesName }}の家族
                 </span>
                 <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
             </h1>
-            <p class="text-sm text-gray-600">新しい家族のもとで、今日も元気に暮らしています！</p>
+            <p class="text-sm text-main-text">新しい家族のもとで、今日も元気に暮らしています！</p>
         </div>
 
         <!-- 検索条件表示 -->
         @if(isset($searchParams) && array_filter($searchParams))
         <div class="mb-6 bg-amber-50 rounded-lg border border-amber-200 p-4">
-            <h3 class="text-sm font-semibold text-gray-800 mb-3">現在の検索条件</h3>
+            <h3 class="text-sm font-semibold text-main-text mb-3">現在の検索条件</h3>
             <div class="flex flex-wrap gap-2">
                 @if(isset($searchParams['species']) && $searchParams['species'])
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
@@ -59,11 +59,11 @@
         <!-- ソート機能 -->
         <div class="mb-8 bg-white rounded-lg border border-amber-100 p-4">
             <div class="flex items-center justify-between gap-4">
-                <div class="text-sm text-gray-700">
+                <div class="text-sm text-main-text">
                     検索結果一覧 <span class="font-semibold text-amber-600">{{ number_format($totalCount) }}</span> 件
                 </div>
                 <div class="flex items-center gap-2">
-                    <label class="text-sm text-gray-700 whitespace-nowrap">並び順:</label>
+                    <label class="text-sm text-main-text whitespace-nowrap">並び順:</label>
                     <select id="sort-order" class="px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 min-w-[120px]">
                         <option value="newest" {{ $filters['sort'] === 'newest' ? 'selected' : '' }}>新着順</option>
                         <option value="updated" {{ $filters['sort'] === 'updated' ? 'selected' : '' }}>更新順</option>
@@ -82,8 +82,8 @@
 
         <!-- ローディングインジケーター -->
         <div id="loading-indicator" class="text-center py-6 hidden">
-            <div class="inline-flex items-center px-5 py-3 text-base text-gray-600">
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <div class="inline-flex items-center px-5 py-3 text-base text-main-text">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-main-text" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -92,7 +92,7 @@
         </div>
 
         <!-- これ以上ないメッセージ -->
-        <div id="no-more-pets" class="text-center py-6 text-gray-500 text-base hidden">
+        <div id="no-more-pets" class="text-center py-6 text-sub-text text-base hidden">
             これ以上ペットはいません
         </div>
 
@@ -215,7 +215,7 @@
             petElement.className = 'text-center group bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-300';
             
             const genderIcon = pet.gender === 'male' ? '♂' : (pet.gender === 'female' ? '♀' : '?');
-            const genderColor = pet.gender === 'male' ? 'text-blue-500' : (pet.gender === 'female' ? 'text-pink-500' : 'text-gray-500');
+            const genderColor = pet.gender === 'male' ? 'text-blue-500' : (pet.gender === 'female' ? 'text-pink-500' : 'text-sub-text');
             
             let ageDisplay = '';
             if (pet.age_years && pet.age_months && pet.age_years > 0 && pet.age_months > 0) {
@@ -251,17 +251,17 @@
                     ` : ''}
                     
                     <!-- 名前・性別・推定年齢 -->
-                    <div class="text-xl font-bold text-gray-800">
+                    <div class="text-xl font-bold text-main-text">
                         ${pet.name} 
                         <span class="text-lg font-normal ${genderColor}">
                             ${genderIcon}
                         </span>
-                        ${ageDisplay ? `<span class="text-sm text-gray-500 ml-1">${ageDisplay}</span>` : ''}
+                        ${ageDisplay ? `<span class="text-sm text-sub-text ml-1">${ageDisplay}</span>` : ''}
                     </div>
                     
                     <!-- プロフィール説明 -->
                     ${pet.profile_description ? `
-                        <div class="text-sm text-gray-600 leading-relaxed max-w-xs mx-auto">
+                        <div class="text-sm text-main-text leading-relaxed max-w-xs mx-auto">
                             ${pet.profile_description.length > 60 ? pet.profile_description.substring(0, 60) + '...' : pet.profile_description}
                         </div>
                     ` : ''}
@@ -274,7 +274,7 @@
                            class="px-4 py-2 text-sm rounded-full border-2 border-amber-400 text-amber-700 bg-white hover:bg-amber-50 hover:border-amber-500 transition-all duration-200 font-medium shadow-sm text-center">
                             保護団体サイトへ
                         </a>` :
-                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed text-center">
+                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed text-center">
                             保護団体サイトへ
                         </button>`
                     }
@@ -284,7 +284,7 @@
                            class="px-4 py-2 text-sm rounded-full border-2 border-pink-400 text-pink-700 bg-white hover:bg-pink-50 hover:border-pink-500 transition-all duration-200 font-medium shadow-sm text-center">
                              お迎え体験を読む
                         </a>` :
-                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed text-center">
+                        `<button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed text-center">
                             お迎え体験を読む
                         </button>`
                     }

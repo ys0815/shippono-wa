@@ -14,7 +14,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans text-gray-900 antialiased" style="font-family: 'Noto Sans JP', sans-serif;">
+<body class="font-sans text-main-text antialiased" style="font-family: 'Noto Sans JP', sans-serif;">
     <div class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
             <!-- Header -->
@@ -22,8 +22,8 @@
                 <div class="mx-auto h-32 w-32 flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 shadow-lg mb-6">
                     <img src="{{ asset('images/icon.png') }}" alt="# しっぽのわ" class="h-20 w-20">
                 </div>
-                <h2 class="text-xl font-bold text-gray-800 mb-2">新しいパスワード設定</h2>
-                <p class="text-gray-600">新しいパスワードを入力してください</p>
+                <h2 class="text-xl font-bold text-main-text mb-2">新しいパスワード設定</h2>
+                <p class="text-main-text">新しいパスワードを入力してください</p>
             </div>
 
             <!-- Form Card -->
@@ -53,7 +53,7 @@
 
                     <!-- Email Address -->
                     <div>
-                        <x-input-label for="email" :value="__('メールアドレス')" class="text-sm font-medium text-gray-700 mb-2" />
+                        <x-input-label for="email" :value="__('メールアドレス')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="email" 
                                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
                                       type="email" 
@@ -68,7 +68,7 @@
 
                     <!-- Password -->
                     <div>
-                        <x-input-label for="password" :value="__('新しいパスワード')" class="text-sm font-medium text-gray-700 mb-2" />
+                        <x-input-label for="password" :value="__('新しいパスワード')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="password" 
                                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
                                       type="password"
@@ -77,12 +77,12 @@
                                       autocomplete="new-password" 
                                       placeholder="新しいパスワードを入力してください" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        <p class="mt-1 text-sm text-gray-500">8文字以上の英数字を含むパスワードを設定してください</p>
+                        <p class="mt-1 text-sm text-sub-text">8文字以上の英数字を含むパスワードを設定してください</p>
                     </div>
 
                     <!-- Confirm Password -->
                     <div>
-                        <x-input-label for="password_confirmation" :value="__('パスワード確認')" class="text-sm font-medium text-gray-700 mb-2" />
+                        <x-input-label for="password_confirmation" :value="__('パスワード確認')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="password_confirmation" 
                                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
                                       type="password"
@@ -103,7 +103,7 @@
 
                     <!-- Back to Login Link -->
                     <div class="text-center">
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-main-text">
                             ログインは
                             <a href="{{ route('login') }}" class="font-medium text-amber-600 hover:text-amber-700 transition-colors">
                                 こちら
@@ -115,7 +115,7 @@
 
             <!-- Footer -->
             <div class="text-center">
-                <a href="/" class="text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                <a href="/" class="text-sm text-sub-text hover:text-main-text transition-colors">
                     ← トップページに戻る
                 </a>
             </div>

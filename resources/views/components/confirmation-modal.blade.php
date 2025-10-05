@@ -80,10 +80,10 @@ style="display: none;">
                     
                     <!-- テキスト内容 -->
                     <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                        <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title" x-text="title">
+                        <h3 class="text-lg font-medium leading-6 text-main-text" id="modal-title" x-text="title">
                         </h3>
                         <div class="mt-2">
-                            <p class="text-sm text-gray-500" x-text="message">
+                            <p class="text-sm text-sub-text" x-text="message">
                             </p>
                         </div>
                     </div>
@@ -91,7 +91,7 @@ style="display: none;">
             </div>
             
             <!-- ボタンエリア -->
-            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <div class="bg-main-bg px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <!-- 実行ボタン -->
                 <button type="button" 
                         @click="confirmAction()"
@@ -103,7 +103,7 @@ style="display: none;">
                 <!-- キャンセルボタン -->
                 <button type="button" 
                         @click="closeModal()"
-                        class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                        class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-main-text shadow-sm hover:bg-main-bg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                         x-text="cancelText">
                 </button>
             </div>

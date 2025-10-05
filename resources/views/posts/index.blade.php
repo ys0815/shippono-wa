@@ -4,7 +4,7 @@
 
 <x-app-layout>
 
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-main-bg">
         <!-- ヘッダー（固定） -->
         <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,15 +26,15 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <nav class="flex justify-center space-x-6 sm:space-x-8 md:space-x-12">
                     <a href="{{ route('mypage.posts', ['type' => 'all']) }}" 
-                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'all' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
+                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'all' ? 'border-amber-500 text-amber-600' : 'border-transparent text-sub-text hover:text-main-text hover:border-gray-300' }}">
                         すべて
                     </a>
                     <a href="{{ route('mypage.posts', ['type' => 'gallery']) }}" 
-                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'gallery' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
+                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'gallery' ? 'border-amber-500 text-amber-600' : 'border-transparent text-sub-text hover:text-main-text hover:border-gray-300' }}">
                         今日の幸せ
                     </a>
                     <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" 
-                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'interview' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
+                       class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'interview' ? 'border-amber-500 text-amber-600' : 'border-transparent text-sub-text hover:text-main-text hover:border-gray-300' }}">
                         里親インタビュー
                     </a>
                 </nav>
@@ -71,7 +71,7 @@
                     <div class="flex flex-col sm:flex-row gap-3">
                         <!-- キーワード検索 -->
                         <div class="flex-1">
-                            <label for="keyword" class="block text-sm md:text-lg font-medium text-gray-700 mb-1">検索:</label>
+                            <label for="keyword" class="block text-sm md:text-lg font-medium text-main-text mb-1">検索:</label>
                             <div class="relative">
                                 <input type="text" 
                                        id="keyword" 
@@ -89,7 +89,7 @@
                         <div class="flex gap-3">
                             <!-- 期間フィルタ -->
                             <div class="flex-1">
-                                <label for="period" class="block text-sm md:text-lg font-medium text-gray-700 mb-1">期間:</label>
+                                <label for="period" class="block text-sm md:text-lg font-medium text-main-text mb-1">期間:</label>
                                 <select id="period" 
                                         name="period" 
                                         class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
@@ -102,7 +102,7 @@
                             
                             <!-- 状態フィルタ -->
                             <div class="flex-1">
-                                <label for="status" class="block text-sm md:text-lg font-medium text-gray-700 mb-1">状態:</label>
+                                <label for="status" class="block text-sm md:text-lg font-medium text-main-text mb-1">状態:</label>
                                 <select id="status" 
                                         name="status" 
                                         class="w-full px-2 py-1.5 text-base md:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
@@ -131,8 +131,8 @@
                             </div>
                             
                             <!-- タイトルと本文 -->
-                            <h3 class="text-lg font-medium text-gray-900 mb-2">{{ $post->title }}</h3>
-                            <div class="text-gray-600 mb-4 whitespace-pre-wrap">{{ Str::limit($post->content, 100) }}</div>
+                            <h3 class="text-lg font-medium text-main-text mb-2">{{ $post->title }}</h3>
+                            <div class="text-main-text mb-4 whitespace-pre-wrap">{{ Str::limit($post->content, 100) }}</div>
                             
                             <!-- メディア表示（画像・動画） -->
                             @if($post->media->count() > 0)
@@ -156,7 +156,7 @@
                             
                             <!-- 閲覧数と日時 -->
                             <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <div class="flex items-center space-x-4 text-sm text-sub-text">
                                     <span class="flex items-center">
                                         <span class="mr-1">👀</span>
                                         {{ $post->view_count ?? 0 }}
@@ -254,7 +254,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-700 mb-2">
+                    <h3 class="text-lg font-semibold text-main-text mb-2">
                         @if($type === 'gallery')
                             まだ今日の幸せを投稿していませんね
                         @elseif($type === 'interview')
@@ -263,7 +263,7 @@
                             まだ投稿をしていませんね
                         @endif
                     </h3>
-                    <p class="text-gray-500 mb-6">
+                    <p class="text-sub-text mb-6">
                         @if($type === 'gallery')
                         小さな幸せをシェアしてみませんか？
                         @elseif($type === 'interview')

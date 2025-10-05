@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-main-bg">
         <!-- ヘッダー（固定） -->
         <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,7 +19,7 @@
 
         <!-- メインコンテンツ -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <h3 class="text-base font-semibold text-gray-800 mb-3">登録済みペット</h3>
+            <h3 class="text-base font-semibold text-main-text mb-3">登録済みペット</h3>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($pets as $pet)
@@ -54,13 +54,13 @@
                                 
                                 <!-- いいね・投稿数バッジ -->
                                 <div class="absolute top-3 right-3 flex space-x-2">
-                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-800 flex items-center">
+                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-main-text flex items-center">
                                         <svg class="w-3 h-3 mr-1 text-red-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                                         </svg>
                                         {{ $pet->likes->count() }}
                                     </div>
-                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-gray-800 flex items-center">
+                                    <div class="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-main-text flex items-center">
                                         <svg class="w-3 h-3 mr-1 text-amber-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                                         </svg>
@@ -72,17 +72,17 @@
                     <!-- ペット情報 -->
                     <div class="px-6 pb-6 flex-1 flex flex-col" style="padding-top: 2rem;">
                                 <div class="text-center mb-4">
-                                    <h3 class="font-bold text-xl text-gray-800 mb-1">{{ $pet->name }}</h3>
+                                    <h3 class="font-bold text-xl text-main-text mb-1">{{ $pet->name }}</h3>
                                     <div class="text-sm text-amber-600 font-medium">
                                         {{ __([ 'dog' => '犬', 'cat' => '猫', 'rabbit' => 'うさぎ', 'other' => 'その他'][$pet->species] ?? $pet->species) }}
                                         @if($pet->breed)
-                                            <span class="text-gray-500">・{{ $pet->breed }}</span>
+                                            <span class="text-sub-text">・{{ $pet->breed }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 
                                 <div class="space-y-2 mb-4">
-                                    <div class="flex items-center text-sm text-gray-600">
+                                    <div class="flex items-center text-sm text-main-text">
                                         <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
                                         </svg>
@@ -99,7 +99,7 @@
                                     </div>
                                     
                                     @if($pet->rescue_date)
-                                    <div class="flex items-center text-sm text-gray-600">
+                                    <div class="flex items-center text-sm text-main-text">
                                         <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                         </svg>
@@ -108,7 +108,7 @@
                                     @endif
                                     
                                     @if($pet->shelter)
-                                    <div class="flex items-center text-sm text-gray-600">
+                                    <div class="flex items-center text-sm text-main-text">
                                         <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                                         </svg>
@@ -129,7 +129,7 @@
                                             見る
                                         </a>
                                         <a href="{{ route('mypage.pets.edit', ['pet_id' => $pet->id]) }}" 
-                                           class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm font-medium text-center hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center">
+                                           class="flex-1 bg-gray-100 text-main-text py-2 px-3 rounded-lg text-sm font-medium text-center hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center">
                                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                             </svg>
@@ -146,8 +146,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-lg font-semibold text-gray-700 mb-2">まだペットが登録されていません</h3>
-                            <p class="text-gray-500 mb-6">大切な家族の一員を登録して、<br>みんなでシェアしましょう</p>
+                            <h3 class="text-lg font-semibold text-main-text mb-2">まだペットが登録されていません</h3>
+                            <p class="text-sub-text mb-6">大切な家族の一員を登録して、<br>みんなでシェアしましょう</p>
                             <a href="{{ route('mypage.pets.create') }}" 
                                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -162,30 +162,30 @@
             <!-- 家族リンク設定セクション -->
             <div class="mt-8">
                 <div class="bg-white rounded-lg shadow-sm border p-6">
-                    <h3 class="text-base font-semibold text-gray-800 mb-3">家族リンク設定</h3>
+                    <h3 class="text-base font-semibold text-main-text mb-3">家族リンク設定</h3>
 
-                    <div class="text-sm text-gray-700 mb-4">
+                    <div class="text-sm text-main-text mb-4">
                         複数の動物を一緒に飼っている場合、家族として関連付けることができます。
                     </div>
 
                     @php($pair = $pets->take(2))
                     @if($pair->count() === 2)
                         <div class="flex items-center justify-between rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 mb-4">
-                            <div class="text-gray-800 font-medium">
+                            <div class="text-main-text font-medium">
                                 {{ $pair[0]->name }} ↔ {{ $pair[1]->name }}
                             </div>
-                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-gray-300 text-gray-700 hover:bg-gray-100">編集</a>
+                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-gray-300 text-main-text hover:bg-gray-100">編集</a>
                         </div>
                     @else
-                        <div class="flex items-center justify-between rounded-lg bg-gray-50 border border-gray-200 px-4 py-3 mb-4">
-                            <div class="text-gray-500">
+                        <div class="flex items-center justify-between rounded-lg bg-main-bg border border-gray-200 px-4 py-3 mb-4">
+                            <div class="text-sub-text">
                                 家族リンクは未設定です
                             </div>
-                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-gray-300 text-gray-700 hover:bg-gray-100">編集</a>
+                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-gray-300 text-main-text hover:bg-gray-100">編集</a>
                         </div>
                     @endif
 
-                    <a href="{{ route('mypage.pets.links') }}" class="w-full inline-flex justify-center items-center px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition duration-200">
+                    <a href="{{ route('mypage.pets.links') }}" class="w-full inline-flex justify-center items-center px-4 py-2 rounded-lg border border-gray-300 text-main-text hover:bg-main-bg transition duration-200">
                         <span class="mr-1">+</span> 家族リンクを追加
                     </a>
                 </div>

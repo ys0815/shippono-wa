@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-main-bg">
         <!-- ヘッダー -->
         <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-30">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -120,10 +120,10 @@
 
                 <!-- 基本情報 -->
                 <div>
-                    <h3 class="text-base font-medium text-gray-700 mb-4">基本情報</h3>
+                    <h3 class="text-base font-medium text-main-text mb-4">基本情報</h3>
 
                     <div>
-                        <label for="name" class="block text-base font-medium text-gray-700 mb-2">名前</label>
+                        <label for="name" class="block text-base font-medium text-main-text mb-2">名前</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🐾 その子の名前を教えてください。呼び方も含めて、親しみやすい名前で大丈夫です。
@@ -142,7 +142,7 @@
                     </div>
 
                     <div>
-                        <label for="species" class="block text-base font-medium text-gray-700 mb-2 mt-6" >ペットの種類</label>
+                        <label for="species" class="block text-base font-medium text-main-text mb-2 mt-6" >ペットの種類</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🐕 どのような動物でしょうか？犬、猫、うさぎなど、その子の種類を選んでください。
@@ -158,7 +158,7 @@
                     </div>
 
                     <div>
-                        <label for="breed" class="block text-base font-medium text-gray-700 mb-2 mt-6">品種</label>
+                        <label for="breed" class="block text-base font-medium text-main-text mb-2 mt-6">品種</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🎨 品種がわかる場合は教えてください。ミックスや雑種でも、その子らしさが一番大切です。
@@ -176,7 +176,7 @@
                     </div>
 
                     <div>
-                        <label for="gender" class="block text-base font-medium text-gray-700 mb-2 mt-6">性別</label>
+                        <label for="gender" class="block text-base font-medium text-main-text mb-2 mt-6">性別</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 ♂♀ 性別がわかる場合は教えてください。わからない場合は「不明」で大丈夫です。
@@ -191,7 +191,7 @@
                     </div>
 
                     <div>
-                        <label for="birth_date" class="block text-base font-medium text-gray-700 mb-2 mt-6">誕生日</label>
+                        <label for="birth_date" class="block text-base font-medium text-main-text mb-2 mt-6">誕生日</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🎂 誕生日がわかる場合は教えてください。わからない場合は空欄のままで大丈夫です。
@@ -205,7 +205,7 @@
                     </div>
 
                     <div>
-                        <label for="estimated_age" class="block text-base font-medium text-gray-700 mb-2 mt-6">推定年齢</label>
+                        <label for="estimated_age" class="block text-base font-medium text-main-text mb-2 mt-6">推定年齢</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 📅 年齢がわかる場合は教えてください。わからない場合は空欄のままで大丈夫です。
@@ -214,11 +214,11 @@
                         <div class="space-y-2">
                             <div class="flex items-center gap-2">
                                 <input id="age_years" name="age_years" type="number" min="0" max="40" step="1" placeholder="0" class="w-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" value="{{ old('age_years', $pet->age_years ?? '') }}" @input="updateTotalMonths()" />
-                                <span class="text-gray-600 text-sm">歳</span>
+                                <span class="text-main-text text-sm">歳</span>
                                 <input id="age_months" name="age_months" type="number" min="0" max="11" step="1" placeholder="0" class="w-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" value="{{ old('age_months', $pet->age_months ?? '') }}" @input="updateTotalMonths()" />
-                                <span class="text-gray-600 text-sm">ヶ月</span>
+                                <span class="text-main-text text-sm">ヶ月</span>
                             </div>
-                            <p class="text-xs text-gray-500">例: 1歳3ヶ月の場合は「1歳」「3ヶ月」、6ヶ月の場合は「0歳」「6ヶ月」</p>
+                            <p class="text-xs text-sub-text">例: 1歳3ヶ月の場合は「1歳」「3ヶ月」、6ヶ月の場合は「0歳」「6ヶ月」</p>
                             <!-- 隠しフィールドで総月数を計算して保存 -->
                             <input type="hidden" id="estimated_age" name="estimated_age" value="{{ old('estimated_age', isset($pet) ? ((($pet->age_years ?? 0) * 12) + ($pet->age_months ?? 0)) : '') }}" />
                         </div>
@@ -228,11 +228,11 @@
 
                 <!-- お迎え情報 -->
                 <div>
-                    <h3 class="text-base font-medium text-gray-700 mb-4">お迎え情報</h3>
+                    <h3 class="text-base font-medium text-main-text mb-4">お迎え情報</h3>
 
                     <!-- 1. 種別選択（セレクト） -->
                     <div>
-                        <label for="shelter_kind" class="block text-base font-medium text-gray-700 mb-2 mt-6">保護施設の種別</label>
+                        <label for="shelter_kind" class="block text-base font-medium text-main-text mb-2 mt-6">保護施設の種別</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🏠 お迎えした場所の種別を教えてください。わからない場合は「不明」で大丈夫です。
@@ -248,7 +248,7 @@
 
                     <!-- 2. 所在地カテゴリ選択（セレクト） -->
                     <div>
-                        <label for="shelter_area" class="block text-base font-medium text-gray-700 mb-2 mt-6">保護施設の所在地</label>
+                        <label for="shelter_area" class="block text-base font-medium text-main-text mb-2 mt-6">保護施設の所在地</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 📍 お迎えした場所の地域を教えてください。わからない場合は空欄のままで大丈夫です。
@@ -264,7 +264,7 @@
 
                     <!-- 3. 施設名選択（セレクト） -->
                     <div>
-                        <label for="shelter_id" class="block text-base font-medium text-gray-700 mb-2 mt-6">保護施設名</label>
+                        <label for="shelter_id" class="block text-base font-medium text-main-text mb-2 mt-6">保護施設名</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 🏢 お迎えした団体・施設・サイト名を教えてください。わからない場合は空欄のままで大丈夫です。
@@ -277,11 +277,11 @@
                                 <option :value="s.id" x-text="s.name" :selected="s.id == '{{ old('shelter_id', $pet->shelter_id ?? '') }}'"></option>
                             </template>
                         </select>
-                        <p class="text-xs text-gray-500 mt-1" x-show="kind==='unknown'">※ 不明を選んだ場合は未選択のままで構いません。</p>
+                        <p class="text-xs text-sub-text mt-1" x-show="kind==='unknown'">※ 不明を選んだ場合は未選択のままで構いません。</p>
                     </div>
 
                     <div>
-                        <label for="rescue_date" class="block text-base font-medium text-gray-700 mb-2 mt-6">お迎え記念日</label>
+                        <label for="rescue_date" class="block text-base font-medium text-main-text mb-2 mt-6">お迎え記念日</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 💝 お迎えした日を教えてください。特別な記念日として大切に記録しましょう。
@@ -297,10 +297,10 @@
 
                 <!-- プロフィール画像 -->
                 <div>
-                    <h3 class="text-base font-medium text-gray-700 mb-4">プロフィール画像</h3>
+                    <h3 class="text-base font-medium text-main-text mb-4">プロフィール画像</h3>
                     <div class="grid grid-cols-2 gap-6">
                         <div>
-                            <label for="profile_image" class="block text-base font-medium text-gray-700 mb-2">アイコン画像</label>
+                            <label for="profile_image" class="block text-base font-medium text-main-text mb-2">アイコン画像</label>
                             <div class="p-3 mb-3" style="background-color: #fefce8;">
                                 <p class="text-sm" style="color: #a16207;">
                                     📸 その子の顔がよく見える写真を選んでください。正方形の画像がおすすめです。
@@ -309,11 +309,11 @@
                             @if(isset($pet) && $pet->profile_image_url)
                                 <div class="mb-2">
                                     <img src="{{ $pet->profile_image_url }}" alt="現在のアイコン画像" class="w-20 h-20 object-cover rounded">
-                                    <p class="text-xs text-gray-500">現在の画像</p>
+                                    <p class="text-xs text-sub-text">現在の画像</p>
                                 </div>
                             @endif
                             <input id="profile_image" name="profile_image" type="file" accept="image/*" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" onchange="previewProfileImage(this)" />
-                            <p class="text-xs text-gray-500 mt-1">正方形推奨</p>
+                            <p class="text-xs text-sub-text mt-1">正方形推奨</p>
                             
                             <!-- プロフィール画像プレビュー -->
                             <div id="profile-image-preview" class="mt-4 hidden">
@@ -324,7 +324,7 @@
                             </div>
                         </div>
                         <div>
-                            <label for="header_image" class="block text-base font-medium text-gray-700 mb-2">背景画像</label>
+                            <label for="header_image" class="block text-base font-medium text-main-text mb-2">背景画像</label>
                             <div class="p-3 mb-3" style="background-color: #fefce8;">
                                 <p class="text-sm" style="color: #a16207;">
                                     🖼️ その子の魅力が伝わる写真を選んでください。横長の画像がおすすめです。
@@ -333,11 +333,11 @@
                             @if(isset($pet) && $pet->header_image_url)
                                 <div class="mb-2">
                                     <img src="{{ $pet->header_image_url }}" alt="現在の背景画像" class="w-20 h-12 object-cover rounded">
-                                    <p class="text-xs text-gray-500">現在の画像</p>
+                                    <p class="text-xs text-sub-text">現在の画像</p>
                                 </div>
                             @endif
                             <input id="header_image" name="header_image" type="file" accept="image/*" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" onchange="previewHeaderImage(this)" />
-                            <p class="text-xs text-gray-500 mt-1">横長推奨</p>
+                            <p class="text-xs text-sub-text mt-1">横長推奨</p>
                             
                             <!-- 背景画像プレビュー -->
                             <div id="header-image-preview" class="mt-4 hidden">
@@ -352,9 +352,9 @@
 
                 <!-- プロフィール説明 -->
                 <div>
-                    <h3 class="text-base font-medium text-gray-700 mb-4">プロフィール説明</h3>
+                    <h3 class="text-base font-medium text-main-text mb-4">プロフィール説明</h3>
                     <div>
-                        <label for="profile_description" class="block text-base font-medium text-gray-700 mb-2">自由記述</label>
+                        <label for="profile_description" class="block text-base font-medium text-main-text mb-2">自由記述</label>
                         <div class="p-3 mb-3" style="background-color: #fefce8;">
                             <p class="text-sm" style="color: #a16207;">
                                 💝 その子の性格や好きなもの、エピソードなどを自由に書いてください。きっと誰かの心に響きます。
@@ -369,9 +369,9 @@
                 </div>
 
                 <!-- ボタン -->
-                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <div class="bg-main-bg rounded-lg p-4 mb-6">
                     <div class="text-center mb-4">
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-main-text">
                             💝 大切な家族の一員のプロフィールを完成させましょう。
                         </p>
                     </div>

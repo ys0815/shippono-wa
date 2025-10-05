@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-main-bg">
         <!-- ヘッダー（固定） -->
         <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -16,7 +16,7 @@
         <script src="{{ asset('js/shelter-picker.js') }}"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased bg-gray-50" style="font-family: 'Noto Sans JP', sans-serif;">
+    <body class="font-sans text-main-text antialiased bg-main-bg" style="font-family: 'Noto Sans JP', sans-serif;">
         <div x-data="{ 
             sidebar:false, 
             search:false,
@@ -41,7 +41,7 @@
                     window.location.href = '/#shelters';
                 }
             }
-        }" class="min-h-screen bg-gray-50">
+        }" class="min-h-screen bg-main-bg">
             <!-- Header -->
             <header class="sticky top-0 z-[900] bg-white/90 backdrop-blur border-b border-amber-100">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
@@ -79,12 +79,12 @@
                         <div class="flex items-center gap-3">
                             <img src="{{ asset('images/icon.png') }}" alt="# しっぽのわ" class="w-16 h-16">
                             <div>
-                                <div class="text-lg font-bold text-gray-800"># しっぽのわ</div>
-                                <div class="text-sm text-gray-600">保護動物と家族の幸せを共有</div>
+                                <div class="text-lg font-bold text-main-text"># しっぽのわ</div>
+                                <div class="text-sm text-main-text">保護動物と家族の幸せを共有</div>
                             </div>
                         </div>
                         <button @click="sidebar=false" aria-label="メニューを閉じる" 
-                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-amber-700 hover:bg-amber-100 focus:outline-none transition">
+                            class="inline-flex items-center justify-center p-2 rounded-md text-sub-text hover:text-amber-700 hover:bg-amber-100 focus:outline-none transition">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -99,8 +99,8 @@
                         <div>
                             <div class="text-xs font-semibold text-amber-700 mb-2">アカウント</div>
                             <div class="flex gap-2">
-                                <a href="{{ route('register') }}" class="flex-1 px-4 py-2 text-sm border border-gray-300 rounded text-gray-700 bg-white hover:bg-gray-50 text-center">新規登録</a>
-                                <a href="{{ route('login') }}" class="flex-1 px-4 py-2 text-sm border border-gray-300 rounded text-gray-700 bg-white hover:bg-gray-50 text-center">ログイン</a>
+                                <a href="{{ route('register') }}" class="flex-1 px-4 py-2 text-sm border border-gray-300 rounded text-main-text bg-white hover:bg-main-bg text-center">新規登録</a>
+                                <a href="{{ route('login') }}" class="flex-1 px-4 py-2 text-sm border border-gray-300 rounded text-main-text bg-white hover:bg-main-bg text-center">ログイン</a>
                             </div>
                         </div>
                         @endguest
@@ -110,8 +110,8 @@
                         <div>
                             <div class="text-xs font-semibold text-amber-700 mb-2">ユーザー</div>
                             <div class="p-3 bg-amber-50 rounded-lg">
-                                <div class="text-sm font-medium text-gray-800">{{ Auth::user()->display_name ?? Auth::user()->name }}</div>
-                                <div class="text-xs text-gray-600">{{ Auth::user()->email }}</div>
+                                <div class="text-sm font-medium text-main-text">{{ Auth::user()->display_name ?? Auth::user()->name }}</div>
+                                <div class="text-xs text-main-text">{{ Auth::user()->email }}</div>
                             </div>
                         </div>
 
@@ -119,11 +119,11 @@
                         <div>
                             <div class="text-xs font-semibold text-amber-700 mb-2">メイン</div>
                             <ul class="space-y-1">
-                                <li><a @click="sidebar=false" href="{{ route('mypage') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">マイページ</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('mypage.posts') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">投稿管理</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('mypage.pets') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットプロフィール管理</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('mypage.pets.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットを登録</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('mypage.likes') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">いいね一覧</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('mypage') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">マイページ</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('mypage.posts') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">投稿管理</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('mypage.pets') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットプロフィール管理</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('mypage.pets.create') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">ペットを登録</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('mypage.likes') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">いいね一覧</a></li>
                             </ul>
                         </div>
 
@@ -131,8 +131,8 @@
                         <div>
                             <div class="text-xs font-semibold text-amber-700 mb-2">作成</div>
                             <ul class="space-y-1">
-                                <li><a @click="sidebar=false" href="{{ route('mypage.posts.gallery.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">今日の幸せを投稿</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('mypage.posts.interview.create') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">里親インタビューを投稿</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('mypage.posts.gallery.create') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">今日の幸せを投稿</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('mypage.posts.interview.create') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">里親インタビューを投稿</a></li>
                             </ul>
                         </div>
                         @endauth
@@ -141,12 +141,12 @@
                         <div>
                             <div class="text-xs font-semibold text-amber-700 mb-2">サイト</div>
                             <ul class="space-y-1">
-                                <li><a @click="sidebar=false" href="/about" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">#しっぽのわとは？</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('pets.search', 'dog') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">犬の家族を見る</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('pets.search', 'cat') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">猫の家族を見る</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('pets.search', 'rabbit') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">うさぎの家族を見る</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('pets.search', 'other') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">その他の家族を見る</a></li>
-                                <li><a @click="sidebar=false; scrollToShelters()" href="#shelters" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">保護団体リンク集</a></li>
+                                <li><a @click="sidebar=false" href="/about" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">#しっぽのわとは？</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('pets.search', 'dog') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">犬の家族を見る</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('pets.search', 'cat') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">猫の家族を見る</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('pets.search', 'rabbit') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">うさぎの家族を見る</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('pets.search', 'other') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">その他の家族を見る</a></li>
+                                <li><a @click="sidebar=false; scrollToShelters()" href="#shelters" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">保護団体リンク集</a></li>
                             </ul>
                         </div>
 
@@ -155,9 +155,9 @@
                         <div>
                             <div class="text-xs font-semibold text-amber-700 mb-2">設定</div>
                             <ul class="space-y-1">
-                                <li><a @click="sidebar=false" href="{{ route('profile.edit') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">プロフィール編集</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('mypage.profile.email') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">メールアドレス変更</a></li>
-                                <li><a @click="sidebar=false" href="{{ route('mypage.profile.password') }}" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">パスワード変更</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('profile.edit') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">プロフィール編集</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('mypage.profile.email') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">メールアドレス変更</a></li>
+                                <li><a @click="sidebar=false" href="{{ route('mypage.profile.password') }}" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">パスワード変更</a></li>
                             </ul>
                         </div>
 
@@ -165,12 +165,12 @@
                         <div>
                             <div class="text-xs font-semibold text-amber-700 mb-2">その他</div>
                             <ul class="space-y-1">
-                                <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ヘルプ・サポート</a></li>
-                                <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">お問い合わせ</a></li>
+                                <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">ヘルプ・サポート</a></li>
+                                <li><a @click="sidebar=false" href="#" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">お問い合わせ</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}" class="inline">
                                         @csrf
-                                        <button type="submit" class="flex items-center p-2 rounded text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors">ログアウト</button>
+                                        <button type="submit" class="flex items-center p-2 rounded text-main-text hover:bg-amber-50 hover:text-amber-800 transition-colors">ログアウト</button>
                                     </form>
                                 </li>
                             </ul>
@@ -229,7 +229,7 @@
                     })" x-init="init()" class="space-y-4">
                         <!-- 動物の種類 -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">動物の種類</label>
+                            <label class="block text-sm font-medium text-main-text mb-2">動物の種類</label>
                             <div class="grid grid-cols-2 gap-2">
                                 <label class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-amber-50 cursor-pointer">
                                     <input type="radio" name="species" value="dog" class="mr-2 text-amber-600 focus:ring-amber-500">
@@ -252,7 +252,7 @@
 
                         <!-- 性別 -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">性別</label>
+                            <label class="block text-sm font-medium text-main-text mb-2">性別</label>
                             <select name="gender" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">すべて</option>
                                 <option value="male">オス</option>
@@ -263,7 +263,7 @@
 
                         <!-- 保護施設の種別 -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">保護施設の種別</label>
+                            <label class="block text-sm font-medium text-main-text mb-2">保護施設の種別</label>
                             <select name="shelter_kind" x-model="kind" @change="handleKindChange()" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">すべて</option>
                                 <option value="facility">保護団体・施設</option>
@@ -274,7 +274,7 @@
 
                         <!-- 保護施設の所在地 -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">保護施設の所在地</label>
+                            <label class="block text-sm font-medium text-main-text mb-2">保護施設の所在地</label>
                             <select name="shelter_area" x-model="area" @change="handleAreaChange()" :disabled="kind==='unknown'" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">すべて</option>
                                 <template x-for="a in filteredAreas" :key="a">
@@ -285,7 +285,7 @@
 
                         <!-- 保護施設名 -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">保護施設名</label>
+                            <label class="block text-sm font-medium text-main-text mb-2">保護施設名</label>
                             <select name="shelter_id" x-model="shelterId" :disabled="kind==='unknown'" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">すべて</option>
                                 <option value="" x-show="loading">読み込み中...</option>
@@ -293,7 +293,7 @@
                                     <option :value="s.id" x-text="s.name"></option>
                                 </template>
                             </select>
-                            <p class="text-xs text-gray-500 mt-1" x-show="kind==='unknown'">※ 不明を選んだ場合は未選択のままで構いません。</p>
+                            <p class="text-xs text-sub-text mt-1" x-show="kind==='unknown'">※ 不明を選んだ場合は未選択のままで構いません。</p>
                         </div>
 
                         
@@ -302,7 +302,7 @@
                             <button type="submit" class="flex-1 px-4 py-2 bg-amber-500 text-white text-sm rounded-md hover:bg-amber-600 transition font-medium">
                                 検索する
                             </button>
-                            <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 transition">
+                            <button type="button" @click="search=false" class="px-4 py-2 text-sm border border-gray-300 rounded-md text-main-text hover:bg-main-bg transition">
                                 閉じる
                             </button>
                         </div>

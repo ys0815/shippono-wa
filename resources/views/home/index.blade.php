@@ -23,7 +23,7 @@
                 }
             });
         }
-    }" class="min-h-screen bg-gray-50">
+    }" class="min-h-screen bg-main-bg">
 
 
         <!-- Hero Section - 全面画像版 -->
@@ -81,8 +81,8 @@
         <section class="w-full bg-white border-t border-b border-gray-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
-                    <p class="text-base text-gray-600 mb-2">かわいい家族たちの生活を見てみよう</p>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2">
+                    <p class="text-base text-main-text mb-2">かわいい家族たちの生活を見てみよう</p>
+                    <h3 class="text-3xl font-bold text-main-text mb-2">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             家族になった子たち新着
                         </span>
@@ -119,13 +119,13 @@
                                 @endif
                                 
                                 <!-- 名前・性別・推定年齢 -->
-                                <div class="text-2xl font-bold text-gray-800">
+                                <div class="text-2xl font-bold text-main-text">
                                     {{ $pet->name }} 
-                                    <span class="text-xl font-normal {{ $pet->gender === 'male' ? 'text-blue-500' : ($pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
+                                    <span class="text-xl font-normal {{ $pet->gender === 'male' ? 'text-blue-500' : ($pet->gender === 'female' ? 'text-pink-500' : 'text-sub-text') }}">
                                         {{ __(['male' => '♂', 'female' => '♀', 'unknown' => '?'][$pet->gender] ?? '?') }}
                                     </span>
                                     @if($pet->age_years !== null || $pet->age_months !== null)
-                                        <span class="text-base text-gray-500 ml-1">
+                                        <span class="text-base text-sub-text ml-1">
                                             @if($pet->age_years > 0 && $pet->age_months > 0)
                                                 (推定{{ $pet->age_years }}歳{{ $pet->age_months }}ヶ月)
                                             @elseif($pet->age_years > 0)
@@ -139,7 +139,7 @@
                                 
                                 <!-- プロフィール説明 -->
                                 @if($pet->profile_description)
-                                    <div class="text-base text-gray-600 leading-relaxed max-w-xs mx-auto">
+                                    <div class="text-base text-main-text leading-relaxed max-w-xs mx-auto">
                                         {{ Str::limit($pet->profile_description, 60) }}
                                     </div>
                                 @endif
@@ -155,7 +155,7 @@
                                         保護団体サイトへ
                                     </a>
                                 @else
-                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
+                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed">
                                         保護団体サイトへ
                                     </button>
                                 @endif
@@ -170,7 +170,7 @@
                                         お迎え体験を読む
                                     </a>
                                 @else
-                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed">
+                                    <button disabled class="px-4 py-2 text-sm rounded-full border-2 border-gray-200 text-gray-400 bg-main-bg cursor-not-allowed">
                                         お迎え体験を読む
                                     </button>
                                 @endif
@@ -183,10 +183,10 @@
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
             <!-- サービスコンセプト -->
-            <section class="relative bg-gray-50 border-gray-200 py-16">
+            <section class="relative bg-main-bg border-gray-200 py-16">
                 <div class="text-center mb-12">
-                    <p class="text-base text-gray-600 mb-2">私たちが大切にしている想い</p>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2">
+                    <p class="text-base text-main-text mb-2">私たちが大切にしている想い</p>
+                    <h3 class="text-3xl font-bold text-main-text mb-2">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             サービスコンセプト
                         </span>
@@ -203,8 +203,8 @@
                             </div>
                             <div class="absolute -inset-3 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-4">幸せの可視化</h4>
-                        <p class="text-base text-gray-600 leading-relaxed">保護動物と家族の温かいストーリーを<br>写真と文章で心に届けます。</p>
+                        <h4 class="text-2xl font-bold text-main-text mb-4">幸せの可視化</h4>
+                        <p class="text-base text-main-text leading-relaxed">保護動物と家族の温かいストーリーを<br>写真と文章で心に届けます。</p>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-8">
@@ -213,8 +213,8 @@
                             </div>
                             <div class="absolute -inset-3 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-4">共感の輪</h4>
-                        <p class="text-base text-gray-600 leading-relaxed">一人ひとりの想いに触れて<br>優しさが広がる支援の循環を生み出します。</p>
+                        <h4 class="text-2xl font-bold text-main-text mb-4">共感の輪</h4>
+                        <p class="text-base text-main-text leading-relaxed">一人ひとりの想いに触れて<br>優しさが広がる支援の循環を生み出します。</p>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-8">
@@ -223,8 +223,8 @@
                             </div>
                             <div class="absolute -inset-3 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-4">命をつなぐ</h4>
-                        <p class="text-base text-gray-600 leading-relaxed">施設や里親さんとの出会いを<br>温かく分かりやすくお手伝いします。</p>
+                        <h4 class="text-2xl font-bold text-main-text mb-4">命をつなぐ</h4>
+                        <p class="text-base text-main-text leading-relaxed">施設や里親さんとの出会いを<br>温かく分かりやすくお手伝いします。</p>
                     </div>
                 </div>
             </section>
@@ -235,8 +235,8 @@
         <section class="w-full bg-white border-t border-b border-gray-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
-                    <p class="text-base text-gray-600 mb-2">みんなの活動を数字で見てみよう</p>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2">
+                    <p class="text-base text-main-text mb-2">みんなの活動を数字で見てみよう</p>
+                    <h3 class="text-3xl font-bold text-main-text mb-2">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             統計情報
                         </span>
@@ -245,7 +245,7 @@
                     </div>
                   
                     @if(isset($stats['updated_at']))
-                        <p class="text-sm text-gray-500 mt-2">
+                        <p class="text-sm text-sub-text mt-2">
                             最終更新: {{ \Carbon\Carbon::parse($stats['updated_at'])->format('Y年n月j日 H:i') }}<br>
                         </p>
                     @endif
@@ -258,8 +258,8 @@
                             </div>
                             <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['posts_gallery']) }}</div>
-                        <div class="text-sm text-gray-600">投稿数</div>
+                        <div class="text-3xl font-bold text-main-text mb-1">{{ number_format($stats['posts_gallery']) }}</div>
+                        <div class="text-sm text-main-text">投稿数</div>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-4">
@@ -268,8 +268,8 @@
                             </div>
                             <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['posts_interview']) }}</div>
-                        <div class="text-sm text-gray-600">インタビュー数</div>
+                        <div class="text-3xl font-bold text-main-text mb-1">{{ number_format($stats['posts_interview']) }}</div>
+                        <div class="text-sm text-main-text">インタビュー数</div>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-4">
@@ -278,8 +278,8 @@
                             </div>
                             <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['pets']) }}</div>
-                        <div class="text-sm text-gray-600">登録動物数</div>
+                        <div class="text-3xl font-bold text-main-text mb-1">{{ number_format($stats['pets']) }}</div>
+                        <div class="text-sm text-main-text">登録動物数</div>
                     </div>
                     <div class="text-center group">
                         <div class="relative mb-4">
@@ -288,8 +288,8 @@
                             </div>
                             <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['shelters']) }}</div>
-                        <div class="text-sm text-gray-600">掲載団体数</div>
+                        <div class="text-3xl font-bold text-main-text mb-1">{{ number_format($stats['shelters']) }}</div>
+                        <div class="text-sm text-main-text">掲載団体数</div>
                     </div>
                     <div class="text-center group col-span-2 sm:col-span-1">
                         <div class="relative mb-4">
@@ -298,8 +298,8 @@
                             </div>
                             <div class="absolute -inset-1 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
                         </div>
-                        <div class="text-3xl font-bold text-gray-800 mb-1">{{ number_format($stats['likes']) }}</div>
-                        <div class="text-sm text-gray-600">いいね数</div>
+                        <div class="text-3xl font-bold text-main-text mb-1">{{ number_format($stats['likes']) }}</div>
+                        <div class="text-sm text-main-text">いいね数</div>
                     </div>
                 </div>
             </div>
@@ -307,10 +307,10 @@
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
             <!-- 保護団体リンク集 -->
-            <section id="shelters" class="relative bg-gray-50 border-gray-200 py-12" x-data="shelterFilter()">
+            <section id="shelters" class="relative bg-main-bg border-gray-200 py-12" x-data="shelterFilter()">
                 <div class="text-center mb-10">
-                    <p class="text-sm text-gray-600 mb-2">協力いただいている保護団体の皆様</p>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2">
+                    <p class="text-sm text-main-text mb-2">協力いただいている保護団体の皆様</p>
+                    <h3 class="text-3xl font-bold text-main-text mb-2">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-sans">
                             保護団体リンク集
                         </span>
@@ -323,11 +323,11 @@
                 <!-- 地域選択フィルター -->
                 <div class="mb-8">
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <label for="region-filter" class="text-sm font-medium text-gray-700 whitespace-nowrap">地域別表示</label>
+                        <label for="region-filter" class="text-sm font-medium text-main-text whitespace-nowrap">地域別表示</label>
                         <select id="region-filter" 
                                 x-model="selectedRegion" 
                                 @change="filterShelters()"
-                                class="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors duration-200 w-full sm:w-auto sm:min-w-[200px]">
+                                class="px-4 py-2 border border-gray-300 rounded-lg bg-white text-main-text focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors duration-200 w-full sm:w-auto sm:min-w-[200px]">
                             <option value="all">全国</option>
                             <option value="hokkaido-tohoku">北海道・東北</option>
                             <option value="kanto">関東</option>
@@ -340,11 +340,11 @@
                     
                     <!-- フィルター結果表示 -->
                     <div class="mt-4 text-center">
-                        <p class="text-sm text-gray-600" x-show="selectedRegion !== 'all'">
+                        <p class="text-sm text-main-text" x-show="selectedRegion !== 'all'">
                             <span x-text="getRegionName(selectedRegion)"></span>の保護団体を表示中
                             <span x-text="'（' + filteredShelters.length + '件中' + Math.min(currentPage * itemsPerPage, filteredShelters.length) + '件表示）'"></span>
                         </p>
-                        <p class="text-sm text-gray-600" x-show="selectedRegion === 'all'">
+                        <p class="text-sm text-main-text" x-show="selectedRegion === 'all'">
                             里親募集サイトを表示中
                             <span x-text="'（' + filteredShelters.length + '件中' + Math.min(currentPage * itemsPerPage, filteredShelters.length) + '件表示）'"></span>
                         </p>
@@ -377,7 +377,7 @@
                                     
                                     <!-- 団体情報 -->
                                     <div class="flex-1 min-w-0">
-                                        <h4 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-amber-700 transition-colors">
+                                        <h4 class="text-lg font-bold text-main-text mb-2 group-hover:text-amber-700 transition-colors">
                                             {{ $shelter->name }}
                                         </h4>
                                         
@@ -405,7 +405,7 @@
                                             公式サイト
                                         </a>
                                     @else
-                                        <span class="inline-flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 text-gray-500 rounded-lg cursor-not-allowed">
+                                        <span class="inline-flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 text-sub-text rounded-lg cursor-not-allowed">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                             </svg>
@@ -420,7 +420,7 @@
                             <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 text-2xl">
                                 🏢
                             </div>
-                            <p class="text-gray-500">登録されている保護団体はありません</p>
+                            <p class="text-sub-text">登録されている保護団体はありません</p>
                         </div>
                     @endforelse
                     
@@ -429,7 +429,7 @@
                         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center text-amber-500 text-2xl">
                             🔍
                         </div>
-                        <p class="text-gray-500" x-text="getRegionName(selectedRegion) + 'には保護団体が登録されていません'"></p>
+                        <p class="text-sub-text" x-text="getRegionName(selectedRegion) + 'には保護団体が登録されていません'"></p>
                     </div>
                 </div>
                 

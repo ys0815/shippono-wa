@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-main-bg">
         <!-- ヘッダー（固定） -->
         <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,10 +21,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
                 <div>
                     <x-input-label :value="__('現在のメールアドレス')" />
-                    <div class="mt-1 p-4 border rounded text-gray-800">
+                    <div class="mt-1 p-4 border rounded text-main-text">
                         {{ auth()->user()->email }}
                         @if(auth()->user()->email_verified_at)
-                            <div class="text-xs text-gray-500 mt-1">登録日: {{ auth()->user()->email_verified_at->format('Y年n月j日') }}</div>
+                            <div class="text-xs text-sub-text mt-1">登録日: {{ auth()->user()->email_verified_at->format('Y年n月j日') }}</div>
                         @endif
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <section>
     <header class="mb-6">
-        <h2 class="text-base font-semibold text-gray-900">基本情報</h2>
+        <h2 class="text-base font-semibold text-main-text">基本情報</h2>
     </header>
 
     @if ($errors->any())
@@ -40,7 +40,7 @@
             <x-input-label for="email" :value="__('メールアドレス')" />
             <div class="flex gap-3">
                 <x-text-input id="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" disabled />
-                <a href="{{ route('mypage.profile.email') }}" class="px-3 py-2 mt-1 rounded border text-gray-700">変更</a>
+                <a href="{{ route('mypage.profile.email') }}" class="px-3 py-2 mt-1 rounded border text-main-text">変更</a>
             </div>
         </div>
 
@@ -48,25 +48,25 @@
             <x-input-label for="password" :value="__('パスワード')" />
             <div class="flex gap-3">
                 <x-text-input id="password" type="password" class="mt-1 block w-full" value="********" disabled />
-                <a href="{{ route('mypage.profile.password') }}" class="px-3 py-2 mt-1 rounded border text-gray-700">変更</a>
+                <a href="{{ route('mypage.profile.password') }}" class="px-3 py-2 mt-1 rounded border text-main-text">変更</a>
             </div>
         </div>
 
         <div>
             <x-input-label for="display_name" :value="__('ハンドルネーム')" />
             <x-text-input id="display_name" name="display_name" type="text" class="mt-1 block w-full" :value="old('display_name', $user->display_name)" required />
-            <p class="mt-1 text-xs text-gray-500">※投稿やプロフィールで表示される名前です</p>
+            <p class="mt-1 text-xs text-sub-text">※投稿やプロフィールで表示される名前です</p>
             <x-input-error class="mt-2" :messages="$errors->get('display_name')" />
         </div>
 
         <header class="pt-4 border-t">
-            <h3 class="text-base font-semibold text-gray-900 mt-4">SNSアカウント設定</h3>
+            <h3 class="text-base font-semibold text-main-text mt-4">SNSアカウント設定</h3>
         </header>
 
         <div>
             <x-input-label for="sns_x" :value="__('X')" />
             <div class="flex items-center gap-2">
-                <span class="text-gray-500">@</span>
+                <span class="text-sub-text">@</span>
                 <x-text-input id="sns_x" name="sns_x" type="text" class="mt-1 block w-full" :value="old('sns_x', $user->sns_x)" placeholder="example._pet" />
             </div>
             <x-input-error class="mt-2" :messages="$errors->get('sns_x')" />
@@ -75,7 +75,7 @@
         <div>
             <x-input-label for="sns_instagram" :value="__('Instagram')" />
             <div class="flex items-center gap-2">
-                <span class="text-gray-500">@</span>
+                <span class="text-sub-text">@</span>
                 <x-text-input id="sns_instagram" name="sns_instagram" type="text" class="mt-1 block w-full" :value="old('sns_instagram', $user->sns_instagram)" placeholder="example.with.pets" />
             </div>
             <x-input-error class="mt-2" :messages="$errors->get('sns_instagram')" />

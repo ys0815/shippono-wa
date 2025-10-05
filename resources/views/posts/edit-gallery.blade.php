@@ -3,7 +3,7 @@
 @endphp
 
 <x-app-layout>
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-main-bg">
         <!-- ヘッダー -->
         <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-30">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -69,7 +69,7 @@
 
                 <!-- ペット選択 -->
                 <div>
-                    <label for="pet_id" class="block text-base font-medium text-gray-700 mb-2">ペットを選択</label>
+                    <label for="pet_id" class="block text-base font-medium text-main-text mb-2">ペットを選択</label>
                     <div class="p-3 mb-3 bg-yellow-50">
                         <p class="text-sm text-yellow-800">
                             🐾 今日はどの子の幸せを分かち合いますか？かけがえのない家族を選んでくださいね。
@@ -88,7 +88,7 @@
 
                 <!-- タイトル -->
                 <div>
-                    <label for="title" class="block text-base font-medium text-gray-700 mb-2">タイトル</label>
+                    <label for="title" class="block text-base font-medium text-main-text mb-2">タイトル</label>
                     <div class="p-3 mb-3 bg-yellow-50">
                         <p class="text-sm text-yellow-800">
                             ✨ その瞬間の気持ちを素直にひとこと。短くても、想いはきっと伝わります。
@@ -102,14 +102,14 @@
                            required
                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                            placeholder="今日の幸せを30文字以内で入力">
-                    <div class="mt-1 text-sm text-gray-500">
+                    <div class="mt-1 text-sm text-sub-text">
                         <span id="title-count">{{ strlen(old('title', $post->title)) }}</span>/30文字
                     </div>
                 </div>
 
                 <!-- 本文 -->
                 <div>
-                    <label for="content" class="block text-base font-medium text-gray-700 mb-2">本文</label>
+                    <label for="content" class="block text-base font-medium text-main-text mb-2">本文</label>
                     <div class="p-3 mb-3 bg-yellow-50">
                         <p class="text-sm text-yellow-800">
                             💝 その時に感じた喜びや愛しさを、自由に書いてください。小さな出来事が、大きな温もりとなって広がります。
@@ -122,7 +122,7 @@
                               required
                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                               placeholder="今日の幸せな出来事を140文字以内で入力">{{ old('content', $post->content) }}</textarea>
-                    <div class="mt-1 text-sm text-gray-500">
+                    <div class="mt-1 text-sm text-sub-text">
                         <span id="content-count">{{ strlen(old('content', $post->content)) }}</span>/140文字
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                 <!-- 現在のメディア -->
                 @if($post->media->count() > 0)
                     <div>
-                        <label class="block text-base font-medium text-gray-700 mb-2">現在のメディア</label>
+                        <label class="block text-base font-medium text-main-text mb-2">現在のメディア</label>
                         <div class="grid grid-cols-2 gap-4">
                             @foreach($post->media as $media)
                                 <div class="relative">
@@ -151,13 +151,13 @@
                                 </div>
                             @endforeach
                         </div>
-                        <p class="mt-2 text-sm text-gray-500">新しいメディアを選択すると、現在のメディアは置き換えられます</p>
+                        <p class="mt-2 text-sm text-sub-text">新しいメディアを選択すると、現在のメディアは置き換えられます</p>
                     </div>
                 @endif
 
                 <!-- メディアアップロード（画像・動画） -->
                 <div>
-                    <label for="media" class="block text-base font-medium text-gray-700 mb-2">新しい写真・動画</label>
+                    <label for="media" class="block text-base font-medium text-main-text mb-2">新しい写真・動画</label>
                     <div class="p-3 mb-3 bg-yellow-50">
                         <p class="text-sm text-yellow-800">
                             📸 写真や動画で幸せを形にしましょう。見る人も一緒に、その空気を感じられます。
@@ -175,9 +175,9 @@
                             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
-                            <p class="mt-2 text-sm text-gray-600">新しい写真・動画を選択（最大2ファイル）</p>
-                            <p class="text-xs text-gray-500">画像：JPEG, PNG, JPG, GIF（各2MB以下）</p>
-                            <p class="text-xs text-gray-500">動画：MP4, MOV, AVI（各10MB以下）</p>
+                            <p class="mt-2 text-sm text-main-text">新しい写真・動画を選択（最大2ファイル）</p>
+                            <p class="text-xs text-sub-text">画像：JPEG, PNG, JPG, GIF（各2MB以下）</p>
+                            <p class="text-xs text-sub-text">動画：MP4, MOV, AVI（各10MB以下）</p>
                         </label>
                     </div>
                     
@@ -189,7 +189,7 @@
 
                 <!-- 公開設定 -->
                 <div>
-                    <label class="block text-base font-medium text-gray-700 mb-2">公開設定</label>
+                    <label class="block text-base font-medium text-main-text mb-2">公開設定</label>
                     <div class="p-3 mb-3 bg-yellow-50">
                         <p class="text-sm text-yellow-800">
                             🌟 公開すれば仲間と幸せを分け合えます。もちろん下書きにして、あなたのペースで大切に残すこともできます。
@@ -202,7 +202,7 @@
                                    value="published" 
                                    {{ old('status', $post->status) === 'published' ? 'checked' : '' }}
                                    class="mr-2">
-                            <span class="text-sm text-gray-700">公開する</span>
+                            <span class="text-sm text-main-text">公開する</span>
                         </label>
                         <label class="flex items-center">
                             <input type="radio" 
@@ -210,15 +210,15 @@
                                    value="draft" 
                                    {{ old('status', $post->status) === 'draft' ? 'checked' : '' }}
                                    class="mr-2">
-                            <span class="text-sm text-gray-700">下書きとして保存</span>
+                            <span class="text-sm text-main-text">下書きとして保存</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- ボタン -->
-                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <div class="bg-main-bg rounded-lg p-4 mb-6">
                     <div class="text-center mb-4">
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-main-text">
                             💝 あなたの「幸せな瞬間」が、「#しっぽのわ」をもっとやさしく彩ります。
                         </p>
                     </div>

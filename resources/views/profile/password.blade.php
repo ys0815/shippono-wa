@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-main-bg">
         <!-- ヘッダー（固定） -->
         <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,7 +59,7 @@
                     <div>
                         <x-input-label for="password" :value="__('新しいパスワード')" />
                         <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-                        <p class="text-xs text-gray-500 mt-1">8文字以上、大小英字・数字・記号の組み合わせ推奨</p>
+                        <p class="text-xs text-sub-text mt-1">8文字以上、大小英字・数字・記号の組み合わせ推奨</p>
                         <x-input-error :messages="$errors->updatePassword->get('password') ?? []" class="mt-2" />
                     </div>
 

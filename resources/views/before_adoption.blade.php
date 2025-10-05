@@ -30,10 +30,10 @@
                         </svg>
                         <span>家族をお迎えする前に知っておきたいこと</span>
                     </div>
-                    <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-gray-900 mb-6">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-main-text mb-6">
                         命を迎えるその瞬間に
                     </h1>
-                    <p class="text-base md:text-xl lg:text-xl text-gray-600 leading-relaxed mb-8">
+                    <p class="text-base md:text-xl lg:text-xl text-main-text leading-relaxed mb-8">
                         近年、保護犬や保護猫に関心が集まり、里親募集サイトや保護シェルターを通じて新しい家族を迎える方が増えてきました。けれども、ペットを幸せにするためには、迎える前に考えておきたい大切なことがあります。
                     </p>
                     <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-8 max-w-2xl mx-auto shadow-sm">
@@ -42,7 +42,7 @@
                                 <span class="text-2xl">💝</span>
                             </div>
                         </div>
-                        <p class="text-gray-700 leading-relaxed mb-3">
+                        <p class="text-main-text leading-relaxed mb-3">
                             ここでは、安心して一歩を踏み出すためのヒントをお届けします。
                         </p>
                         <p class="text-amber-700 text-sm font-medium">
@@ -55,7 +55,7 @@
             <!-- 数字が語る日本の現状 -->
             <section>
                 <div class="text-center mb-12">
-                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">数字が語る日本の現状</h2>
+                    <h2 class="text-2xl md:text-4xl font-bold text-main-text mb-4">数字が語る日本の現状</h2>
                     <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                 </div>
                 
@@ -69,7 +69,7 @@
                         </div>
                         <p class="text-4xl md:text-5xl font-bold text-green-700 mb-4">9,017件</p>
                         <p class="text-xl md:text-2xl font-semibold text-green-800 mb-4">令和5年度の殺処分数</p>
-                        <p class="text-gray-700 leading-relaxed text-base md:text-xl max-w-4xl mx-auto">
+                        <p class="text-main-text leading-relaxed text-base md:text-xl max-w-4xl mx-auto">
                             近年は改善が進み、令和5年度には9,017件まで減少しています。保護活動の広がりや、私たち一人ひとりの意識の変化が確かな成果を生んでいます。
                         </p>
                     </div>
@@ -78,27 +78,27 @@
                 <!-- 過去の数字を背景として表示 -->
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
                     <div class="text-center mb-6">
-                        <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-4">過去との比較</h3>
+                        <h3 class="text-xl md:text-2xl font-semibold text-main-text mb-4">過去との比較</h3>
                         <div class="flex flex-col md:flex-row items-center justify-center gap-8">
                             <div class="text-center">
                                 <p class="text-2xl md:text-3xl font-bold text-red-600 mb-2">43,216匹</p>
-                                <p class="text-sm md:text-base text-gray-600">平成29年度</p>
+                                <p class="text-sm md:text-base text-main-text">平成29年度</p>
                             </div>
                             <div class="hidden md:block text-2xl text-gray-400">→</div>
                             <div class="text-center">
                                 <p class="text-2xl md:text-3xl font-bold text-green-600 mb-2">9,017件</p>
-                                <p class="text-sm md:text-base text-gray-600">令和5年度</p>
+                                <p class="text-sm md:text-base text-main-text">令和5年度</p>
                             </div>
                         </div>
-                        <div class="mt-4 text-sm text-gray-500">
+                        <div class="mt-4 text-sm text-sub-text">
                             <span class="inline-block bg-red-100 text-red-800 px-3 py-1 rounded-full mr-2">79%減少</span>
-                            <span class="text-gray-600">過去の数字と比較して大幅な改善を実現</span>
+                            <span class="text-main-text">過去の数字と比較して大幅な改善を実現</span>
                         </div>
                     </div>
 
                     <div class="text-center mb-8">
-                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">あなたの「優しい選択」が、大きな力になります</h3>
-                        <p class="text-gray-700 leading-relaxed text-base md:text-xl">
+                        <h3 class="text-2xl md:text-3xl font-bold text-main-text mb-4">あなたの「優しい選択」が、大きな力になります</h3>
+                        <p class="text-main-text leading-relaxed text-base md:text-xl">
                             この流れをさらに前へ進めるために——これから家族を迎えるあなたの選択が、次の命を守る力になります。
                         </p>
                     </div>
@@ -109,7 +109,7 @@
             <section>
                 <div class="text-center mb-12">
                     <p class="text-amber-700 text-sm md:text-base tracking-wide mb-2">これから家族を迎えるみなさまへ</p>
-                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">ペットを飼いたい<br>あなたへ贈る5つの心得</h2>
+                    <h2 class="text-2xl md:text-4xl font-bold text-main-text mb-4">ペットを飼いたい<br>あなたへ贈る5つの心得</h2>
                     <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                 </div>
 
@@ -123,9 +123,9 @@
                             <div class="md:col-span-3 p-6 md:p-8">
                                 <div class="flex items-center gap-3 mb-4">
                                     <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">1</span>
-                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">何があっても最後まで共に生きる</h3>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-main-text">何があっても最後まで共に生きる</h3>
                                 </div>
-                                <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
+                                <div class="space-y-4 text-main-text leading-relaxed text-base md:text-xl">
                                     <p>ペットを迎えるときに最も大切なのは、最期まで一緒に生きるという覚悟です。</p>
                                     <p>結婚や出産、転職など、私たちの暮らしは変化していきます。その中で、もしもの時に備えて考えておくことが、悲しい選択を避ける第一歩になります。</p>
                                     <p>アレルギーの有無や家族の理解など、事前に想像しておくことで「もしもの時の対策」を描くことができます。その備えが、共に生きるためのやさしい力になります。</p>
@@ -140,9 +140,9 @@
                             <div class="md:col-span-3 p-6 md:p-8 order-2 md:order-1">
                                 <div class="flex items-center gap-3 mb-4">
                                     <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">2</span>
-                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">家族や周りの人の理解を得よう</h3>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-main-text">家族や周りの人の理解を得よう</h3>
                                 </div>
-                                <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
+                                <div class="space-y-4 text-main-text leading-relaxed text-base md:text-xl">
                                     <p>ペットを育てるには、家族や周囲の理解が欠かせません。パートナーや子どもにきちんと相談し、同じ気持ちで迎えられるようにしましょう。</p>
                                     <p>ひとり暮らしの場合は、信頼できる友人や親族など、いざというときに助けてくれる人を見つけておくことが大切です。</p>
                                     <p>周囲に頼れる人を作っておけば、万が一、あなたの身に何かがあったときや家を留守にしなければいけないときでも、ペットに悲しい思いをさせずに済みます。</p>
@@ -163,9 +163,9 @@
                             <div class="md:col-span-3 p-6 md:p-8">
                                 <div class="flex items-center gap-3 mb-4">
                                     <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">3</span>
-                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">金銭面もチェック</h3>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-main-text">金銭面もチェック</h3>
                                 </div>
-                                <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
+                                <div class="space-y-4 text-main-text leading-relaxed text-base md:text-xl">
                                     <p>ペットと暮らしていくには、思っている以上にお金がかかります。フードやペットシーツ、猫砂など、日々の生活に必要なものは積み重ねると大きな負担になることもあります。</p>
                                     <p>さらに、人間とは違ってペットの医療費には保険が効かないため、病気やけがのときには治療費が高額になる場合もあります。特に子どもの時期やシニア期は体調を崩しやすく、「想像していたよりも費用がかかる」と感じる方も少なくありません。</p>
                                     <p>だからこそ、金銭面に不安がある方は、飼い始める前に少しずつ貯金をしたり、ペット保険に加入することを検討したりするのがおすすめです。</p>
@@ -180,9 +180,9 @@
                             <div class="md:col-span-3 p-6 md:p-8 order-2 md:order-1">
                                 <div class="flex items-center gap-3 mb-4">
                                     <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">4</span>
-                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">二度と悲しい思いをさせない</h3>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-main-text">二度と悲しい思いをさせない</h3>
                                 </div>
-                                <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
+                                <div class="space-y-4 text-main-text leading-relaxed text-base md:text-xl">
                                     <p>悲しいことに、日本はまだ動物福祉の面で後進国と言われており、動物の命を守る法律には多くの課題が残されています。その結果、人間の身勝手な理由で捨てられてしまうペットも少なくありません。</p>
                                     <p>だからこそ、ペットをお迎えするときには「二度と悲しい思いをさせない」という強い気持ちを持つことが大切です。</p>
                                 </div>
@@ -202,9 +202,9 @@
                             <div class="md:col-span-3 p-6 md:p-8">
                                 <div class="flex items-center gap-3 mb-4">
                                     <span class="inline-flex items-center justify-center w-9 h-9 aspect-square rounded-full border-2 border-amber-400 text-amber-700 font-bold">5</span>
-                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">飼育するペットの習性を理解する</h3>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-main-text">飼育するペットの習性を理解する</h3>
                                 </div>
-                                <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-xl">
+                                <div class="space-y-4 text-main-text leading-relaxed text-base md:text-xl">
                                     <p>ペットによって、しつけ方や性格、生活のリズムが大きく異なります。迎える前に、その動物の習性や特性をしっかり学んでおくことで、より良い関係を築けるようになります。</p>
                                     <p>違いを尊重しながら、安心して快適に過ごせる環境を整えてあげましょう。</p>
                                 </div>
@@ -217,7 +217,7 @@
             <!-- ペットは大きな幸せを与えてくれる存在 -->
             <section>
                 <div class="text-center mb-12">
-                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">ペットは大きな幸せを<br>与えてくれる存在</h2>
+                    <h2 class="text-2xl md:text-4xl font-bold text-main-text mb-4">ペットは大きな幸せを<br>与えてくれる存在</h2>
                     <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mt-2"></div>
                 </div>
                 <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-lg border border-amber-200 p-8">
@@ -229,15 +229,15 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                     </svg>
                                 </div>
-                                <h3 class="text-2xl md:text-3xl font-bold text-gray-900">ペットとの幸せな時間</h3>
+                                <h3 class="text-2xl md:text-3xl font-bold text-main-text">ペットとの幸せな時間</h3>
                             </div>
-                            <p class="text-gray-700 leading-relaxed mb-4 text-base md:text-xl">
+                            <p class="text-main-text leading-relaxed mb-4 text-base md:text-xl">
                                 ペットと暮らしていると、時には「大変だな」と悩んでしまうこともあるかもしれません。けれど、その何倍も大きな幸せを、彼らは私たちに届けてくれます。
                             </p>
-                            <p class="text-gray-700 leading-relaxed mb-4 text-base md:text-xl">
+                            <p class="text-main-text leading-relaxed mb-4 text-base md:text-xl">
                                 人間相手では得られない癒しを与えてくれたり、ふとした瞬間に笑顔のきっかけをくれたり……。ペットとの日々は、喜びや楽しみにあふれています。日々のスキンシップを通じて、お互いに成長していけるのも、ペットと暮らす醍醐味のひとつです。
                             </p>
-                            <p class="text-gray-700 leading-relaxed text-base md:text-xl">
+                            <p class="text-main-text leading-relaxed text-base md:text-xl">
                                 だからこそ、私たちは"誠実な飼い主"として、最後まで責任と愛情を持って向き合っていくことが大切だと考えています。
                             </p>
                         </div>

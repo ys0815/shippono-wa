@@ -68,6 +68,12 @@ export default {
                 // 全面を Noto Sans JP に統一（英数字含む）
                 sans: ["Noto Sans JP", ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                // カスタムカラーを定義
+                "main-text": "#3A2E25",
+                "sub-text": "#80746b",
+                "main-bg": "#fbfaf9",
+            },
         },
     },
 

@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-main-bg">
         <!-- ヘッダー（固定） -->
         <div class="bg-white/90 backdrop-blur border-b border-amber-100 shadow-sm sticky top-16 z-[900]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,11 +51,11 @@
             @endif
             <!-- 現在の家族リンク -->
             <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
-                <h3 class="text-base font-semibold text-gray-800 mb-3">現在の家族リンク</h3>
+                <h3 class="text-base font-semibold text-main-text mb-3">現在の家族リンク</h3>
                 
                 @if($familyGroups->isNotEmpty())
                     @foreach($familyGroups as $group)
-                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-3">
+                        <div class="bg-main-bg border border-gray-200 rounded-lg p-4 mb-3">
                             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                                 <!-- ペット表示エリア -->
                                 <div class="flex-1 mb-3 sm:mb-0">
@@ -71,7 +71,7 @@
                                                             {{ mb_substr($pet->name, 0, 2) }}
                                                         @endif
                                                     </div>
-                                                    <div class="text-xs text-gray-600 mt-1 text-center">{{ $pet->name }}</div>
+                                                    <div class="text-xs text-main-text mt-1 text-center">{{ $pet->name }}</div>
                                                 </div>
                                                 @if($index < count($group['pets']) - 1)
                                                     <div class="text-blue-500 text-lg flex-shrink-0">⇔</div>
@@ -90,7 +90,7 @@
                                                             {{ mb_substr($pet->name, 0, 2) }}
                                                         @endif
                                                     </div>
-                                                    <div class="text-xs text-gray-600 mt-1 text-center">{{ $pet->name }}</div>
+                                                    <div class="text-xs text-main-text mt-1 text-center">{{ $pet->name }}</div>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -102,7 +102,7 @@
                                 
                                 <!-- 設定日と解除ボタン -->
                                 <div class="text-center sm:text-right">
-                                    <div class="text-sm text-gray-600 mb-2">設定日: {{ $group['created_at']->format('Y/m/d') }}</div>
+                                    <div class="text-sm text-main-text mb-2">設定日: {{ $group['created_at']->format('Y/m/d') }}</div>
                                     <button type="button" 
                                             onclick="window.dispatchEvent(new CustomEvent('open-confirm', {
                                                 detail: { 
@@ -131,7 +131,7 @@
                         </div>
                     @endforeach
                 @else
-                    <div class="text-center py-8 text-gray-500">
+                    <div class="text-center py-8 text-sub-text">
                         <p>現在設定されている家族リンクはありません</p>
                         <p class="text-sm mt-1">※家族リンクがない場合は、下記から新しいリンクを作成してください</p>
                     </div>
@@ -140,8 +140,8 @@
 
             <!-- 新しい家族リンクを作成 -->
             <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
-                <h3 class="text-base font-semibold text-gray-800 mb-3">新しい家族リンクを作成</h3>
-                <p class="text-sm text-gray-600 mb-4">一緒に暮らしている動物を選択してください (複数選択可能)</p>
+                <h3 class="text-base font-semibold text-main-text mb-3">新しい家族リンクを作成</h3>
+                <p class="text-sm text-main-text mb-4">一緒に暮らしている動物を選択してください (複数選択可能)</p>
                 
                 @if($pets->count() >= 2)
                     <form method="post" action="{{ route('mypage.pets.links.store') }}" class="space-y-4">
@@ -151,7 +151,7 @@
                                 <label class="relative cursor-pointer">
                                     <input type="checkbox" name="selected_pets[]" value="{{ $pet->id }}" 
                                            class="absolute top-3 right-3 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                                    <div class="border rounded-lg p-4 hover:bg-gray-50 transition duration-200">
+                                    <div class="border rounded-lg p-4 hover:bg-main-bg transition duration-200">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-sm font-bold overflow-hidden flex-shrink-0">
                                                 @if($pet->profile_image_url)
@@ -161,8 +161,8 @@
                                                 @endif
                                             </div>
                                             <div class="flex-1 min-w-0">
-                                                <div class="font-medium text-gray-900 truncate">{{ $pet->name }}</div>
-                                                <div class="text-sm text-gray-600 truncate">
+                                                <div class="font-medium text-main-text truncate">{{ $pet->name }}</div>
+                                                <div class="text-sm text-main-text truncate">
                                                     {{ __(['dog' => '犬', 'cat' => '猫', 'rabbit' => 'うさぎ', 'other' => 'その他'][$pet->species] ?? $pet->species) }}
                                                     @if($pet->breed)
                                                         {{ $pet->breed }}
@@ -180,7 +180,7 @@
                         </button>
                     </form>
                 @else
-                    <div class="text-center py-8 text-gray-500">
+                    <div class="text-center py-8 text-sub-text">
                         <p>家族リンクを作成するには、2匹以上のペットを登録してください</p>
                         <div class="mt-4">
                             <a href="{{ route('mypage.pets.create') }}" class="btn btn-brand px-6 py-3">
@@ -193,8 +193,8 @@
 
             <!-- 家族リンクについて -->
             <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                <h4 class="text-base font-semibold text-gray-800 mb-3">家族リンクについて</h4>
-                <ul class="text-sm text-gray-700 space-y-1">
+                <h4 class="text-base font-semibold text-main-text mb-3">家族リンクについて</h4>
+                <ul class="text-sm text-main-text space-y-1">
                     <li>• 一緒に暮らしている動物同士をリンクできます</li>
                     <li>• 複数の動物を同時に選択して、グループとしてリンク可能</li>
                     <li>• リンクされた動物は、プロフィールページで「家族」として表示されます</li>

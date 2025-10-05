@@ -14,7 +14,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans text-gray-900 antialiased" style="font-family: 'Noto Sans JP', sans-serif;">
+<body class="font-sans text-main-text antialiased" style="font-family: 'Noto Sans JP', sans-serif;">
     <div class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
             <!-- Header -->
@@ -22,8 +22,8 @@
                 <div class="mx-auto h-32 w-32 flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 to-orange-100 shadow-lg mb-6">
                     <img src="{{ asset('images/icon.png') }}" alt="# しっぽのわ" class="h-20 w-20">
                 </div>
-                <h2 class="text-xl font-bold text-gray-800 mb-2">新規登録</h2>
-                <p class="text-gray-600">#しっぽのわに参加しましょう</p>
+                <h2 class="text-xl font-bold text-main-text mb-2">新規登録</h2>
+                <p class="text-main-text">#しっぽのわに参加しましょう</p>
             </div>
 
             <!-- Form Card -->
@@ -33,7 +33,7 @@
 
                     <!-- ハンドルネーム -->
                     <div>
-                        <x-input-label for="display_name" :value="__('ハンドルネーム')" class="text-sm font-medium text-gray-700 mb-2" />
+                        <x-input-label for="display_name" :value="__('ハンドルネーム')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="display_name" 
                                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
                                       type="text" 
@@ -44,12 +44,12 @@
                                       autocomplete="display_name" 
                                       placeholder="ハンドルネームを入力してください" />
                         <x-input-error :messages="$errors->get('display_name')" class="mt-2" />
-                        <p class="mt-1 text-sm text-gray-500">{{ __('公開されるハンドルネームです') }}</p>
+                        <p class="mt-1 text-sm text-sub-text">{{ __('公開されるハンドルネームです') }}</p>
                     </div>
 
                     <!-- Email Address -->
                     <div>
-                        <x-input-label for="email" :value="__('メールアドレス')" class="text-sm font-medium text-gray-700 mb-2" />
+                        <x-input-label for="email" :value="__('メールアドレス')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="email" 
                                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors" 
                                       type="email" 
@@ -63,7 +63,7 @@
 
                     <!-- Password -->
                     <div>
-                        <x-input-label for="password" :value="__('パスワード')" class="text-sm font-medium text-gray-700 mb-2" />
+                        <x-input-label for="password" :value="__('パスワード')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="password" 
                                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
                                       type="password"
@@ -76,7 +76,7 @@
 
                     <!-- Confirm Password -->
                     <div>
-                        <x-input-label for="password_confirmation" :value="__('パスワード確認')" class="text-sm font-medium text-gray-700 mb-2" />
+                        <x-input-label for="password_confirmation" :value="__('パスワード確認')" class="text-sm font-medium text-main-text mb-2" />
                         <x-text-input id="password_confirmation" 
                                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
                                       type="password"
@@ -97,7 +97,7 @@
 
                     <!-- Login Link -->
                     <div class="text-center">
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-main-text">
                             すでにアカウントをお持ちの方は
                             <a href="{{ route('login') }}" class="font-medium text-amber-600 hover:text-amber-700 transition-colors">
                                 ログイン
@@ -109,7 +109,7 @@
 
             <!-- Footer -->
             <div class="text-center">
-                <a href="/" class="text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                <a href="/" class="text-sm text-sub-text hover:text-main-text transition-colors">
                     ← トップページに戻る
                 </a>
             </div>

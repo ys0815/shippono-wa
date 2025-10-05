@@ -12,8 +12,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans text-gray-900 antialiased bg-gray-50" style="font-family: 'Noto Sans JP', sans-serif;">
-<div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-gray-50">
+<body class="font-sans text-main-text antialiased bg-main-bg" style="font-family: 'Noto Sans JP', sans-serif;">
+<div x-data="{ sidebar:false, search:false }" class="min-h-screen bg-main-bg">
     <!-- 共通ヘッダー -->
     @include('partials.header')
 
@@ -33,12 +33,12 @@
                 
                 <!-- 保護団体情報 -->
                 <div class="flex-1">
-                    <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">{{ $shelter->name }}</h1>
+                    <h1 class="text-3xl sm:text-4xl font-bold text-main-text mb-4">{{ $shelter->name }}</h1>
                     
                     <div class="space-y-3">
                         <!-- 種別 -->
                         <div class="flex items-center gap-3">
-                            <span class="text-sm font-medium text-gray-600">種別：</span>
+                            <span class="text-sm font-medium text-main-text">種別：</span>
                             <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">
                                 {{ $shelter->kind === 'facility' ? '施設' : ($shelter->kind === 'site' ? 'サイト' : '不明') }}
                             </span>
@@ -47,15 +47,15 @@
                         <!-- 所在地 -->
                         @if($shelter->prefecture)
                             <div class="flex items-center gap-3">
-                                <span class="text-sm font-medium text-gray-600">所在地：</span>
-                                <span class="text-gray-800">{{ $shelter->prefecture->name }}</span>
+                                <span class="text-sm font-medium text-main-text">所在地：</span>
+                                <span class="text-main-text">{{ $shelter->prefecture->name }}</span>
                             </div>
                         @endif
                         
                         <!-- ウェブサイト -->
                         @if($shelter->website_url)
                             <div class="flex items-center gap-3">
-                                <span class="text-sm font-medium text-gray-600">ウェブサイト：</span>
+                                <span class="text-sm font-medium text-main-text">ウェブサイト：</span>
                                 <a href="{{ $shelter->website_url }}" target="_blank" class="text-amber-600 hover:text-amber-700 hover:underline">
                                     {{ $shelter->website_url }}
                                 </a>
@@ -69,7 +69,7 @@
         <!-- 関連ペット -->
         @if($pets->count() > 0)
             <div class="mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">この保護団体からお迎えされたペット</h2>
+                <h2 class="text-2xl font-bold text-main-text mb-6">この保護団体からお迎えされたペット</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     @foreach($pets as $pet)
                         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
@@ -84,16 +84,16 @@
                                     </div>
                                 @endif
                                 <div class="p-4">
-                                    <h3 class="font-semibold text-gray-800 mb-2">{{ $pet->name }}</h3>
-                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                    <h3 class="font-semibold text-main-text mb-2">{{ $pet->name }}</h3>
+                                    <div class="flex items-center gap-2 text-sm text-main-text">
                                         <span>{{ $pet->species }}</span>
                                         @if($pet->gender)
-                                            <span class="{{ $pet->gender === 'male' ? 'text-blue-500' : ($pet->gender === 'female' ? 'text-pink-500' : 'text-gray-500') }}">
+                                            <span class="{{ $pet->gender === 'male' ? 'text-blue-500' : ($pet->gender === 'female' ? 'text-pink-500' : 'text-sub-text') }}">
                                                 {{ ['male'=>'♂','female'=>'♀','unknown'=>'?'][$pet->gender] ?? '?' }}
                                             </span>
                                         @endif
                                     </div>
-                                    <div class="text-sm text-gray-500 mt-2">
+                                    <div class="text-sm text-sub-text mt-2">
                                         飼い主さん：{{ $pet->user->display_name ?? $pet->user->name }}
                                     </div>
                                 </div>
@@ -104,13 +104,13 @@
             </div>
         @else
             <div class="text-center py-12">
-                <div class="text-gray-500 mb-4">
+                <div class="text-sub-text mb-4">
                     <svg class="w-16 h-16 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                     </svg>
                 </div>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">まだペットの登録がありません</h3>
-                <p class="text-gray-500">この保護団体からお迎えされたペットの情報が登録されると、ここに表示されます。</p>
+                <h3 class="text-lg font-medium text-main-text mb-2">まだペットの登録がありません</h3>
+                <p class="text-sub-text">この保護団体からお迎えされたペットの情報が登録されると、ここに表示されます。</p>
             </div>
         @endif
     </main>
