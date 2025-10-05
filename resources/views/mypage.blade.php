@@ -127,7 +127,7 @@
 
             <!-- 詳細を見るボタン（ペットプロフィール管理＝一覧ページへ遷移） -->
             @if($pets->isNotEmpty())
-                <a href="{{ route('mypage.pets') }}" class="btn btn-brand w-full py-3">
+                <a href="{{ route('mypage.pets') }}" class="block w-full text-center bg-gray-200 text-gray-800 py-3 rounded-lg font-medium hover:bg-gray-300 transition duration-200">
                     ペット一覧を見る→
                 </a>
             @endif
