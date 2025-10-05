@@ -23,7 +23,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($pets as $pet)
-                    <div class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-amber-200 h-full flex flex-col transform hover:-translate-y-1">
+                    <div class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border hover:border-amber-200 h-full flex flex-col transform hover:-translate-y-1">
                         <!-- プロフィール画像（背景画像） -->
                         <div class="relative h-40 bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center">
                                 @if($pet->header_image_url)
