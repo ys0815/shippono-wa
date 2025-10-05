@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // 統計情報キャッシュチェックミドルウェアを登録
+        $middleware->web(append: [
+            \App\Http\Middleware\CheckStatsCache::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
