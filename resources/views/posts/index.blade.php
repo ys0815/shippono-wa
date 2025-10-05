@@ -35,7 +35,7 @@
                     </a>
                     <a href="{{ route('mypage.posts', ['type' => 'interview']) }}" 
                        class="py-4 px-1 border-b-2 font-medium text-base md:text-lg {{ $type === 'interview' ? 'border-amber-500 text-amber-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
-                        しっぽのわ
+                        里親インタビュー
                     </a>
                 </nav>
             </div>
@@ -51,14 +51,14 @@
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
-                        ＋幸せをシェアする
+                        幸せをシェアする
                     </a>
                     <a href="{{ route('mypage.posts.interview.create') }}" 
                        class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
-                        ＋体験をシェアする
+                        体験をシェアする
                     </a>
                 </div>
             </div>
