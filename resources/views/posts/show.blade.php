@@ -66,9 +66,9 @@
                                     <div class="media-item w-full flex-shrink-0 cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
                                         <div class="w-full h-80 sm:h-96 overflow-hidden">
                                             @if($media->type === 'image')
-                                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover ">
+                                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover object-center" style="object-fit: cover; object-position: center;">
                                             @elseif($media->type === 'video')
-                                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover" controls muted preload="metadata" playsinline>
+                                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted preload="metadata" playsinline style="object-fit: cover; object-position: center;">
                                                     お使いのブラウザは動画をサポートしていません。
                                                 </video>
                                             @endif
@@ -105,11 +105,11 @@
                         <div id="media-carousel" class="flex transition-transform duration-300 ease-in-out">
                             @foreach($post->media as $index => $media)
                                 <div class="media-item w-full flex-shrink-0 cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
-                                    <div class="w-full h-80 sm:h-96 overflow-hidden flex items-center justify-center bg-gray-50">
+                                    <div class="w-full h-80 sm:h-96 overflow-hidden">
                                         @if($media->type === 'image')
-                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="max-w-full max-h-full object-contain">
+                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover object-center" style="object-fit: cover; object-position: center;">
                                         @elseif($media->type === 'video')
-                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover" controls muted preload="metadata" playsinline>
+                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted preload="metadata" playsinline style="object-fit: cover; object-position: center;">
                                                 お使いのブラウザは動画をサポートしていません。
                                             </video>
                                         @endif
