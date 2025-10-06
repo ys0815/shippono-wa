@@ -8,7 +8,7 @@
                     <!-- 単一メディア（端末に合わせてアスペクト比を自動切替） -->
                     @php $media = $post->media->first(); @endphp
                     <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
-                        <div class="w-full overflow-hidden media-aspect aspect-video" id="single-media-container">
+                        <div class="w-full overflow-hidden media-aspect aspect-auto" id="single-media-container"></div>
                             @if($media->type === 'image')
                                 <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover" id="single-media-image">
                             @elseif($media->type === 'video')
@@ -362,21 +362,23 @@
                 
                 const aspectRatio = naturalWidth / naturalHeight;
                 
+                console.log('Media dimensions:', { naturalWidth, naturalHeight, aspectRatio });
+                
                 // 既存のアスペクト比クラスを削除
                 container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]');
                 
                 // アスペクト比に応じてクラスを追加
-                if (aspectRatio >= 1.5) {
-                    // 横長（16:9以上）
+                if (aspectRatio >= 1.7) {
+                    // 横長（16:9以上、約1.78）
                     container.classList.add('aspect-video');
-                } else if (aspectRatio >= 0.8) {
-                    // 正方形に近い（4:5〜5:4）
+                } else if (aspectRatio >= 0.9 && aspectRatio <= 1.1) {
+                    // 正方形（0.9〜1.1）
                     container.classList.add('aspect-square');
-                } else if (aspectRatio >= 0.5) {
-                    // 縦長（2:3程度）
+                } else if (aspectRatio >= 0.6) {
+                    // 縦長（2:3程度、約0.67）
                     container.classList.add('aspect-[2/3]');
                 } else {
-                    // 非常に縦長（9:16程度）
+                    // 非常に縦長（9:16程度、約0.56）
                     container.classList.add('aspect-[9/16]');
                 }
             }

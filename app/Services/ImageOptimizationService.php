@@ -79,13 +79,14 @@ class ImageOptimizationService
                 // 失敗しても処理継続
             }
 
-            // アスペクト比を保持してリサイズ（高さ未指定時は幅ベース）
+            // アスペクト比を保持してリサイズ（幅のみ指定）
             $targetWidth = $config['width'] ?? null;
-            $targetHeight = $config['height'] ?? null;
-            $image->resize($targetWidth, $targetHeight, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize(); // 元画像より大きくしない
-            });
+            if ($targetWidth) {
+                $image->resize($targetWidth, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize(); // 元画像より大きくしない
+                });
+            }
 
             // ファイル名を生成
             $filename = $this->generateFilename($file, $sizeName);
@@ -156,13 +157,14 @@ class ImageOptimizationService
             } catch (\Throwable $t) {
             }
 
-            // アスペクト比を保持してリサイズ（高さ未指定時は幅ベース）
+            // アスペクト比を保持してリサイズ（幅のみ指定）
             $targetWidth = $config['width'] ?? null;
-            $targetHeight = $config['height'] ?? null;
-            $image->resize($targetWidth, $targetHeight, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
+            if ($targetWidth) {
+                $image->resize($targetWidth, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
 
             $filename = $this->generateFilename($file, $sizeName, 'webp');
             $path = $directory . '/' . $filename;
@@ -233,13 +235,14 @@ class ImageOptimizationService
                 } catch (\Throwable $t) {
                 }
 
-                // アスペクト比を保持してリサイズ（高さ未指定時は幅ベース）
+                // アスペクト比を保持してリサイズ（幅のみ指定）
                 $targetWidth = $config['width'] ?? null;
-                $targetHeight = $config['height'] ?? null;
-                $image->resize($targetWidth, $targetHeight, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                if ($targetWidth) {
+                    $image->resize($targetWidth, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                }
 
                 $filename = $this->generateFilenameFromPath($originalPath, $sizeName);
                 $path = $directory . '/' . $filename;
