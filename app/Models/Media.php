@@ -11,6 +11,7 @@ class Media extends Model
         'post_id',
         'url',
         'type',
+        'thumbnail_url',
     ];
 
     public function post(): BelongsTo
