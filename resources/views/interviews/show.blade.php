@@ -6,57 +6,19 @@
         <!-- メディア表示 -->
         @if($post->media->count() > 0)
             <div class="relative">
-                @if($post->media->count() === 1)
-                    <!-- 単一メディア -->
-                    @php $media = $post->media->first(); @endphp
-                    <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
-                        <div class="w-full h-80 sm:h-96 overflow-hidden">
-                            @if($media->type === 'image')
-                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover ">
-                            @elseif($media->type === 'video')
-                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover " muted>
-                                    お使いのブラウザは動画をサポートしていません。
-                                </video>
-                            @endif
+                <!-- 単一メディア（画像1枚のみ） -->
+                @php $media = $post->media->first(); @endphp
+                <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
+                    <div class="w-full overflow-hidden">
+                        @if($media->type === 'image')
+                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-auto object-contain">
+                        @elseif($media->type === 'video')
+                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-auto object-contain" muted>
+                                お使いのブラウザは動画をサポートしていません。
+                            </video>
+                        @endif
                     </div>
                 </div>
-                @else
-                    <!-- 複数メディア -->
-                    <div class="relative">
-                        <div class="w-full h-80 sm:h-96 overflow-hidden">
-                            @foreach($post->media as $index => $media)
-                                <div class="media-item cursor-pointer {{ $index === 0 ? '' : 'hidden' }}" 
-                                     data-media-type="{{ e($media->type) }}" 
-                                     data-media-url="{{ e(Storage::url($media->url)) }}" 
-                                     data-media-index="{{ $index }}">
-                                    @if($media->type === 'image')
-                                        <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
-                                    @elseif($media->type === 'video')
-                                        <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover" muted>
-                                            お使いのブラウザは動画をサポートしていません。
-                                        </video>
-                                    @endif
-                </div>
-                            @endforeach
-                </div>
-                        
-                        <!-- ナビゲーションボタン -->
-                        @if($post->media->count() > 1)
-                            <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all" 
-                                    onclick="previousMedia()">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
-                            </button>
-                            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all" 
-                                    onclick="nextMedia()">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                            </button>
-                                @endif
-                    </div>
-                @endif
             </div>
                     @endif
 
@@ -231,7 +193,7 @@
 
 
         <!-- 関連投稿 -->
-        @if($relatedPosts->count() > 0)
+        {{-- @if($relatedPosts->count() > 0)
             <div class="mt-8">
                 <h2 class="text-2xl font-bold text-main-text mb-4">関連する里親インタビュー</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -260,7 +222,7 @@
                     @endforeach
                 </div>
             </div>
-        @endif
+        @endif --}}
     </main>
 
     <!-- メディアビューアーモーダル -->
