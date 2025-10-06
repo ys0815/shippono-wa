@@ -5,22 +5,19 @@
     <main class="max-w-4xl mx-auto">
         <!-- メディア表示 -->
         @if($post->media->count() > 0)
-            <div class="relative">
-                <!-- 単一メディア（画像1枚のみ） -->
+            <section class="w-full relative overflow-hidden" style="position: relative !important;">
                 @php $media = $post->media->first(); @endphp
-                <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
-                    <div class="w-full overflow-hidden">
-                        @if($media->type === 'image')
-                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-auto object-contain">
-                        @elseif($media->type === 'video')
-                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-auto object-contain" muted>
-                                お使いのブラウザは動画をサポートしていません。
-                            </video>
-                        @endif
-                    </div>
-                </div>
-            </div>
+                <div class="media-item cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
+                    @if($media->type === 'image')
+                        <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover" style="height: 256px !important; max-height: 400px; object-position: center;">
+                    @elseif($media->type === 'video')
+                        <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover" muted style="height: 256px !important; max-height: 400px; object-position: center;">
+                            お使いのブラウザは動画をサポートしていません。
+                        </video>
                     @endif
+                </div>
+            </section>
+        @endif
 
         <!-- 投稿内容 -->
         <div class="bg-white px-4 py-6">
