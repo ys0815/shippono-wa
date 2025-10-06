@@ -59,6 +59,11 @@ export default {
         "pt-14",
         "pt-12",
         "pt-8",
+        // アスペクト比制御（任意比率をパージさせない）
+        "aspect-square",
+        "aspect-video",
+        "aspect-[2/3]",
+        "aspect-[9/16]",
         // その他の動的クラスも必要に応じて追加
     ],
 
