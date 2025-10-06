@@ -241,7 +241,11 @@
                                 <video src="${e.target.result}" 
                                        class="w-full h-32 object-cover rounded-lg" 
                                        controls muted preload="metadata" playsinline
-                                       onloadeddata="this.style.opacity='1';">
+                                       style="opacity: 0;"
+                                       poster="${e.target.result}"
+                                       onloadeddata="this.style.opacity='1';" 
+                                       oncanplay="this.style.opacity='1';"
+                                       onloadstart="this.style.opacity='0.5';">
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
                                 <button type="button" onclick="removeMedia(this)" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">×</button>
