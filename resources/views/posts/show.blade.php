@@ -68,7 +68,7 @@
                                             @if($media->type === 'image')
                                                 <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover object-center" style="object-fit: cover; object-position: center;">
                                             @elseif($media->type === 'video')
-                                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted playsinline style="object-fit: cover; object-position: center;" poster="{{ e(Storage::url($media->url)) }}">
+                                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted playsinline preload="metadata" style="object-fit: cover; object-position: center; opacity: 0;" poster="{{ e(Storage::url($media->url)) }}" onloadeddata="this.style.opacity='1';" oncanplay="this.style.opacity='1';" onloadstart="this.style.opacity='0.5';">
                                                     お使いのブラウザは動画をサポートしていません。
                                                 </video>
                                             @endif
@@ -109,7 +109,7 @@
                                         @if($media->type === 'image')
                                             <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover object-center" style="object-fit: cover; object-position: center;">
                                         @elseif($media->type === 'video')
-                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted playsinline style="object-fit: cover; object-position: center;" poster="{{ e(Storage::url($media->url)) }}">
+                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted playsinline preload="metadata" style="object-fit: cover; object-position: center; opacity: 0;" poster="{{ e(Storage::url($media->url)) }}" onloadeddata="this.style.opacity='1';" oncanplay="this.style.opacity='1';" onloadstart="this.style.opacity='0.5';">
                                                 お使いのブラウザは動画をサポートしていません。
                                             </video>
                                         @endif
