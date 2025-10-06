@@ -659,22 +659,40 @@
                                class="px-3 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600 transition">
                                 編集
                             </a>
-                            <form action="/mypage/posts/${post.id}" method="POST" class="inline">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" 
-                                        class="px-3 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600 transition"
-                                        onclick="return confirm('この投稿を削除してもよろしいですか？この操作は元に戻せません。')">
-                                    削除
-                                </button>
-                            </form>
-                            <form action="/mypage/posts/${post.id}/toggle-visibility" method="POST" class="inline">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" 
-                                        class="px-3 py-1 text-xs bg-yellow-500 hover:bg-yellow-600 text-white rounded transition">
-                                    非公開
-                                </button>
-                            </form>
+                            <button type="button" 
+                                    onclick="const deleteEvent = new CustomEvent('open-confirm', {
+                                                 detail: { 
+                                                     id: 'confirmation-modal',
+                                                     title: '投稿を削除しますか？',
+                                                     message: 'この投稿を削除してもよろしいですか？この操作は元に戻せません。',
+                                                     confirmText: '削除',
+                                                     cancelText: 'キャンセル',
+                                                     confirmClass: 'bg-red-600 hover:bg-red-700 text-white',
+                                                     icon: '🗑️',
+                                                     formId: 'delete-form-${post.id}'
+                                                 }
+                                             });
+                                             window.dispatchEvent(deleteEvent);"
+                                    class="px-3 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600 transition">
+                                削除
+                            </button>
+                            <button type="button" 
+                                    onclick="const hideEvent = new CustomEvent('open-confirm', {
+                                                 detail: { 
+                                                     id: 'confirmation-modal',
+                                                     title: '投稿を非公開にしますか？',
+                                                     message: 'この投稿を非公開にしますか？',
+                                                     confirmText: '非公開にする',
+                                                     cancelText: 'キャンセル',
+                                                     confirmClass: 'bg-orange-600 hover:bg-orange-700 text-white',
+                                                     icon: '👁️',
+                                                     formId: 'hide-form-${post.id}'
+                                                 }
+                                             });
+                                             window.dispatchEvent(hideEvent);"
+                                    class="px-3 py-1 text-xs bg-yellow-500 text-white rounded hover:bg-yellow-600 transition">
+                                非公開
+                            </button>
                         </div>
                     `;
                 }
@@ -718,6 +736,33 @@
             `;
             
             container.appendChild(postElement);
+            
+            // フォームを追加（削除・非公開用）
+            @auth
+                if (post.user_id === {{ Auth::id() }}) {
+                    const deleteForm = document.createElement('form');
+                    deleteForm.id = `delete-form-${post.id}`;
+                    deleteForm.action = `/mypage/posts/${post.id}`;
+                    deleteForm.method = 'POST';
+                    deleteForm.className = 'hidden';
+                    deleteForm.innerHTML = `
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_method" value="DELETE">
+                    `;
+                    document.body.appendChild(deleteForm);
+                    
+                    const hideForm = document.createElement('form');
+                    hideForm.id = `hide-form-${post.id}`;
+                    hideForm.action = `/mypage/posts/${post.id}/toggle-visibility`;
+                    hideForm.method = 'POST';
+                    hideForm.className = 'hidden';
+                    hideForm.innerHTML = `
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_method" value="PATCH">
+                    `;
+                    document.body.appendChild(hideForm);
+                }
+            @endauth
         }
 
         // スクロールイベントリスナー
@@ -1029,6 +1074,138 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closePetImageModal();
+            }
+        });
+    </script>
+
+    <!-- 確認モーダル -->
+    <div id="confirmation-modal" class="fixed inset-0 z-[9999] hidden bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="flex-shrink-0 w-10 h-10 mx-auto bg-red-100 rounded-full flex items-center justify-center">
+                        <span id="modal-icon" class="text-2xl">⚠️</span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 id="modal-title" class="text-lg font-medium text-gray-900 mb-2">確認</h3>
+                    <p id="modal-message" class="text-sm text-gray-500 mb-6">この操作を実行しますか？</p>
+                    <div class="flex space-x-3 justify-center">
+                        <button id="modal-cancel" 
+                                class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            キャンセル
+                        </button>
+                        <button id="modal-confirm" 
+                                class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                            確認
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 確認モーダルの制御
+        
+        // イベントリスナーを複数の方法で登録
+        document.addEventListener('open-confirm', function(event) {
+            const { id, title, message, confirmText, cancelText, confirmClass, icon, formId } = event.detail;
+            
+            const modal = document.getElementById(id);
+            const titleEl = document.getElementById('modal-title');
+            const messageEl = document.getElementById('modal-message');
+            const confirmBtn = document.getElementById('modal-confirm');
+            const cancelBtn = document.getElementById('modal-cancel');
+            const iconEl = document.getElementById('modal-icon');
+            
+            if (!modal || !titleEl || !messageEl || !confirmBtn || !cancelBtn || !iconEl) {
+                return;
+            }
+            
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            confirmBtn.textContent = confirmText;
+            cancelBtn.textContent = cancelText;
+            iconEl.textContent = icon;
+            
+            // 確認ボタンのスタイルを設定
+            confirmBtn.className = `px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 ${confirmClass}`;
+            
+            // イベントリスナーを削除（重複防止）
+            const newConfirmBtn = confirmBtn.cloneNode(true);
+            const newCancelBtn = cancelBtn.cloneNode(true);
+            confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+            cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+            
+            // 新しいイベントリスナーを追加
+            newConfirmBtn.addEventListener('click', function() {
+                const form = document.getElementById(formId);
+                if (form) {
+                    form.submit();
+                }
+                modal.classList.add('hidden');
+            });
+            
+            newCancelBtn.addEventListener('click', function() {
+                modal.classList.add('hidden');
+            });
+            
+            modal.classList.remove('hidden');
+        });
+        
+        // windowオブジェクトにもイベントリスナーを登録
+        window.addEventListener('open-confirm', function(event) {
+            const { id, title, message, confirmText, cancelText, confirmClass, icon, formId } = event.detail;
+            
+            const modal = document.getElementById(id);
+            const titleEl = document.getElementById('modal-title');
+            const messageEl = document.getElementById('modal-message');
+            const confirmBtn = document.getElementById('modal-confirm');
+            const cancelBtn = document.getElementById('modal-cancel');
+            const iconEl = document.getElementById('modal-icon');
+            
+            if (!modal || !titleEl || !messageEl || !confirmBtn || !cancelBtn || !iconEl) {
+                return;
+            }
+            
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            confirmBtn.textContent = confirmText;
+            cancelBtn.textContent = cancelText;
+            iconEl.textContent = icon;
+            
+            // 確認ボタンのスタイルを設定
+            confirmBtn.className = `px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 ${confirmClass}`;
+            
+            // イベントリスナーを削除（重複防止）
+            const newConfirmBtn = confirmBtn.cloneNode(true);
+            const newCancelBtn = cancelBtn.cloneNode(true);
+            confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+            cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+            
+            // 新しいイベントリスナーを追加
+            newConfirmBtn.addEventListener('click', function() {
+                const form = document.getElementById(formId);
+                if (form) {
+                    form.submit();
+                }
+                modal.classList.add('hidden');
+            });
+            
+            newCancelBtn.addEventListener('click', function() {
+                modal.classList.add('hidden');
+            });
+            
+            modal.classList.remove('hidden');
+        });
+        
+        
+        
+        // モーダル外クリックで閉じる
+        document.getElementById('confirmation-modal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                this.classList.add('hidden');
             }
         });
     </script>

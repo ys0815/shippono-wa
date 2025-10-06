@@ -537,6 +537,13 @@ class PostController extends Controller
 
         $post->delete();
 
+        // リファラーをチェックして適切なページにリダイレクト
+        $referer = request()->header('referer');
+        if ($referer && str_contains($referer, '/pets/')) {
+            // ペットプロフィール画面から来た場合はペットプロフィール画面に戻る
+            return redirect()->back()->with('success', '投稿を削除しました。');
+        }
+
         return redirect()->route('mypage.posts')
             ->with('success', '投稿を削除しました。');
     }
@@ -566,6 +573,13 @@ class PostController extends Controller
         $post->save();
 
         $message = $post->status === 'published' ? '投稿を公開しました。' : '投稿を非公開にしました。';
+
+        // リファラーをチェックして適切なページにリダイレクト
+        $referer = request()->header('referer');
+        if ($referer && str_contains($referer, '/pets/')) {
+            // ペットプロフィール画面から来た場合はペットプロフィール画面に戻る
+            return redirect()->back()->with('success', $message);
+        }
 
         return redirect()->back()->with('success', $message);
     }
