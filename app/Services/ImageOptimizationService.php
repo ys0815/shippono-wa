@@ -100,30 +100,11 @@ class ImageOptimizationService
 
                 \Log::info("Calculated new dimensions: {$targetWidth}x{$newHeight}");
 
-                // 表示領域の最大高さを設定（80vh相当、約600px）
-                $maxDisplayHeight = 600;
-
-                // 縦長画像で表示領域からはみ出す場合はトリミング
-                if ($newHeight > $maxDisplayHeight) {
-                    \Log::info("Image too tall, applying crop to fit display area");
-
-                    // まずアスペクト比を保持してリサイズ
-                    $image->resize($targetWidth, $newHeight, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    });
-
-                    // 表示領域に合わせてトリミング（中央部分を保持）
-                    $image->crop($targetWidth, $maxDisplayHeight, 0, ($newHeight - $maxDisplayHeight) / 2);
-
-                    \Log::info("Image cropped to fit display: {$targetWidth}x{$maxDisplayHeight}");
-                } else {
-                    // 通常のリサイズ
-                    $image->resize($targetWidth, $newHeight, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    });
-                }
+                // 正確なサイズでリサイズ
+                $image->resize($targetWidth, $newHeight, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize(); // 元画像より大きくしない
+                });
 
                 \Log::info("Final image dimensions: {$image->width()}x{$image->height()}");
             }
@@ -219,30 +200,11 @@ class ImageOptimizationService
 
                 \Log::info("WebP calculated new dimensions: {$targetWidth}x{$newHeight}");
 
-                // 表示領域の最大高さを設定（80vh相当、約600px）
-                $maxDisplayHeight = 600;
-
-                // 縦長画像で表示領域からはみ出す場合はトリミング
-                if ($newHeight > $maxDisplayHeight) {
-                    \Log::info("WebP image too tall, applying crop to fit display area");
-
-                    // まずアスペクト比を保持してリサイズ
-                    $image->resize($targetWidth, $newHeight, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    });
-
-                    // 表示領域に合わせてトリミング（中央部分を保持）
-                    $image->crop($targetWidth, $maxDisplayHeight, 0, ($newHeight - $maxDisplayHeight) / 2);
-
-                    \Log::info("WebP image cropped to fit display: {$targetWidth}x{$maxDisplayHeight}");
-                } else {
-                    // 通常のリサイズ
-                    $image->resize($targetWidth, $newHeight, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    });
-                }
+                // 正確なサイズでリサイズ
+                $image->resize($targetWidth, $newHeight, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
 
                 \Log::info("WebP final image dimensions: {$image->width()}x{$image->height()}");
             }
@@ -334,30 +296,11 @@ class ImageOptimizationService
 
                     \Log::info("Existing image calculated new dimensions: {$targetWidth}x{$newHeight}");
 
-                    // 表示領域の最大高さを設定（80vh相当、約600px）
-                    $maxDisplayHeight = 600;
-
-                    // 縦長画像で表示領域からはみ出す場合はトリミング
-                    if ($newHeight > $maxDisplayHeight) {
-                        \Log::info("Existing image too tall, applying crop to fit display area");
-
-                        // まずアスペクト比を保持してリサイズ
-                        $image->resize($targetWidth, $newHeight, function ($constraint) {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                        });
-
-                        // 表示領域に合わせてトリミング（中央部分を保持）
-                        $image->crop($targetWidth, $maxDisplayHeight, 0, ($newHeight - $maxDisplayHeight) / 2);
-
-                        \Log::info("Existing image cropped to fit display: {$targetWidth}x{$maxDisplayHeight}");
-                    } else {
-                        // 通常のリサイズ
-                        $image->resize($targetWidth, $newHeight, function ($constraint) {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                        });
-                    }
+                    // 正確なサイズでリサイズ
+                    $image->resize($targetWidth, $newHeight, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
 
                     \Log::info("Existing image final dimensions: {$image->width()}x{$image->height()}");
                 }
