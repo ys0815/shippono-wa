@@ -183,7 +183,7 @@ class PostController extends Controller
                         'post_id' => $post->id,
                         'url' => $path,
                         'type' => $type,
-                        'thumbnail_url' => $thumbnailUrl,
+                        // 'thumbnail_url' => $thumbnailUrl, // 一時的にコメントアウト
                     ]);
                 }
             }
@@ -497,7 +497,7 @@ class PostController extends Controller
                             'post_id' => $post->id,
                             'url' => $path,
                             'type' => $type,
-                            'thumbnail_url' => $thumbnailUrl,
+                            // 'thumbnail_url' => $thumbnailUrl, // 一時的にコメントアウト
                         ]);
                     }
                 }

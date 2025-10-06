@@ -11,7 +11,7 @@ class Media extends Model
         'post_id',
         'url',
         'type',
-        'thumbnail_url',
+        // 'thumbnail_url', // 一時的にコメントアウト
     ];
 
     public function post(): BelongsTo
