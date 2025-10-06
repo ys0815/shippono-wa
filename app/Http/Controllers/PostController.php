@@ -158,7 +158,14 @@ class PostController extends Controller
                 } else {
                     // 動画の場合は最適化して保存
                     $optimizedVideos = $videoService->optimizeAndSave($file, 'posts');
-                    $path = $optimizedVideos['large'] ?? $optimizedVideos['medium'] ?? $optimizedVideos['thumbnail'];
+
+                    // 最適化が成功した場合は最適化された動画を使用、失敗した場合は元の動画を保存
+                    if (!empty($optimizedVideos)) {
+                        $path = $optimizedVideos['large'] ?? $optimizedVideos['medium'] ?? $optimizedVideos['thumbnail'] ?? null;
+                    } else {
+                        // 最適化に失敗した場合は元の動画をそのまま保存
+                        $path = $file->store('posts', 'public');
+                    }
 
                     // 動画のサムネイルを生成
                     $thumbnailUrl = null;
@@ -465,7 +472,14 @@ class PostController extends Controller
                     } else {
                         // 動画の場合は最適化して保存
                         $optimizedVideos = $videoService->optimizeAndSave($file, 'posts');
-                        $path = $optimizedVideos['large'] ?? $optimizedVideos['medium'] ?? $optimizedVideos['thumbnail'];
+
+                        // 最適化が成功した場合は最適化された動画を使用、失敗した場合は元の動画を保存
+                        if (!empty($optimizedVideos)) {
+                            $path = $optimizedVideos['large'] ?? $optimizedVideos['medium'] ?? $optimizedVideos['thumbnail'] ?? null;
+                        } else {
+                            // 最適化に失敗した場合は元の動画をそのまま保存
+                            $path = $file->store('posts', 'public');
+                        }
 
                         // 動画のサムネイルを生成
                         $thumbnailUrl = null;

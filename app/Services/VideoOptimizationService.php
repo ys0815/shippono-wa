@@ -22,6 +22,13 @@ class VideoOptimizationService
     {
         $savedPaths = [];
 
+        // FFmpegが利用可能かチェック
+        $ffmpegPath = $this->getFFmpegPath();
+        if (!$ffmpegPath) {
+            Log::warning('FFmpeg not available, skipping video optimization');
+            return $savedPaths; // 空の配列を返す
+        }
+
         // デフォルト設定
         $defaultConfigs = [
             'thumbnail' => [
