@@ -68,7 +68,7 @@
                                             @if($media->type === 'image')
                                                 <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover object-center" style="object-fit: cover; object-position: center;">
                                             @elseif($media->type === 'video')
-                                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted preload="metadata" playsinline style="object-fit: cover; object-position: center;">
+                                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted playsinline style="object-fit: cover; object-position: center;" poster="{{ e(Storage::url($media->url)) }}">
                                                     お使いのブラウザは動画をサポートしていません。
                                                 </video>
                                             @endif
@@ -109,7 +109,7 @@
                                         @if($media->type === 'image')
                                             <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover object-center" style="object-fit: cover; object-position: center;">
                                         @elseif($media->type === 'video')
-                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted preload="metadata" playsinline style="object-fit: cover; object-position: center;">
+                                            <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover object-center" controls muted playsinline style="object-fit: cover; object-position: center;" poster="{{ e(Storage::url($media->url)) }}">
                                                 お使いのブラウザは動画をサポートしていません。
                                             </video>
                                         @endif
