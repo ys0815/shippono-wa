@@ -1,3 +1,4 @@
-# 日本時間の8:00と18:00に統計情報を更新（直接実行）
-# タイムゾーンを明示的に設定し、ログディレクトリを確実に作成
-0 8,18 * * * root cd /var/www/html && TZ=Asia/Tokyo php artisan stats:update >> /var/log/cron.log 2>&1 || echo "$(date): stats:update failed" >> /var/log/cron.log
+#!/bin/sh
+# 毎分 Laravel スケジューラを実行（JST）
+# これにより routes/console.php の everyTwoHours() が正しく反映されます
+* * * * * root cd /var/www/html && TZ=Asia/Tokyo php artisan schedule:run >> /var/log/cron.log 2>&1 || echo "$(date): schedule:run failed" >> /var/log/cron.log
