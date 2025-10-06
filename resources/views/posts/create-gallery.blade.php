@@ -240,7 +240,8 @@
                             div.innerHTML = `
                                 <video src="${e.target.result}" 
                                        class="w-full h-32 object-cover rounded-lg" 
-                                       controls>
+                                       controls muted preload="metadata" playsinline
+                                       onloadeddata="this.style.opacity='1';">
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
                                 <button type="button" onclick="removeMedia(this)" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">×</button>
