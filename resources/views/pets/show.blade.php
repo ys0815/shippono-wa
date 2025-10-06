@@ -576,7 +576,7 @@
                                       </div>`;
                     } else if (media.type === 'video') {
                         mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative" style="border-radius: 0.5rem;">
-                                        <video src="${mediaUrl}" class="w-full h-full object-cover" controls muted preload="metadata" playsinline
+                                        <video src="${mediaUrl}" poster="${mediaUrl}" class="w-full h-full object-cover" controls muted preload="metadata" playsinline
                                                style="opacity: 0;"
                                                onloadeddata="this.style.opacity='1';"
                                                oncanplay="this.style.opacity='1';"
@@ -604,7 +604,7 @@
                                                             </div>`;
                                                 } else if (media.type === 'video') {
                                                     return `<div class="w-full h-80 flex-shrink-0 relative">
-                                                                <video src="${mediaUrl}" class="w-full h-full object-cover" controls muted preload="metadata" playsinline
+                                                                <video src="${mediaUrl}" poster="${mediaUrl}" class="w-full h-full object-cover" controls muted preload="metadata" playsinline
                                                                        style="opacity: 0;"
                                                                        onloadeddata="this.style.opacity='1';"
                                                                        oncanplay="this.style.opacity='1';"
