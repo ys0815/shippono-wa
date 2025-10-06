@@ -242,7 +242,6 @@
                                        class="w-full h-32 object-cover rounded-lg" 
                                        controls muted preload="metadata" playsinline
                                        style="opacity: 0;"
-                                       poster="${e.target.result}"
                                        onloadeddata="this.style.opacity='1';" 
                                        oncanplay="this.style.opacity='1';"
                                        onloadstart="this.style.opacity='0.5';">

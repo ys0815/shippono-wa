@@ -577,8 +577,10 @@
                     } else if (media.type === 'video') {
                         mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative" style="border-radius: 0.5rem;">
                                         <video src="${mediaUrl}" class="w-full h-full object-cover" controls muted preload="metadata" playsinline
-                                               poster="${mediaUrl}"
+                                               style="opacity: 0;"
                                                onloadeddata="this.style.opacity='1';"
+                                               oncanplay="this.style.opacity='1';"
+                                               onloadstart="this.style.opacity='0.5';"
                                                onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                         </video>
                                         <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
@@ -603,8 +605,10 @@
                                                 } else if (media.type === 'video') {
                                                     return `<div class="w-full h-80 flex-shrink-0 relative">
                                                                 <video src="${mediaUrl}" class="w-full h-full object-cover" controls muted preload="metadata" playsinline
-                                                                       poster="${mediaUrl}"
+                                                                       style="opacity: 0;"
                                                                        onloadeddata="this.style.opacity='1';"
+                                                                       oncanplay="this.style.opacity='1';"
+                                                                       onloadstart="this.style.opacity='0.5';"
                                                                        onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                                                 </video>
                                                                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
