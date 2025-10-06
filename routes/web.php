@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function () {
     // 里親インタビュー投稿
     Route::get('/mypage/posts/interview/create', [PostController::class, 'createInterview'])->name('mypage.posts.interview.create');
     Route::post('/mypage/posts/interview', [PostController::class, 'storeInterview'])->name('mypage.posts.interview.store');
+
+    // 投稿編集・削除・表示
+    Route::get('/mypage/posts/{post}', [PostController::class, 'showMyPage'])->name('mypage.posts.show');
     Route::get('/mypage/posts/{post}/edit', [PostController::class, 'edit'])->name('mypage.posts.edit');
     Route::put('/mypage/posts/{post}', [PostController::class, 'update'])->name('mypage.posts.update');
     Route::delete('/mypage/posts/{post}', [PostController::class, 'destroy'])->name('mypage.posts.destroy');

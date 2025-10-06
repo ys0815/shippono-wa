@@ -595,4 +595,21 @@ class PostController extends Controller
 
         return view('posts.show', compact('post'));
     }
+
+    /**
+     * マイページでの投稿詳細表示（認証必要）
+     * 
+     * @param Post $post 表示する投稿
+     * @return \Illuminate\View\View 投稿詳細ページ
+     */
+    public function showMyPage(Post $post)
+    {
+        // 認証されたユーザーの投稿のみ表示
+        abort_unless($post->user_id === Auth::id(), 403);
+
+        // 関連データを読み込み（ペット、ユーザー、メディア）
+        $post->load(['pet.user', 'media', 'user']);
+
+        return view('posts.show', compact('post'));
+    }
 }
