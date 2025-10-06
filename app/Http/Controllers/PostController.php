@@ -8,6 +8,7 @@ use App\Models\Pet;
 use App\Models\Media;
 use App\Models\User;
 use App\Services\ImageOptimizationService;
+use App\Services\VideoOptimizationService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -143,6 +144,7 @@ class PostController extends Controller
         // メディアアップロード処理（画像・動画）
         if ($request->hasFile('media')) {
             $imageService = new ImageOptimizationService();
+            $videoService = new VideoOptimizationService();
 
             foreach ($request->file('media') as $file) {
                 // ファイルタイプを判定
@@ -152,9 +154,21 @@ class PostController extends Controller
                     // 画像の場合は最適化して保存
                     $optimizedImages = $imageService->optimizeAndSave($file, 'posts');
                     $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                    $thumbnailUrl = null;
                 } else {
-                    // 動画の場合はそのまま保存
-                    $path = $file->store('posts', 'public');
+                    // 動画の場合は最適化して保存
+                    $optimizedVideos = $videoService->optimizeAndSave($file, 'posts');
+                    $path = $optimizedVideos['large'] ?? $optimizedVideos['medium'] ?? $optimizedVideos['thumbnail'];
+
+                    // 動画のサムネイルを生成
+                    $thumbnailUrl = null;
+                    if ($path) {
+                        $fullVideoPath = storage_path('app/public/' . $path);
+                        $thumbnailPath = $videoService->generateThumbnail($fullVideoPath, 'posts');
+                        if ($thumbnailPath) {
+                            $thumbnailUrl = $thumbnailPath;
+                        }
+                    }
                 }
 
                 if ($path) {
@@ -162,7 +176,7 @@ class PostController extends Controller
                         'post_id' => $post->id,
                         'url' => $path,
                         'type' => $type,
-                        // 'thumbnail_url' => null, // 一時的にコメントアウト
+                        'thumbnail_url' => $thumbnailUrl,
                     ]);
                 }
             }
@@ -438,6 +452,7 @@ class PostController extends Controller
 
                 // 新しいメディアをアップロード（最適化）
                 $imageService = new ImageOptimizationService();
+                $videoService = new VideoOptimizationService();
 
                 foreach ($request->file('media') as $file) {
                     $type = $this->getMediaType($file);
@@ -446,9 +461,21 @@ class PostController extends Controller
                         // 画像の場合は最適化して保存
                         $optimizedImages = $imageService->optimizeAndSave($file, 'posts');
                         $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                        $thumbnailUrl = null;
                     } else {
-                        // 動画の場合はそのまま保存
-                        $path = $file->store('posts', 'public');
+                        // 動画の場合は最適化して保存
+                        $optimizedVideos = $videoService->optimizeAndSave($file, 'posts');
+                        $path = $optimizedVideos['large'] ?? $optimizedVideos['medium'] ?? $optimizedVideos['thumbnail'];
+
+                        // 動画のサムネイルを生成
+                        $thumbnailUrl = null;
+                        if ($path) {
+                            $fullVideoPath = storage_path('app/public/' . $path);
+                            $thumbnailPath = $videoService->generateThumbnail($fullVideoPath, 'posts');
+                            if ($thumbnailPath) {
+                                $thumbnailUrl = $thumbnailPath;
+                            }
+                        }
                     }
 
                     if ($path) {
@@ -456,6 +483,7 @@ class PostController extends Controller
                             'post_id' => $post->id,
                             'url' => $path,
                             'type' => $type,
+                            'thumbnail_url' => $thumbnailUrl,
                         ]);
                     }
                 }
