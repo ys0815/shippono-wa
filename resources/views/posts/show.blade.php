@@ -374,29 +374,49 @@
                 console.log('Media dimensions:', { naturalWidth, naturalHeight, aspectRatio });
                 
                 // 既存のアスペクト比クラスを削除
-                container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]', 'aspect-[4/3]');
+                container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]', 'aspect-[4/3]', 'aspect-[3/4]', 'aspect-[16/9]');
                 
-                // アスペクト比に応じてクラスを追加
+                // メディアタイプに応じてアスペクト比を判定
+                const mediaType = media.tagName.toLowerCase();
                 let aspectClass = '';
-                if (aspectRatio >= 1.3) {
-                    // 横長（4:3以上）- 正方形に近い比率でトリミング
-                    aspectClass = 'aspect-square';
-                    container.classList.add('aspect-square');
-                } else if (aspectRatio >= 0.9 && aspectRatio <= 1.1) {
-                    // 正方形（0.9〜1.1）
-                    aspectClass = 'aspect-square';
-                    container.classList.add('aspect-square');
-                } else if (aspectRatio >= 0.5) {
-                    // 縦長（2:3程度、約0.67）
-                    aspectClass = 'aspect-[2/3]';
-                    container.classList.add('aspect-[2/3]');
+                
+                if (mediaType === 'video') {
+                    // 動画の場合
+                    if (aspectRatio >= 1.7) {
+                        // 横長動画（16:9以上）
+                        aspectClass = 'aspect-[16/9]';
+                        container.classList.add('aspect-[16/9]');
+                    } else if (aspectRatio >= 0.9 && aspectRatio <= 1.1) {
+                        // 正方形動画
+                        aspectClass = 'aspect-square';
+                        container.classList.add('aspect-square');
+                    } else {
+                        // 縦長動画（9:16程度）
+                        aspectClass = 'aspect-[9/16]';
+                        container.classList.add('aspect-[9/16]');
+                    }
                 } else {
-                    // 非常に縦長（9:16程度、約0.56）- 正方形にトリミング
-                    aspectClass = 'aspect-square';
-                    container.classList.add('aspect-square');
+                    // 画像の場合
+                    if (aspectRatio >= 1.5) {
+                        // 横長画像（4:3以上）
+                        aspectClass = 'aspect-[4/3]';
+                        container.classList.add('aspect-[4/3]');
+                    } else if (aspectRatio >= 0.9 && aspectRatio <= 1.1) {
+                        // 正方形画像
+                        aspectClass = 'aspect-square';
+                        container.classList.add('aspect-square');
+                    } else if (aspectRatio >= 0.6) {
+                        // 縦長画像（3:4程度）
+                        aspectClass = 'aspect-[3/4]';
+                        container.classList.add('aspect-[3/4]');
+                    } else {
+                        // 非常に縦長画像（2:3程度）
+                        aspectClass = 'aspect-[2/3]';
+                        container.classList.add('aspect-[2/3]');
+                    }
                 }
                 
-                console.log('Aspect ratio applied:', { aspectRatio, aspectClass });
+                console.log('Aspect ratio applied:', { mediaType, aspectRatio, aspectClass });
             }
             
             // 画像の場合はloadイベント、動画の場合はloadedmetadataイベントを待つ

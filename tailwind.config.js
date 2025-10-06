@@ -63,8 +63,10 @@ export default {
         "aspect-square",
         "aspect-video",
         "aspect-[2/3]",
+        "aspect-[3/4]",
         "aspect-[4/3]",
         "aspect-[9/16]",
+        "aspect-[16/9]",
         // その他の動的クラスも必要に応じて追加
     ],
 
