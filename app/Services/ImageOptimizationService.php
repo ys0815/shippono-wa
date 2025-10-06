@@ -68,15 +68,21 @@ class ImageOptimizationService
         try {
             $image = $this->imageManager->read($file->getPathname());
 
-            // 可能ならEXIFの向きを自動補正
+            // EXIFの向きを確実に補正
             try {
-                if (method_exists($image, 'orient')) {
-                    $image->orient();
-                } elseif (method_exists($image, 'orientate')) {
-                    $image->orientate();
-                }
+                // 新しいIntervention ImageのAPIを使用
+                $image->orientate();
+                \Log::info('EXIF orientation corrected using orientate()');
             } catch (\Throwable $t) {
-                // 失敗しても処理継続
+                // 古いAPIも試す
+                try {
+                    $image->orient();
+                    \Log::info('EXIF orientation corrected using orient()');
+                } catch (\Throwable $t2) {
+                    \Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
+                    // 手動でEXIF向きを確認・補正
+                    $this->manualOrientationCorrection($image, $file);
+                }
             }
 
             // アスペクト比を保持してリサイズ（幅のみ指定）
@@ -147,14 +153,21 @@ class ImageOptimizationService
         try {
             $image = $this->imageManager->read($file->getPathname());
 
-            // 可能ならEXIFの向きを自動補正
+            // EXIFの向きを確実に補正
             try {
-                if (method_exists($image, 'orient')) {
-                    $image->orient();
-                } elseif (method_exists($image, 'orientate')) {
-                    $image->orientate();
-                }
+                // 新しいIntervention ImageのAPIを使用
+                $image->orientate();
+                \Log::info('EXIF orientation corrected using orientate()');
             } catch (\Throwable $t) {
+                // 古いAPIも試す
+                try {
+                    $image->orient();
+                    \Log::info('EXIF orientation corrected using orient()');
+                } catch (\Throwable $t2) {
+                    \Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
+                    // 手動でEXIF向きを確認・補正
+                    $this->manualOrientationCorrection($image, $file);
+                }
             }
 
             // アスペクト比を保持してリサイズ（幅のみ指定）
@@ -225,14 +238,17 @@ class ImageOptimizationService
             try {
                 $image = $this->imageManager->read($fullPath);
 
-                // 可能ならEXIFの向きを自動補正
+                // EXIFの向きを確実に補正
                 try {
-                    if (method_exists($image, 'orient')) {
-                        $image->orient();
-                    } elseif (method_exists($image, 'orientate')) {
-                        $image->orientate();
-                    }
+                    // 新しいIntervention ImageのAPIを使用
+                    $image->orientate();
                 } catch (\Throwable $t) {
+                    // 古いAPIも試す
+                    try {
+                        $image->orient();
+                    } catch (\Throwable $t2) {
+                        \Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
+                    }
                 }
 
                 // アスペクト比を保持してリサイズ（幅のみ指定）
@@ -300,6 +316,56 @@ class ImageOptimizationService
         } catch (\Exception $e) {
             \Log::error('Failed to get image metadata: ' . $e->getMessage());
             return [];
+        }
+    }
+
+    /**
+     * 手動でEXIF向きを確認・補正
+     *
+     * @param mixed $image
+     * @param UploadedFile $file
+     * @return void
+     */
+    private function manualOrientationCorrection($image, UploadedFile $file): void
+    {
+        try {
+            // EXIFデータを直接読み取り
+            $exif = @exif_read_data($file->getPathname());
+
+            if ($exif && isset($exif['Orientation'])) {
+                $orientation = $exif['Orientation'];
+                \Log::info('Manual EXIF orientation correction: ' . $orientation);
+
+                switch ($orientation) {
+                    case 3:
+                        $image->rotate(180);
+                        break;
+                    case 6:
+                        $image->rotate(90);
+                        break;
+                    case 8:
+                        $image->rotate(270);
+                        break;
+                    case 2:
+                        $image->flip('h');
+                        break;
+                    case 4:
+                        $image->flip('v');
+                        break;
+                    case 5:
+                        $image->rotate(90)->flip('h');
+                        break;
+                    case 7:
+                        $image->rotate(270)->flip('h');
+                        break;
+                }
+
+                \Log::info('Manual orientation correction applied successfully');
+            } else {
+                \Log::info('No EXIF orientation data found, skipping manual correction');
+            }
+        } catch (\Throwable $t) {
+            \Log::warning('Manual orientation correction failed: ' . $t->getMessage());
         }
     }
 }

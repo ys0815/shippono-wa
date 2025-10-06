@@ -501,3 +501,12 @@
 .pet-info-loose {
     padding-top: 4rem; /* 64px - pt-16相当 */
 }
+.media-item img,
+.media-item video {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}

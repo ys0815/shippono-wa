@@ -8,38 +8,11 @@
                     <!-- 単一メディア（端末に合わせてアスペクト比を自動切替） -->
                     @php $media = $post->media->first(); @endphp
                     <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
-                        <div class="w-full overflow-hidden media-aspect aspect-auto max-h-[80vh]" id="single-media-container">
+                        <div class="w-full" id="single-media-container" style="display: block;">
                             @if($media->type === 'image')
-                                @php
-                                    $displayPath = $media->url;
-                                    try {
-                                        $dir = dirname($media->url);
-                                        $base = pathinfo($media->url, PATHINFO_FILENAME);
-                                        // すでに派生サイズでなければ、同名の large/medium/thumbnail を優先して探す
-                                        if (!Str::contains($base, ['_large_', '_medium_', '_thumbnail_'])) {
-                                            $files = collect(Storage::disk('public')->files($dir));
-                                            $candidate = $files->first(function ($f) use ($base) {
-                                                return Str::startsWith(pathinfo($f, PATHINFO_FILENAME), $base . '_large_');
-                                            });
-                                            if (!$candidate) {
-                                                $candidate = $files->first(function ($f) use ($base) {
-                                                    return Str::startsWith(pathinfo($f, PATHINFO_FILENAME), $base . '_medium_');
-                                                });
-                                            }
-                                            if (!$candidate) {
-                                                $candidate = $files->first(function ($f) use ($base) {
-                                                    return Str::startsWith(pathinfo($f, PATHINFO_FILENAME), $base . '_thumbnail_');
-                                                });
-                                            }
-                                            if ($candidate) {
-                                                $displayPath = $candidate;
-                                            }
-                                        }
-                                    } catch (\Throwable $t) {}
-                                @endphp
-                                <img src="{{ e(Storage::url($displayPath)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-auto max-h-[80vh] object-contain" id="single-media-image">
+                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" id="single-media-image" style="display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain;">
                             @elseif($media->type === 'video')
-                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-auto max-h-[80vh] object-contain" muted playsinline id="single-media-video" controls>
+                                <video src="{{ e(Storage::url($media->url)) }}" muted playsinline id="single-media-video" controls style="display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain;">
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
                             @endif
@@ -245,9 +218,9 @@
                     @foreach($post->media as $index => $media)
                         <div class="w-full flex-shrink-0 flex items-center justify-center">
                             @if($media->type === 'image')
-                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" class="max-w-full max-h-full object-contain" style="max-height: 90vh;">
+                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" style="display: block; width: 100%; height: auto; max-height: 90vh; object-fit: contain;">
                             @elseif($media->type === 'video')
-                                <video src="{{ e(Storage::url($media->url)) }}" class="max-w-full max-h-full object-contain" controls muted style="max-height: 90vh;">
+                                <video src="{{ e(Storage::url($media->url)) }}" controls muted style="display: block; width: 100%; height: auto; max-height: 90vh; object-fit: contain;">
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
                             @endif
@@ -365,37 +338,10 @@
         let currentMediaIndex = 0;
         const totalMedia = {{ $post->media->count() }};
 
-        // 単体メディアのアスペクト比を動的に調整（EXIF非依存）
+        // 単体メディアのアスペクト比を動的に調整（シンプル版）
         function adjustSingleMediaAspect() {
-            console.log('adjustSingleMediaAspect called');
-            const container = document.getElementById('single-media-container');
-            const image = document.getElementById('single-media-image');
-            const video = document.getElementById('single-media-video');
-            
-            console.log('Elements found:', { container, image, video });
-            
-            if (!container) {
-                console.log('Container not found');
-                return;
-            }
-            
-            const media = image || video;
-            if (!media) {
-                console.log('No media element found');
-                return;
-            }
-            
-            // EXIFに依存せず、純粋にCSS側でアスペクト比を維持
-            // コンテナは aspect-auto のまま、メディアは object-contain で表示
-            container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]', 'aspect-[4/3]', 'aspect-[3/4]', 'aspect-[16/9]');
-            container.classList.add('aspect-auto');
-            
-            if (media.classList) {
-                media.classList.remove('object-cover');
-                media.classList.add('object-contain');
-            }
-            
-            console.log('Using CSS-only aspect ratio preservation (EXIF-independent)');
+            console.log('adjustSingleMediaAspect called - using full-width responsive container');
+            // レスポンシブな w-full コンテナを使用するため、特別な処理は不要
         }
         
         // ページ読み込み時にアスペクト比を調整
