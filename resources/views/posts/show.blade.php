@@ -8,11 +8,38 @@
                     <!-- 単一メディア（端末に合わせてアスペクト比を自動切替） -->
                     @php $media = $post->media->first(); @endphp
                     <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
-                        <div class="w-full overflow-hidden media-aspect aspect-auto" id="single-media-container">
+                        <div class="w-full overflow-hidden media-aspect aspect-auto max-h-[80vh]" id="single-media-container">
                             @if($media->type === 'image')
-                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover" id="single-media-image">
+                                @php
+                                    $displayPath = $media->url;
+                                    try {
+                                        $dir = dirname($media->url);
+                                        $base = pathinfo($media->url, PATHINFO_FILENAME);
+                                        // すでに派生サイズでなければ、同名の large/medium/thumbnail を優先して探す
+                                        if (!Str::contains($base, ['_large_', '_medium_', '_thumbnail_'])) {
+                                            $files = collect(Storage::disk('public')->files($dir));
+                                            $candidate = $files->first(function ($f) use ($base) {
+                                                return Str::startsWith(pathinfo($f, PATHINFO_FILENAME), $base . '_large_');
+                                            });
+                                            if (!$candidate) {
+                                                $candidate = $files->first(function ($f) use ($base) {
+                                                    return Str::startsWith(pathinfo($f, PATHINFO_FILENAME), $base . '_medium_');
+                                                });
+                                            }
+                                            if (!$candidate) {
+                                                $candidate = $files->first(function ($f) use ($base) {
+                                                    return Str::startsWith(pathinfo($f, PATHINFO_FILENAME), $base . '_thumbnail_');
+                                                });
+                                            }
+                                            if ($candidate) {
+                                                $displayPath = $candidate;
+                                            }
+                                        }
+                                    } catch (\Throwable $t) {}
+                                @endphp
+                                <img src="{{ e(Storage::url($displayPath)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-auto max-h-[80vh] object-contain" id="single-media-image">
                             @elseif($media->type === 'video')
-                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover" muted playsinline id="single-media-video">
+                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-auto max-h-[80vh] object-contain" muted playsinline id="single-media-video" controls>
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
                             @endif
@@ -338,7 +365,7 @@
         let currentMediaIndex = 0;
         const totalMedia = {{ $post->media->count() }};
 
-        // 単体メディアのアスペクト比を動的に調整
+        // 単体メディアのアスペクト比を動的に調整（EXIF非依存）
         function adjustSingleMediaAspect() {
             console.log('adjustSingleMediaAspect called');
             const container = document.getElementById('single-media-container');
@@ -358,93 +385,17 @@
                 return;
             }
             
-            // メディアが読み込まれた後にアスペクト比を判定
-            function checkAspectRatio() {
-                const naturalWidth = media.naturalWidth || media.videoWidth;
-                const naturalHeight = media.naturalHeight || media.videoHeight;
-                
-                if (!naturalWidth || !naturalHeight) {
-                    // まだ読み込まれていない場合は少し待って再試行
-                    setTimeout(checkAspectRatio, 100);
-                    return;
-                }
-                
-                const aspectRatio = naturalWidth / naturalHeight;
-                
-                console.log('Media dimensions:', { naturalWidth, naturalHeight, aspectRatio });
-                
-                // 既存のアスペクト比クラスを削除
-                container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]', 'aspect-[4/3]', 'aspect-[3/4]', 'aspect-[16/9]');
-                
-                // メディアタイプに応じてアスペクト比を判定
-                const mediaType = media.tagName.toLowerCase();
-                let aspectClass = '';
-                
-                if (mediaType === 'video') {
-                    // 動画の場合
-                    if (aspectRatio >= 1.7) {
-                        // 横長動画（16:9以上）
-                        aspectClass = 'aspect-[16/9]';
-                        container.classList.add('aspect-[16/9]');
-                    } else if (aspectRatio >= 0.9 && aspectRatio <= 1.1) {
-                        // 正方形動画
-                        aspectClass = 'aspect-square';
-                        container.classList.add('aspect-square');
-                    } else {
-                        // 縦長動画（9:16程度）
-                        aspectClass = 'aspect-[9/16]';
-                        container.classList.add('aspect-[9/16]');
-                    }
-                } else {
-                    // 画像の場合
-                    if (aspectRatio >= 1.5) {
-                        // 横長画像（4:3以上）
-                        aspectClass = 'aspect-[4/3]';
-                        container.classList.add('aspect-[4/3]');
-                    } else if (aspectRatio >= 0.9 && aspectRatio <= 1.1) {
-                        // 正方形画像
-                        aspectClass = 'aspect-square';
-                        container.classList.add('aspect-square');
-                    } else if (aspectRatio >= 0.6) {
-                        // 縦長画像（3:4程度）
-                        aspectClass = 'aspect-[3/4]';
-                        container.classList.add('aspect-[3/4]');
-                    } else {
-                        // 非常に縦長画像（2:3程度）
-                        aspectClass = 'aspect-[2/3]';
-                        container.classList.add('aspect-[2/3]');
-                    }
-                }
-                
-                console.log('Aspect ratio applied:', { mediaType, aspectRatio, aspectClass });
+            // EXIFに依存せず、純粋にCSS側でアスペクト比を維持
+            // コンテナは aspect-auto のまま、メディアは object-contain で表示
+            container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]', 'aspect-[4/3]', 'aspect-[3/4]', 'aspect-[16/9]');
+            container.classList.add('aspect-auto');
+            
+            if (media.classList) {
+                media.classList.remove('object-cover');
+                media.classList.add('object-contain');
             }
             
-            // 画像の場合はloadイベント、動画の場合はloadedmetadataイベントを待つ
-            if (image) {
-                if (image.complete && image.naturalWidth > 0) {
-                    checkAspectRatio();
-                } else {
-                    image.addEventListener('load', checkAspectRatio);
-                    // フォールバック: 一定時間後に強制実行
-                    setTimeout(() => {
-                        if (image.naturalWidth > 0) {
-                            checkAspectRatio();
-                        }
-                    }, 1000);
-                }
-            } else if (video) {
-                if (video.readyState >= 1) {
-                    checkAspectRatio();
-                } else {
-                    video.addEventListener('loadedmetadata', checkAspectRatio);
-                    // フォールバック: 一定時間後に強制実行
-                    setTimeout(() => {
-                        if (video.videoWidth > 0) {
-                            checkAspectRatio();
-                        }
-                    }, 1000);
-                }
-            }
+            console.log('Using CSS-only aspect ratio preservation (EXIF-independent)');
         }
         
         // ページ読み込み時にアスペクト比を調整
