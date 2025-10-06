@@ -576,7 +576,7 @@
                                       </div>`;
                     } else if (media.type === 'video') {
                         mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative" style="border-radius: 0.5rem;">
-                                        <video src="${mediaUrl}" class="w-full h-full object-cover" muted playsinline
+                                        <video src="${mediaUrl}" class="w-full h-full object-cover" controls muted playsinline
                                                ${post.media[0].thumbnail_url ? `poster="${post.media[0].thumbnail_url}"` : ''}
                                                onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                         </video>
@@ -601,7 +601,7 @@
                                                             </div>`;
                                                 } else if (media.type === 'video') {
                                                     return `<div class="w-full h-80 flex-shrink-0 relative">
-                                                                <video src="${mediaUrl}" class="w-full h-full object-cover" muted playsinline
+                                                                <video src="${mediaUrl}" class="w-full h-full object-cover" controls muted playsinline
                                                                        ${media.thumbnail_url ? `poster="${media.thumbnail_url}"` : ''}
                                                                        onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                                                 </video>

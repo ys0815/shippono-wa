@@ -143,7 +143,7 @@ class PostController extends Controller
         // メディアアップロード処理（画像・動画）
         if ($request->hasFile('media')) {
             $imageService = new ImageOptimizationService();
-            $videoThumbnailService = new \App\Services\VideoThumbnailService();
+            $videoPosterService = new \App\Services\VideoPosterService();
 
             foreach ($request->file('media') as $file) {
                 // ファイルタイプを判定
@@ -153,13 +153,13 @@ class PostController extends Controller
                     // 画像の場合は最適化して保存
                     $optimizedImages = $imageService->optimizeAndSave($file, 'posts');
                     $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
-                    $thumbnailPath = null;
+                    $posterPath = null;
                 } else {
                     // 動画の場合はそのまま保存
                     $path = $file->store('posts', 'public');
 
-                    // 動画サムネイルを生成
-                    $thumbnailPath = $videoThumbnailService->generateThumbnail($file, 'video-thumbnails');
+                    // 動画の静止画（poster）を生成
+                    $posterPath = $videoPosterService->generatePoster($file, 'video-posters');
                 }
 
                 if ($path) {
@@ -167,7 +167,7 @@ class PostController extends Controller
                         'post_id' => $post->id,
                         'url' => $path,
                         'type' => $type,
-                        'thumbnail_url' => $thumbnailPath,
+                        'thumbnail_url' => $posterPath, // poster属性用の静止画パス
                     ]);
                 }
             }
