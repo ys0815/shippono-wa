@@ -576,9 +576,10 @@
                                       </div>`;
                     } else if (media.type === 'video') {
                         mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative" style="border-radius: 0.5rem;">
-                                        <video src="${mediaUrl}" poster="${mediaUrl}" class="w-full h-full object-cover" controls muted preload="none" playsinline
+                                        <video controls poster="${media.thumbnail_url ? media.thumbnail_url : mediaUrl}" class="w-full h-full object-cover" muted preload="metadata" playsinline
                                                style="opacity: 1;"
                                                onerror="console.error('Video load error:', this.src); this.style.display='none';">
+                                            <source src="${mediaUrl}" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
                                             <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -601,9 +602,10 @@
                                                             </div>`;
                                                 } else if (media.type === 'video') {
                                                     return `<div class="w-full h-80 flex-shrink-0 relative">
-                                                                <video src="${mediaUrl}" poster="${mediaUrl}" class="w-full h-full object-cover" controls muted preload="none" playsinline
+                                                                <video controls poster="${media.thumbnail_url ? media.thumbnail_url : mediaUrl}" class="w-full h-full object-cover" muted preload="metadata" playsinline
                                                                        style="opacity: 1;"
                                                                        onerror="console.error('Video load error:', this.src); this.style.display='none';">
+                                                                    <source src="${mediaUrl}" type="video/mp4">
                                                                 </video>
                                                                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
                                                                     <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
