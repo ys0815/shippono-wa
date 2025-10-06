@@ -8,11 +8,11 @@
                     <!-- 単一メディア（端末に合わせてアスペクト比を自動切替） -->
                     @php $media = $post->media->first(); @endphp
                     <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
-                        <div class="w-full overflow-hidden media-aspect aspect-video">
+                        <div class="w-full overflow-hidden media-aspect aspect-video" id="single-media-container">
                             @if($media->type === 'image')
-                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover ">
+                                <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover" id="single-media-image">
                             @elseif($media->type === 'video')
-                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover " muted playsinline>
+                                <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-full object-cover" muted playsinline id="single-media-video">
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
                             @endif
@@ -337,6 +337,70 @@
         // メディアカルーセルの制御
         let currentMediaIndex = 0;
         const totalMedia = {{ $post->media->count() }};
+
+        // 単体メディアのアスペクト比を動的に調整
+        function adjustSingleMediaAspect() {
+            const container = document.getElementById('single-media-container');
+            const image = document.getElementById('single-media-image');
+            const video = document.getElementById('single-media-video');
+            
+            if (!container) return;
+            
+            const media = image || video;
+            if (!media) return;
+            
+            // メディアが読み込まれた後にアスペクト比を判定
+            function checkAspectRatio() {
+                const naturalWidth = media.naturalWidth || media.videoWidth;
+                const naturalHeight = media.naturalHeight || media.videoHeight;
+                
+                if (!naturalWidth || !naturalHeight) {
+                    // まだ読み込まれていない場合は少し待って再試行
+                    setTimeout(checkAspectRatio, 100);
+                    return;
+                }
+                
+                const aspectRatio = naturalWidth / naturalHeight;
+                
+                // 既存のアスペクト比クラスを削除
+                container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]');
+                
+                // アスペクト比に応じてクラスを追加
+                if (aspectRatio >= 1.5) {
+                    // 横長（16:9以上）
+                    container.classList.add('aspect-video');
+                } else if (aspectRatio >= 0.8) {
+                    // 正方形に近い（4:5〜5:4）
+                    container.classList.add('aspect-square');
+                } else if (aspectRatio >= 0.5) {
+                    // 縦長（2:3程度）
+                    container.classList.add('aspect-[2/3]');
+                } else {
+                    // 非常に縦長（9:16程度）
+                    container.classList.add('aspect-[9/16]');
+                }
+            }
+            
+            // 画像の場合はloadイベント、動画の場合はloadedmetadataイベントを待つ
+            if (image) {
+                if (image.complete) {
+                    checkAspectRatio();
+                } else {
+                    image.addEventListener('load', checkAspectRatio);
+                }
+            } else if (video) {
+                if (video.readyState >= 1) {
+                    checkAspectRatio();
+                } else {
+                    video.addEventListener('loadedmetadata', checkAspectRatio);
+                }
+            }
+        }
+        
+        // ページ読み込み時にアスペクト比を調整
+        document.addEventListener('DOMContentLoaded', function() {
+            adjustSingleMediaAspect();
+        });
 
         function previousMedia() {
             if (totalMedia <= 1) return;
