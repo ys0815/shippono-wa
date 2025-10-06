@@ -223,7 +223,7 @@
     </main>
 
     <!-- メディアビューアーモーダル -->
-    <div id="mediaViewer" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center">
+    <div id="mediaViewer" class="fixed inset-0 bg-black bg-opacity-90 z-[9999] hidden flex items-center justify-center">
         <div class="relative max-w-4xl max-h-full p-4">
             <button onclick="closeMediaViewer()" class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300 z-10">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -323,7 +323,7 @@
     </script>
 
     <!-- シェアモーダル -->
-    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-[9999] hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 border border-main-border">
                 <div class="text-center">
