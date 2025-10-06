@@ -162,7 +162,7 @@ class PostController extends Controller
                         'post_id' => $post->id,
                         'url' => $path,
                         'type' => $type,
-                        'thumbnail_url' => null, // ブラウザのネイティブ機能を使用
+                        // 'thumbnail_url' => null, // 一時的にコメントアウト
                     ]);
                 }
             }
