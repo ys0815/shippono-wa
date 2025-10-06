@@ -47,7 +47,7 @@
             <div class="absolute bottom-0 left-0 right-0 p-8 sm:p-10 pb-10 sm:pb-12" style="z-index: 20 !important; position: absolute !important; top: auto !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;">
                 <div class="max-w-5xl mx-auto text-center">
                     <p class="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-5xl font-medium leading-relaxed drop-shadow-lg select-none mb-8">
-                        保護動物と家族の幸せな毎日をみんなで分かち合う場所
+                        保護動物と家族の幸せな毎日を<br>みんなで分かち合う場所
                     </p>
                     <div class="flex flex-row flex-wrap gap-5 justify-center">
                         @guest

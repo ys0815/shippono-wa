@@ -570,12 +570,12 @@
                     console.log('Media URL:', mediaUrl, 'Type:', media.type);
                     
                     if (media.type === 'image') {
-                        mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3">
-                                        <img src="${mediaUrl}" alt="${post.title}" class="w-full h-full object-cover max-h-[300px]" 
+                        mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3" style="border-radius: 0.5rem;">
+                                        <img src="${mediaUrl}" alt="${post.title}" class="w-full h-full object-cover" 
                                              onerror="console.error('Image load error:', this.src); this.style.display='none';">
                                       </div>`;
                     } else if (media.type === 'video') {
-                        mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative">
+                        mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative" style="border-radius: 0.5rem;">
                                         <video src="${mediaUrl}" class="w-full h-full object-cover" muted 
                                                onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                         </video>
@@ -589,13 +589,13 @@
                 } else {
                     // 複数メディアの場合 - スクロール切り替えシステム（単一投稿と同じサイズ）
                     mediaHtml += `<div class="relative">
-                                    <div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative">
+                                    <div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative" style="border-radius: 0.5rem;">
                                         <div id="media-carousel-${post.id}" class="flex transition-transform duration-300 ease-in-out">
                                             ${post.media.map((media, index) => {
                                                 let mediaUrl = media.url;
                                                 if (media.type === 'image') {
                                                     return `<div class="w-full h-80 flex-shrink-0">
-                                                                <img src="${mediaUrl}" alt="${post.title}" class="w-full h-full object-cover max-h-[300px]" 
+                                                                <img src="${mediaUrl}" alt="${post.title}" class="w-full h-full object-cover" 
                                                                      onerror="console.error('Image load error:', this.src); this.style.display='none';">
                                                             </div>`;
                                                 } else if (media.type === 'video') {
