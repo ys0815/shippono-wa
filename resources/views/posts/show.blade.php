@@ -24,13 +24,39 @@
                         foreach ($post->media as $m) { if ($m->type !== 'image') { $allImages = false; break; } }
                     @endphp
                     @if($allImages)
-                        <!-- 2枚画像は左右並び（正方形トリミング） -->
-                        <div class="grid grid-cols-2 gap-1">
-                            @foreach($post->media as $index => $media)
-                                <div class="relative w-full overflow-hidden aspect-square media-item cursor-pointer" data-media-type="image" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
-                                    <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
-                                </div>
-                            @endforeach
+                        <!-- 2枚画像はスライド式表示 -->
+                        <div class="relative overflow-hidden">
+                            <div id="media-carousel" class="flex transition-transform duration-300 ease-in-out">
+                                @foreach($post->media as $index => $media)
+                                    <div class="media-item w-full flex-shrink-0 cursor-pointer" data-media-type="image" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="{{ $index }}">
+                                        <div class="w-full h-80 sm:h-96 overflow-hidden">
+                                            <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            
+                            <!-- ナビゲーションボタン -->
+                            <button onclick="previousMedia()" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-70 transition-all z-10">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                                </svg>
+                            </button>
+                            <button onclick="nextMedia()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-70 transition-all z-10">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                                </svg>
+                            </button>
+                            
+                            <!-- インジケーター -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex justify-center space-x-2">
+                                @foreach($post->media as $index => $media)
+                                    <button onclick="goToMedia({{ $index }})" 
+                                            class="w-2 h-2 rounded-full transition-all bg-gray-300 hover:bg-gray-400" 
+                                            id="indicator-{{ $index }}">
+                                    </button>
+                                @endforeach
+                            </div>
                         </div>
                     @else
                         <!-- 2枚以上または画像以外を含む場合は既存カルーセルを使用 -->

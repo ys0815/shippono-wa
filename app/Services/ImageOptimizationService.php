@@ -85,13 +85,28 @@ class ImageOptimizationService
                 }
             }
 
-            // アスペクト比を保持してリサイズ（幅のみ指定）
+            // アスペクト比を保持してリサイズ（正確な計算）
             $targetWidth = $config['width'] ?? null;
             if ($targetWidth) {
-                $image->resize($targetWidth, null, function ($constraint) {
+                // 現在の画像サイズを取得
+                $currentWidth = $image->width();
+                $currentHeight = $image->height();
+                $aspectRatio = $currentHeight / $currentWidth;
+
+                \Log::info("Image dimensions before resize: {$currentWidth}x{$currentHeight}, aspect ratio: {$aspectRatio}");
+
+                // 新しい高さを計算
+                $newHeight = (int) round($targetWidth * $aspectRatio);
+
+                \Log::info("Calculated new dimensions: {$targetWidth}x{$newHeight}");
+
+                // 正確なサイズでリサイズ
+                $image->resize($targetWidth, $newHeight, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize(); // 元画像より大きくしない
                 });
+
+                \Log::info("Final image dimensions: {$image->width()}x{$image->height()}");
             }
 
             // ファイル名を生成
@@ -170,13 +185,28 @@ class ImageOptimizationService
                 }
             }
 
-            // アスペクト比を保持してリサイズ（幅のみ指定）
+            // アスペクト比を保持してリサイズ（正確な計算）
             $targetWidth = $config['width'] ?? null;
             if ($targetWidth) {
-                $image->resize($targetWidth, null, function ($constraint) {
+                // 現在の画像サイズを取得
+                $currentWidth = $image->width();
+                $currentHeight = $image->height();
+                $aspectRatio = $currentHeight / $currentWidth;
+
+                \Log::info("WebP image dimensions before resize: {$currentWidth}x{$currentHeight}, aspect ratio: {$aspectRatio}");
+
+                // 新しい高さを計算
+                $newHeight = (int) round($targetWidth * $aspectRatio);
+
+                \Log::info("WebP calculated new dimensions: {$targetWidth}x{$newHeight}");
+
+                // 正確なサイズでリサイズ
+                $image->resize($targetWidth, $newHeight, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
+
+                \Log::info("WebP final image dimensions: {$image->width()}x{$image->height()}");
             }
 
             $filename = $this->generateFilename($file, $sizeName, 'webp');
@@ -251,13 +281,28 @@ class ImageOptimizationService
                     }
                 }
 
-                // アスペクト比を保持してリサイズ（幅のみ指定）
+                // アスペクト比を保持してリサイズ（正確な計算）
                 $targetWidth = $config['width'] ?? null;
                 if ($targetWidth) {
-                    $image->resize($targetWidth, null, function ($constraint) {
+                    // 現在の画像サイズを取得
+                    $currentWidth = $image->width();
+                    $currentHeight = $image->height();
+                    $aspectRatio = $currentHeight / $currentWidth;
+
+                    \Log::info("Existing image dimensions before resize: {$currentWidth}x{$currentHeight}, aspect ratio: {$aspectRatio}");
+
+                    // 新しい高さを計算
+                    $newHeight = (int) round($targetWidth * $aspectRatio);
+
+                    \Log::info("Existing image calculated new dimensions: {$targetWidth}x{$newHeight}");
+
+                    // 正確なサイズでリサイズ
+                    $image->resize($targetWidth, $newHeight, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     });
+
+                    \Log::info("Existing image final dimensions: {$image->width()}x{$image->height()}");
                 }
 
                 $filename = $this->generateFilenameFromPath($originalPath, $sizeName);
