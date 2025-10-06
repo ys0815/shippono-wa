@@ -8,7 +8,7 @@
                     <!-- 単一メディア（端末に合わせてアスペクト比を自動切替） -->
                     @php $media = $post->media->first(); @endphp
                     <div class="media-item cursor-pointer overflow-hidden" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
-                        <div class="w-full overflow-hidden media-aspect aspect-auto" id="single-media-container"></div>
+                        <div class="w-full overflow-hidden media-aspect aspect-auto" id="single-media-container">
                             @if($media->type === 'image')
                                 <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover" id="single-media-image">
                             @elseif($media->type === 'video')
@@ -139,7 +139,7 @@
                 <div class="border-t border-main-border pt-4">
                     <div class="flex items-center space-x-3 mb-4">
                         <a href="{{ route('pets.show', $post->pet) }}" class="w-12 h-12 rounded-full overflow-hidden border-2 border-amber-400 bg-amber-100 flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
-                            @if($post->pet->profile_image_url)
+                            @if($post->pet && $post->pet->profile_image_url)
                                 @php
                                     $imageUrl = $post->pet->profile_image_url;
                                     // /storage/で始まっていない場合は追加
@@ -148,13 +148,13 @@
                                     }
                                 @endphp
                                 <img src="{{ $imageUrl }}" alt="{{ e($post->pet->name) }}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="console.error('Image load error:', this.src); this.style.display='none';">
-                            @else
+                            @elseif($post->pet)
                                 <span class="text-amber-600 font-medium">{{ substr($post->pet->name, 0, 1) }}</span>
                             @endif
                         </a>
                         <div>
                             <div class="text-lg font-bold text-main-text leading-tight">
-                                {{ e($post->pet->name) }} 
+                                {{ e($post->pet->name ?? '') }} 
                                 <span class="text-lg font-normal {{ $post->pet->gender === 'male' ? 'text-blue-500' : ($post->pet->gender === 'female' ? 'text-pink-500' : 'text-sub-text') }}">
                                     {{ ['male' => '♂', 'female' => '♀', 'unknown' => '?'][$post->pet->gender] ?? '?' }}
                                 </span>
@@ -365,12 +365,15 @@
                 console.log('Media dimensions:', { naturalWidth, naturalHeight, aspectRatio });
                 
                 // 既存のアスペクト比クラスを削除
-                container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]');
+                container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]', 'aspect-[4/3]');
                 
                 // アスペクト比に応じてクラスを追加
-                if (aspectRatio >= 1.7) {
-                    // 横長（16:9以上、約1.78）
-                    container.classList.add('aspect-video');
+                if (aspectRatio >= 2.0) {
+                    // 非常に横長（2:1以上）- より短い比率でトリミング
+                    container.classList.add('aspect-[4/3]');
+                } else if (aspectRatio >= 1.5) {
+                    // 横長（3:2以上）- 16:9より短くしてトリミング
+                    container.classList.add('aspect-[4/3]');
                 } else if (aspectRatio >= 0.9 && aspectRatio <= 1.1) {
                     // 正方形（0.9〜1.1）
                     container.classList.add('aspect-square');
@@ -503,7 +506,7 @@
 
         function shareToX() {
             const postTitle = '{{ Str::limit(strip_tags(str_replace(['"', "'", "\n", "\r"], '', $post->title)), 50) }}';
-            const petName = '{{ $post->pet ? $post->pet->name : "" }}';
+            const petName = '{{ $post->pet ? ($post->pet->name ?? '') : "" }}';
             const shareUrl = window.location.href;
             const text = `#しっぽのわ ${petName ? `「${petName}」` : ''}の幸せなストーリーを読んでみませんか？\n\n${postTitle}\n\n${shareUrl}`;
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
