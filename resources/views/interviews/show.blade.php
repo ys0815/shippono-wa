@@ -9,9 +9,9 @@
                 @php $media = $post->media->first(); @endphp
                 <div class="media-item cursor-pointer" data-media-type="{{ e($media->type) }}" data-media-url="{{ e(Storage::url($media->url)) }}" data-media-index="0">
                     @if($media->type === 'image')
-                        <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover" style="height: 256px !important; max-height: 400px; object-position: center;">
+                        <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover object-center" style="height: 256px !important; max-height: 400px; object-fit: cover; object-position: center;">
                     @elseif($media->type === 'video')
-                        <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover" muted style="height: 256px !important; max-height: 400px; object-position: center;">
+                        <video src="{{ e(Storage::url($media->url)) }}" class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover object-center" muted style="height: 256px !important; max-height: 400px; object-fit: cover; object-position: center;">
                             お使いのブラウザは動画をサポートしていません。
                         </video>
                     @endif
