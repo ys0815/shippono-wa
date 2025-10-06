@@ -340,14 +340,23 @@
 
         // 単体メディアのアスペクト比を動的に調整
         function adjustSingleMediaAspect() {
+            console.log('adjustSingleMediaAspect called');
             const container = document.getElementById('single-media-container');
             const image = document.getElementById('single-media-image');
             const video = document.getElementById('single-media-video');
             
-            if (!container) return;
+            console.log('Elements found:', { container, image, video });
+            
+            if (!container) {
+                console.log('Container not found');
+                return;
+            }
             
             const media = image || video;
-            if (!media) return;
+            if (!media) {
+                console.log('No media element found');
+                return;
+            }
             
             // メディアが読み込まれた後にアスペクト比を判定
             function checkAspectRatio() {
@@ -368,36 +377,52 @@
                 container.classList.remove('aspect-video', 'aspect-[2/3]', 'aspect-square', 'aspect-[9/16]', 'aspect-[4/3]');
                 
                 // アスペクト比に応じてクラスを追加
-                if (aspectRatio >= 2.0) {
-                    // 非常に横長（2:1以上）- より短い比率でトリミング
-                    container.classList.add('aspect-[4/3]');
-                } else if (aspectRatio >= 1.5) {
-                    // 横長（3:2以上）- 16:9より短くしてトリミング
-                    container.classList.add('aspect-[4/3]');
+                let aspectClass = '';
+                if (aspectRatio >= 1.3) {
+                    // 横長（4:3以上）- 正方形に近い比率でトリミング
+                    aspectClass = 'aspect-square';
+                    container.classList.add('aspect-square');
                 } else if (aspectRatio >= 0.9 && aspectRatio <= 1.1) {
                     // 正方形（0.9〜1.1）
+                    aspectClass = 'aspect-square';
                     container.classList.add('aspect-square');
-                } else if (aspectRatio >= 0.6) {
+                } else if (aspectRatio >= 0.5) {
                     // 縦長（2:3程度、約0.67）
+                    aspectClass = 'aspect-[2/3]';
                     container.classList.add('aspect-[2/3]');
                 } else {
-                    // 非常に縦長（9:16程度、約0.56）
-                    container.classList.add('aspect-[9/16]');
+                    // 非常に縦長（9:16程度、約0.56）- 正方形にトリミング
+                    aspectClass = 'aspect-square';
+                    container.classList.add('aspect-square');
                 }
+                
+                console.log('Aspect ratio applied:', { aspectRatio, aspectClass });
             }
             
             // 画像の場合はloadイベント、動画の場合はloadedmetadataイベントを待つ
             if (image) {
-                if (image.complete) {
+                if (image.complete && image.naturalWidth > 0) {
                     checkAspectRatio();
                 } else {
                     image.addEventListener('load', checkAspectRatio);
+                    // フォールバック: 一定時間後に強制実行
+                    setTimeout(() => {
+                        if (image.naturalWidth > 0) {
+                            checkAspectRatio();
+                        }
+                    }, 1000);
                 }
             } else if (video) {
                 if (video.readyState >= 1) {
                     checkAspectRatio();
                 } else {
                     video.addEventListener('loadedmetadata', checkAspectRatio);
+                    // フォールバック: 一定時間後に強制実行
+                    setTimeout(() => {
+                        if (video.videoWidth > 0) {
+                            checkAspectRatio();
+                        }
+                    }, 1000);
                 }
             }
         }
