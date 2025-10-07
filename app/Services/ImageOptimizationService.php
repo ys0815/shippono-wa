@@ -28,31 +28,60 @@ class ImageOptimizationService
      */
     public function optimizeAndSave(UploadedFile $file, string $directory = 'posts', array $sizes = []): array
     {
-        $savedPaths = [];
+        try {
+            $savedPaths = [];
 
-        // デフォルトサイズ設定
-        // 高さは指定せず、幅基準でアスペクト比を維持
-        $defaultSizes = [
-            'thumbnail' => ['width' => 300, 'quality' => 80],
-            'medium' => ['width' => 800, 'quality' => 85],
-            'large' => ['width' => 1200, 'quality' => 90],
-        ];
-
-        $sizes = array_merge($defaultSizes, $sizes);
-
-        foreach ($sizes as $sizeName => $config) {
-            $path = $this->createOptimizedImage($file, $directory, $sizeName, $config);
-            if ($path) {
-                $savedPaths[$sizeName] = $path;
+            // iOSのSafariでよく発生する問題に対応
+            if (!$file->isValid()) {
+                Log::error('Invalid file upload', [
+                    'error' => $file->getError(),
+                    'filename' => $file->getClientOriginalName(),
+                    'size' => $file->getSize()
+                ]);
+                return [];
             }
 
-            // メモリを解放
-            if (function_exists('gc_collect_cycles')) {
-                gc_collect_cycles();
+            // デフォルトサイズ設定
+            // 高さは指定せず、幅基準でアスペクト比を維持
+            $defaultSizes = [
+                'thumbnail' => ['width' => 300, 'quality' => 80],
+                'medium' => ['width' => 800, 'quality' => 85],
+                'large' => ['width' => 1200, 'quality' => 90],
+            ];
+
+            $sizes = array_merge($defaultSizes, $sizes);
+
+            foreach ($sizes as $sizeName => $config) {
+                try {
+                    $path = $this->createOptimizedImage($file, $directory, $sizeName, $config);
+                    if ($path) {
+                        $savedPaths[$sizeName] = $path;
+                    }
+                } catch (\Exception $e) {
+                    Log::error('Failed to create optimized image', [
+                        'size' => $sizeName,
+                        'error' => $e->getMessage(),
+                        'filename' => $file->getClientOriginalName()
+                    ]);
+                    // 個別のサイズでエラーが発生しても処理を継続
+                }
+
+                // メモリを解放
+                if (function_exists('gc_collect_cycles')) {
+                    gc_collect_cycles();
+                }
             }
+
+            return $savedPaths;
+        } catch (\Exception $e) {
+            Log::error('ImageOptimizationService::optimizeAndSave failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'filename' => $file->getClientOriginalName(),
+                'directory' => $directory
+            ]);
+            return [];
         }
-
-        return $savedPaths;
     }
 
     /**
@@ -67,7 +96,19 @@ class ImageOptimizationService
     private function createOptimizedImage(UploadedFile $file, string $directory, string $sizeName, array $config): ?string
     {
         try {
-            $image = $this->imageManager->read($file->getPathname());
+            // iOSのSafariでよく発生する問題に対応
+            $filePath = $file->getPathname();
+            if (!file_exists($filePath)) {
+                Log::error('Image file not found', ['path' => $filePath]);
+                return null;
+            }
+
+            if (!is_readable($filePath)) {
+                Log::error('Image file not readable', ['path' => $filePath]);
+                return null;
+            }
+
+            $image = $this->imageManager->read($filePath);
 
             // EXIFの向きを確実に補正
             try {

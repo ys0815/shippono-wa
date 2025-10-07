@@ -736,9 +736,24 @@ class PetController extends Controller
             Log::error('Pet store error', [
                 'user_id' => Auth::id(),
                 'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString(),
+                'request_data' => $request->except(['profile_image', 'header_image']),
+                'user_agent' => $request->userAgent(),
+                'ip' => $request->ip()
             ]);
-            throw $e;
+
+            // バリデーションエラーの場合は元のページに戻す
+            if ($e instanceof \Illuminate\Validation\ValidationException) {
+                return redirect()->back()
+                    ->withErrors($e->errors())
+                    ->withInput()
+                    ->with('error', '入力内容に問題があります。確認してください。');
+            }
+
+            // その他のエラーの場合は汎用的なエラーメッセージを表示
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'ペットの登録中にエラーが発生しました。しばらく時間をおいて再度お試しください。');
         }
     }
 
@@ -751,61 +766,90 @@ class PetController extends Controller
      */
     public function update(Request $request, $pet_id): RedirectResponse
     {
-        // ユーザーが所有するペットのみ更新可能
-        $pet = Pet::where('user_id', Auth::id())
-            ->where('id', $pet_id)
-            ->firstOrFail();
+        try {
+            Log::info('Pet update method called', ['user_id' => Auth::id(), 'pet_id' => $pet_id]);
 
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'species' => ['required', 'in:dog,cat,rabbit,other'],
-            'breed' => ['nullable', 'string', 'max:255'],
-            'gender' => ['required', 'in:male,female,unknown'],
-            'birth_date' => ['nullable', 'date'],
-            'age_years' => ['nullable', 'integer', 'min:0', 'max:40'],
-            'age_months' => ['nullable', 'integer', 'min:0', 'max:11'],
-            'estimated_age' => ['nullable', 'integer', 'min:0', 'max:480'], // 40歳×12ヶ月
-            'shelter_area' => ['nullable', 'in:hokkaido_tohoku,kanto,chubu_tokai,kinki,chugoku_shikoku,kyushu_okinawa,national'],
-            'shelter_kind' => ['nullable', 'in:facility,site,unknown'],
-            'shelter_id' => ['nullable', 'exists:shelters,id'],
-            'rescue_date' => ['nullable', 'date'],
-            'profile_description' => ['nullable', 'string', 'max:2000'],
-            'profile_image' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'],
-            'header_image' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:8192'],
-        ]);
+            // ユーザーが所有するペットのみ更新可能
+            $pet = Pet::where('user_id', Auth::id())
+                ->where('id', $pet_id)
+                ->firstOrFail();
 
-        $pet->name = $validated['name'];
-        $pet->species = $validated['species'];
-        $pet->breed = $validated['breed'] ?? null;
-        $pet->gender = $validated['gender'];
-        $pet->birth_date = $validated['birth_date'] ?? null;
-        $pet->age_years = $validated['age_years'] ?? null;
-        $pet->age_months = $validated['age_months'] ?? null;
-        $pet->estimated_age = $validated['estimated_age'] ?? null;
-        $pet->rescue_date = $validated['rescue_date'] ?? null;
-        $pet->shelter_id = $validated['shelter_id'] ?? null;
-        $pet->profile_description = $validated['profile_description'] ?? null;
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'species' => ['required', 'in:dog,cat,rabbit,other'],
+                'breed' => ['nullable', 'string', 'max:255'],
+                'gender' => ['required', 'in:male,female,unknown'],
+                'birth_date' => ['nullable', 'date'],
+                'age_years' => ['nullable', 'integer', 'min:0', 'max:40'],
+                'age_months' => ['nullable', 'integer', 'min:0', 'max:11'],
+                'estimated_age' => ['nullable', 'integer', 'min:0', 'max:480'], // 40歳×12ヶ月
+                'shelter_area' => ['nullable', 'in:hokkaido_tohoku,kanto,chubu_tokai,kinki,chugoku_shikoku,kyushu_okinawa,national'],
+                'shelter_kind' => ['nullable', 'in:facility,site,unknown'],
+                'shelter_id' => ['nullable', 'exists:shelters,id'],
+                'rescue_date' => ['nullable', 'date'],
+                'profile_description' => ['nullable', 'string', 'max:2000'],
+                'profile_image' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'],
+                'header_image' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:8192'],
+            ]);
 
-        // 画像アップロード処理（新しい画像がアップロードされた場合のみ更新・最適化）
-        if ($request->hasFile('profile_image')) {
-            $imageService = new ImageOptimizationService();
-            $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
-            $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
-            $pet->profile_image_url = '/storage/' . $path;
+            $pet->name = $validated['name'];
+            $pet->species = $validated['species'];
+            $pet->breed = $validated['breed'] ?? null;
+            $pet->gender = $validated['gender'];
+            $pet->birth_date = $validated['birth_date'] ?? null;
+            $pet->age_years = $validated['age_years'] ?? null;
+            $pet->age_months = $validated['age_months'] ?? null;
+            $pet->estimated_age = $validated['estimated_age'] ?? null;
+            $pet->rescue_date = $validated['rescue_date'] ?? null;
+            $pet->shelter_id = $validated['shelter_id'] ?? null;
+            $pet->profile_description = $validated['profile_description'] ?? null;
+
+            // 画像アップロード処理（新しい画像がアップロードされた場合のみ更新・最適化）
+            if ($request->hasFile('profile_image')) {
+                $imageService = new ImageOptimizationService();
+                $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
+                $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                $pet->profile_image_url = '/storage/' . $path;
+            }
+            // 新しい画像がアップロードされない場合は既存の画像を保持
+
+            if ($request->hasFile('header_image')) {
+                $imageService = new ImageOptimizationService();
+                $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
+                $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                $pet->header_image_url = '/storage/' . $path;
+            }
+            // 新しい画像がアップロードされない場合は既存の画像を保持
+
+            $pet->save();
+
+            Log::info('Pet updated successfully', ['pet_id' => $pet->id, 'user_id' => Auth::id()]);
+
+            return redirect()->route('mypage.pets')->with('status', 'pet-updated');
+        } catch (\Exception $e) {
+            Log::error('Pet update error', [
+                'user_id' => Auth::id(),
+                'pet_id' => $pet_id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'request_data' => $request->except(['profile_image', 'header_image']),
+                'user_agent' => $request->userAgent(),
+                'ip' => $request->ip()
+            ]);
+
+            // バリデーションエラーの場合は元のページに戻す
+            if ($e instanceof \Illuminate\Validation\ValidationException) {
+                return redirect()->back()
+                    ->withErrors($e->errors())
+                    ->withInput()
+                    ->with('error', '入力内容に問題があります。確認してください。');
+            }
+
+            // その他のエラーの場合は汎用的なエラーメッセージを表示
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'ペットの更新中にエラーが発生しました。しばらく時間をおいて再度お試しください。');
         }
-        // 新しい画像がアップロードされない場合は既存の画像を保持
-
-        if ($request->hasFile('header_image')) {
-            $imageService = new ImageOptimizationService();
-            $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
-            $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
-            $pet->header_image_url = '/storage/' . $path;
-        }
-        // 新しい画像がアップロードされない場合は既存の画像を保持
-
-        $pet->save();
-
-        return redirect()->route('mypage.pets')->with('status', 'pet-updated');
     }
 
     /**
