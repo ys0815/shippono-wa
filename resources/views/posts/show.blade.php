@@ -12,12 +12,10 @@
                             @if($media->type === 'image')
                                 <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" id="single-media-image" style="display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain;">
                             @elseif($media->type === 'video')
-                                <div class="w-full h-80 sm:h-96 overflow-hidden">
-                                    <video controls class="w-full h-full object-cover object-center" muted playsinline preload="metadata" style="object-fit: cover; object-position: center; opacity: 1;">
-                                        <source src="{{ e(Storage::url($media->url)) }}" type="video/mp4">
-                                        お使いのブラウザは動画をサポートしていません。
-                                    </video>
-                                </div>
+                                <video controls muted playsinline preload="metadata" id="single-media-video" style="display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain; opacity: 1;">
+                                    <source src="{{ e(Storage::url($media->url)) }}" type="video/mp4">
+                                    お使いのブラウザは動画をサポートしていません。
+                                </video>
                             @endif
                         </div>
                     </div>
