@@ -106,7 +106,10 @@ class PostController extends Controller
         // ユーザーのペット一覧を取得
         $pets = $user->pets;
 
-        return view('posts.create-gallery', compact('pets'));
+        // 家族リンク情報を取得（空の配列をデフォルトとして設定）
+        $familyGroups = collect();
+
+        return view('posts.create-gallery', compact('pets', 'familyGroups'));
     }
 
     /**
@@ -351,13 +354,16 @@ class PostController extends Controller
 
         $pets = $user->pets;
 
+        // 家族リンク情報を取得（空の配列をデフォルトとして設定）
+        $familyGroups = collect();
+
         // 投稿タイプに応じて適切なビューを返す
         if ($post->type === 'interview') {
             // インタビュー内容を読み込み
             $post->load('interviewContent');
-            return view('posts.edit-interview', compact('post', 'pets'));
+            return view('posts.edit-interview', compact('post', 'pets', 'familyGroups'));
         } else {
-            return view('posts.edit-gallery', compact('post', 'pets'));
+            return view('posts.edit-gallery', compact('post', 'pets', 'familyGroups'));
         }
     }
 
