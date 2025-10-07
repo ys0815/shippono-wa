@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -602,62 +603,75 @@ class PetController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // バリデーション
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'species' => ['required', 'in:dog,cat,rabbit,other'],
-            'breed' => ['nullable', 'string', 'max:255'],
-            'gender' => ['required', 'in:male,female,unknown'],
-            'birth_date' => ['nullable', 'date'],
-            'age_years' => ['nullable', 'integer', 'min:0', 'max:40'],
-            'age_months' => ['nullable', 'integer', 'min:0', 'max:11'],
-            'estimated_age' => ['nullable', 'integer', 'min:0', 'max:480'], // 40歳×12ヶ月
-            'shelter_area' => ['nullable', 'in:hokkaido_tohoku,kanto,chubu_tokai,kinki,chugoku_shikoku,kyushu_okinawa,national'],
-            'shelter_kind' => ['nullable', 'in:facility,site,unknown'],
-            'shelter_id' => ['nullable', 'exists:shelters,id'],
-            'rescue_date' => ['nullable', 'date'],
-            'profile_description' => ['nullable', 'string', 'max:2000'],
-            'profile_image' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'],
-            'header_image' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:8192'],
-        ]);
+        try {
+            Log::info('Pet store method called', ['user_id' => Auth::id()]);
+
+            // バリデーション
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'species' => ['required', 'in:dog,cat,rabbit,other'],
+                'breed' => ['nullable', 'string', 'max:255'],
+                'gender' => ['required', 'in:male,female,unknown'],
+                'birth_date' => ['nullable', 'date'],
+                'age_years' => ['nullable', 'integer', 'min:0', 'max:40'],
+                'age_months' => ['nullable', 'integer', 'min:0', 'max:11'],
+                'estimated_age' => ['nullable', 'integer', 'min:0', 'max:480'], // 40歳×12ヶ月
+                'shelter_area' => ['nullable', 'in:hokkaido_tohoku,kanto,chubu_tokai,kinki,chugoku_shikoku,kyushu_okinawa,national'],
+                'shelter_kind' => ['nullable', 'in:facility,site,unknown'],
+                'shelter_id' => ['nullable', 'exists:shelters,id'],
+                'rescue_date' => ['nullable', 'date'],
+                'profile_description' => ['nullable', 'string', 'max:2000'],
+                'profile_image' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'],
+                'header_image' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:8192'],
+            ]);
 
 
-        $pet = new Pet();
-        $pet->user_id = Auth::id();
-        $pet->name = $validated['name'];
-        $pet->species = $validated['species'];
-        $pet->breed = $validated['breed'] ?? null;
-        $pet->gender = $validated['gender'];
-        $pet->birth_date = $validated['birth_date'] ?? null;
-        $pet->age_years = $validated['age_years'] ?? null;
-        $pet->age_months = $validated['age_months'] ?? null;
-        $pet->estimated_age = $validated['estimated_age'] ?? null;
-        $pet->rescue_date = $validated['rescue_date'] ?? null;
-        $pet->shelter_id = $validated['shelter_id'] ?? null;
-        $pet->profile_description = $validated['profile_description'] ?? null;
+            $pet = new Pet();
+            $pet->user_id = Auth::id();
+            $pet->name = $validated['name'];
+            $pet->species = $validated['species'];
+            $pet->breed = $validated['breed'] ?? null;
+            $pet->gender = $validated['gender'];
+            $pet->birth_date = $validated['birth_date'] ?? null;
+            $pet->age_years = $validated['age_years'] ?? null;
+            $pet->age_months = $validated['age_months'] ?? null;
+            $pet->estimated_age = $validated['estimated_age'] ?? null;
+            $pet->rescue_date = $validated['rescue_date'] ?? null;
+            $pet->shelter_id = $validated['shelter_id'] ?? null;
+            $pet->profile_description = $validated['profile_description'] ?? null;
 
-        // 画像アップロード（最適化）
-        $imageService = new ImageOptimizationService();
+            // 画像アップロード（最適化）
+            $imageService = new ImageOptimizationService();
 
-        if ($request->hasFile('profile_image')) {
-            $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
-            $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
-            $pet->profile_image_url = '/storage/' . $path;
-        } else {
-            $pet->profile_image_url = '/images/icon.png';
+            if ($request->hasFile('profile_image')) {
+                $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
+                $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                $pet->profile_image_url = '/storage/' . $path;
+            } else {
+                $pet->profile_image_url = '/images/icon.png';
+            }
+
+            if ($request->hasFile('header_image')) {
+                $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
+                $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                $pet->header_image_url = '/storage/' . $path;
+            } else {
+                $pet->header_image_url = '/images/icon.png';
+            }
+
+            $pet->save();
+
+            Log::info('Pet saved successfully', ['pet_id' => $pet->id, 'user_id' => Auth::id()]);
+
+            return redirect()->route('mypage.pets')->with('status', 'pet-created');
+        } catch (\Exception $e) {
+            Log::error('Pet store error', [
+                'user_id' => Auth::id(),
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            throw $e;
         }
-
-        if ($request->hasFile('header_image')) {
-            $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
-            $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
-            $pet->header_image_url = '/storage/' . $path;
-        } else {
-            $pet->header_image_url = '/images/icon.png';
-        }
-
-        $pet->save();
-
-        return redirect()->route('mypage.pets')->with('status', 'pet-created');
     }
 
     /**
