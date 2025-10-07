@@ -758,5 +758,60 @@
                     break;
             }
         });
+
+        // 画面内に入ったvideoの先頭フレームをposter化（thumbnail_urlが無い場合のみ）
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!('IntersectionObserver' in window)) return;
+
+            const processed = new WeakSet();
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const video = entry.target;
+                    if (processed.has(video)) return;
+                    // 既に有効なposterがあればスキップ
+                    if (video.getAttribute('poster')) {
+                        processed.add(video);
+                        observer.unobserve(video);
+                        return;
+                    }
+                    try {
+                        // メタデータ読み込み後に先頭付近へシーク
+                        const onMeta = () => {
+                            video.removeEventListener('loadedmetadata', onMeta);
+                            try { video.currentTime = 0.1; } catch(e) {}
+                        };
+                        const onSeeked = () => {
+                            video.removeEventListener('seeked', onSeeked);
+                            try {
+                                const canvas = document.createElement('canvas');
+                                canvas.width = video.videoWidth || 480;
+                                canvas.height = video.videoHeight || 270;
+                                const ctx = canvas.getContext('2d');
+                                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                                const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                                if (dataUrl && !video.getAttribute('poster')) {
+                                    video.setAttribute('poster', dataUrl);
+                                }
+                            } catch(e) {}
+                            processed.add(video);
+                            observer.unobserve(video);
+                        };
+
+                        video.addEventListener('loadedmetadata', onMeta, { once: true });
+                        video.addEventListener('seeked', onSeeked, { once: true });
+                        // メタデータが既に読み込まれているケース
+                        if (video.readyState >= 1) onMeta();
+                    } catch(e) {
+                        // 失敗しても静かにフォールバック（プレースホルダーや既定挙動）
+                        processed.add(video);
+                        observer.unobserve(video);
+                    }
+                });
+            }, { rootMargin: '200px 0px', threshold: 0.1 });
+
+            // 投稿詳細ページのvideo要素を監視
+            document.querySelectorAll('video').forEach(v => observer.observe(v));
+        });
     </script>
 </x-guest-layout>
