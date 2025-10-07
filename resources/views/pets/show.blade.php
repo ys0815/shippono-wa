@@ -584,7 +584,7 @@
                                       </div>`;
                     } else if (media.type === 'video') {
                         mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative" style="border-radius: 0.5rem;">
-                                        <video controls poster="${posterUrl}" class="w-full h-full object-cover" muted preload="metadata" playsinline
+                                        <video controls class="w-full h-full object-cover" muted preload="metadata" playsinline
                                                style="opacity: 1;"
                                                onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                             <source src="${mediaUrl}" type="video/mp4">
@@ -611,7 +611,7 @@
                                                             </div>`;
                                                 } else if (media.type === 'video') {
                                                     return `<div class="w-full h-80 flex-shrink-0 relative">
-                                                                <video controls poster="${posterUrl}" class="w-full h-full object-cover" muted preload="metadata" playsinline
+                                                                <video controls class="w-full h-full object-cover" muted preload="metadata" playsinline
                                                                        style="opacity: 1;"
                                                                        onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                                                     <source src="${mediaUrl}" type="video/mp4">
