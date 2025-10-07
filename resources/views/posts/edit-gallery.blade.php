@@ -254,46 +254,49 @@
             document.getElementById('content-count').textContent = count;
         });
 
-        // メディアプレビュー（画像・動画）
+        // メディアプレビュー（画像・動画）: URL.createObjectURLで即時表示し、revokeで解放
         function previewMedia(input) {
             const preview = document.getElementById('media-preview');
+            // 既存のObjectURLを解放
+            Array.from(preview.querySelectorAll('[data-object-url]')).forEach(el => {
+                const url = el.getAttribute('data-object-url');
+                if (url) URL.revokeObjectURL(url);
+            });
             preview.innerHTML = '';
-            
+
             if (input.files && input.files.length > 0) {
                 preview.classList.remove('hidden');
-                
+
                 Array.from(input.files).slice(0, 2).forEach((file, index) => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const div = document.createElement('div');
-                        div.className = 'relative';
-                        
-                        // ファイルタイプを判定
-                        const isVideo = file.type.startsWith('video/');
-                        
-                        if (isVideo) {
-                            div.innerHTML = `
-                                <video src="${e.target.result}" 
-                                       class="w-full h-32 object-cover rounded-lg" 
-                                       controls muted preload="metadata" playsinline
-                                       style="opacity: 0;"
-                                       onloadeddata="this.style.opacity='1';" 
-                                       oncanplay="this.style.opacity='1';"
-                                       onloadstart="this.style.opacity='0.5';">
-                                    お使いのブラウザは動画をサポートしていません。
-                                </video>
-                                <button type="button" onclick="removeMedia(this)" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">×</button>
-                            `;
-                        } else {
-                            div.innerHTML = `
-                                <img src="${e.target.result}" alt="プレビュー${index + 1}" class="w-full h-32 object-cover rounded-lg">
-                                <button type="button" onclick="removeMedia(this)" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">×</button>
-                            `;
-                        }
-                        
-                        preview.appendChild(div);
-                    };
-                    reader.readAsDataURL(file);
+                    const objectUrl = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'relative';
+
+                    const isVideo = file.type.startsWith('video/');
+
+                    if (isVideo) {
+                        div.innerHTML = `
+                            <video src="${objectUrl}" 
+                                   class="w-full h-32 object-cover rounded-lg" 
+                                   controls muted preload="metadata" playsinline
+                                   data-object-url="${objectUrl}">
+                                お使いのブラウザは動画をサポートしていません。
+                            </video>
+                            <button type="button" onclick="removeMedia(this)" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">×</button>
+                        `;
+                    } else {
+                        div.innerHTML = `
+                            <img src="${objectUrl}" alt="プレビュー${index + 1}" class="w-full h-32 object-cover rounded-lg" data-object-url="${objectUrl}">
+                            <button type="button" onclick="removeMedia(this)" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">×</button>
+                        `;
+                    }
+
+                    preview.appendChild(div);
+                });
+
+                preview.querySelectorAll('video').forEach(v => {
+                    v.style.opacity = '0';
+                    v.addEventListener('loadeddata', () => { v.style.opacity = '1'; }, { once: true });
                 });
             } else {
                 preview.classList.add('hidden');
@@ -301,7 +304,13 @@
         }
 
         function removeMedia(button) {
-            button.parentElement.remove();
+            const wrapper = button.parentElement;
+            const media = wrapper.querySelector('[data-object-url]');
+            if (media) {
+                const url = media.getAttribute('data-object-url');
+                if (url) URL.revokeObjectURL(url);
+            }
+            wrapper.remove();
             const preview = document.getElementById('media-preview');
             if (preview.children.length === 0) {
                 preview.classList.add('hidden');
