@@ -643,20 +643,34 @@ class PetController extends Controller
             // 画像アップロード（最適化）
             $imageService = new ImageOptimizationService();
 
+            // プロフィール画像の処理
             if ($request->hasFile('profile_image')) {
-                $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
-                $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
-                $pet->profile_image_url = '/storage/' . $path;
+                try {
+                    $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
+                    $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                    $pet->profile_image_url = '/storage/' . $path;
+                    Log::info('Profile image uploaded successfully', ['path' => $pet->profile_image_url]);
+                } catch (\Exception $e) {
+                    Log::error('Profile image upload failed', ['error' => $e->getMessage()]);
+                    $pet->profile_image_url = null; // エラー時はnullに設定
+                }
             } else {
-                $pet->profile_image_url = '/images/icon.png';
+                $pet->profile_image_url = null; // デフォルト画像はnullに設定
             }
 
+            // ヘッダー画像の処理
             if ($request->hasFile('header_image')) {
-                $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
-                $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
-                $pet->header_image_url = '/storage/' . $path;
+                try {
+                    $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
+                    $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                    $pet->header_image_url = '/storage/' . $path;
+                    Log::info('Header image uploaded successfully', ['path' => $pet->header_image_url]);
+                } catch (\Exception $e) {
+                    Log::error('Header image upload failed', ['error' => $e->getMessage()]);
+                    $pet->header_image_url = null; // エラー時はnullに設定
+                }
             } else {
-                $pet->header_image_url = '/images/icon.png';
+                $pet->header_image_url = null; // デフォルト画像はnullに設定
             }
 
             $pet->save();
