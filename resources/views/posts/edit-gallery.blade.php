@@ -285,6 +285,30 @@
                             </video>
                             <button type="button" onclick="removeMedia(this)" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">×</button>
                         `;
+                        
+                        // 動画プレビュー用の先頭フレーム生成
+                        const video = div.querySelector('video');
+                        if (video) {
+                            video.addEventListener('loadedmetadata', function() {
+                                try {
+                                    video.currentTime = 0.1;
+                                } catch(e) {}
+                            });
+                            
+                            video.addEventListener('seeked', function() {
+                                try {
+                                    const canvas = document.createElement('canvas');
+                                    canvas.width = video.videoWidth || 480;
+                                    canvas.height = video.videoHeight || 270;
+                                    const ctx = canvas.getContext('2d');
+                                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                                    const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                                    if (dataUrl) {
+                                        video.setAttribute('poster', dataUrl);
+                                    }
+                                } catch(e) {}
+                            }, { once: true });
+                        }
                     } else {
                         div.innerHTML = `
                             <img src="${objectUrl}" alt="プレビュー${index + 1}" class="w-full h-32 object-cover rounded-lg" data-object-url="${objectUrl}">
