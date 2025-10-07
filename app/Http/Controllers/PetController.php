@@ -641,35 +641,81 @@ class PetController extends Controller
             $pet->profile_description = $validated['profile_description'] ?? null;
 
             // 画像アップロード（最適化）
-            $imageService = new ImageOptimizationService();
+            try {
+                $imageService = new ImageOptimizationService();
+                Log::info('ImageOptimizationService initialized successfully');
+            } catch (\Exception $e) {
+                Log::error('Failed to initialize ImageOptimizationService', [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString()
+                ]);
+                // フォールバック: 画像最適化なしで直接保存
+                $imageService = null;
+            }
 
             // プロフィール画像の処理
             if ($request->hasFile('profile_image')) {
+                Log::info('Profile image file detected', ['filename' => $request->file('profile_image')->getClientOriginalName()]);
                 try {
-                    $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
-                    $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
-                    $pet->profile_image_url = '/storage/' . $path;
-                    Log::info('Profile image uploaded successfully', ['path' => $pet->profile_image_url]);
+                    if ($imageService) {
+                        $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
+                        Log::info('Image optimization completed', ['optimized_images' => $optimizedImages]);
+                        $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                        if ($path) {
+                            $pet->profile_image_url = '/storage/' . $path;
+                            Log::info('Profile image uploaded successfully', ['path' => $pet->profile_image_url]);
+                        } else {
+                            Log::error('No optimized image path returned');
+                            $pet->profile_image_url = null;
+                        }
+                    } else {
+                        // フォールバック: 直接保存
+                        $path = $request->file('profile_image')->store('pets/profile', 'public');
+                        $pet->profile_image_url = '/storage/' . $path;
+                        Log::info('Profile image saved directly (fallback)', ['path' => $pet->profile_image_url]);
+                    }
                 } catch (\Exception $e) {
-                    Log::error('Profile image upload failed', ['error' => $e->getMessage()]);
+                    Log::error('Profile image upload failed', [
+                        'error' => $e->getMessage(),
+                        'trace' => $e->getTraceAsString()
+                    ]);
                     $pet->profile_image_url = null; // エラー時はnullに設定
                 }
             } else {
+                Log::info('No profile image uploaded');
                 $pet->profile_image_url = null; // デフォルト画像はnullに設定
             }
 
             // ヘッダー画像の処理
             if ($request->hasFile('header_image')) {
+                Log::info('Header image file detected', ['filename' => $request->file('header_image')->getClientOriginalName()]);
                 try {
-                    $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
-                    $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
-                    $pet->header_image_url = '/storage/' . $path;
-                    Log::info('Header image uploaded successfully', ['path' => $pet->header_image_url]);
+                    if ($imageService) {
+                        $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
+                        Log::info('Header image optimization completed', ['optimized_images' => $optimizedImages]);
+                        $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
+                        if ($path) {
+                            $pet->header_image_url = '/storage/' . $path;
+                            Log::info('Header image uploaded successfully', ['path' => $pet->header_image_url]);
+                        } else {
+                            Log::error('No optimized header image path returned');
+                            $pet->header_image_url = null;
+                        }
+                    } else {
+                        // フォールバック: 直接保存
+                        $path = $request->file('header_image')->store('pets/header', 'public');
+                        $pet->header_image_url = '/storage/' . $path;
+                        Log::info('Header image saved directly (fallback)', ['path' => $pet->header_image_url]);
+                    }
                 } catch (\Exception $e) {
-                    Log::error('Header image upload failed', ['error' => $e->getMessage()]);
+                    Log::error('Header image upload failed', [
+                        'error' => $e->getMessage(),
+                        'trace' => $e->getTraceAsString()
+                    ]);
                     $pet->header_image_url = null; // エラー時はnullに設定
                 }
             } else {
+                Log::info('No header image uploaded');
                 $pet->header_image_url = null; // デフォルト画像はnullに設定
             }
 
