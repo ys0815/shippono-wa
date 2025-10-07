@@ -11,7 +11,7 @@
                     @if($media->type === 'image')
                         <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover object-center" style="height: 256px !important; max-height: 400px; object-fit: cover; object-position: center;">
                     @elseif($media->type === 'video')
-                        <video controls class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover object-center" muted playsinline preload="metadata" style="height: 256px !important; max-height: 400px; object-fit: cover; object-position: center;" @if(!empty($media->thumbnail_url)) poster="{{ e(Storage::url($media->thumbnail_url)) }}" @endif>
+                        <video controls class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[400px] 2xl:h-[400px] object-cover object-center" muted playsinline preload="metadata" style="height: 256px !important; max-height: 400px; object-fit: cover; object-position: center;" poster="{{ !empty($media->thumbnail_url) ? e(Storage::url($media->thumbnail_url)) : e(asset('images/video-placeholder.jpg')) }}">
                             <source src="{{ e(Storage::url($media->url)) }}" type="video/mp4">
                             お使いのブラウザは動画をサポートしていません。
                         </video>
