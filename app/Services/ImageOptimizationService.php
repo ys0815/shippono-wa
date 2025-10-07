@@ -6,6 +6,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ImageOptimizationService
@@ -71,15 +72,15 @@ class ImageOptimizationService
             // EXIFの向きを確実に補正
             try {
                 // 新しいIntervention ImageのAPIを使用
-                $image->orientate();
-                \Log::info('EXIF orientation corrected using orientate()');
+                $image->orient();
+                Log::info('EXIF orientation corrected using orientate()');
             } catch (\Throwable $t) {
                 // 古いAPIも試す
                 try {
                     $image->orient();
-                    \Log::info('EXIF orientation corrected using orient()');
+                    Log::info('EXIF orientation corrected using orient()');
                 } catch (\Throwable $t2) {
-                    \Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
+                    Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
                     // 手動でEXIF向きを確認・補正
                     $this->manualOrientationCorrection($image, $file);
                 }
@@ -93,12 +94,12 @@ class ImageOptimizationService
                 $currentHeight = $image->height();
                 $aspectRatio = $currentHeight / $currentWidth;
 
-                \Log::info("Image dimensions before resize: {$currentWidth}x{$currentHeight}, aspect ratio: {$aspectRatio}");
+                Log::info("Image dimensions before resize: {$currentWidth}x{$currentHeight}, aspect ratio: {$aspectRatio}");
 
                 // 新しい高さを計算
                 $newHeight = (int) round($targetWidth * $aspectRatio);
 
-                \Log::info("Calculated new dimensions: {$targetWidth}x{$newHeight}");
+                Log::info("Calculated new dimensions: {$targetWidth}x{$newHeight}");
 
                 // 正確なサイズでリサイズ
                 $image->resize($targetWidth, $newHeight, function ($constraint) {
@@ -106,7 +107,7 @@ class ImageOptimizationService
                     $constraint->upsize(); // 元画像より大きくしない
                 });
 
-                \Log::info("Final image dimensions: {$image->width()}x{$image->height()}");
+                Log::info("Final image dimensions: {$image->width()}x{$image->height()}");
             }
 
             // ファイル名を生成
@@ -118,7 +119,7 @@ class ImageOptimizationService
 
             return $path;
         } catch (\Exception $e) {
-            \Log::error('Image optimization failed: ' . $e->getMessage());
+            Log::error('Image optimization failed: ' . $e->getMessage());
             return null;
         }
     }
@@ -171,15 +172,15 @@ class ImageOptimizationService
             // EXIFの向きを確実に補正
             try {
                 // 新しいIntervention ImageのAPIを使用
-                $image->orientate();
-                \Log::info('EXIF orientation corrected using orientate()');
+                $image->orient();
+                Log::info('EXIF orientation corrected using orientate()');
             } catch (\Throwable $t) {
                 // 古いAPIも試す
                 try {
                     $image->orient();
-                    \Log::info('EXIF orientation corrected using orient()');
+                    Log::info('EXIF orientation corrected using orient()');
                 } catch (\Throwable $t2) {
-                    \Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
+                    Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
                     // 手動でEXIF向きを確認・補正
                     $this->manualOrientationCorrection($image, $file);
                 }
@@ -193,12 +194,12 @@ class ImageOptimizationService
                 $currentHeight = $image->height();
                 $aspectRatio = $currentHeight / $currentWidth;
 
-                \Log::info("WebP image dimensions before resize: {$currentWidth}x{$currentHeight}, aspect ratio: {$aspectRatio}");
+                Log::info("WebP image dimensions before resize: {$currentWidth}x{$currentHeight}, aspect ratio: {$aspectRatio}");
 
                 // 新しい高さを計算
                 $newHeight = (int) round($targetWidth * $aspectRatio);
 
-                \Log::info("WebP calculated new dimensions: {$targetWidth}x{$newHeight}");
+                Log::info("WebP calculated new dimensions: {$targetWidth}x{$newHeight}");
 
                 // 正確なサイズでリサイズ
                 $image->resize($targetWidth, $newHeight, function ($constraint) {
@@ -206,7 +207,7 @@ class ImageOptimizationService
                     $constraint->upsize();
                 });
 
-                \Log::info("WebP final image dimensions: {$image->width()}x{$image->height()}");
+                Log::info("WebP final image dimensions: {$image->width()}x{$image->height()}");
             }
 
             $filename = $this->generateFilename($file, $sizeName, 'webp');
@@ -216,7 +217,7 @@ class ImageOptimizationService
 
             return $path;
         } catch (\Exception $e) {
-            \Log::error('WebP optimization failed: ' . $e->getMessage());
+            Log::error('WebP optimization failed: ' . $e->getMessage());
             return null;
         }
     }
@@ -271,13 +272,13 @@ class ImageOptimizationService
                 // EXIFの向きを確実に補正
                 try {
                     // 新しいIntervention ImageのAPIを使用
-                    $image->orientate();
+                    $image->orient();
                 } catch (\Throwable $t) {
                     // 古いAPIも試す
                     try {
                         $image->orient();
                     } catch (\Throwable $t2) {
-                        \Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
+                        Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
                     }
                 }
 
@@ -289,12 +290,12 @@ class ImageOptimizationService
                     $currentHeight = $image->height();
                     $aspectRatio = $currentHeight / $currentWidth;
 
-                    \Log::info("Existing image dimensions before resize: {$currentWidth}x{$currentHeight}, aspect ratio: {$aspectRatio}");
+                    Log::info("Existing image dimensions before resize: {$currentWidth}x{$currentHeight}, aspect ratio: {$aspectRatio}");
 
                     // 新しい高さを計算
                     $newHeight = (int) round($targetWidth * $aspectRatio);
 
-                    \Log::info("Existing image calculated new dimensions: {$targetWidth}x{$newHeight}");
+                    Log::info("Existing image calculated new dimensions: {$targetWidth}x{$newHeight}");
 
                     // 正確なサイズでリサイズ
                     $image->resize($targetWidth, $newHeight, function ($constraint) {
@@ -302,7 +303,7 @@ class ImageOptimizationService
                         $constraint->upsize();
                     });
 
-                    \Log::info("Existing image final dimensions: {$image->width()}x{$image->height()}");
+                    Log::info("Existing image final dimensions: {$image->width()}x{$image->height()}");
                 }
 
                 $filename = $this->generateFilenameFromPath($originalPath, $sizeName);
@@ -317,7 +318,7 @@ class ImageOptimizationService
                     gc_collect_cycles();
                 }
             } catch (\Exception $e) {
-                \Log::error('Existing image optimization failed: ' . $e->getMessage());
+                Log::error('Existing image optimization failed: ' . $e->getMessage());
             }
         }
 
@@ -359,7 +360,7 @@ class ImageOptimizationService
                 'mime_type' => mime_content_type($fullPath),
             ];
         } catch (\Exception $e) {
-            \Log::error('Failed to get image metadata: ' . $e->getMessage());
+            Log::error('Failed to get image metadata: ' . $e->getMessage());
             return [];
         }
     }
@@ -379,7 +380,7 @@ class ImageOptimizationService
 
             if ($exif && isset($exif['Orientation'])) {
                 $orientation = $exif['Orientation'];
-                \Log::info('Manual EXIF orientation correction: ' . $orientation);
+                Log::info('Manual EXIF orientation correction: ' . $orientation);
 
                 switch ($orientation) {
                     case 3:
@@ -405,12 +406,12 @@ class ImageOptimizationService
                         break;
                 }
 
-                \Log::info('Manual orientation correction applied successfully');
+                Log::info('Manual orientation correction applied successfully');
             } else {
-                \Log::info('No EXIF orientation data found, skipping manual correction');
+                Log::info('No EXIF orientation data found, skipping manual correction');
             }
         } catch (\Throwable $t) {
-            \Log::warning('Manual orientation correction failed: ' . $t->getMessage());
+            Log::warning('Manual orientation correction failed: ' . $t->getMessage());
         }
     }
 }
