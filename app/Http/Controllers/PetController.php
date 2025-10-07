@@ -43,7 +43,15 @@ class PetController extends Controller
             ->latest()
             ->get();
 
-        return view('pets.index', compact('pets'));
+        // 既存の家族リンクを取得してグループ化
+        $links = PetFamilyLink::where('user_id', Auth::id())
+            ->with(['pet1', 'pet2'])
+            ->get();
+
+        // ペットIDをグループ化して家族グループを作成
+        $familyGroups = $this->groupFamilyLinks($links);
+
+        return view('pets.index', compact('pets', 'familyGroups'));
     }
 
     /**

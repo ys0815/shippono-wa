@@ -168,20 +168,67 @@
                         複数の動物を一緒に飼っている場合、家族として関連付けることができます。
                     </div>
 
-                    @php($pair = $pets->take(2))
-                    @if($pair->count() === 2)
-                        <div class="flex items-center justify-between rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 mb-4">
-                            <div class="text-main-text font-medium">
-                                {{ $pair[0]->name }} ↔ {{ $pair[1]->name }}
+                    @if($familyGroups->isNotEmpty())
+                        @foreach($familyGroups as $group)
+                            <div class="bg-main-bg border border-main-border rounded-lg p-4 mb-3">
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                    <!-- ペット表示エリア -->
+                                    <div class="flex-1 mb-3 sm:mb-0">
+                                        @if(count($group['pets']) <= 3)
+                                            <!-- 3匹以下の場合は横並び -->
+                                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                                                @foreach($group['pets'] as $index => $pet)
+                                                    <div class="flex flex-col items-center">
+                                                        <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-sm font-bold overflow-hidden">
+                                                            @if($pet->profile_image_url)
+                                                                <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
+                                                            @else
+                                                                {{ mb_substr($pet->name, 0, 2) }}
+                                                            @endif
+                                                        </div>
+                                                        <div class="text-xs text-main-text mt-1 text-center">{{ $pet->name }}</div>
+                                                    </div>
+                                                    @if($index < count($group['pets']) - 1)
+                                                        <div class="text-blue-500 text-lg flex-shrink-0">⇔</div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            <!-- 4匹以上の場合はグリッドレイアウト -->
+                                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                                                @foreach($group['pets'] as $index => $pet)
+                                                    <div class="flex flex-col items-center">
+                                                        <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-sm font-bold overflow-hidden">
+                                                            @if($pet->profile_image_url)
+                                                                <img src="{{ $pet->profile_image_url }}" alt="{{ $pet->name }}" class="w-full h-full object-cover">
+                                                            @else
+                                                                {{ mb_substr($pet->name, 0, 2) }}
+                                                            @endif
+                                                        </div>
+                                                        <div class="text-xs text-main-text mt-1 text-center">{{ $pet->name }}</div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="text-center mt-2">
+                                                <span class="text-sm text-blue-600 font-medium">家族グループ</span>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    
+                                    <!-- 設定日と編集ボタン -->
+                                    <div class="text-center sm:text-right">
+                                        <div class="text-sm text-main-text mb-2">設定日: {{ $group['created_at']->format('Y/m/d') }}</div>
+                                        <a href="{{ route('mypage.pets.links') }}" class="text-blue-600 text-sm hover:text-blue-800 px-3 py-1 border border-blue-300 rounded hover:bg-blue-50 transition duration-200">
+                                            編集
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-sub-border text-main-text hover:bg-gray-100">編集</a>
-                        </div>
+                        @endforeach
                     @else
-                        <div class="flex items-center justify-between rounded-lg bg-main-bg border border-main-border px-4 py-3 mb-4">
-                            <div class="text-sub-text">
-                                家族リンクは未設定です
-                            </div>
-                            <a href="{{ route('mypage.pets.links') }}" class="px-3 py-1 text-xs rounded border border-sub-border text-main-text hover:bg-gray-100">編集</a>
+                        <div class="text-center py-8 text-sub-text">
+                            <p>現在設定されている家族リンクはありません</p>
+                            <p class="text-sm mt-1">※家族リンクがない場合は、下記から新しいリンクを作成してください</p>
                         </div>
                     @endif
 
