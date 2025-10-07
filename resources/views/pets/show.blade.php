@@ -553,6 +553,13 @@
                 });
         }
 
+        // /storage で公開されるパスに正規化（相対パスが来た場合の保険）
+        function normalizeUrl(url) {
+            if (!url) return '';
+            if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/')) return url;
+            return '/storage/' + url.replace(/^\/+/, '');
+        }
+
         function addPostToContainer(post) {
             const container = document.getElementById('posts-container');
             const postElement = document.createElement('div');
@@ -566,7 +573,8 @@
                 if (post.media.length === 1) {
                     // 単一メディアの場合
                     const media = post.media[0];
-                    let mediaUrl = media.url;
+                    let mediaUrl = normalizeUrl(media.url);
+                    let posterUrl = media.thumbnail_url ? normalizeUrl(media.thumbnail_url) : '/images/video-placeholder.jpg';
                     console.log('Media URL:', mediaUrl, 'Type:', media.type);
                     
                     if (media.type === 'image') {
@@ -576,7 +584,7 @@
                                       </div>`;
                     } else if (media.type === 'video') {
                         mediaHtml += `<div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative" style="border-radius: 0.5rem;">
-                                        <video controls poster="${media.thumbnail_url ? media.thumbnail_url : '/images/video-placeholder.jpg'}" class="w-full h-full object-cover" muted preload="metadata" playsinline
+                                        <video controls poster="${posterUrl}" class="w-full h-full object-cover" muted preload="metadata" playsinline
                                                style="opacity: 1;"
                                                onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                             <source src="${mediaUrl}" type="video/mp4">
@@ -594,7 +602,8 @@
                                     <div class="w-full h-80 rounded-lg overflow-hidden mb-3 relative" style="border-radius: 0.5rem;">
                                         <div id="media-carousel-${post.id}" class="flex transition-transform duration-300 ease-in-out">
                                             ${post.media.map((media, index) => {
-                                                let mediaUrl = media.url;
+                                                let mediaUrl = normalizeUrl(media.url);
+                                                let posterUrl = media.thumbnail_url ? normalizeUrl(media.thumbnail_url) : '/images/video-placeholder.jpg';
                                                 if (media.type === 'image') {
                                                     return `<div class="w-full h-80 flex-shrink-0">
                                                                 <img src="${mediaUrl}" alt="${post.title}" class="w-full h-full object-cover" 
@@ -602,7 +611,7 @@
                                                             </div>`;
                                                 } else if (media.type === 'video') {
                                                     return `<div class="w-full h-80 flex-shrink-0 relative">
-                                                                <video controls poster="${media.thumbnail_url ? media.thumbnail_url : '/images/video-placeholder.jpg'}" class="w-full h-full object-cover" muted preload="metadata" playsinline
+                                                                <video controls poster="${posterUrl}" class="w-full h-full object-cover" muted preload="metadata" playsinline
                                                                        style="opacity: 1;"
                                                                        onerror="console.error('Video load error:', this.src); this.style.display='none';">
                                                                     <source src="${mediaUrl}" type="video/mp4">
@@ -951,6 +960,69 @@
                 alert('以下のリンクをコピーしてInstagramアプリで「リンクをシェア」して投稿してください。\n\n' + text + '\n' + url);
             }
         }
+
+        // 画面内に入ったvideoの先頭フレームをposter化（thumbnail_urlが無い場合のみ）
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!('IntersectionObserver' in window)) return;
+
+            const processed = new WeakSet();
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const video = entry.target;
+                    if (processed.has(video)) return;
+                    // 既に有効なposterがあればスキップ
+                    if (video.getAttribute('poster')) {
+                        processed.add(video);
+                        observer.unobserve(video);
+                        return;
+                    }
+                    try {
+                        // メタデータ読み込み後に先頭付近へシーク
+                        const onMeta = () => {
+                            video.removeEventListener('loadedmetadata', onMeta);
+                            try { video.currentTime = 0.1; } catch(e) {}
+                        };
+                        const onSeeked = () => {
+                            video.removeEventListener('seeked', onSeeked);
+                            try {
+                                const canvas = document.createElement('canvas');
+                                canvas.width = video.videoWidth || 480;
+                                canvas.height = video.videoHeight || 270;
+                                const ctx = canvas.getContext('2d');
+                                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                                const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                                if (dataUrl && !video.getAttribute('poster')) {
+                                    video.setAttribute('poster', dataUrl);
+                                }
+                            } catch(e) {}
+                            processed.add(video);
+                            observer.unobserve(video);
+                        };
+
+                        video.addEventListener('loadedmetadata', onMeta, { once: true });
+                        video.addEventListener('seeked', onSeeked, { once: true });
+                        // メタデータが既に読み込まれているケース
+                        if (video.readyState >= 1) onMeta();
+                    } catch(e) {
+                        // 失敗しても静かにフォールバック（プレースホルダーや既定挙動）
+                        processed.add(video);
+                        observer.unobserve(video);
+                    }
+                });
+            }, { rootMargin: '200px 0px', threshold: 0.1 });
+
+            document.querySelectorAll('#posts-container video').forEach(v => observer.observe(v));
+
+            // 動的追加分にも対応
+            const container = document.getElementById('posts-container');
+            const mo = new MutationObserver(() => {
+                container.querySelectorAll('video').forEach(v => {
+                    if (!processed.has(v)) observer.observe(v);
+                });
+            });
+            mo.observe(container, { childList: true, subtree: true });
+        });
     </script>
 
     <!-- シェアモーダル -->

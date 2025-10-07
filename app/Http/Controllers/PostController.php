@@ -11,6 +11,8 @@ use App\Services\ImageOptimizationService;
 use App\Services\VideoOptimizationService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Throwable;
 
 /**
  * 投稿管理コントローラー
@@ -167,13 +169,36 @@ class PostController extends Controller
                         $path = $file->store('posts', 'public');
                     }
 
-                    // 動画のサムネイルを生成
+                    // 動画のサムネイルを生成（優先: Laravel-FFMpeg / フォールバック: サービス）
                     $thumbnailUrl = null;
                     if ($path) {
-                        $fullVideoPath = storage_path('app/public/' . $path);
-                        $thumbnailPath = $videoService->generateThumbnail($fullVideoPath, 'posts');
-                        if ($thumbnailPath) {
-                            $thumbnailUrl = $thumbnailPath;
+                        try {
+                            $thumbDir = 'posts/thumbnails';
+                            if (!Storage::disk('public')->exists($thumbDir)) {
+                                Storage::disk('public')->makeDirectory($thumbDir);
+                            }
+                            $thumbRelative = $thumbDir . '/' . pathinfo($path, PATHINFO_FILENAME) . '_poster_' . Str::random(8) . '.jpg';
+
+                            $ffmpegClass = 'ProtoneMedia\\LaravelFFMpeg\\Support\\FFMpeg';
+                            if (class_exists($ffmpegClass)) {
+                                $ffmpegClass::fromDisk('public')
+                                    ->open($path)
+                                    ->getFrameFromSeconds(0)
+                                    ->export()
+                                    ->toDisk('public')
+                                    ->save($thumbRelative);
+
+                                if (Storage::disk('public')->exists($thumbRelative)) {
+                                    $thumbnailUrl = $thumbRelative;
+                                }
+                            }
+                        } catch (Throwable $e) {
+                            // フォールバック: 既存サービスで生成
+                            $fullVideoPath = storage_path('app/public/' . $path);
+                            $thumbnailPath = $videoService->generateThumbnail($fullVideoPath, 'posts');
+                            if ($thumbnailPath) {
+                                $thumbnailUrl = $thumbnailPath;
+                            }
                         }
                     }
                 }
@@ -183,7 +208,7 @@ class PostController extends Controller
                         'post_id' => $post->id,
                         'url' => $path,
                         'type' => $type,
-                        // 'thumbnail_url' => $thumbnailUrl, // 一時的にコメントアウト
+                        'thumbnail_url' => $thumbnailUrl,
                     ]);
                 }
             }
@@ -481,13 +506,36 @@ class PostController extends Controller
                             $path = $file->store('posts', 'public');
                         }
 
-                        // 動画のサムネイルを生成
+                        // 動画のサムネイルを生成（優先: Laravel-FFMpeg / フォールバック: サービス）
                         $thumbnailUrl = null;
                         if ($path) {
-                            $fullVideoPath = storage_path('app/public/' . $path);
-                            $thumbnailPath = $videoService->generateThumbnail($fullVideoPath, 'posts');
-                            if ($thumbnailPath) {
-                                $thumbnailUrl = $thumbnailPath;
+                            try {
+                                $thumbDir = 'posts/thumbnails';
+                                if (!Storage::disk('public')->exists($thumbDir)) {
+                                    Storage::disk('public')->makeDirectory($thumbDir);
+                                }
+                                $thumbRelative = $thumbDir . '/' . pathinfo($path, PATHINFO_FILENAME) . '_poster_' . Str::random(8) . '.jpg';
+
+                                $ffmpegClass = 'ProtoneMedia\\LaravelFFMpeg\\Support\\FFMpeg';
+                                if (class_exists($ffmpegClass)) {
+                                    $ffmpegClass::fromDisk('public')
+                                        ->open($path)
+                                        ->getFrameFromSeconds(0)
+                                        ->export()
+                                        ->toDisk('public')
+                                        ->save($thumbRelative);
+
+                                    if (Storage::disk('public')->exists($thumbRelative)) {
+                                        $thumbnailUrl = $thumbRelative;
+                                    }
+                                }
+                            } catch (Throwable $e) {
+                                // フォールバック: 既存サービスで生成
+                                $fullVideoPath = storage_path('app/public/' . $path);
+                                $thumbnailPath = $videoService->generateThumbnail($fullVideoPath, 'posts');
+                                if ($thumbnailPath) {
+                                    $thumbnailUrl = $thumbnailPath;
+                                }
                             }
                         }
                     }
@@ -497,7 +545,7 @@ class PostController extends Controller
                             'post_id' => $post->id,
                             'url' => $path,
                             'type' => $type,
-                            // 'thumbnail_url' => $thumbnailUrl, // 一時的にコメントアウト
+                            'thumbnail_url' => $thumbnailUrl,
                         ]);
                     }
                 }
