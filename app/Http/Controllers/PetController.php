@@ -637,8 +637,9 @@ class PetController extends Controller
         $pet->profile_description = $validated['profile_description'] ?? null;
 
         // 画像アップロード（最適化）
+        $imageService = new ImageOptimizationService();
+
         if ($request->hasFile('profile_image')) {
-            $imageService = new ImageOptimizationService();
             $optimizedImages = $imageService->optimizeAndSave($request->file('profile_image'), 'pets/profile');
             $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
             $pet->profile_image_url = '/storage/' . $path;
@@ -647,7 +648,6 @@ class PetController extends Controller
         }
 
         if ($request->hasFile('header_image')) {
-            $imageService = new ImageOptimizationService();
             $optimizedImages = $imageService->optimizeAndSave($request->file('header_image'), 'pets/header');
             $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
             $pet->header_image_url = '/storage/' . $path;
