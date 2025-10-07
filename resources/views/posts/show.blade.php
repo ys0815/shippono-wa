@@ -12,7 +12,7 @@
                             @if($media->type === 'image')
                                 <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" id="single-media-image" style="display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain;">
                             @elseif($media->type === 'video')
-                                <video controls muted playsinline preload="metadata" id="single-media-video" style="display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain;">
+                                <video controls muted playsinline preload="metadata" id="single-media-video" style="display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain; aspect-ratio: 16/9;">
                                     <source src="{{ e(Storage::url($media->url)) }}" type="video/mp4">
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
@@ -69,7 +69,7 @@
                                             @if($media->type === 'image')
                                                 <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover object-center" style="object-fit: cover; object-position: center;">
                                             @elseif($media->type === 'video')
-                                                <video controls class="w-full h-full object-cover object-center" muted playsinline preload="metadata" style="object-fit: cover; object-position: center;">
+                                                <video controls class="w-full h-full object-cover object-center" muted playsinline preload="metadata" style="object-fit: cover; object-position: center; aspect-ratio: 16/9;">
                                                     <source src="{{ e(Storage::url($media->url)) }}" type="video/mp4">
                                                     お使いのブラウザは動画をサポートしていません。
                                                 </video>
@@ -111,7 +111,7 @@
                                         @if($media->type === 'image')
                                             <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" loading="lazy" decoding="async" class="w-full h-full object-cover object-center" style="object-fit: cover; object-position: center;">
                                         @elseif($media->type === 'video')
-                                            <video controls class="w-full h-full object-cover object-center" muted playsinline preload="metadata" style="object-fit: cover; object-position: center;">
+                                            <video controls class="w-full h-full object-cover object-center" muted playsinline preload="metadata" style="object-fit: cover; object-position: center; aspect-ratio: 16/9;">
                                                 <source src="{{ e(Storage::url($media->url)) }}" type="video/mp4">
                                                 お使いのブラウザは動画をサポートしていません。
                                             </video>
@@ -249,7 +249,7 @@
                             @if($media->type === 'image')
                                 <img src="{{ e(Storage::url($media->url)) }}" alt="{{ e($post->title) }}" style="display: block; width: 100%; height: auto; max-height: 90vh; object-fit: contain;">
                             @elseif($media->type === 'video')
-                                <video controls muted preload="metadata" playsinline style="display: block; width: 100%; height: auto; max-height: 90vh; object-fit: contain;">
+                                <video controls muted preload="metadata" playsinline style="display: block; width: 100%; height: auto; max-height: 90vh; object-fit: contain; aspect-ratio: 16/9;">
                                     <source src="{{ e(Storage::url($media->url)) }}" type="video/mp4">
                                     お使いのブラウザは動画をサポートしていません。
                                 </video>
