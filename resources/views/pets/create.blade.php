@@ -322,6 +322,9 @@
                                 <p class="text-sm" style="color: #a16207;">
                                     📸 その子の顔がよく見える写真を選んでください。正方形の画像がおすすめです。
                                 </p>
+                                <p class="text-xs mt-1" style="color: #a16207;">
+                                    ※ iPhoneのアルバムから選択する場合、画像の向きが自動で調整されます。
+                                </p>
                             </div>
                             @if(isset($pet) && $pet->profile_image_url)
                                 <div class="mb-2">
@@ -345,6 +348,9 @@
                             <div class="p-3 mb-3" style="background-color: #fefce8;">
                                 <p class="text-sm" style="color: #a16207;">
                                     🖼️ その子の魅力が伝わる写真を選んでください。横長の画像がおすすめです。
+                                </p>
+                                <p class="text-xs mt-1" style="color: #a16207;">
+                                    ※ iPhoneのアルバムから選択する場合、画像の向きが自動で調整されます。
                                 </p>
                             </div>
                             @if(isset($pet) && $pet->header_image_url)

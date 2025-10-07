@@ -110,20 +110,39 @@ class ImageOptimizationService
 
             $image = $this->imageManager->read($filePath);
 
+            // iOSのライブラリから選択した画像の詳細情報をログに記録
+            Log::info('Processing image from iOS library', [
+                'filename' => $file->getClientOriginalName(),
+                'mime_type' => $file->getMimeType(),
+                'size' => $file->getSize(),
+                'dimensions' => $image->width() . 'x' . $image->height(),
+                'user_agent' => request()->userAgent(),
+                'memory_usage' => memory_get_usage(true),
+                'memory_peak' => memory_get_peak_usage(true)
+            ]);
+
+            // メモリ使用量が多すぎる場合は警告
+            if (memory_get_usage(true) > 128 * 1024 * 1024) { // 128MB
+                Log::warning('High memory usage detected during image processing', [
+                    'memory_usage' => memory_get_usage(true),
+                    'filename' => $file->getClientOriginalName()
+                ]);
+            }
+
             // EXIFの向きを確実に補正
             try {
                 // 新しいIntervention ImageのAPIを使用
                 $image->orient();
-                Log::info('EXIF orientation corrected using orientate()');
+                Log::info('EXIF orientation corrected using orient()');
             } catch (\Throwable $t) {
-                // 古いAPIも試す
+                Log::warning('EXIF orientation correction failed with orient(): ' . $t->getMessage());
+                // 手動でEXIF向きを確認・補正
                 try {
-                    $image->orient();
-                    Log::info('EXIF orientation corrected using orient()');
-                } catch (\Throwable $t2) {
-                    Log::warning('EXIF orientation correction failed: ' . $t2->getMessage());
-                    // 手動でEXIF向きを確認・補正
                     $this->manualOrientationCorrection($image, $file);
+                    Log::info('Manual orientation correction applied');
+                } catch (\Throwable $t2) {
+                    Log::warning('Manual orientation correction also failed: ' . $t2->getMessage());
+                    // 向き補正に失敗しても処理を継続（画像は表示されるが向きが間違っている可能性）
                 }
             }
 
@@ -160,7 +179,14 @@ class ImageOptimizationService
 
             return $path;
         } catch (\Exception $e) {
-            Log::error('Image optimization failed: ' . $e->getMessage());
+            Log::error('Image optimization failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'filename' => $file->getClientOriginalName(),
+                'size' => $sizeName,
+                'memory_usage' => memory_get_usage(true),
+                'user_agent' => request()->userAgent()
+            ]);
             return null;
         }
     }
