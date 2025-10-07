@@ -276,10 +276,11 @@
 
                     if (isVideo) {
                         div.innerHTML = `
-                            <video src="${objectUrl}" 
-                                   class="w-full h-32 object-cover rounded-lg" 
+                            <video class="w-full h-32 object-cover rounded-lg" 
                                    controls muted preload="metadata" playsinline
+                                   style="opacity: 1;"
                                    data-object-url="${objectUrl}">
+                                <source src="${objectUrl}" type="video/mp4">
                                 お使いのブラウザは動画をサポートしていません。
                             </video>
                             <button type="button" onclick="removeMedia(this)" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">×</button>
