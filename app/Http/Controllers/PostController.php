@@ -12,6 +12,7 @@ use App\Services\VideoOptimizationService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 /**
@@ -158,16 +159,8 @@ class PostController extends Controller
                     $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
                     $thumbnailUrl = null;
                 } else {
-                    // 動画の場合は最適化して保存
-                    $optimizedVideos = $videoService->optimizeAndSave($file, 'posts');
-
-                    // 最適化が成功した場合は最適化された動画を使用、失敗した場合は元の動画を保存
-                    if (!empty($optimizedVideos)) {
-                        $path = $optimizedVideos['large'] ?? $optimizedVideos['medium'] ?? $optimizedVideos['thumbnail'] ?? null;
-                    } else {
-                        // 最適化に失敗した場合は元の動画をそのまま保存
-                        $path = $file->store('posts', 'public');
-                    }
+                    // 動画の場合は圧縮せずオリジナルを保存（圧縮無効）
+                    $path = $file->store('posts', 'public');
 
                     // 動画のサムネイルを生成（優先: Laravel-FFMpeg / フォールバック: サービス）
                     $thumbnailUrl = null;
@@ -204,12 +197,15 @@ class PostController extends Controller
                 }
 
                 if ($path) {
-                    Media::create([
+                    $mediaData = [
                         'post_id' => $post->id,
                         'url' => $path,
                         'type' => $type,
-                        'thumbnail_url' => $thumbnailUrl,
-                    ]);
+                    ];
+                    if (Schema::hasColumn('media', 'thumbnail_url')) {
+                        $mediaData['thumbnail_url'] = $thumbnailUrl;
+                    }
+                    Media::create($mediaData);
                 }
             }
         }
@@ -495,16 +491,8 @@ class PostController extends Controller
                         $path = $optimizedImages['large'] ?? $optimizedImages['medium'] ?? $optimizedImages['thumbnail'];
                         $thumbnailUrl = null;
                     } else {
-                        // 動画の場合は最適化して保存
-                        $optimizedVideos = $videoService->optimizeAndSave($file, 'posts');
-
-                        // 最適化が成功した場合は最適化された動画を使用、失敗した場合は元の動画を保存
-                        if (!empty($optimizedVideos)) {
-                            $path = $optimizedVideos['large'] ?? $optimizedVideos['medium'] ?? $optimizedVideos['thumbnail'] ?? null;
-                        } else {
-                            // 最適化に失敗した場合は元の動画をそのまま保存
-                            $path = $file->store('posts', 'public');
-                        }
+                        // 動画は圧縮せずオリジナルを保存（圧縮無効）
+                        $path = $file->store('posts', 'public');
 
                         // 動画のサムネイルを生成（優先: Laravel-FFMpeg / フォールバック: サービス）
                         $thumbnailUrl = null;
@@ -541,12 +529,15 @@ class PostController extends Controller
                     }
 
                     if ($path) {
-                        Media::create([
+                        $mediaData = [
                             'post_id' => $post->id,
                             'url' => $path,
                             'type' => $type,
-                            'thumbnail_url' => $thumbnailUrl,
-                        ]);
+                        ];
+                        if (Schema::hasColumn('media', 'thumbnail_url')) {
+                            $mediaData['thumbnail_url'] = $thumbnailUrl;
+                        }
+                        Media::create($mediaData);
                     }
                 }
             }
